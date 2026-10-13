@@ -1,0 +1,44 @@
+{
+  "id": "kastelydombi-uszoda",
+  "name": "Kastélydombi Uszoda",
+  "shortName": "Kastélydombi uszoda",
+  "district": "XVIII.",
+  "address": "1188 Budapest, Nemes utca 56.",
+  "lat": 47.4095455,
+  "lon": 19.193631,
+  "website": "https://www.varosgazda18.hu/kastelydombi-uszoda/",
+  "phone": "+36 30 559 6724",
+  "basins": [
+    {
+      "id": "20m-tanmedence",
+      "name": "Tanmedence (20×9 m, 140 cm)",
+      "lengthM": 20,
+      "lanes": 4,
+      "indoor": true
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "21:00", "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45; 14.00-19.00 között NINCS szabad sáv a lakosságnak" },
+    { "weekday": 2, "opens": "06:00", "closes": "21:00", "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45; 14.00-19.00 között NINCS szabad sáv a lakosságnak" },
+    { "weekday": 3, "opens": "06:00", "closes": "21:00", "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45; 14.00-19.00 között NINCS szabad sáv a lakosságnak" },
+    { "weekday": 4, "opens": "06:00", "closes": "21:00", "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45; 14.00-19.00 között NINCS szabad sáv a lakosságnak" },
+    { "weekday": 5, "opens": "06:00", "closes": "21:00", "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45; 14.00-19.00 között NINCS szabad sáv a lakosságnak" },
+    { "weekday": 6, "opens": "08:00", "closes": "15:00", "seasonNote": "Hétvégén és ünnepnapokon; pénztárzárás 14.00, medencetér elhagyása 14.45" },
+    { "weekday": 7, "opens": "08:00", "closes": "15:00", "seasonNote": "Hétvégén és ünnepnapokon; pénztárzárás 14.00, medencetér elhagyása 14.45; vasárnap 09.00-10.00 ingyenes felnőtt úszásoktatás kerületi lakosoknak" }
+  ],
+  "scheduleSource": {
+    "url": "https://www.varosgazda18.hu/wp-content/uploads/2026/09/2026-HL-KU-2026-SZEPTEMBER-21-27.pdf",
+    "format": "pdf",
+    "note": "HETENTE CSERÉLŐDŐ PDF, a /kastelydombi-uszoda/ oldalon sávbérlés linkként. URL-minta: https://www.varosgazda18.hu/wp-content/uploads/<ÉÉÉÉ>/<HH>/<ÉÉÉÉ>-HL-KU-<ÉÉÉÉ>-<HÓNAP NAGYBETŰVEL>-<kezdőnap>-<zárónap>.pdf ; 'KU' = Kastélydombi Uszoda, 'HL' = heti lebontás. A linket a HTML-oldalról kell kinyerni, nem szabad kitalálni. FORMÁTUM: ugyanaz a Városgazda-sablon, mint a Park Uszodánál és a Vilmos Endrénél - 2 oldalas, A4 FEKVŐ (841.7 × 595.2 pt), VALÓDI SZÖVEGRÉTEGGEL (PyMuPDF page.get_text() olvassa). 1. oldal fejléce 'délelőtt', 2. oldal 'délután'. OSZLOPOK = 15 perces idősávok: 1. oldal 6:00 ... 12:45 (28 oszlop), 2. oldal 13:00 ... 20:45 (32 oszlop); az idősáv-fejléc a táblázat tetején és alján is szerepel, a bal és jobb szélén pedig egy-egy 'sáv' feliratú oszlop. SOROK: 7 napblokk egymás alatt (HÉTFŐ..VASÁRNAP), napblokkonként 4 sor, a sorok bal és jobb szélén 1,2,3,4 = A NÉGY ÚSZÓSÁV. A napnevek betűnként, függőlegesen tördelve vannak a szélső cellákban (get_text() 'H\\nÉ\\nT\\nF\\nŐ' alakban adja - össze kell fűzni). A napblokk mellett a konkrét dátum külön cellában ('szeptember 21.' ...), a fejlécben a hét sorszáma ('39. HÉT') és az intervallum ('2026. SZEPTEMBER 21 - 27.'). FOGLALTSÁG: a foglalt blokkok kitöltőszínt ÉS szöveget is kapnak; a szöveg maga az időtartam ('8:45-9:30', '10:00-11:00' stb.). A SZABAD cellák fehérek és üresek. A színek a foglalás típusát kódolják - ebben a lapban élénkzöld, halványkék, sárga, szürke és halvány narancs kitöltést láttam; LEGENDA NINCS a lapon, így a színek jelentése nem dekódolható, de a foglalt/szabad megkülönböztetéshez elég a színes téglalap + időtartam-szöveg. FONTOS BUKTATÓ: egy színes blokk TÖBB SÁVSORT IS ÁTFOGHAT függőlegesen (pl. szept. 21. hétfő 8:45-9:30 blokkja az 1. ÉS 2. sávra terjed ki egyetlen téglalapként), ezért a téglalap magasságát is fel kell osztani a sávsorokra, nem elég a felső él. Parse-stratégia: page.get_drawings() nem-fekete/nem-fehér fill-ű téglalapjai -> bal/jobb él x -> oszlop-idősávok (page.get_text('words') bbox-ai alapján), felső/alsó él y -> a 7×4=28 sávsor y-sávjai. A lap alján piros dőlt 'Változtatás jogát fenntartjuk!' és generálási időbélyeg ('2026.09.18 10:22')."
+  },
+  "sources": [
+    "https://www.varosgazda18.hu/",
+    "https://www.varosgazda18.hu/kastelydombi-uszoda/",
+    "https://www.varosgazda18.hu/wp-content/uploads/2026/09/2026-HL-KU-2026-SZEPTEMBER-21-27.pdf",
+    "https://18.kerulet.ittlakunk.hu/holmi/sport-szabadido/kastelydombi-uszoda",
+    "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=3&countrycodes=hu&q=Kast%C3%A9lydombi%20uszoda%20Budapest",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "high",
+  "notes": "Koordináta: Nominatim a 'Kastélydombi uszoda Budapest' keresésre 47.4095455 / 19.1936310-et adott, display_name 'Kastélydombi uszoda, 56, Nemes utca, Újpéteritelep, XVIII. kerület, Budapest, 1188'. Az Overpass ugyanezt az OSM way-t (id 428278054, leisure=sports_centre, sport=swimming, addr:postcode=1188, addr:street=Nemes utca, addr:housenumber=56, website=https://www.varosgazda18.hu/kastelydombi-uszoda/, phone=+36 1 290 6965) adta vissza azonos középponttal - mivel ez ugyanaz az OSM objektum, a valódi második, FÜGGETLEN megerősítés az üzemeltető saját /kastelydombi-uszoda/ oldala, amely '1188 Budapest, Nemes u. 56.' címet ír, és a 18.kerulet.ittlakunk.hu adatlap, amely szintén 'Nemes u. 56.'-ot ad. FIGYELEM: ugyanezen a telken/címen van a Kastélydombi Általános Iskola (OSM way 548689243, 'Nemes utca 56-60', 47.4102382 / 19.193641) - az iskola koordinátája kb. 75 m-rel ÉSZAKABBRA van, azt nem szabad az uszodára használni; az uszoda külön OSM objektum. SÁVSZÁM: nem becslés - a hivatalos heti sávbérlés-PDF rácsában minden naphoz pontosan 4 sor tartozik 1,2,3,4 számozással; ezt a PDF szövegrétegéből olvastam ki ÉS a PDF 130 dpi-s renderelésén vizuálisan is ellenőriztem (a sávszámok a táblázat bal és jobb szélén is ki vannak írva). MEDENCEMÉRET: az üzemeltetői oldal csak a vízmélységet írja (2006-ban 1,40 m-re növelték); a 20×9 m-es méret a 18.kerulet.ittlakunk.hu adatlapjáról származik, szó szerint: 'alacsony vízmélységgel, kisméretű (20×9 m) medencével került kialakításra' - ez másodlagos forrás, ezért a hosszt 20 m-nek vettem, de ezt csak egy forrás erősíti meg. Az uszoda medencéjében dobogórendszer van, amellyel 90 cm-es vízmélység állítható be az oktatáshoz. TELEFON ELTÉRÉS: az üzemeltetői oldal '+36-30 559 6724'-et ad (ezt vettem fel), az OSM objektum '+36 1 290 6965'-öt (valószínűleg régi vezetékes). NYITVATARTÁS: két forrás egyezik - a varosgazda18.hu szerint hétköznap 06.00-21.00, hétvégén és ünnepnapokon 08.00-15.00, a medencetér elhagyása hétköznap 20.45, hétvégén 14.45; az ittlakunk adatlap szó szerint ugyanezt a medencetér-elhagyási időt írja. KRITIKUS A SÁVFOGLALTSÁGHOZ: az uszoda TANUSZODAKÉNT üzemel, a nap nagy részében iskolai/tanfolyami oktatás folyik; a hivatalos szöveg szerint hétköznap 06.00-19.00 között 'lehetőség szerint 1 sáv' jut a lakosságnak, KIVÉVE 14.00-19.00 között, amikor NEM áll rendelkezésre szabad sáv a lakosság számára. TECHNIKAI: a www.varosgazda18.hu nginx-e 403-mal utasítja el a curl/script-klienseket, csak böngésző-szerű fetcheren át érhető el."
+}

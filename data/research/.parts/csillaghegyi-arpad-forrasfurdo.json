@@ -1,0 +1,67 @@
+{
+  "id": "csillaghegyi-arpad-forrasfurdo",
+  "name": "Csillaghegyi Árpád Forrásfürdő és Székely Éva Uszoda",
+  "shortName": "Csillaghegyi fürdő",
+  "district": "III.",
+  "address": "1038 Budapest, Pusztakúti út 2-6.",
+  "lat": 47.5845514,
+  "lon": 19.0409268,
+  "website": "https://www.csillaghegyifurdo.hu/",
+  "phone": "+36 1 242 0754",
+  "basins": [
+    {
+      "id": "25m-uszomedence",
+      "name": "Úszómedence (25 × 33 méter)",
+      "lengthM": 25,
+      "lanes": 13,
+      "indoor": true
+    },
+    {
+      "id": "tanmedence",
+      "name": "Tanmedence (12 méter)",
+      "lengthM": 12,
+      "lanes": 4,
+      "indoor": true
+    },
+    {
+      "id": "kulteri-uszomedence-33m",
+      "name": "Kültéri úszómedence (33 méter)",
+      "lengthM": 33,
+      "lanes": null,
+      "indoor": false
+    },
+    {
+      "id": "kulteri-strandmedence-55m",
+      "name": "Kültéri strandmedence (55 méter)",
+      "lengthM": 55,
+      "lanes": null,
+      "indoor": false
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "20:00", "seasonNote": "Sport zóna, 2026. szeptember 14-től érvényes rend. Wellness/Szaunavilág csak 10:00-tól." },
+    { "weekday": 2, "opens": "06:00", "closes": "20:00", "seasonNote": "Sport zóna, 2026. szeptember 14-től." },
+    { "weekday": 3, "opens": "06:00", "closes": "22:00", "seasonNote": "Sport zóna, szerdánként hosszított nyitvatartás 22:00-ig." },
+    { "weekday": 4, "opens": "06:00", "closes": "20:00", "seasonNote": "Sport zóna, 2026. szeptember 14-től." },
+    { "weekday": 5, "opens": "06:00", "closes": "20:00", "seasonNote": "Sport zóna, 2026. szeptember 14-től." },
+    { "weekday": 6, "opens": "06:00", "closes": "20:00", "seasonNote": "Sport zóna. A sávtábla hétvégén csak 7:00-tól sorolja a sávokat." },
+    { "weekday": 7, "opens": "06:00", "closes": "20:00", "seasonNote": "Sport zóna. A sávtábla hétvégén csak 7:00-tól sorolja a sávokat." }
+  ],
+  "scheduleSource": {
+    "url": "https://www.csillaghegyifurdo.hu/savfoglaltsag",
+    "format": "pdf",
+    "note": "A /savfoglaltsag HTML-oldalon nincs táblázat, csak KÉT PDF-LINK, amit a scrapernek onnan kell kiszednie (a fájlnév dátumbélyeges, hetente/idényenként cserélődik). 2026-09-24-én érvényes linkek: (1) 25 méteres úszómedence -> https://budapestgyogyfurdoi.synergyfox.app/public/10/savtablak/uszomedence_260914_tol_mod2.pdf ; (2) Tanmedence -> https://budapestgyogyfurdoi.synergyfox.app/public/10/savtablak/tanmedence_260914_tol_mod.pdf . Minta: .../public/10/savtablak/<medence>_<ÉÉHHNN>_tol[_mod|_mod2].pdf . FIGYELEM: a www.csillaghegyifurdo.hu lassú, a curl gyakran 40-60 s-nál timeoutol, érdemes --max-time 100 és újrapróbálkozás. --- ÚSZÓMEDENCE PDF SZERKEZETE (1 oldal, A4 álló, 595.2 x 841.8 pt): hét napblokk, elrendezés 3+3+1 (felső sor: Hétfő | Kedd | Szerda, alsó sor: Csütörtök | Péntek | Szombat, majd a Szombat alatt Vasárnap). Minden napblokk OSZLOPAI = úszósávok, balról jobbra: 'A', 'B' (e kettő fölött 90 fokkal forgatva a 'lépcsők közötti' felirat), majd a SZÁMOZOTT sávok '0','1','2','3','4','5','6','7','8','9', végül 'C'. ÖSSZESEN 13 EGYFORMA SZÉLESSÉGŰ OSZLOP (a Hétfő blokkban a fejléc-betűk x-középpontjai: A=85.8, B=97.4, 0=109.8, 1=121.8, 2=133.3, 3=144.8, 4=156.3, 5=167.8, 6=179.4, 7=190.9, 8=202.4, 9=213.9, C=224.8 -> egyenletes ~11.5 pt osztás, tehát A/B/C ugyanolyan széles sáv, mint a számozottak). SOROK = ÓRASÁVOK, hétköznap '6-7'-től '19-20'-ig (szerdán plusz egy '20-22' sor), hétvégén '7-8'-tól '19-20'-ig; a sorfeliratok a blokk bal ÉS jobb szélén is szerepelnek. A FOGLALTSÁG KIZÁRÓLAG CELLA-KITÖLTŐSZÍN, nulla szöveggel a cellákban -> page.get_drawings() kötelező. RGB-k (PyMuPDF 0-1 float fill): FEKETE (0.0, 0.0, 0.0) = 'Foglalt sávok'; HALVÁNY CIÁN (0.659, 0.941, 0.98) = 'Szabad sávok'; TELÍTETT CIÁN (0.224, 0.867, 0.953) = 'Legnagyobb terhelésű időszak' (ez IS szabad/közönség, csak zsúfolt - NE számoljuk foglaltnak); FEHÉR (1.0, 1.0, 1.0) = az 'AQUA-MAZE*' kiemelt dobozok; LILA (0.439, 0.188, 0.627) = csak a magyarázó nyilak. A jelmagyarázat az oldal alján y~783-nál van ('Jelmagyarázat: Foglalt sávok / Szabad sávok / Legnagyobb terhelésű időszak'). SZŰRÉS: a fekete fill-ek száma 984, ami jóval több a fekete celláknál, mert a betűk és a vékony keretek is fekete fill-ek -> a scraper CSAK a kb. 11.5 pt széles x 22.5 pt magas, a rácsra illeszkedő téglalapokat vegye figyelembe. --- TANMEDENCE PDF SZERKEZETE (1 oldal, nagy méret: 1749.88 x 2476.59 pt): ugyanaz a logika, de NAPONKÉNT CSAK 4 SÁV, és a sávok JOBBRÓL BALRA vannak számozva ('4','3','2','1' sorrendben növekvő x mentén). Napfejlécek rövidítve: 'Hé','Ke','Sze','Csü','Pé','Szo' (+ Vasárnap). Sorok szintén órasávok '6-7'-től. Színkulcs azonos: fekete = foglalt, halvány cián (0.659, 0.941, 0.98) = szabad. Az 'Aqua-' feliratú fehér dobozok az Aquafitness/Aquamaze órákat jelölik (aquamaze.hu/idopontfoglalas előzetes regisztráció)."
+  },
+  "sources": [
+    "https://www.csillaghegyifurdo.hu/",
+    "https://www.csillaghegyifurdo.hu/nyitvatartas",
+    "https://www.csillaghegyifurdo.hu/osszes-medence-parametere",
+    "https://www.csillaghegyifurdo.hu/savfoglaltsag",
+    "https://budapestgyogyfurdoi.synergyfox.app/public/10/savtablak/uszomedence_260914_tol_mod2.pdf",
+    "https://budapestgyogyfurdoi.synergyfox.app/public/10/savtablak/tanmedence_260914_tol_mod.pdf",
+    "https://nominatim.openstreetmap.org/search?q=Pusztak%C3%BAti+%C3%BAt+2%2C+Budapest",
+    "https://overpass-api.de/api/interpreter (OSM way 965214078 + node 3465235517)"
+  ],
+  "confidence": "high",
+  "notes": "KOORDINÁTA: Nominatim a 'Pusztakúti út 2, Budapest' lekérdezésre pontosan a névvel egyező objektumot adta vissza: 47.5845514 / 19.0409268, display_name = 'Csillaghegyi Árpád Forrásfürdő és Székely Éva Uszoda, 2-6, Pusztakúti út, Csillaghegy, III. kerület, Budapest, 1038'. Ezt megerősíti az Overpass-ból lekért OSM way 965214078 (amenity=public_bath, name = ugyanez a hivatalos név, addr:postcode=1038, addr:street=Pusztakúti út, addr:housenumber=2-6) középpontja: 47.5845379 / 19.0409268 - 2 m eltérés. A fürdő SAJÁT honlapjának fejlécében és láblécében kiírt cím ('1038 Budapest, Pusztakúti út 2-6.') karakterre egyezik. Az OSM-ben van egy külön node (3465235517) is 47.5859151 / 19.0421026 'Csillaghegyi strandfürdő és uszoda' néven, ami ~180 m-rel északkeletebbre esik és a strandterületet/bejáratot jelöli; NEM ezt használtam, mert a way a tényleges fürdőépület. SÁVSZÁM - NEM BECSLÉS: a 25 m-es úszómedence 13 sávját a hivatalos sávfoglaltsági PDF fejléce tételesen felsorolja (A, B, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, C), és a fejlécbetűk x-koordinátái egyenletes ~11.5 pt osztást mutatnak, tehát mind a 13 azonos szélességű sáv. Ez keresztbe stimmel a hivatalos medenceparaméterrel is: a medence 25 x 33 m (825 nm), 33 m / 13 sáv = 2,54 m/sáv, ami szabványos sávszélesség. A tanmedence 4 sávját ugyanígy a tanmedence-PDF fejléce sorolja fel (4, 3, 2, 1), és 120 nm / 12 m hossz = 10 m szélesség, 10 m / 4 = 2,5 m/sáv - szintén konzisztens. MEDENCEHOSSZ: a /savfoglaltsag oldal szövege explicit '25 méteres úszómedence'-ként hivatkozik rá, a paramétertábla pedig 'Úszómedence (25x33 méter)'-ként, tehát 25 m a sávhossz és 33 m a szélesség. BELTÉR/KÜLTÉR: a hivatalos paramétertábla a kültéri medencéket kifejezetten 'Kültéri' előtaggal jelöli (Kültéri strandmedence 55 m, Kültéri gyermekmedence, Kültéri úszómedence 33 m), a 25 m-es úszómedence és a tanmedence előtag nélkül szerepel és a 'Sport zóna' egész évben 6:00-tól üzemel, ezért ezeket fedettnek vettem. A kültéri 33 m-es úszómedence és az 55 m-es strandmedence sávszámát EGYIK forrás sem adja meg (a sávfoglaltsági PDF-ek csak a fedett 25 m-es medencére és a tanmedencére vonatkoznak), ezért ezeknél lanes = null. NYITVATARTÁS: a /nyitvatartas oldal 'Nyitvatartás szeptember 14-től' HTML-táblázatából, a 'Sport zóna' sorából vettem (a Wellness 10:00-tól, a Gyermekvilág hétköznap zárva). A fürdő fenntartja a sávkiosztás változtatásának jogát. Üzemeltető: Budapest Gyógyfürdői és Hévizei Zrt."
+}

@@ -1,0 +1,54 @@
+{
+  "id": "pesterzsebeti-uszoda",
+  "name": "Pesterzsébeti Uszoda",
+  "shortName": "Pesterzsébeti Uszoda",
+  "district": "XX.",
+  "address": "1203 Budapest, Zodony utca 1.",
+  "lat": 47.4324069,
+  "lon": 19.0962869,
+  "website": "https://www.pesterzsebetiuszoda.hu/",
+  "phone": "+36 1 920 0155",
+  "basins": [
+    {
+      "id": "melyvizes-medence",
+      "name": "Mélyvizes medence",
+      "lengthM": 33.3,
+      "lanes": 10,
+      "indoor": true
+    },
+    {
+      "id": "tanmedence",
+      "name": "Tanmedence",
+      "lengthM": 20,
+      "lanes": 5,
+      "indoor": true
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "19:00", "seasonNote": "Pénztár 6.00-18.30" },
+    { "weekday": 2, "opens": "06:00", "closes": "18:00", "seasonNote": "Pénztár 6.00-17.30" },
+    { "weekday": 3, "opens": "06:00", "closes": "19:00", "seasonNote": "Pénztár 6.00-18.30" },
+    { "weekday": 4, "opens": "06:00", "closes": "18:00", "seasonNote": "Pénztár 6.00-17.30" },
+    { "weekday": 5, "opens": "06:00", "closes": "19:00", "seasonNote": "Pénztár 6.00-18.30" },
+    { "weekday": 6, "opens": "06:00", "closes": "18:00", "seasonNote": "Pénztárzárás 17.30; ünnepnapokon külön kiírás szerint" },
+    { "weekday": 7, "opens": "08:00", "closes": "18:00", "seasonNote": "Pénztár 8.00-17.30; a sávbeosztásban vasárnapra nincs tábla" }
+  ],
+  "scheduleSource": {
+    "url": "https://www.pesterzsebetiuszoda.hu/savbeosztas/",
+    "format": "html-table",
+    "note": "A /savbeosztas/ oldal csak egy választó: két medencénként külön aloldalra mutat - https://www.pesterzsebetiuszoda.hu/melyvizes-medence/ és https://www.pesterzsebetiuszoda.hu/tanmedence/ . EZEK a scraper valódi célpontjai, és VALÓDI HTML <table> elemek (nem kép, nem PDF), szerver-oldalon renderelve, JS nélkül is megvannak a nyers HTML-ben. Szerkezet mindkét aloldalon azonos: Elementor tab-widget 6 füllel - a fülek <div class=\"elementor-tab-title ...\" data-tab=\"1..6\"> elemek, szövegük Hétfő, Kedd, Szerda, Csütörtök, Péntek, Szombat (VASÁRNAP NINCS). Minden fül tartalma egy-egy <table>, tehát az oldalon pontosan 6 <table> van, sorrendjük = hétfő..szombat (a data-tab / aria-controls attribútum köti össze a fület a tartalommal: aria-controls=\"elementor-tab-content-<id>\"). FIGYELEM: a fülcímkék KÉTSZER szerepelnek a HTML-ben (elementor-tab-desktop-title és elementor-tab-mobile-title), de a <table>-ök csak egyszer. Egy táblázat felépítése: az ELSŐ <tr> a fejléc (csupa <td>, nem <th>): az első cella ÜRES, utána a sávok nevei. Mélyvizes medence: '0.pálya', '1. pálya' (FIGYELEM: szóköz a pont után csak ennél az egynél!), '2.pálya', '3.pálya', '4.pálya', '5.pálya', '6.pálya', '7.pálya', '8.pálya', '9.pálya' - azaz 10 sáv, 0-tól indexelve. Tanmedence: '5.pálya', '4.pálya', '3.pálya', '2.pálya', '1. pálya' - azaz 5 sáv, és a sorrend FORDÍTOTT (5-től 1-ig). A további <tr>-ek idősorok: az első cella az idősáv szövege pont-elválasztóval, nem kettősponttal (mélyvizes: '6.00-7.00','7.00-8.00',...,'18.00-19.00' óránként; tanmedence: '6.00-7.00','7.00-8.00','8.15-9.15','9.15-10.15','10.15-11.15','11.15-12.15','12.15-13.15','13.15-14.15','14.00-15.00','15.00-16.00','16.00-17.00','17.00-18.00','18.00-19.00' - vagyis a tanmedencénél NEM egyenletes és átfedő időpontok vannak, pl. 13.15-14.15 után 14.00-15.00). A cellák szövege jelzi a foglaltságot: üres cella (csak &nbsp;) = SZABAD sáv; 'foglalt' = lefoglalt; 'iskola' / 'iskolai oktatás' / 'iskolai-óvodai oktatás' = oktatás miatt foglalt. NINCS cellaszín-kódolás, minden információ szövegben van. KRITIKUS SCRAPER-BUKTATÓ: a foglalt blokkok COLSPAN-t használnak, ezért egy <tr>-ben kevesebb <td> lehet, mint ahány sáv van. Pl. mélyvizes hétfő: <tr><td>8.00-9.00</td><td colspan=\"3\" rowspan=\"1\">iskola</td><td> </td><td> </td><td> </td><td> </td><td colspan=\"3\" rowspan=\"1\"> </td></tr> - naiv td-számlálás elcsúsztatja a sáv-hozzárendelést, a colspan/rowspan attribútumokat KÖTELEZŐ kibontani. A táblázatok felett szabadszöveg adja az érvényességet és a medenceméretet, pl. mélyvizes: 'Méret: 21 m széles – 33,3 m hosszú – 2 m mély / Hőfok: 26 – 28 fok' és '2026.09.01-től érvényes. Az iskolai és óvodai oktatás 09.14-től kezdődik, addig a sávokat lehet használni.'; tanmedence: 'Méret: 20 m hosszú – 10 m széles 90 cm mély / Hőfok: 30 – 32 fok'. Mindkét oldalon: 'Az uszoda a pályabeosztás változtatásának jogát fenntartja.' A beosztás heti ismétlődő (nem dátumozott hét), szezononként cserélik. Eseti zárásokat a nyitólap 'Friss Hírek' blokkja közli (pl. vízilabda bajnoki forduló miatti korábbi zárás) - ezt külön érdemes figyelni."
+  },
+  "sources": [
+    "https://www.pesterzsebetiuszoda.hu/",
+    "https://www.pesterzsebetiuszoda.hu/savbeosztas/",
+    "https://www.pesterzsebetiuszoda.hu/melyvizes-medence/",
+    "https://www.pesterzsebetiuszoda.hu/tanmedence/",
+    "https://www.pesterzsebetiuszoda.hu/kapcsolat/",
+    "https://www.pesterzsebetiuszoda.hu/arlista/",
+    "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=3&countrycodes=hu&q=Zodony%20utca%201%2C%201203%20Budapest",
+    "https://overpass-api.de/api/interpreter",
+    "https://esmtkuszoda-pesterzsebet.hu/"
+  ],
+  "confidence": "high",
+  "notes": "Koordináta: Nominatim a 'Zodony utca 1, 1203 Budapest' keresésre külön objektumként adta vissza a 'Pesterzsébeti Uszoda'-t 47.4324069 / 19.0962869 értékkel; független második forrásként az Overpass API ugyanazt az OSM way-t (id 328804606, leisure=sports_centre, sport=swimming, addr:postcode=1203, addr:street=Zodony utca, addr:housenumber=1) adta 47.4323661 / 19.0963251 középponttal - néhány méteren belül egyeznek. Harmadik megerősítés: az uszoda saját https://www.pesterzsebetiuszoda.hu/kapcsolat/ oldala szó szerint 'Cím: 1203 Budapest, Zodony utca 1.'-t ír. FIGYELEM: ugyanezen a címen (Zodony utca 1) van az ESMTK Pesterzsébet Jégcsarnok is, amit a Nominatim 47.4323634 / 19.0973125-re tesz - ez kb. 70 m-rel KELETEBBRE van, tehát a jégcsarnok koordinátáját nem szabad az uszodára használni. SÁVSZÁM: nem becslés - a hivatalos sávbeosztás HTML-táblázatok fejlécsorában a sávok EGYENKÉNT fel vannak sorolva. Mélyvizes medence: '0.pálya' ... '9.pálya' = 10 sáv. Tanmedence: '5.pálya' ... '1. pálya' = 5 sáv. MEDENCEMÉRET szó szerint a saját oldalakról: mélyvizes '21 m széles – 33,3 m hosszú – 2 m mély' (33,3 m = rövid pályás versenymedencének szokatlan méret, de így van kiírva), tanmedence '20 m hosszú – 10 m széles 90 cm mély'. A lengthM mezőbe a hosszúságot tettem (33.3 ill. 20). ÜZEMELTETŐI WEBOLDAL: a feladatban megadott esmtkuszoda-pesterzsebet.hu NEM működik - a DNS egy megosztott tárhelyre mutat, amelynek tanúsítványa teljesen más domainekre szól (termalfurdo.net, huawei.hu stb.), tehát elhagyott/parkolt domain; NEM vettem fel website-ként. A ténylegesen élő, az uszoda által üzemeltetett oldal a https://www.pesterzsebetiuszoda.hu/ (e-mail: esmtk.uszoda@gmail.com, tehát az ESMTK üzemelteti). BIZONYTALANSÁG a hétvégi nyitvatartásban: a /kapcsolat/, /savbeosztas/ és /tanmedence/ oldalak fejléce szombatra 6:00-18:00, vasárnapra 8:00-18:00-t ír, DE a /melyvizes-medence/ oldal ugyanabban a fejléc-widgetben szombat 6:00-14:00, vasárnap 8:00-14:00-t ír. A többségi (és a /kapcsolat/ oldal részletes szövegével, pénztárzárási időkkel megerősített) 18:00-át vettem fel. További bizonytalanság: a sávbeosztás táblázatok csak hétfőtől SZOMBATIG vannak, vasárnapra nincs közzétett sávbeosztás, bár az uszoda vasárnap nyitva van. Telefon: a saját oldal '06-1-920-01-55' központi és '06-20-352-76-55' mobil számot ad; a phone mezőbe a központit tettem nemzetközi formában. Az OSM objektumon nincs telefonszám."
+}

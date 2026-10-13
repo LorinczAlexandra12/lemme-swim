@@ -1,0 +1,57 @@
+{
+  "id": "halassy-oliver-varosi-uszoda",
+  "name": "Halassy Olivér Városi Uszoda",
+  "shortName": "Halassy Olivér Uszoda",
+  "district": "IV.",
+  "address": "1048 Budapest, Tóth Aladár utca 16-18.",
+  "lat": 47.58271,
+  "lon": 19.10726,
+  "website": "https://haloujpest.hu/",
+  "phone": "+36 1 696 1641",
+  "basins": [
+    {
+      "id": "uszomedence",
+      "name": "Úszómedence (FINA, 275 m² vízfelület)",
+      "lengthM": 25,
+      "lanes": null,
+      "indoor": true
+    },
+    {
+      "id": "tanmedence",
+      "name": "Tanmedence",
+      "lengthM": null,
+      "lanes": null,
+      "indoor": true
+    },
+    {
+      "id": "pezsgofurdo",
+      "name": "Pezsgőfürdő",
+      "lengthM": null,
+      "lanes": null,
+      "indoor": true
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "20:00", "seasonNote": "UNCONFIRMED — from the OSM opening_hours tag 'Mo-Fr 06:00-20:00, Sa-Su 08:00-20:00'; the operator's own site could not be fetched (bot wall) and secondary sources disagree about the weekend. Verify before use." },
+    { "weekday": 2, "opens": "06:00", "closes": "20:00", "seasonNote": "UNCONFIRMED — see weekday 1 note" },
+    { "weekday": 3, "opens": "06:00", "closes": "20:00", "seasonNote": "UNCONFIRMED — see weekday 1 note" },
+    { "weekday": 4, "opens": "06:00", "closes": "20:00", "seasonNote": "UNCONFIRMED — see weekday 1 note" },
+    { "weekday": 5, "opens": "06:00", "closes": "20:00", "seasonNote": "UNCONFIRMED — see weekday 1 note" },
+    { "weekday": 6, "opens": "08:00", "closes": "20:00", "seasonNote": "UNCONFIRMED — OSM says 08:00-20:00, one secondary source says 06:00-20:00. Conflict unresolved." },
+    { "weekday": 7, "opens": "08:00", "closes": "20:00", "seasonNote": "UNCONFIRMED — OSM says 08:00-20:00, two secondary sources say 08:00-17:00. Conflict unresolved." }
+  ],
+  "scheduleSource": {
+    "url": "https://haloujpest.hu/",
+    "format": "none-found",
+    "note": "BLOCKED, NOT ABSENT — the distinction matters for whoever writes the scraper. haloujpest.hu sits behind a JavaScript anti-bot interstitial: every plain HTTP request returns HTTP 403 with a ~9.7 KB 'Hitelesítés / Verification' challenge page instead of content. Reproduced against https://haloujpest.hu/, https://www.haloujpest.hu/ and https://haloujpest.hu/uszoda/, with a full desktop-Chrome and a Safari User-Agent plus Accept-Language: hu-HU and the Sec-Fetch-* navigation headers — all 403. Plain http:// (port 80) does not answer at all (connection failure). The managed WebFetch tool separately declined the host ('Unable to verify if domain haloujpest.hu is safe to fetch'), so there is currently NO route to this site from this environment. A scraper running from a normal residential/browser context, or a headless browser that executes the challenge JS, will very likely get through — this pool should be RE-ATTEMPTED with Playwright/Puppeteer rather than written off. Until then no schedule page, PDF or image could be located or ruled out, hence format 'none-found' with low confidence. The pool's Facebook page is the other likely publication channel."
+  },
+  "sources": [
+    "https://haloujpest.hu/",
+    "https://haloujpest.hu/uszoda/",
+    "https://www.furdoszovetseg.hu/furdok/halassy-oliver-varosi-uszoda/",
+    "https://www.furdoszovetseg.hu/en/furdok/halassy-oliver-varosi-uszoda/",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "low",
+  "notes": "LANE COUNT DELIBERATELY NULL. Secondary sources (a lifestyle article and a district news piece) claim '25 méteres medence 6 sávból áll', i.e. six lanes, but the operator's own site is unreachable (see scheduleSource note) so this could not be confirmed against a primary source and is recorded here as hearsay only. What IS confirmed by the Magyar Fürdőszövetség entry: the main pool is FINA-compliant with a 275 m² water surface, reaching 1.8 m depth; total facility 2139 m²; 'Az úszómedencében a víz 27, a tanmedencében 32, míg a pezsgőfürdőben 34 °C-os'. A 275 m² FINA pool is 25 x 11 m, which would conventionally be laid out as 5 or 6 lanes — again an inference, not recorded. Secondary sources also mention a simultaneous capacity of 108 people, a wellness unit of one sauna plus the whirlpool, and Újpest Kártya discounts. Facility manager: Mogyorósi Ferenc. Four-star Fürdőszövetség rating. COORDINATE VERIFIED: Overpass way 302647667 'Halassy Olivér Uszoda' at 47.58271, 19.10726 carries addr 1048 Tóth Aladár utca 16-18, and the Magyar Fürdőszövetség (an independent national trade body, fetched directly) prints the identical address '1048 Budapest, Tóth Aladár utca 16-18' together with the same contact e-mail info@haloujpest.hu — two independent agreeing sources, so the coordinate is accepted even though the operator's own page is unreachable. THIS IS THE ONE POOL IN THE SET WHERE THE BLOCKER IS PURELY TECHNICAL AND EASILY FIXED — worth a second pass from a different network or with a headless browser."
+}

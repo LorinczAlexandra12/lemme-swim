@@ -1,0 +1,56 @@
+{
+  "id": "szentmihalyi-konrad-ferenc-uszoda",
+  "name": "Szentmihályi Konrád Ferenc Uszoda",
+  "shortName": "Szentmihályi Uszoda",
+  "district": "XVI.",
+  "address": "1162 Budapest, Segesvár utca 16.",
+  "lat": 47.53144,
+  "lon": 19.16663,
+  "website": "https://www.uszodak16.hu/szentmihalyi-uszoda/",
+  "phone": "+36 20 416 9396",
+  "basins": [
+    {
+      "id": "25m-uszomedence",
+      "name": "25 m-es úszómedence",
+      "lengthM": 25,
+      "lanes": 6,
+      "indoor": true
+    },
+    {
+      "id": "tanmedence",
+      "name": "12,5 m-es tanmedence",
+      "lengthM": 12.5,
+      "lanes": null,
+      "indoor": true
+    },
+    {
+      "id": "pezsgofurdo",
+      "name": "Pezsgőfürdő",
+      "lengthM": null,
+      "lanes": null,
+      "indoor": true
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30" },
+    { "weekday": 2, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30" },
+    { "weekday": 3, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30" },
+    { "weekday": 4, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30" },
+    { "weekday": 5, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30" },
+    { "weekday": 6, "opens": "08:00", "closes": "20:00", "seasonNote": "Hétvége és ünnepnap; a medencék és szaunák 08:00-19:30" },
+    { "weekday": 7, "opens": "08:00", "closes": "20:00", "seasonNote": "Hétvége és ünnepnap; a medencék és szaunák 08:00-19:30" }
+  ],
+  "scheduleSource": {
+    "url": "https://www.uszodak16.hu/szentmihalyi-uszoda/?content=dct&did=34",
+    "format": "html-table",
+    "note": "SECOND HTML-TABLE SOURCE, IDENTICAL CMS AND SCHEMA TO THE ERZSÉBETLIGETI POOL (same operator, same Flashcom CMS) — free public lanes published as a plain integer in server-rendered HTML. Nav label 'Szabad pályák a közönségnek'; note the document id here is did=34, NOT 36 as at Erzsébetliget, so resolve the id by scraping the nav for that anchor text rather than hardcoding. No JS, no login.\n\nTHERE ARE FIVE <table> ELEMENTS ON THE PAGE; indexes 0-3 are chrome (layout, search box, 'Eseménynaptár' month calendar, footer nav). THE SCHEDULE IS INDEX 4 — but select by caption text, not index. Caption row has two cells: 'Szabad pályák a közönség részére / A változtatás jogát fenntartjuk!' and 'Közönség részére szabad sávok száma az úszómedencében'. Header row: empty corner cell then H | K | Sz | Cs | P | Szo | V (Monday-first ISO order). 34 <tr> = caption + header + 32 DATA ROWS of half-hour slots labelled '6:00 - 6:30' through '21:00 - 21:30' (spaces around the dash; single-digit hours NOT zero-padded).\n\nCELL VALUE = THE NUMBER OF LANES FREE TO THE PUBLIC, an integer 2..6, or the literal 'X' when the pool is closed in that slot. Direct read, no colour decoding and no arithmetic needed. Verified samples: Mon-Fri 06:00-08:00 all 6 free while Sat/Sun show 'X' (matches the 08:00 weekend opening); Thursday 11:30-12:30 drops to 2 (the week's minimum); Sat/Sun are 6 all day except 08:00-12:00 which is 4.\n\nUNLIKE ERZSÉBETLIGET THERE IS NO SECOND TABLE for the tanmedence here — a scraper written for both pools must tolerate its absence. Carries the operator's 'A változtatás jogát fenntartjuk!' disclaimer, so this is the nominal weekly pattern, not a live feed."
+  },
+  "sources": [
+    "https://www.uszodak16.hu/",
+    "https://www.uszodak16.hu/szentmihalyi-uszoda/",
+    "https://www.uszodak16.hu/szentmihalyi-uszoda/?content=dct&did=34",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "high",
+  "notes": "LANE COUNT 6 IS DOUBLY VERIFIED: the homepage 'Kínálatunk' spec reads '25 m-es úszómedence, feszített víztükör 4 oldalról, 6 sávos, 1,90 m mély, hőmérséklet: 26 C°', and independently the maximum cell value in the free-lane table is exactly 6. Tanmedence: '12,5 m-es tanmedence, 0,70 m mély, hőmérséklet: 32 C°', usable individually only at weekends from 12:00 because of group lessons; no lane count published, so lanes is null. Pezsgőfürdő max 8 people at 34 °C. Non-basin facilities: finn szauna, infra szauna, 1 stand-up solarium, grass sunbathing area and terrace. Opened 2008-07-10. Operated by Kertvárosi Sportlétesítményeket Üzemeltető Kft. (same operator as the Erzsébetligeti Rátonyi Gábor Uszoda and the Erzsébetligeti Strand); shared e-mail titkarsag@uszodak16.hu. SEASONAL: as of 2026-09-24 the site banner states 'A kültéri medencéink bezártak!' — the outdoor basins are shut for the season, so only the indoor 25 m pool and tanmedence are in play. COORDINATE VERIFIED: Overpass way 219296047 'Szentmihályi Konrád Ferenc Uszoda' at 47.53144, 19.16663 carries addr 1162 Segesvár utca 16, exactly matching the address block in the site footer; OSM's opening_hours tag 'Mo-Fr 06:00-22:00; Sa,Su,PH 08:00-20:00' also matches the operator's published hours independently."
+}

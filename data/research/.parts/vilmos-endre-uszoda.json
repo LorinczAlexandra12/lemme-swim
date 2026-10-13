@@ -1,0 +1,43 @@
+{
+  "id": "vilmos-endre-uszoda",
+  "name": "Vilmos Endre Sportcentrum – Vilmos Endre Uszoda",
+  "shortName": "Vilmos Endre uszoda",
+  "district": "XVIII.",
+  "address": "1185 Budapest, Nagyszalonta utca 25.",
+  "lat": 47.4388882,
+  "lon": 19.2194507,
+  "website": "https://www.varosgazda18.hu/vilmos-endre-sportcentrum/",
+  "phone": "+36 30 547 6476",
+  "basins": [
+    {
+      "id": "25m-uszomedence",
+      "name": "Úszómedence (25×16 m, feszített víztükrű)",
+      "lengthM": 25,
+      "lanes": 6,
+      "indoor": true
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "20:00", "seasonNote": "2026.09.26-i újranyitás utáni nyitvatartás; pénztárzárás 19.00, medencetér elhagyása 19.45" },
+    { "weekday": 2, "opens": "06:00", "closes": "20:00", "seasonNote": "Pénztárzárás 19.00, medencetér elhagyása 19.45" },
+    { "weekday": 3, "opens": "06:00", "closes": "20:00", "seasonNote": "Pénztárzárás 19.00, medencetér elhagyása 19.45" },
+    { "weekday": 4, "opens": "06:00", "closes": "20:00", "seasonNote": "Pénztárzárás 19.00, medencetér elhagyása 19.45" },
+    { "weekday": 5, "opens": "06:00", "closes": "20:00", "seasonNote": "Pénztárzárás 19.00, medencetér elhagyása 19.45" },
+    { "weekday": 6, "opens": "06:00", "closes": "19:00", "seasonNote": "Hétvégén és ünnepnapokon; pénztárzárás 18.00, medencetér elhagyása 18.45" },
+    { "weekday": 7, "opens": "06:00", "closes": "19:00", "seasonNote": "Hétvégén és ünnepnapokon; pénztárzárás 18.00, medencetér elhagyása 18.45" }
+  ],
+  "scheduleSource": {
+    "url": "https://www.varosgazda18.hu/wp-content/uploads/2026/04/2026-HL-VE-2026-APRILIS-27-MAJUS-3.pdf",
+    "format": "pdf",
+    "note": "FIGYELEM: EZ AZ URL ELAVULT. A /vilmos-endre-sportcentrum/ oldalon a 'sávbérlés' link 2026.09.24-én még mindig a 2026. ÁPRILIS 27 - MÁJUS 3. közötti (18.) hetet mutatja, mert az uszoda 2026. május 1. óta felújítás miatt zárva volt. Az újranyitás (2026.09.26.) után a Városgazda várhatóan friss, heti PDF-et tesz ki - a scraper MINDIG a HTML-oldalról olvassa ki az aktuális href-et, soha ne találja ki az URL-t. URL-minta: https://www.varosgazda18.hu/wp-content/uploads/<ÉÉÉÉ>/<HH>/<ÉÉÉÉ>-HL-VE-<ÉÉÉÉ>-<HÓNAP NAGYBETŰVEL>-<kezdőnap>-<zárónap>.pdf ; 'VE' = Vilmos Endre, 'HL' = heti lebontás. FORMÁTUM: azonos Városgazda-sablon, mint a Park Uszoda (PU) és a Kastélydombi (KU) esetében - 2 oldalas, A4 FEKVŐ (841.7 × 595.2 pt), VALÓDI SZÖVEGRÉTEGGEL (PyMuPDF page.get_text() kiolvassa, nem szkennelt kép). 1. oldal fejléce 'délelőtt', 2. oldal 'délután'. OSZLOPOK = 15 perces idősávok: 1. oldal 6:00 ... 12:45 (28 oszlop), 2. oldal 13:00 ... 20:45 (32 oszlop); az idősáv-fejléc a táblázat tetején és alján is megismétlődik, bal és jobb szélen egy-egy 'sáv' feliratú oszlop. SOROK: 7 napblokk egymás alatt (HÉTFŐ, KEDD, SZERDA, CSÜTÖRTÖK, PÉNTEK, SZOMBAT, VASÁRNAP), és ITT napblokkonként 6 SOR van (a PU/KU-nál csak 4), a sorok bal és jobb szélén 1,2,3,4,5,6 = A HAT ÚSZÓSÁV. A napnevek betűnként, függőlegesen tördelve vannak a szélső cellákban (get_text() 'H\\nÉ\\nT\\nF\\nŐ' alakban adja - össze kell fűzni). Napblokkonként a konkrét dátum külön cellában ('április 27.' ...), a fejlécben a hét sorszáma ('18. HÉT'), az intervallum ('2026. ÁPRILIS 27 - MÁJUS 03') és az uszoda neve ('Vilmos Endre Uszoda'). FOGLALTSÁG: a foglalt blokkok kitöltőszínt ÉS szöveget kapnak, a szöveg az időtartam ('6:00-7:30', '9:00-10:00', '11:00-15:00'); a SZABAD cellák fehérek és üresek. A színek a foglalás típusát kódolják (ebben a lapban piros, halvány narancs, zöld, kék, magenta, világospiros fordul elő), LEGENDA NINCS, de a foglalt/szabad döntéshez elég a színes téglalap + időtartam-szöveg. BUKTATÓ: egy színes blokk több sávsort is átfoghat függőlegesen (pl. a 6:00-7:30 piros blokk az 1-4. sávot fogja át egyben), ezért a téglalap magasságát is fel kell osztani a sávsorokra. Teljes napos zárást egy lila, a teljes napblokkot (mind a 6 sávot) átfogó téglalap jelez a szöveggel 'KARBANTARTÁS, FELÚJÍTÁS 2026 MÁJUS 1 -' - ezt a scraper 'egész nap zárva'-ként kell kezelje. A lap alján piros dőlt 'Változtatás jogát fenntartjuk!' és generálási időbélyeg ('2026.04.24 9:40')."
+  },
+  "sources": [
+    "https://www.varosgazda18.hu/",
+    "https://www.varosgazda18.hu/vilmos-endre-sportcentrum/",
+    "https://www.varosgazda18.hu/wp-content/uploads/2026/04/2026-HL-VE-2026-APRILIS-27-MAJUS-3.pdf",
+    "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=4&countrycodes=hu&q=Vilmos%20Endre%20uszoda%20Budapest",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "medium",
+  "notes": "LEGFONTOSABB: AZ USZODA 2026. MÁJUS 1. ÓTA FELÚJÍTÁS MIATT ZÁRVA VOLT, és az üzemeltetői oldal szó szerinti közleménye szerint 'a Vilmos Endre Uszoda 2026. szeptember 26-án, szombaton reggel 6:00 órakor újra megnyitja kapuit.' A kutatás napján (2026.09.24.) tehát MÉG ZÁRVA VAN, két nappal az újranyitás előtt. Az élő appban ezt a nyitási dátumot kötelező figyelembe venni, különben zárt uszodához küldi a felhasználókat. A zárást két forrás erősíti: (a) a fenti újranyitási közlemény, (b) a még mindig kint lévő április végi sávbérlés-PDF, amelynek péntek-szombat-vasárnap napblokkjait teljes szélességben lefedi egy lila 'KARBANTARTÁS, FELÚJÍTÁS 2026 MÁJUS 1 -' sáv (nyitott végű dátum). Koordináta: Nominatim a 'Vilmos Endre uszoda Budapest' keresésre 47.4388882 / 19.2194507-et adott (display_name: 'Vilmos Endre uszoda, Nagybecskerek utca, Szemeretelep, XVIII. kerület, Budapest, 1185'); független második forrásként az Overpass API az OSM way 200827294-et ('Vilmos Endre uszoda', leisure=sports_centre, sport=swimming) adta 47.4388565 / 19.2194494 középponttal - a kettő néhány méteren belül egyezik. HARMADIK forrás: az üzemeltető saját /vilmos-endre-sportcentrum/ oldala '1185 Budapest, Nagyszalonta utca 25.' címet ír, és az OSM-ben a befoglaló sportkomplexum (way 551220509, 'Vilmos Endre Sportcentrum', sport=soccer;swimming;athletics;...) pontosan ezt az addr:street=Nagyszalonta utca / addr:housenumber=25 / addr:postcode=1185 címet viseli. MAGYARÁZAT A KOORDINÁTÁHOZ: szándékosan az USZODA ÉPÜLETÉNEK pontját vettem fel (47.43889 / 19.21945), nem a teljes sportkomplexum centroidját (47.4388247 / 19.2185741) - a kettő kb. 65 m-re van egymástól. A Nominatim az uszodánál 'Nagybecskerek utca'-t ír, mert az épület ehhez az utcához van közelebb a komplexumon belül, de a létesítmény postai/bejárati címe a Nagyszalonta utca 25. SÁVSZÁM: nem becslés - a hivatalos sávbérlés-PDF rácsában minden naphoz pontosan 6 sor tartozik 1..6 számozással; ezt a PDF szövegrétegéből olvastam ki ÉS a 130 dpi-s renderelésén vizuálisan is ellenőriztem. MEDENCEMÉRET: az üzemeltetői oldal szó szerint '25 x 16 méteres, feszített víztükrű', vízhőmérséklet kb. 24 °C; a belépőjegy tartalmazza a szaunát. Sávbérlés műugró és vízilabda csapatoknak is elérhető. TELEFON: a létesítmény száma +36-30-547-6476; létesítménybérléshez hétköznap 9:00-15:00 között +36-30-935-7014 / +36-70-657-8935, e-mail Karvasz.Karoly@varosgazda18.hu és papp.zsuzsanna@varosgazda18.hu. Az OSM objektumon nincs telefonszám. A confidence azért csak 'medium', mert az uszoda épp most nyit újra, a kint lévő sávbeosztás elavult, és az újranyitás utáni tényleges nyitvatartás/sávrend még nem volt ellenőrizhető. A közismert régi neve 'Malév uszoda'. TECHNIKAI: a www.varosgazda18.hu nginx-e 403-mal utasítja el a curl/script-klienseket, csak böngésző-szerű fetcheren át érhető el."
+}

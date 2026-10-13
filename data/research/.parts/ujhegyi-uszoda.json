@@ -1,0 +1,64 @@
+{
+  "id": "ujhegyi-uszoda",
+  "name": "Újhegyi Uszoda és Strandfürdő",
+  "shortName": "Újhegyi Uszoda",
+  "district": "X.",
+  "address": "1108 Budapest, Újhegyi út 13.",
+  "lat": 47.46685,
+  "lon": 19.16705,
+  "website": "https://www.kobanyasport.hu/letesitmenyek.htm",
+  "phone": "+36 1 262 4359",
+  "basins": [
+    {
+      "id": "belso-uszomedence",
+      "name": "Belső úszómedence (25 m-es)",
+      "lengthM": 25,
+      "lanes": 6,
+      "indoor": true
+    },
+    {
+      "id": "belso-tanmedence",
+      "name": "Belső tanmedence",
+      "lengthM": 4.5,
+      "lanes": null,
+      "indoor": true
+    },
+    {
+      "id": "kulso-strandmedence",
+      "name": "Külső strandmedence",
+      "lengthM": 25,
+      "lanes": null,
+      "indoor": false
+    },
+    {
+      "id": "kulso-babausztato",
+      "name": "Külső babaúsztató",
+      "lengthM": 5,
+      "lanes": null,
+      "indoor": false
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "20:00", "seasonNote": "Egész évben; szabadtéri medence nyáron külön 09:00-19:00" },
+    { "weekday": 2, "opens": "06:00", "closes": "20:00", "seasonNote": "Egész évben" },
+    { "weekday": 3, "opens": "06:00", "closes": "20:00", "seasonNote": "Egész évben" },
+    { "weekday": 4, "opens": "06:00", "closes": "20:00", "seasonNote": "Egész évben" },
+    { "weekday": 5, "opens": "06:00", "closes": "20:00", "seasonNote": "Egész évben" },
+    { "weekday": 6, "opens": "08:00", "closes": "19:00", "seasonNote": "Hétvége és ünnepnap" },
+    { "weekday": 7, "opens": "08:00", "closes": "19:00", "seasonNote": "Hétvége és ünnepnap" }
+  ],
+  "scheduleSource": {
+    "url": "https://www.kobanyasport.hu/index_htm_files/aktualis_palyabeosztas_20260831.pdf",
+    "format": "pdf",
+    "note": "HIGHEST-VALUE MACHINE-READABLE SOURCE FOUND. Linked from https://www.kobanyasport.hu/letesitmenyek.htm as 'Aktuális pályabeosztás (A változás jogát fenntartjuk!!!)'. The filename carries a date stamp (aktualis_palyabeosztas_YYYYMMDD.pdf), so a scraper MUST regex the href off letesitmenyek.htm each run, not hardcode it. STRUCTURE: 7 pages, exactly one per weekday, page 0 = Hétfő ... page 6 = Vasárnap; each page's text layer starts with the effective date ('2026. augusztus 31.') then the weekday name. Column headers: the 25 m indoor pool is split 'Bal oldal' / 'Jobb oldal' over six lanes labelled with Roman numerals I. II. III. IV. V. VI., followed by two further columns both labelled '1/2 tanm.' (the learner pool split into two halves rather than lanes). Row headers are hourly slots '6. - 7 .' through '21. - 22 ' (labels are typographically inconsistent — e.g. '7. - 830', '17. - 18.30', '20. - 21.00' — so parse leniently). CRITICAL: the free/occupied state is NOT in the text layer; it is encoded purely as cell FILL COLOUR, verified via PyMuPDF page.get_drawings(). Legend swatches confirmed by position against their labels: RGB (1.0, 0.75, 0.0) amber = FOGLALT (occupied), RGB (0.0, 0.69, 0.31) green = SZABAD (free). A scraper should extract filled rects, drop the two legend swatches (x0≈16, x1≈97, y≈398-453 on each page), then map each remaining rect's centre to a (lane column, hour row) cell and read its colour. Page 6 (Vasárnap) omits the 'Bal oldal'/'Jobb oldal' grouping header but keeps the same I.-VI. + 2×'1/2 tanm.' columns."
+  },
+  "sources": [
+    "https://www.kobanyasport.hu/",
+    "https://www.kobanyasport.hu/letesitmenyek.htm",
+    "https://www.kobanyasport.hu/index_htm_files/aktualis_palyabeosztas_20260831.pdf",
+    "https://www.kobanyasport.hu/index_htm_files/uszoda.pdf",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "high",
+  "notes": "Operated by the Kocsis Sándor Sportközpont (X. kerület önkormányzat). Lane count 6 is VERIFIED: the official pályabeosztás PDF enumerates lanes I.-VI. for the indoor pool. Basin dimensions taken verbatim from the operator's own 'Medencék adatai' table on letesitmenyek.htm (szélesség/hosszúság/mélység/hőfok): belső úszómedence 16 m wide x 25 m long x 2 m deep, 26-28 °C; belső tanmedence 16 m wide x 4,5 m long x 80 cm, 30-32 °C; külső strandmedence 8,5 m x 25 m x 1,35 m; külső babaúsztató 5 x 5 m. Note the operator lists width BEFORE length, so lengthM here is the longer 'hosszúság' value (4.5 for the tanmedence is genuinely its length per that table). Opening hours from the operator's own uszoda.pdf. WARNING: aggregator site strand.hu lists the postcode as 1196 — that is WRONG (1196 is Kispest); OSM and the operator both give 1108. Coordinate cross-checked: OSM way at 1108 Újhegyi út 13 vs. operator address — exact match."
+}

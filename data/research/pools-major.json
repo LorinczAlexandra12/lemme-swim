@@ -1,0 +1,1407 @@
+{
+  "pools": [
+    {
+      "id": "csaszar-komjadi-sportuszoda",
+      "name": "Császár-Komjádi Béla Sportuszoda",
+      "shortName": "Komjádi",
+      "district": "II.",
+      "address": "1023 Budapest, Árpád fejedelem útja 8.",
+      "lat": 47.51984,
+      "lon": 19.03719,
+      "website": "https://nsu.hu/letesitmeny/csaszar-komjadi-sportuszoda-nemzeti-uszo-es-vizilabda-olimpiai-kozpont/",
+      "phone": "+36 1 225 1780",
+      "basins": [
+        {
+          "id": "csaszar-50m-nyitott",
+          "name": "50 m-es nyitott versenymedence (\"Császár 50\")",
+          "lengthM": 50,
+          "lanes": 10,
+          "indoor": false,
+          "seasonNote": "50 × 25 m-es szabadtéri versenymedence, egész évben üzemel (fűtött). Sávszám igazolva: a hivatalos heti lakossági vízfelület-PDF minden hétköznap 08:00-14:00 között 10 pályát ad ki a közönségnek, hétvégén 08:00-18:45 között szintén 10-et; ez a 25 m-es medenceszélességgel (10 × 2,5 m) is egybevág. Délutánonként (14:00-18:45) a medencét KERESZTBEN osztják, ilyenkor 4 rövid (25 m-es) pálya van."
+        },
+        {
+          "id": "komjadi-50m-fedett",
+          "name": "50 m-es fedett versenymedence",
+          "lengthM": 50,
+          "lanes": null,
+          "indoor": true,
+          "seasonNote": "50 × 21 m. EZ A MEDENCE NEM SZEREPEL a heti lakossági vízfelület-kiírásban - gyakorlatilag teljesen a válogatott/utánpótlás edzéseké. Sávszám hivatalos forrásból nem igazolt (a 21 m-es szélesség 8 sávot sejtet, de ezt NEM erősítette meg forrás)."
+        },
+        {
+          "id": "csaszar-25m",
+          "name": "25 m-es úszómedence (\"Császár 25\")",
+          "lengthM": 25,
+          "lanes": 6,
+          "indoor": false,
+          "seasonNote": "25 × 16 m; télen sátorral fedett. Sávszám igazolva: a heti lakossági vízfelület-PDF-ben a legmagasabb kiadott érték 6 pálya (több napon hosszú blokkokban), ami a 16 m-es szélességgel (6 × ~2,5 m) egybevág."
+        },
+        {
+          "id": "tanmedence-fedett",
+          "name": "Tanmedence (fedett)",
+          "lengthM": 12.5,
+          "lanes": null,
+          "indoor": true,
+          "seasonNote": "12,5 × 5,8 m. Nem úszósávos; a lakosság csak oktatás céljából használhatja."
+        },
+        {
+          "id": "tanmedence-satras",
+          "name": "Tanmedence (sátras)",
+          "lengthM": 16,
+          "lanes": null,
+          "indoor": false,
+          "seasonNote": "16 × 6 m; télen sátorral fedett. Nem úszósávos."
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "18:45",
+          "seasonNote": "Lakossági (közönség) nyitvatartás a hatályos házirend szerint; sportolóknak 06:00-22:00. Pénztár 06:00-18:00."
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "18:45",
+          "seasonNote": "Lakossági (közönség) nyitvatartás a hatályos házirend szerint; sportolóknak 06:00-22:00. Pénztár 06:00-18:00."
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "18:45",
+          "seasonNote": "Lakossági (közönség) nyitvatartás a hatályos házirend szerint; sportolóknak 06:00-22:00. Pénztár 06:00-18:00."
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "18:45",
+          "seasonNote": "Lakossági (közönség) nyitvatartás a hatályos házirend szerint; sportolóknak 06:00-22:00. Pénztár 06:00-18:00."
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "18:45",
+          "seasonNote": "Lakossági (közönség) nyitvatartás a hatályos házirend szerint; sportolóknak 06:00-22:00. Pénztár 06:00-18:00."
+        },
+        {
+          "weekday": 6,
+          "opens": "06:00",
+          "closes": "18:45",
+          "seasonNote": "Lakossági (közönség) nyitvatartás a hatályos házirend szerint; sportolóknak 06:00-22:00. Pénztár 06:00-18:00."
+        },
+        {
+          "weekday": 7,
+          "opens": "06:00",
+          "closes": "18:45",
+          "seasonNote": "Lakossági (közönség) nyitvatartás a hatályos házirend szerint; sportolóknak 06:00-22:00. Pénztár 06:00-18:00."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://nsu.hu/wp-content/uploads/2026/09/2026.09.19-09.25-1.pdf",
+        "format": "pdf",
+        "note": "Hetente cserélt, szöveges (NEM szkennelt) PDF: 'HETI LAKOSSÁGI VÍZFELÜLETEK A CSÁSZÁR-KOMJÁDI USZODÁBAN'. A létesítményoldalon a 'Heti lakossági szabad vízfelületek' gomb mögül tölthető le; a fájlnév a hét dátumtartománya (pl. 2026.09.19-09.25-1.pdf), tehát a linket hetente újra ki kell olvasni a HTML-ből (nem kiszámítható mintázat - a '-1' utótag esetleges). Tartalma naponként, medencénként ('Császár 50', 'Császár 25') idősáv -> szabad pályaszám, pl. 'Szeptember 22. (kedd) / Császár 50 / 08:00 - 14:00  10 pálya'. PyMuPDF-fel tisztán kinyerhető, de a napcímkék a szövegfolyam VÉGÉN jönnek, nem a blokkok előtt - a sorrendhez koordináta-alapú (x,y) kiolvasás kell. Fontos kikötés a PDF-ben: 'Hétköznapokon a tanmedenencék a lakosság részére zárva vannak!' és 'a változás jogát fenntartjuk'."
+      },
+      "sources": [
+        "https://nsu.hu/letesitmeny/csaszar-komjadi-sportuszoda-nemzeti-uszo-es-vizilabda-olimpiai-kozpont/",
+        "https://nsu.hu/wp-content/uploads/2026/01/Hazirend-Magyar-Angol-Nemet-1.pdf",
+        "https://nsu.hu/wp-content/uploads/2026/09/2026.09.19-09.25-1.pdf",
+        "https://www.futas.net/hungary/Budapest/csaszar-komjadi-uszoda.html",
+        "https://nominatim.openstreetmap.org/search?q=Komj%C3%A1di+uszoda+Budapest",
+        "https://hu.wikipedia.org/wiki/Cs%C3%A1sz%C3%A1r-Komj%C3%A1di_B%C3%A9la_Sportuszoda"
+      ],
+      "confidence": "high",
+      "note": "Az NSU (Nemzeti Sportügynökség) üzemelteti. A házirend szó szerint rögzíti: 'A lakosság létesítményhasználati lehetőségei a mindenkori sportolói igények, és a különböző versenyek rendezésének figyelembevételével kerülnek kialakításra.' Alaptevékenység az úszó/vízilabda utánpótlás és válogatott felkészítése - a közönségnek kiadott sávszám naponta és óránként változik (a heti PDF-ben pl. 'Császár 25' sávszáma 1 és 6 között ingadozik), versenyek idején a medencék teljesen zárva lehetnek. Az 5 medencéből a lakosság gyakorlatilag CSAK kettőt ('Császár 50' és 'Császár 25') használhat; a fedett 50 m-es és a tanmedencék hétköznap a közönség elől el vannak zárva. Két telefonszám kering: a hivatalos oldalon és a házirendben +36 1 225 1780 szerepel, katalógusokban +36 1 212 2750."
+    },
+    {
+      "id": "dagaly-furdo-es-uszoda",
+      "name": "Dagály Gyógyfürdő, Strandfürdő és Uszoda",
+      "shortName": "Dagály",
+      "district": "XIII.",
+      "address": "1138 Budapest, Népfürdő utca 28-30.",
+      "lat": 47.5392,
+      "lon": 19.06033,
+      "website": "https://nsu.hu/letesitmeny/dagaly-gyogyfurdo-strandfurdo-es-uszoda-nemzeti-uszo-es-vizilabda-olimpiai-kozpont/",
+      "phone": "+36 30 160 0150",
+      "basins": [
+        {
+          "id": "50m-medence",
+          "name": "50 m-es szabadtéri úszómedence",
+          "lengthM": 50,
+          "lanes": 10,
+          "indoor": false,
+          "seasonNote": "Egész évben üzemel, 27 °C, 1250 m² vízfelület. A sávszám a hivatalos heti pályabeosztásból igazolt (0-9-ig számozott sávok)."
+        },
+        {
+          "id": "25m-medence",
+          "name": "25 m-es szabadtéri úszómedence",
+          "lengthM": 25,
+          "lanes": 8,
+          "indoor": false,
+          "seasonNote": "Egész évben üzemel, 27 °C, 525 m² vízfelület. A sávszám a hivatalos heti pályabeosztásból igazolt (1-8-ig számozott sávok)."
+        },
+        {
+          "id": "termal-medence",
+          "name": "Szabadtéri termálmedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "36 °C, 523 m². Nincs úszósáv."
+        },
+        {
+          "id": "gyogy-medence",
+          "name": "Szabadtéri gyógymedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "34 °C, 516 m². Nincs úszósáv."
+        },
+        {
+          "id": "elmenymedence",
+          "name": "Élménymedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "Csak nyári strandszezonban, 30-34 °C, 794 m². Nincs úszósáv."
+        },
+        {
+          "id": "strandmedence",
+          "name": "Strandmedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "Csak nyári strandszezonban, 30-34 °C, 734 m². Nincs úszósáv."
+        },
+        {
+          "id": "tanmedence",
+          "name": "Tanmedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "Csak nyári strandszezonban, 30-34 °C, 362 m². Nincs úszósáv."
+        },
+        {
+          "id": "gyermekmedence",
+          "name": "Gyermekmedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "Csak nyári strandszezonban, 30-34 °C, 267 m². Nincs úszósáv."
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Egész évben, hétfő-vasárnap. A sávos medencék pályabeosztása 06:00-20:00 közt van kiadva."
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Egész évben, hétfő-vasárnap. A sávos medencék pályabeosztása 06:00-20:00 közt van kiadva."
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Egész évben, hétfő-vasárnap. A sávos medencék pályabeosztása 06:00-20:00 közt van kiadva."
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Egész évben, hétfő-vasárnap. A sávos medencék pályabeosztása 06:00-20:00 közt van kiadva."
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Egész évben, hétfő-vasárnap. A sávos medencék pályabeosztása 06:00-20:00 közt van kiadva."
+        },
+        {
+          "weekday": 6,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Egész évben, hétfő-vasárnap. A sávos medencék pályabeosztása 06:00-20:00 közt van kiadva."
+        },
+        {
+          "weekday": 7,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Egész évben, hétfő-vasárnap. A sávos medencék pályabeosztása 06:00-20:00 közt van kiadva."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://nsu.hu/letesitmeny/dagaly-gyogyfurdo-strandfurdo-es-uszoda-nemzeti-uszo-es-vizilabda-olimpiai-kozpont/",
+        "format": "image",
+        "note": "A LEGJOBB FORRÁS a teljes listában. Hetente cserélt JPG 'pályabeosztás' rács medencénként, a létesítményoldalon linkelve. Fájlnév-minta: https://nsu.hu/wp-content/uploads/ÉÉÉÉ/HH/50m-palyabeosztas-ÉÉÉÉ.HH.NN-HH.NN.jpg és 25m-palyabeosztas-... (pl. 2026.09.21-09.27). A rács: oszlop = úszósáv (50 m: 0-9, 25 m: 1-8), sor = 30 perces idősáv 06:00-20:00, cellaszín = KÖZÖNSÉG (világoskék, szabad) vagy FOGLALT (több szín, egyesületenként) vagy ZÁRVA (szürke). Pontosan a keresett adat, de OCR/képfeldolgozás kell hozzá; a fájlnév dátumtartományból kikövetkeztethető a heti frissítés."
+      },
+      "sources": [
+        "https://nsu.hu/letesitmeny/dagaly-gyogyfurdo-strandfurdo-es-uszoda-nemzeti-uszo-es-vizilabda-olimpiai-kozpont/",
+        "https://nsu.hu/wp-content/uploads/2026/09/50m-palyabeosztas-2026.09.21-09.27.jpg",
+        "https://nsu.hu/wp-content/uploads/2026/09/25m-palyabeosztas-2026.09.21-09.27.jpg",
+        "https://nominatim.openstreetmap.org/search?q=N%C3%A9pf%C3%BCrd%C5%91+utca+28-30%2C+Budapest",
+        "https://hu.wikipedia.org/wiki/Dag%C3%A1ly_f%C3%BCrd%C5%91"
+      ],
+      "confidence": "high",
+      "note": "2017 óta NEM a Budapest Gyógyfürdői Zrt., hanem a Nemzeti Sportügynökség (NSU) üzemelteti, 'Nemzeti Úszó és Vízilabda Olimpiai Központ' részeként, a szomszédos Duna Arénával együtt. A strandmedencék csak nyári szezonban üzemelnek, a két sávos úszómedence viszont egész évben. Sávszámok KÉPRŐL, hivatalos heti pályabeosztásról igazolva."
+    },
+    {
+      "id": "hajos-alfred-nemzeti-sportuszoda",
+      "name": "Hajós Alfréd Nemzeti Sportuszoda",
+      "shortName": "Hajós",
+      "district": "XIII.",
+      "address": "1007 Budapest, Margitsziget",
+      "lat": 47.5215,
+      "lon": 19.04273,
+      "website": "https://nsu.hu/letesitmeny/hajos-alfred-nemzeti-sportuszoda-nemzeti-uszo-es-vizilabda-olimpiai-kozpont/",
+      "phone": "+36 1 450 4200",
+      "basins": [
+        {
+          "id": "fedett-33m",
+          "name": "33 m-es fedett medence",
+          "lengthM": 33,
+          "lanes": null,
+          "indoor": true,
+          "seasonNote": "Vízhőfok 25-27 °C. A műemléki, 1930-as Hajós-csarnok medencéje. A heti lakossági PDF-ben a legmagasabb kiadott érték 7 pálya, de a TELJES sávszám nem igazolt (lehet 8 is, folyamatos egyesületi foglalással)."
+        },
+        {
+          "id": "fedett-tanmedence",
+          "name": "Fedett tanmedence",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": true,
+          "seasonNote": "Vízhőfok 30-32 °C. A 39. héten a lakosság részére ZÁRVA volt; iskolai és egyesületi úszásoktatás folyik benne."
+        },
+        {
+          "id": "fedett-muugro",
+          "name": "Fedett műugró medence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "Csak igazolt versenyzőknek. 5 m mély; katasztrófavédelmi búvárok is itt gyakorolnak. Nincs lakossági úszósáv."
+        },
+        {
+          "id": "hajos-50m-nyitott",
+          "name": "50 m-es nyitott medence (\"Hajós 50 m-es\")",
+          "lengthM": 50,
+          "lanes": 8,
+          "indoor": false,
+          "seasonNote": "Egész évben üzemel. Sávszám igazolva: a hivatalos heti PDF mind az 5 hétköznapon azonos, megszakítás nélküli blokkot ad ki - 'Hétfő-Péntek: 06:00-15:45  8 pálya' -, azaz a teljes medence a közönségé, tehát 8 sávos."
+        },
+        {
+          "id": "szechy-50m-nyitott",
+          "name": "50 m-es nyitott medence (\"Nyitott 50 m-es\", Széchy Tamás Uszoda)",
+          "lengthM": 50,
+          "lanes": 10,
+          "indoor": false,
+          "seasonNote": "A 2006-os úszó-EB-re épült Széchy Tamás Uszoda medencéje. Sávszám igazolva: a heti PDF több napon is 10 pályát ad ki hosszú, összefüggő blokkban (pl. 'Kedd: 09:45-14:30  10 pálya')."
+        },
+        {
+          "id": "nyitott-33m",
+          "name": "33 m-es nyitott medence",
+          "lengthM": 33,
+          "lanes": 8,
+          "indoor": false,
+          "seasonNote": "Vízhőfok 25-27 °C, korábban télen sátorral fedve. Sávszám igazolva: a heti PDF több napon 8 pályát ad ki hosszú blokkban (pl. 'Hétfő: 06:00-15:00  8 pálya'). FIGYELEM: a fedett 33 m-es medencét év végén bezárták, a 2025-ös bérletek 2026.02.20-ig voltak felhasználhatók - a 33-as medencék státuszát indulás előtt ellenőrizni kell."
+        },
+        {
+          "id": "nyitott-tanmedencek",
+          "name": "Nyitott tanmedencék (3., 4.)",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": false,
+          "seasonNote": "Vízhőfok 30-32 °C. A 39. héten (szeptember) ZÁRVA - jellemzően csak a nyári strandszezonban üzemelnek."
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "15:55",
+          "seasonNote": "Általános lakossági nyitvatartás, 'függően az időszakos rendezvényektől'. Pénztár 06:00-17:00. A nyári iskolai szünetben ettől eltérhet."
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "15:55",
+          "seasonNote": "Általános lakossági nyitvatartás, 'függően az időszakos rendezvényektől'. Pénztár 06:00-17:00. A nyári iskolai szünetben ettől eltérhet."
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "15:55",
+          "seasonNote": "Általános lakossági nyitvatartás, 'függően az időszakos rendezvényektől'. Pénztár 06:00-17:00. A nyári iskolai szünetben ettől eltérhet."
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "15:55",
+          "seasonNote": "Általános lakossági nyitvatartás, 'függően az időszakos rendezvényektől'. Pénztár 06:00-17:00. A nyári iskolai szünetben ettől eltérhet."
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "15:55",
+          "seasonNote": "Általános lakossági nyitvatartás, 'függően az időszakos rendezvényektől'. Pénztár 06:00-17:00. A nyári iskolai szünetben ettől eltérhet."
+        },
+        {
+          "weekday": 6,
+          "opens": "06:00",
+          "closes": "18:00",
+          "seasonNote": "Hétvégi nyitvatartás, 'függően az időszakos rendezvényektől'."
+        },
+        {
+          "weekday": 7,
+          "opens": "06:00",
+          "closes": "18:00",
+          "seasonNote": "Hétvégi nyitvatartás, 'függően az időszakos rendezvényektől'."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://nsu.hu/wp-content/uploads/2026/09/Hajos-SzechyLAKOSSAGI-SZABAD-VIZFELULETEK-39.het-d.pdf",
+        "format": "pdf",
+        "note": "Hetente cserélt, szöveges (NEM szkennelt) PDF: 'LAKOSSÁGI SZABAD VÍZFELÜLETEK A HAJÓS ALFRÉD SPORTUSZODÁKBAN'. A létesítményoldalon a 'Heti lakossági szabad vízfelületek' gomb mögül érhető el; a fájlnévben a HÉT SORSZÁMA szerepel (39.het), tehát a linket hetente újra ki kell olvasni a HTML-ből. Szerkezete medencénként ('Fedett 33-es', 'Nyitott 33m-es', 'Hajós 50m-es', 'Nyitott 50m-es', tanmedencék, szaunák), azon belül naponként szabadszöveges idősávok, pl. 'Hétfő: 06:00-07:00 6 pálya, 07:00-08:30 5-6 pálya, 08:30-14:00 6-7 pálya'. FIGYELEM A PARSERNEK: (1) gyakori a TARTOMÁNYOS pályaszám ('5-6 pálya'), amit az appnak intervallumként vagy pesszimista alsó korlátként kell kezelnie; (2) a PDF csak HÉTFŐ-PÉNTEK bontást ad, a hétvégére NEM; (3) a rövidítés 'p.' is előfordul 'pálya' helyett; (4) szerepelnek átfedő/ellentmondó sávok is (pl. hétfő '06:00-07:00 6 pálya' után kedd '06:00-07:30 5 pálya, 07:00-09:00 3 pálya' - a 07:00-07:30 kétszer szerepel)."
+      },
+      "sources": [
+        "https://nsu.hu/letesitmeny/hajos-alfred-nemzeti-sportuszoda-nemzeti-uszo-es-vizilabda-olimpiai-kozpont/",
+        "https://nsu.hu/wp-content/uploads/2026/09/Hajos-SzechyLAKOSSAGI-SZABAD-VIZFELULETEK-39.het-d.pdf",
+        "https://nominatim.openstreetmap.org/search?q=Haj%C3%B3s+Alfr%C3%A9d+Nemzeti+Sportuszoda",
+        "https://hu.wikipedia.org/wiki/Haj%C3%B3s_Alfr%C3%A9d_Nemzeti_Sportuszoda"
+      ],
+      "confidence": "high",
+      "note": "A Margitszigeten, a Hajós Alfréd (1930, műemlék) és a szomszédos Széchy Tamás Uszoda (2006) közös létesítményként üzemel - EGY belépő mindkettőre érvényes, ezért egy rekordként kezelendő. Üzemeltető az NSU. 'A vizes sportok hazai központja': a válogatott úszók, vízilabdázók, műugrók, öttusázók edzenek itt, így a lakossági vízfelület naponta és óránként változik; a heti PDF ezt pontosan dokumentálja. A hivatalos cím csak 'Margitsziget' irányítószámmal, házszám nélkül ('1007 Budapest, Margitsziget'); katalógusokban 'Hajós Alfréd sétány 1.' is szerepel, de ez az NSU oldalán NEM erősíthető meg. A fedett 33 m-es medence bezárásáról szóló közlemény miatt a fedett medencék elérhetősége bizonytalan."
+    },
+    {
+      "id": "duna-arena",
+      "name": "Duna Aréna – Nemzeti Úszó és Vízilabda Olimpiai Központ",
+      "shortName": "Duna Aréna",
+      "district": "XIII.",
+      "address": "1138 Budapest, Népfürdő utca 36.",
+      "lat": 47.54121,
+      "lon": 19.06111,
+      "website": "https://nsu.hu/letesitmeny/duna-arena-nemzeti-uszo-es-vizilabda-olimpiai-kozpont/",
+      "phone": "+36 1 255 2890",
+      "basins": [
+        {
+          "id": "50m-medence-1",
+          "name": "50 m-es versenymedence (1.)",
+          "lengthM": 50,
+          "lanes": 10,
+          "indoor": true,
+          "seasonNote": "Az NSU hivatalos leírása szerint '2 db 10 pályás 50 méteres medence, mindkét medence átalakítható 2 x 25 méteres medencévé'. A 2017-es FINA vizes vb versenymedencéje."
+        },
+        {
+          "id": "50m-medence-2",
+          "name": "50 m-es versenymedence (2., bemelegítő)",
+          "lengthM": 50,
+          "lanes": 10,
+          "indoor": true,
+          "seasonNote": "Ugyanabból a hivatalos mondatból: '2 db 10 pályás 50 méteres medence'. Szintén átalakítható 2 × 25 m-esre."
+        },
+        {
+          "id": "muugro-medence",
+          "name": "Műugró medence",
+          "lengthM": 25,
+          "lanes": 6,
+          "indoor": true,
+          "seasonNote": "Elsősorban műugrás. A hivatalos Ár- és díjszabás önálló tételként tartalmazza: 'Műugró medence – Egyéb edzésre – 6 x 1 db 25 m-es sáv', azaz egyéb edzésre 6 db 25 m-es sávra osztható. Lakossági úszásra jellemzően nem elérhető."
+        },
+        {
+          "id": "tanmedence",
+          "name": "Tanmedence",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": true,
+          "seasonNote": "Az Ár- és díjszabás 'Tanmedence' és 'Tanmedence fele' tételeket is tartalmaz, tehát felezhető; sávszám nem közölt. 3 éves kor alatt nem látogatható."
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "10:00",
+          "closes": "14:45",
+          "seasonNote": "Lakossági nyitvatartás. Sportolóknak H-V 06:00-22:00. 'Kiemelt olimpiai felkészülési helyszínként a nyitva tartás a sportolói és versenyrendezési igények szerint alakul!'"
+        },
+        {
+          "weekday": 2,
+          "opens": "10:00",
+          "closes": "14:45",
+          "seasonNote": "Lakossági nyitvatartás. Sportolóknak H-V 06:00-22:00. 'Kiemelt olimpiai felkészülési helyszínként a nyitva tartás a sportolói és versenyrendezési igények szerint alakul!'"
+        },
+        {
+          "weekday": 3,
+          "opens": "10:00",
+          "closes": "14:45",
+          "seasonNote": "Lakossági nyitvatartás. Sportolóknak H-V 06:00-22:00. 'Kiemelt olimpiai felkészülési helyszínként a nyitva tartás a sportolói és versenyrendezési igények szerint alakul!'"
+        },
+        {
+          "weekday": 4,
+          "opens": "10:00",
+          "closes": "14:45",
+          "seasonNote": "Lakossági nyitvatartás. Sportolóknak H-V 06:00-22:00. 'Kiemelt olimpiai felkészülési helyszínként a nyitva tartás a sportolói és versenyrendezési igények szerint alakul!'"
+        },
+        {
+          "weekday": 5,
+          "opens": "10:00",
+          "closes": "14:45",
+          "seasonNote": "Lakossági nyitvatartás. Sportolóknak H-V 06:00-22:00. 'Kiemelt olimpiai felkészülési helyszínként a nyitva tartás a sportolói és versenyrendezési igények szerint alakul!'"
+        },
+        {
+          "weekday": 6,
+          "opens": "10:00",
+          "closes": "18:00",
+          "seasonNote": "Lakossági nyitvatartás szombaton."
+        },
+        {
+          "weekday": 7,
+          "opens": "06:00",
+          "closes": "18:00",
+          "seasonNote": "Lakossági nyitvatartás vasárnap - a hét leghosszabb közönségsávja."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://nsu.hu/letesitmeny/duna-arena-nemzeti-uszo-es-vizilabda-olimpiai-kozpont/",
+        "format": "none-found",
+        "note": "NINCS publikált sáv-/pályabeosztás. A létesítményoldal teljes HTML-jét letöltve és átvizsgálva 2026-09-24-én nem volt sem 'Heti lakossági szabad vízfelületek' gomb (ellentétben a Komjádival és a Hajóssal), sem pályabeosztás-kép (ellentétben a Dagállyal); a letölthető dokumentumok csak kiajánló, ár- és díjszabás és szerződésminták. Az egyetlen géppel olvasható információ a szűk lakossági nyitvatartási ablak (H-P 10:00-14:45). A hivatkozott darena.hu domaint nem ellenőriztem."
+      },
+      "sources": [
+        "https://nsu.hu/letesitmeny/duna-arena-nemzeti-uszo-es-vizilabda-olimpiai-kozpont/",
+        "https://nsu.hu/wp-content/uploads/2026/04/16_Duna-Arena-260401.pdf",
+        "https://nominatim.openstreetmap.org/search?q=Duna+Ar%C3%A9na+Budapest",
+        "https://hu.wikipedia.org/wiki/Duna_Ar%C3%A9na"
+      ],
+      "confidence": "medium",
+      "note": "CÍM-ELLENTMONDÁS a hivatalos oldalon belül: a létesítmény fejléce '1138 Budapest, Népfürdő utca 28-30.'-at ír (ez valójában a szomszédos Dagály címe), az ELÉRHETŐSÉGEK blokk viszont '1138 Budapest, Népfürdő utca 36.'-ot. Az OpenStreetMap szintén Népfürdő utca 36-ra teszi, ezért a 36-os változatot vettem fel. A Dagály és a Duna Aréna egy telephelyen, egymás mellett van (~200 m), közös 'Nemzeti Úszó és Vízilabda Olimpiai Központ' néven - az appban érdemes lehet figyelmeztetni, hogy a két bejárat külön van. A lakossági nyitvatartás a listában a LEGSZŰKEBB (hétköznap csak 4 óra 45 perc), mert a létesítmény kiemelt olimpiai felkészülési helyszín; versenyek idején a közönség elől teljesen elzárható."
+    },
+    {
+      "id": "tuskecsarnok-sportuszoda",
+      "name": "Tüskecsarnok Sportuszoda",
+      "shortName": "Tüske",
+      "district": "XI.",
+      "address": "1117 Budapest, Magyar tudósok körútja 7.",
+      "lat": 47.47157,
+      "lon": 19.05779,
+      "website": "https://tuskecsarnok.hu/sportuszoda/",
+      "phone": null,
+      "basins": [
+        {
+          "id": "versenymedence-50m",
+          "name": "50 m-es versenymedence",
+          "lengthM": 50,
+          "lanes": 10,
+          "indoor": true,
+          "seasonNote": "Sávszám igazolva: a hivatalos heti 'Lakossági szabad vízfelületek' kiírás hétvégén megszakítás nélkül '6:00-17:30 / 10 sáv'-ot ad ki, hétköznap pedig több napon '8:00-14:00 / 10 sáv'-ot - azaz a teljes medence 10 sávos."
+        },
+        {
+          "id": "tanmedence",
+          "name": "Tanmedence (25 m-es kismedence)",
+          "lengthM": 25,
+          "lanes": 4,
+          "indoor": true,
+          "seasonNote": "Sávszám igazolva: a heti kiírásban a legmagasabb kiadott érték 4 sáv, amit hétvégén végig (6:00-17:30) és több hétköznap egész nap fenntartanak. FIGYELEM: a 25 m-es hossz KÖVETKEZTETÉS - az oldal azt írja, 'Az uszoda nyitvatartása kizárólag a 25 m-es kismedencére vonatkozik', és a lakosság számára csak két medence van kiírva (tanmedence + 50 m-es versenymedence), tehát a 'tanmedence' = a '25 m-es kismedence'. Ezt önálló forrás NEM erősítette meg."
+        },
+        {
+          "id": "merulomedence",
+          "name": "Merülőmedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "A házirend a wellness-részlegnél említi. Nincs úszósáv."
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "16:00",
+          "seasonNote": "Érvényes 2026. január 1-től. Pénztárzárás 15:30. A nyitvatartás GARANTÁLTAN csak a 25 m-es kismedencére vonatkozik; a versenymedence hétköznap jellemzően csak 08:00-14:00 között elérhető."
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "16:00",
+          "seasonNote": "Érvényes 2026. január 1-től. Pénztárzárás 15:30. A nyitvatartás GARANTÁLTAN csak a 25 m-es kismedencére vonatkozik; a versenymedence hétköznap jellemzően csak 08:00-14:00 között elérhető."
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "16:00",
+          "seasonNote": "Érvényes 2026. január 1-től. Pénztárzárás 15:30. A nyitvatartás GARANTÁLTAN csak a 25 m-es kismedencére vonatkozik; a versenymedence hétköznap jellemzően csak 08:00-14:00 között elérhető."
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "16:00",
+          "seasonNote": "Érvényes 2026. január 1-től. Pénztárzárás 15:30. A nyitvatartás GARANTÁLTAN csak a 25 m-es kismedencére vonatkozik; a versenymedence hétköznap jellemzően csak 08:00-14:00 között elérhető."
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "16:00",
+          "seasonNote": "Érvényes 2026. január 1-től. Pénztárzárás 15:30. A nyitvatartás GARANTÁLTAN csak a 25 m-es kismedencére vonatkozik; a versenymedence hétköznap jellemzően csak 08:00-14:00 között elérhető."
+        },
+        {
+          "weekday": 6,
+          "opens": "06:00",
+          "closes": "17:30",
+          "seasonNote": "Érvényes 2026. január 1-től. Pénztárzárás 17:00. Hétvégén a versenymedence is végig 10 sávval nyitva."
+        },
+        {
+          "weekday": 7,
+          "opens": "06:00",
+          "closes": "17:30",
+          "seasonNote": "Érvényes 2026. január 1-től. Pénztárzárás 17:00. Hétvégén a versenymedence is végig 10 sávval nyitva."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://tuskecsarnok.hu/sportuszoda/",
+        "format": "html-table",
+        "note": "A LEGKÖNNYEBBEN GÉPPEL FELDOLGOZHATÓ HTML-FORRÁS a listában. A 'Lakossági szabad vízfelületek' blokk közvetlenül a nyilvános HTML-ben van (nincs JS-render, nincs PDF-letöltés), explicit heti dátumtartománnyal ('2026.09.21-09.27. között:'), medencénként ('Tanmedence:', 'Versenymedence:') napokra bontva, pl. '– hétfő: 6:00-11:00 és 13:00-16:00 / 4 sáv (11:00-13:00 nincs szabad sáv)'. FIGYELEM A PARSERNEK: (1) NEM valódi <table> elem, hanem <p>/<br> szövegblokk - reguláris kifejezéssel kell darabolni; (2) a mintázat 'idősáv[ és idősáv] / N sáv', opcionális zárójeles kivétellel; (3) a szombat/vasárnap közös blokkban szerepel; (4) a HTML-ben előfordulnak sortörések SZÁMOK KÖZEPÉN (pl. 'péntek: 8:\\n00-14:00' és '10:00-15:00 8 sáv 15:00-15:30 2p.'), ezért a whitespace-t normalizálni kell a parse előtt."
+      },
+      "sources": [
+        "https://tuskecsarnok.hu/sportuszoda/",
+        "https://tuskecsarnok.hu/hazirend/",
+        "https://tuskecsarnok.hu/megkozelithetoseg/",
+        "https://nominatim.openstreetmap.org/search?q=T%C3%BCskecsarnok+Budapest",
+        "https://hu.wikipedia.org/wiki/T%C3%BCskecsarnok"
+      ],
+      "confidence": "high",
+      "note": "Szintén állami (Nemzeti Sportközpontok / NSÜ) létesítmény, a saját tuskecsarnok.hu oldalával, ami még a régi mnsk.hu-ra hivatkozik. Az uszoda 2016-ban készült el. Az oldal explicit figyelmeztetése: 'A sávok száma a versenymedence programjától függően eltérhet.' A közönség szempontjából a legjobb a HÉTVÉGE: ilyenkor mindkét medence teljes szélességben (10 + 4 sáv) 6:00-17:30-ig szabad. Telefonszámot a honlap egyik aloldalán sem közöl (sportuszoda, adatok, házirend, megközelíthetőség mind ellenőrizve) - csak Facebook-oldal van."
+    },
+    {
+      "id": "palatinus-strandfurdo",
+      "name": "Palatinus Gyógy-, Strand- és Hullámfürdő",
+      "shortName": "Palatinus",
+      "district": "XIII.",
+      "address": "1007 Budapest, Margitsziget",
+      "lat": 47.52764,
+      "lon": 19.04581,
+      "website": "https://www.palatinusstrand.hu/",
+      "phone": "+36 1 340 4500",
+      "basins": [
+        {
+          "id": "uszomedence",
+          "name": "Kültéri úszómedence",
+          "lengthM": 40,
+          "lanes": 4,
+          "indoor": false,
+          "seasonNote": "EGÉSZ ÉVBEN üzemel - 'Az úszás szerelmesei egész évben hódolhatnak szenvedélyüknek a kültéri úszómedencében. A téli időszakban fűtött folyóson keresztül közelíthető meg a medence.' 26 °C, 1,7-1,9 m mély. A 40 m-es hossz a fürdő saját Medencék oldaláról ('Hossz: 40 m'), a 4 sáv a hivatalos sávfoglaltsági PDF-ből (1-4-ig számozott oszlopok). Úszósapka viselése kötelező. 'Az úszómedencében időszakosan sportoktatások, edzések zajlanak.'"
+        },
+        {
+          "id": "hullammedence",
+          "name": "Hullámmedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "Csak nyári strandszezonban. 28 °C, 0,2-2,8 m. Hullámok minden nap 10:40-től óránként. Nincs úszósáv."
+        },
+        {
+          "id": "strandmedence",
+          "name": "Strandmedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "Csak nyári strandszezonban. 30-32 °C, 0,1-1,37 m. Nincs úszósáv."
+        },
+        {
+          "id": "elmenymedence",
+          "name": "Élménymedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "Sodrófolyosó, buzgárok, nyakzuhanyok. Nincs úszósáv."
+        },
+        {
+          "id": "margareta-medence",
+          "name": "Margaréta medence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "30-32 °C, 0,9 m. Szökőkúttal, derék- és hátmasszázzsal. Nincs úszósáv."
+        },
+        {
+          "id": "ulomedencek",
+          "name": "Ülőmedencék (termál)",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "'Az év 365 napján' üzemel. 32-36 °C. Nincs úszósáv."
+        },
+        {
+          "id": "gyogyvizes-gyogymedence",
+          "name": "Gyógyvizes gyógymedence (beltéri)",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "36 °C, 0,90 m. Derékmasszázs funkció. 14 éven aluliaknak csak orvosi rendelvényre. Nincs úszósáv."
+        },
+        {
+          "id": "gyermekmedencek",
+          "name": "Gyermekmedencék (beltéri és kültéri)",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "30-34 °C, 0,0-0,5 m. Nincs úszósáv."
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "09:00",
+          "closes": "19:00",
+          "seasonNote": "Szezonon kívüli (téli) fürdőnyitvatartás a hivatalos Nyitvatartás oldalról. Pénztárzárás záróra előtt 1 órával, a medencetereket zárás előtt 20 perccel el kell hagyni. FIGYELEM: a sávfoglaltsági PDF 06:00-20:00-ig ad ki sávokat - a nyári strandszezonban az úszómedence a fürdőnél korábban nyit."
+        },
+        {
+          "weekday": 2,
+          "opens": "09:00",
+          "closes": "19:00",
+          "seasonNote": "Szezonon kívüli (téli) fürdőnyitvatartás. Pénztárzárás záróra előtt 1 órával."
+        },
+        {
+          "weekday": 3,
+          "opens": "09:00",
+          "closes": "19:00",
+          "seasonNote": "Szezonon kívüli (téli) fürdőnyitvatartás. Pénztárzárás záróra előtt 1 órával."
+        },
+        {
+          "weekday": 4,
+          "opens": "09:00",
+          "closes": "19:00",
+          "seasonNote": "Szezonon kívüli (téli) fürdőnyitvatartás. Pénztárzárás záróra előtt 1 órával."
+        },
+        {
+          "weekday": 5,
+          "opens": "09:00",
+          "closes": "19:00",
+          "seasonNote": "Szezonon kívüli (téli) fürdőnyitvatartás. Pénztárzárás záróra előtt 1 órával."
+        },
+        {
+          "weekday": 6,
+          "opens": "09:00",
+          "closes": "19:00",
+          "seasonNote": "Szezonon kívüli (téli) fürdőnyitvatartás. Pénztárzárás záróra előtt 1 órával."
+        },
+        {
+          "weekday": 7,
+          "opens": "09:00",
+          "closes": "19:00",
+          "seasonNote": "Szezonon kívüli (téli) fürdőnyitvatartás. Pénztárzárás záróra előtt 1 órával."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.palatinusstrand.hu/savfoglaltsag",
+        "format": "pdf",
+        "note": "A BGYH NÉGY OLYAN FÜRDŐJÉNEK EGYIKE, AMELY SAJÁT SÁVFOGLALTSÁGI DOKUMENTUMOT KÖZÖL (Palatinus, Csillaghegyi, Paskál, Pesterzsébeti - a Széchenyi, a Lukács és a zárva tartó Gellért NEM). A /savfoglaltsag HTML-oldal egy dátumozott linket tartalmaz ('Úszómedence: 2026. június 22-től'), ami egy VEKTOROS (nem szkennelt) PDF-re mutat a synergyfox CDN-en: https://budapestgyogyfurdoi.synergyfox.app/public/9/2026_06_22_08_28_palatinus_uszomedence_osszes20260622.pdf . A fájlnévben a feltöltés időbélyege és az érvényesség kezdete is benne van, tehát a linket a /savfoglaltsag oldalról kell kiolvasni (nem kiszámítható). Rács: 7 nap (Hétfő-Vasárnap) × 4 sáv (oszlopfejlécek 4,3,2,1 - FORDÍTOTT sorrendben!), sorok = 1 órás idősávok 06:00-20:00. PARSER-FIGYELMEZTETÉS: a foglaltságot SZÍNES TÉGLALAPOK jelölik (halványzöld = foglalt/egyesületi, üres = szabad), amelyek NEM szöveges elemek - a PyMuPDF get_text() csak a fejléceket adja vissza, a foglaltsághoz page.get_drawings() vektor-kiolvasás vagy raszterizálás kell. A PDF NEM hetente frissül (2026. június 22-i kiadás érvényben szeptemberben is), tehát statikus heti mintázat, nem élő adat. Kiírt kikötés: 'A sávkiosztás változtatásának a jogát a fürdő fenntartja!'"
+      },
+      "sources": [
+        "https://www.palatinusstrand.hu/",
+        "https://www.palatinusstrand.hu/medencek",
+        "https://www.palatinusstrand.hu/nyitvatartas",
+        "https://www.palatinusstrand.hu/savfoglaltsag",
+        "https://budapestgyogyfurdoi.synergyfox.app/public/9/2026_06_22_08_28_palatinus_uszomedence_osszes20260622.pdf",
+        "https://nominatim.openstreetmap.org/search?q=Palatinus+strandf%C3%BCrd%C5%91+Budapest",
+        "https://hu.wikipedia.org/wiki/Palatinus_Strandf%C3%BCrd%C5%91"
+      ],
+      "confidence": "high",
+      "note": "A hivatalos név ma 'Palatinus Gyógy-, Strand- és Hullámfürdő' (a feladatban szereplő 'Palatinus Strandfürdő' a régi/köznyelvi név). Üzemeltető: Budapest Gyógyfürdői és Hévizei Zrt. A 40 m-es kültéri úszómedence a sávos úszás szempontjából EGÉSZ ÉVBEN használható (télen fűtött folyosón át), a többi medence nagy része csak nyáron - ez a Palatinust a lista egyik legjobb téli sávos úszóhelyévé teszi a 4 sáv ellenére. A cím házszám nélküli ('1007 Budapest, Margitsziget'), ugyanúgy mint a Hajósé; a két margitszigeti létesítmény kb. 800 m-re van egymástól, ezért a koordináta-alapú megkülönböztetés fontos. Koordináta: az OSM-objektum (47.52764/19.04581) és a Wikipédia (47.52806/19.04694) kb. 90 m-re van egymástól - a strand nagy területe miatt ez elfogadható, mindkettő a fürdő telkén belül van; az OSM-változatot vettem. UTÓLAGOS PONTOSÍTÁS: a kutatás későbbi szakaszában kiderült, hogy a BGYH-fürdők közül a Csillaghegyi, a Paskál és a Pesterzsébeti is közöl sávfoglaltsági PDF-et - a Palatinus tehát nem egyedi ebben; viszont a Palatinus PDF-je a legrégebbi (2026. június 22-i) és azóta sem frissült."
+    },
+    {
+      "id": "szechenyi-gyogyfurdo-es-uszoda",
+      "name": "Széchenyi Gyógyfürdő és Uszoda",
+      "shortName": "Széchenyi",
+      "district": "XIV.",
+      "address": "1146 Budapest, Állatkerti körút 9-11.",
+      "lat": 47.51844,
+      "lon": 19.08252,
+      "website": "https://www.szechenyifurdo.hu/",
+      "phone": null,
+      "basins": [
+        {
+          "id": "uszomedence",
+          "name": "Úszómedence (P2)",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": false,
+          "seasonNote": "Kültéri, egész évben üzemel. A fürdő hivatalos paraméterei: hőfok 26-28 °C, vízmélység 1,4-1,7 m, VÍZFELSZÍN 910 m², egyidejű befogadóképesség 182 fő. A HOSSZ ÉS A SÁVSZÁM SEHOL NINCS KÖZÖLVE - sem a Medencék, sem az Elérhető szolgáltatások oldalon; szándékosan hagytam null-on, nem becsültem a 910 m²-ből. A szolgáltatáslistában 'P2 Úszómedence 26 °C' néven szerepel. KARBANTARTÁS: 2026. október 5-16. között zárva."
+        },
+        {
+          "id": "kulteri-termalmedence",
+          "name": "Kültéri termálmedence (P1)",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "36-38 °C, 1,4 m, 675 m², 270 fő. A híres sakkozós medence. Karbantartás miatt 2026. szeptember 21. - október 2. között zárva. Nincs úszósáv."
+        },
+        {
+          "id": "elmenymedence",
+          "name": "Élménymedence (P3)",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "32-34 °C, 1,2 m, 600 m², 240 fő. Sodrófolyosó, masszázsfúvókák. Nincs úszósáv."
+        },
+        {
+          "id": "belteri-gyogymedencek",
+          "name": "Beltéri gyógyvizes medencék",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "28-40 °C, 1,0-1,3 m. Vízalatti csoportos torna minden nap 9:00, 10:30 és 14:30 órakor. Javasolt fürdési idő 20 perc. Nincs úszósáv."
+        },
+        {
+          "id": "merulomedencek",
+          "name": "Merülőmedencék",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "18, illetve 40 °C; 0,8-1,2, illetve 1,1 m. Nincs úszósáv."
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "07:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása. A MEDENCÉK ennél korábban zárnak: 07:00-19:40. Pénztárzárás a záróra előtt 1 órával. Ünnep-, szabad- és munkaszüneti napokon hétvégi rend szerint üzemel."
+        },
+        {
+          "weekday": 2,
+          "opens": "07:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása; medencék 07:00-19:40. Pénztárzárás a záróra előtt 1 órával."
+        },
+        {
+          "weekday": 3,
+          "opens": "07:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása; medencék 07:00-19:40. Pénztárzárás a záróra előtt 1 órával."
+        },
+        {
+          "weekday": 4,
+          "opens": "07:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása; medencék 07:00-19:40. Pénztárzárás a záróra előtt 1 órával."
+        },
+        {
+          "weekday": 5,
+          "opens": "07:00",
+          "closes": "22:00",
+          "seasonNote": "PÉNTEKEN hosszabbított: a fürdő 22:00-ig, a medencék 21:40-ig tartanak nyitva. A gőz bejárat pénztára pénteken 21 órakor zár."
+        },
+        {
+          "weekday": 6,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "Hétvégi rend; medencék 08:00-19:40."
+        },
+        {
+          "weekday": 7,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "Hétvégi rend; medencék 08:00-19:40. Kiemelt napokon (2026.10.23-25., 2026.12.18.-2027.01.06.) 8 órától; 2026.12.25-én és 2027.01.01-jén 20 óráig."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.szechenyifurdo.hu/elerheto-szolgaltatasok",
+        "format": "none-found",
+        "note": "NINCS sávfoglaltsági/sávrend forrás. A fürdő honlapján nincs 'Sávfoglaltság' menüpont (ellentétben a Palatinusszal, a Csillaghegyivel, a Paskállal és a Pesterzsébetivel, amelyek mind közölnek ilyet) - a /medencek, /nyitvatartas és /elerheto-szolgaltatasok oldalakat mind letöltöttem és átvizsgáltam, egyikben sincs 'sáv' szó az úszómedencére. A megadott URL az egyetlen géppel olvasható ÜZEMELÉSI állapotforrás: medencénként (P1, P2, P3...) listázza, melyik van karbantartás miatt zárva - ez az app számára a 'nyitva van-e egyáltalán' kérdésre használható, a szabad sávokra NEM."
+      },
+      "sources": [
+        "https://www.szechenyifurdo.hu/medencek",
+        "https://www.szechenyifurdo.hu/nyitvatartas",
+        "https://www.szechenyifurdo.hu/elerheto-szolgaltatasok",
+        "https://nominatim.openstreetmap.org/search?q=Sz%C3%A9chenyi+gy%C3%B3gyf%C3%BCrd%C5%91+Budapest",
+        "https://hu.wikipedia.org/wiki/Sz%C3%A9chenyi_gy%C3%B3gyf%C3%BCrd%C5%91"
+      ],
+      "confidence": "medium",
+      "note": "Üzemeltető: Budapest Gyógyfürdői és Hévizei Zrt. A kültéri úszómedence valódi, sávozott sportmedence (a fürdő leírása szerint 'ideális választás mindazoknak, akik a sportos mozgást (...) élveznék - maratonra felkészülőknek'), de a fürdő SEMMILYEN sávszámot vagy medencehosszt nem közöl, és sávfoglaltsági kimutatást sem ad ki. Ezért a medence lanes és lengthM mezője szándékosan null. Telefonszám a letöltött oldalakon nem szerepelt (a lábléc csak a budapestgyogyfurdoi.hu-ra hivatkozik) - az Elérhetőség aloldalt nem sikerült ellenőrizni. FIGYELEM: a fürdő nyitvatartása NEM azonos a medencék nyitvatartásával (a medencék 20 perccel korábban zárnak), az app-ban a medence-időt érdemes használni."
+    },
+    {
+      "id": "lukacs-gyogyfurdo-es-uszoda",
+      "name": "Szent Lukács Gyógyfürdő és Uszoda",
+      "shortName": "Lukács",
+      "district": "II.",
+      "address": "1023 Budapest, Frankel Leó út 25-29.",
+      "lat": 47.51801,
+      "lon": 19.03706,
+      "website": "https://www.lukacsfurdo.hu/",
+      "phone": "+36 1 326 1695",
+      "basins": [
+        {
+          "id": "uszomedence-26",
+          "name": "Úszómedence (26 °C)",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": false,
+          "seasonNote": "Hivatalos paraméterek a 'Medencék paraméterei' oldalról: 26 °C, vízfelszín 310 m², egyidejű befogadóképesség 62 fő, vízmélység 1,4-2,2 m. HOSSZ ÉS SÁVSZÁM NINCS KÖZÖLVE - nem becsültem. A főoldali leírás szerint 'A fürdő két úszómedencéjét mind a sportolók, mind a hobbiúszók szívesen használják munka előtt vagy munka után.'"
+        },
+        {
+          "id": "uszomedence-22",
+          "name": "Úszómedence (22 °C)",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": false,
+          "seasonNote": "Hivatalos paraméterek: 22 °C, vízfelszín 368 m², egyidejű befogadóképesség 74 fő, vízmélység 1,4-2,2 m. HOSSZ ÉS SÁVSZÁM NINCS KÖZÖLVE. FIGYELEM: a Medencék oldal 1,4-1,9 / 1-1,9 m mélységet ír, a 'Medencék paraméterei' táblázat viszont mindkettőre 1,4-2,2 m-t - a fürdő saját oldalai ellentmondanak egymásnak."
+        },
+        {
+          "id": "termal-gyogymedencek",
+          "name": "Fedett termál gyógymedencék (32, 36, 40 °C)",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "Három gyógymedence: 32 °C / 16,2 m², 36 °C / 41,6 m², 40 °C / 22,6 m²; mind 0,9 m mély. Nincs úszósáv."
+        },
+        {
+          "id": "elmenymedence",
+          "name": "Kültéri élménymedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "33-35 °C, 220 m², 1,13 m. Pezsgőágyak, nyakzuhanyok, hátmasszírozók, sodrófolyosó. Nincs úszósáv."
+        },
+        {
+          "id": "gyogytorna-sulyfurdo",
+          "name": "Gyógytorna medence és súlyfürdő (csak beutalóval)",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "Gyógytorna medence 30-33 °C / 27,09 m²; súlyfürdő 33-35 °C / 19,5 m², 0,9-1,2 m. Kizárólag beutalóval. Nincs úszósáv."
+        },
+        {
+          "id": "merulo-kneipp",
+          "name": "Merülőmedencék és Kneipp-medence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "Merülőmedencék 19 / 20 / 24 °C (6,7 / 4,75 / 5 m²); Kneipp-medence 22 °C, 7,8 m², 0,5 m. Nincs úszósáv."
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "07:00",
+          "closes": "19:00",
+          "seasonNote": "Pénztárzárás záróra előtt 1 órával; a medencéket zárás előtt 20 perccel el kell hagyni."
+        },
+        {
+          "weekday": 2,
+          "opens": "07:00",
+          "closes": "22:00",
+          "seasonNote": "KEDDEN hosszabbított nyitvatartás 22:00-ig ('Fürdőzés este 10 óráig'). Pénztárzárás záróra előtt 1 órával."
+        },
+        {
+          "weekday": 3,
+          "opens": "07:00",
+          "closes": "19:00",
+          "seasonNote": "Pénztárzárás záróra előtt 1 órával; a medencéket zárás előtt 20 perccel el kell hagyni."
+        },
+        {
+          "weekday": 4,
+          "opens": "07:00",
+          "closes": "19:00",
+          "seasonNote": "Pénztárzárás záróra előtt 1 órával; a medencéket zárás előtt 20 perccel el kell hagyni."
+        },
+        {
+          "weekday": 5,
+          "opens": "07:00",
+          "closes": "19:00",
+          "seasonNote": "Pénztárzárás záróra előtt 1 órával; a medencéket zárás előtt 20 perccel el kell hagyni."
+        },
+        {
+          "weekday": 6,
+          "opens": "07:00",
+          "closes": "19:00",
+          "seasonNote": "Pénztárzárás záróra előtt 1 órával; a medencéket zárás előtt 20 perccel el kell hagyni."
+        },
+        {
+          "weekday": 7,
+          "opens": "07:00",
+          "closes": "19:00",
+          "seasonNote": "Pénztárzárás záróra előtt 1 órával; a medencéket zárás előtt 20 perccel el kell hagyni."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.lukacsfurdo.hu/nyitvatartas",
+        "format": "none-found",
+        "note": "NINCS sávfoglaltsági forrás. A lukacsfurdo.hu menüjében nincs 'Sávfoglaltság' pont (a Palatinusszal, a Csillaghegyivel, a Paskállal és a Pesterzsébetivel ellentétben, amelyek mind közölnek ilyet); a főoldalt, a /medencek-es-szaunak, /medencek-parameterei és /nyitvatartas oldalakat letöltöttem és átvizsgáltam - egyikben sem szerepel sáv- vagy pályabeosztás. A megadott URL csak a fürdő napi nyitvatartását adja (HTML-táblázatszerű lista), a sávokat nem."
+      },
+      "sources": [
+        "https://www.lukacsfurdo.hu/",
+        "https://www.lukacsfurdo.hu/medencek-es-szaunak",
+        "https://www.lukacsfurdo.hu/medencek-parameterei",
+        "https://www.lukacsfurdo.hu/nyitvatartas",
+        "https://nominatim.openstreetmap.org/search?q=Luk%C3%A1cs+gy%C3%B3gyf%C3%BCrd%C5%91+Budapest",
+        "https://hu.wikipedia.org/wiki/Szent_Luk%C3%A1cs_gy%C3%B3gyf%C3%BCrd%C5%91"
+      ],
+      "confidence": "medium",
+      "note": "Üzemeltető: Budapest Gyógyfürdői és Hévizei Zrt. A hivatalos név 'Szt. Lukács Gyógyfürdő és Uszoda'. A lista egyetlen fürdője KÉT külön sávos úszómedencével (26 °C és 22 °C), ami a komolyabb úszóknak vonzó - a hidegebb, 22 °C-os medence a sportolóké. Sem a medencehossz, sem a sávszám nincs a fürdő egyetlen oldalán sem közölve, ezért mindkettő null. AKTUÁLIS KORLÁTOZÁSOK (2026.09.24-én a főoldalon): 'Felújítási munkálatok miatt a férfi öltöző, a privát kádszolgáltatás, valamint az akadálymentes átöltözési lehetőség átmenetileg nem elérhető.' - a férfi öltöző hiánya érdemben érinti az úszókat."
+    },
+    {
+      "id": "gellert-gyogyfurdo-es-uszoda",
+      "name": "Szt. Gellért Gyógyfürdő és Uszoda",
+      "shortName": "Gellért",
+      "district": "XI.",
+      "address": "1114 Budapest, Kelenhegyi út 4.",
+      "lat": 47.48382,
+      "lon": 19.05095,
+      "website": "https://www.gellertfurdo.hu/",
+      "phone": null,
+      "basins": [
+        {
+          "id": "uszomedence-fedett",
+          "name": "Fedett úszómedence (központi csarnok)",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": true,
+          "seasonNote": "*** A FÜRDŐ 2025. OKTÓBER 1. ÓTA ZÁRVA, EZ A MEDENCE JELENLEG NEM HASZNÁLHATÓ. *** Az adatok a bezárás előtti állapotot írják le (forrás: hu.wikipedia, mert a fürdő saját Medencék oldala a bezáráskor eltűnt, és a Wayback Machine-ben sincs mentés a /medencek oldalról). A szecessziós központi csarnok úszómedencéje, vízhőmérséklet 26 °C, MOZGATHATÓ TETŐSZERKEZETTEL (jó időben nyitható). HOSSZ: egyetlen forrásból sem tudtam igazolni - a közkeletű '33 méteres' adatra nem találtam hivatkozható forrást, ezért lengthM null. SÁVSZÁM: null, és van konkrét jel arra, hogy NEM sávozott medencéről van szó - a Wikipédia szerint 'Az úszómedencében KÖRBE szokás úszni', azaz körforgalom-szerű úszásrend volt érvényben, nem sávos. A medence sekélyebb részén időközönként vízpezsegtetők működtek (az egykori pezsgőfürdő az úszómedence ólomlemezzel szigetelt egyharmadában volt). Úszósapka kötelező volt."
+        },
+        {
+          "id": "termalmedence-36-csarnok",
+          "name": "Termálvizes medence a csarnokban",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "ZÁRVA (2025.10.01-től). Az úszómedence vonalában, félkörívben elhelyezkedő 36 °C-os termálvizes medence. Nincs úszósáv."
+        },
+        {
+          "id": "gyogyvizes-medencek-szarnyak",
+          "name": "Gyógyvizes medencék az egykori női és férfi szárnyban",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "ZÁRVA (2025.10.01-től). A fürdő jobb és bal szárnyában két-két gyógyvizes medence, 36 °C, illetve 40 °C-os gyógyvízzel. 2013. január 1-től már nem nemenként elkülönítve üzemeltek. Nincs úszósáv."
+        },
+        {
+          "id": "merulomedencek",
+          "name": "Hideg vizes merülőmedencék",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "ZÁRVA (2025.10.01-től). Mindkét egykori termálrészleg gőzfürdőjéhez tartozott egy-egy hideg vizes merülőmedence. Nincs úszósáv."
+        },
+        {
+          "id": "hullammedence-kulteri",
+          "name": "Kültéri hullámmedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "ZÁRVA (2025.10.01-től); korábban is idényjellegű, nyári üzemű volt. A fedett úszómedence vonalában helyezkedik el; Európa egyik legrégebbi hullámmedencéje. Nincs úszósáv."
+        },
+        {
+          "id": "kulteri-melegvizes-medence",
+          "name": "Kültéri melegvizes medence pezsegtetőkkel",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "ZÁRVA (2025.10.01-től). A hullámmedencénél egy szinttel magasabban, kültéri szauna mellett. Nincs úszósáv."
+        }
+      ],
+      "openingHours": [],
+      "scheduleSource": {
+        "url": "https://www.gellertfurdo.hu/",
+        "format": "none-found",
+        "note": "A fürdő ZÁRVA, ezért nincs és nem is lehet aktuális sávbeosztás. A honlap egyetlen érdemi tartalma a zárásról szóló közlemény; a Medencék/Árak/Nyitvatartás aloldalak megszűntek, és a Wayback Machine-ben sincs mentés a /medencek oldalról (archive.org wayback API: 'archived_snapshots': {}), így a bezárás előtti hivatalos medenceadatok sem visszakereshetők."
+      },
+      "sources": [
+        "https://www.gellertfurdo.hu/",
+        "https://nominatim.openstreetmap.org/search?q=Gell%C3%A9rt+gy%C3%B3gyf%C3%BCrd%C5%91+Budapest",
+        "https://hu.wikipedia.org/wiki/Gell%C3%A9rt_gy%C3%B3gyf%C3%BCrd%C5%91",
+        "https://hu.wikipedia.org/w/api.php?action=query&titles=Gell%C3%A9rt%20gy%C3%B3gyf%C3%BCrd%C5%91&prop=extracts"
+      ],
+      "confidence": "high",
+      "note": "*** NE JELENÍTSD MEG AKTÍV USZODAKÉNT - ZÁRVA. *** A hivatalos honlap (gellertfurdo.hu) 2026-09-24-én egyetlen tartalmi közleménye: 'Kedves Látogatók! A fürdő 2025. október 1-jétől zárva tart. Várható nyitás 2028-ban.' A honlapról eltűnt a Medencék, Árak, Szolgáltatások és Nyitvatartás menüpont is - csak A fürdőről / Hírek / Galéria / Kapcsolat maradt, és a jegyvásárlás átirányít a többi budapesti fürdőre. A basins tömböt UTÓLAG töltöttem fel (a csapatvezető kérésére, hogy a build ne dobja el a rekordot), de KIZÁRÓLAG hu.wikipedia alapján és a bezárás ELŐTTI állapotra - minden medence seasonNote mezője külön is jelzi, hogy jelenleg nem használható. 2014-ben összesen 12 medence üzemelt a fürdőben; itt a hat érdemi medencecsoportot vettem fel. AZ openingHours TÖMB SZÁNDÉKOSAN ÜRES MARAD: a fürdő zárva van, nyitvatartási adatot sem a honlap, sem archív forrás nem ad, és a bezárás előtti órákat visszamenőleg feltüntetni félrevezető lenne. Ha a build nem-üres openingHours-t követel, azt az app oldalán kell kezelni (pl. 'ideiglenesen zárva' állapottal), nem kitalált időpontokkal. A koordináta ellenőrzött (OSM 47.48382/19.05095 és Wikipédia 47.48371/19.05097 ~12 m-re), így a rekord a felújítás utáni újranyitáskor újrahasznosítható. A cím a Kelenhegyi úti (uszoda) bejárat; a fürdő főbejárata a Szent Gellért tér 1. alatt van - nyitáskor ezt érdemes pontosítani. Többéves felújítás: a tervek szerint szállodává/fürdőkomplexummá alakítják."
+    },
+    {
+      "id": "csillaghegyi-arpad-forrasfurdo",
+      "name": "Csillaghegyi Árpád Forrásfürdő",
+      "shortName": "Csillaghegy",
+      "district": "III.",
+      "address": "1038 Budapest, Pusztakúti út 2-6.",
+      "lat": 47.58455,
+      "lon": 19.04093,
+      "website": "https://www.csillaghegyifurdo.hu/",
+      "phone": "+36 1 242 0754",
+      "basins": [
+        {
+          "id": "uszomedence-25m",
+          "name": "25 m-es úszómedence (Sport zóna)",
+          "lengthM": 25,
+          "lanes": 12,
+          "indoor": null,
+          "seasonNote": "Egész évben üzemel, a Sport zóna nyitvatartása szerint (hétköznap már 6:00-tól). A 12 sáv a fürdő saját szövegéből IDÉZVE: 'A 12 sávos 25 méteres úszómedencénket nem csak a sportolók, hanem a hobbi szinten úszó vendégeink is szabadon élvezhetik.' Paraméterek: 26 °C, vízmélység 200 cm, vízfelület 825 m², egyidejű befogadóképesség 167 fő. INDOOR/OUTDOOR: a fürdő egyik oldala sem írja le, hogy fedett-e - szándékosan null, nem tippeltem. FIGYELEM a sávszámozásra: a hivatalos sávfoglaltsági PDF oszlopai naponta 'A, B, 0, 1, 2, ..., 9, C' - azaz a 12 sáv = A, B és 0-9; a 'C' oszlop külön, 'lépcsők közötti' felirattal (a lépcsők közötti vízfelület, nem teljes értékű sáv)."
+        },
+        {
+          "id": "tanmedence",
+          "name": "Tanmedence",
+          "lengthM": null,
+          "lanes": 4,
+          "indoor": null,
+          "seasonNote": "31 °C, vízmélység 90 cm, vízfelület 120 m², 45 fő. A 4 sáv a hivatalos tanmedence-sávfoglaltsági PDF rácsából (naponta 4, 3, 2, 1 oszlop). A PDF csak HAT napot tartalmaz (Hé, Ke, Sze, Csü, Pé, Szo) - vasárnapra nincs kiadott sávkiosztás. Hossz nincs közölve."
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "A SPORT ZÓNA (úszó- és tanmedence) nyitvatartása a 2026. szeptember 14-től érvényes rend szerint. A Wellness csak 10:00-tól, a Gyermekvilág hétköznap zárva."
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Sport zóna. Wellness 10:00-20:00."
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "SZERDÁN hosszabbított: a Sport zóna 22:00-ig üzemel (Wellness 10:00-22:00). Ez a hét egyetlen késő esti úszási lehetősége itt."
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Sport zóna. Wellness 10:00-20:00."
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Sport zóna. Wellness 10:00-20:00."
+        },
+        {
+          "weekday": 6,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Sport zóna. Hétvégén a Gyermekvilág és a Szaunavilág is nyitva 10:00-20:00."
+        },
+        {
+          "weekday": 7,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Sport zóna. A tanmedencére vasárnap nincs kiadott sávkiosztás."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.csillaghegyifurdo.hu/savfoglaltsag",
+        "format": "pdf",
+        "note": "A LEGRÉSZLETESEBB SÁVFOGLALTSÁGI FORRÁS A BGYH-FÜRDŐK KÖZÜL. A /savfoglaltsag HTML-oldal KÉT dátumozott PDF-linket tartalmaz (érvényesség: 2026. szeptember 14-től): úszómedence = https://budapestgyogyfurdoi.synergyfox.app/public/10/savtablak/uszomedence_260914_tol_mod2.pdf , tanmedence = https://budapestgyogyfurdoi.synergyfox.app/public/10/savtablak/tanmedence_260914_tol_mod.pdf . A fájlnév dátumot ÉS '_mod'/'_mod2' verziószuffixet tartalmaz, tehát NEM kiszámítható - mindig a /savfoglaltsag oldalról kell kiolvasni. Rács: 7 nap (Hé-Vas), naponta 13 oszlop (A, B, 0-9, C), sorok = 1 órás idősávok; hétköznap 6-7-től 19-20-ig (szerdán 20-22-ig is), hétvégén 7-8-tól. JELMAGYARÁZAT: FEKETE cella = foglalt sáv, VILÁGOSKÉK = szabad sáv, ÉLÉNKKÉK = 'legnagyobb terhelésű időszak' (szabad, de zsúfolt). PARSER-FIGYELMEZTETÉS: a foglaltság kizárólag cellaszínként jelenik meg, szövegként NEM - PyMuPDF get_text() csak a fejléceket és az időpontokat adja vissza, a kitöltéshez page.get_drawings() vagy raszterizálás + pixelszín-mintavétel kell. Néhány cellában szöveges felirat is van ('AQUAMAZE*' - előzetes regisztrációhoz kötött edzés, https://aquamaze.hu/idopontfoglalas/). Kiírt kikötés: 'A sávkiosztás változtatásának a jogát a fürdő fenntartja!'"
+      },
+      "sources": [
+        "https://www.csillaghegyifurdo.hu/",
+        "https://www.csillaghegyifurdo.hu/sport-zona",
+        "https://www.csillaghegyifurdo.hu/savfoglaltsag",
+        "https://www.csillaghegyifurdo.hu/nyitvatartas",
+        "https://budapestgyogyfurdoi.synergyfox.app/public/10/savtablak/uszomedence_260914_tol_mod2.pdf",
+        "https://budapestgyogyfurdoi.synergyfox.app/public/10/savtablak/tanmedence_260914_tol_mod.pdf",
+        "https://nominatim.openstreetmap.org/search?q=Csillaghegyi+%C3%81rp%C3%A1d+Forr%C3%A1sf%C3%BCrd%C5%91"
+      ],
+      "confidence": "high",
+      "note": "FELVÉVE a feltételes listáról: egyértelműen van kijelölt úszósávja (12 db) ÉS nyilvános sávfoglaltsági kimutatása, így az app fő célját (hány sáv szabad egy idősávban) ez a fürdő szolgálja ki a legjobban a kisebb fürdők közül. Üzemeltető: Budapest Gyógyfürdői és Hévizei Zrt. A fürdő 2022-ben nyílt újra teljes felújítás után. A 25 m-es medence 12 sávja kiugróan sok - a medence 825 m² vízfelülete ezt alátámasztja (825/25 = 33 m szélesség, ami 12 db 2,5 m-es sávnak felel meg). A fürdőnek a Sport zónán kívül van Wellness, Gyermekvilág, Szaunavilág, Strandterület és csúszdapark része is, ezekben nincs úszósáv - ezeket a medencéket nem vettem fel külön, mert a sávos úszás szempontjából irrelevánsak. KOORDINÁTA: a hu.wikipedián NINCS szócikk erről a fürdőről (geosearch 900 m-es körben sem talált semmit), ezért a második, független ellenőrzés a fürdő saját oldalán közölt cím (1038 Budapest, Pusztakúti út 2-6.) egyezése az OSM-objektum címcímkéjével - ez cím-szintű, nem koordináta-szintű megerősítés."
+    },
+    {
+      "id": "paskal-gyogy-es-strandfurdo",
+      "name": "Paskál Gyógy- és Strandfürdő",
+      "shortName": "Paskál",
+      "district": "XIV.",
+      "address": "1141 Budapest, Egressy út 178/f.",
+      "lat": 47.52166,
+      "lon": 19.12698,
+      "website": "https://www.paskalfurdo.hu/",
+      "phone": "+36 1 252 6944",
+      "basins": [
+        {
+          "id": "uszomedence-33m",
+          "name": "33 m-es úszómedence",
+          "lengthM": 33,
+          "lanes": 8,
+          "indoor": false,
+          "seasonNote": "Kültéri, de EGÉSZ ÉVBEN üzemel: 'A medence télen fedett' (sátorral fedik le). A sátorállítás miatt 2026. október 12-18. között az úszómedence nem üzemel (az időpont időjárásfüggő). 26 °C, vízmélység 1,75 m. A 8 sáv a fürdő SZÓ SZERINTI közléséből: 'A 33 méteres úszómedencében összesen 8 darab sáv található, amelyből egyidejűleg maximum 4 sáv van bérbe adva.' EZ AZ APP SZEMPONTJÁBÓL KULCSFONTOSSÁGÚ: a közönség számára GARANTÁLTAN legalább 4 sáv mindig szabad, és a sávfoglaltsági PDF csak a 4 bérbe adható sávot (1-4) ábrázolja."
+        },
+        {
+          "id": "tanmedence",
+          "name": "Tanmedence",
+          "lengthM": null,
+          "lanes": 5,
+          "indoor": true,
+          "seasonNote": "Beltéri. 32 °C, vízmélység 0,8-1 m. 'A tanmedencében rendszeresek az úszásoktatással kapcsolatos foglalkozások.' Az 5 sáv a hivatalos tanmedence-sávtábla rácsából (naponta 5, 4, 3, 2, 1 oszlop, mind a 7 napra). Hossz nincs közölve."
+        },
+        {
+          "id": "gyogymedence",
+          "name": "Gyógymedence (beltéri)",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "38 °C, 0,95 m. Nátriumot is tartalmazó kálcium-magnézium-hidrogénkarbonátos kloridos hévíz, jelentős fluoridion-tartalommal. 14 éven aluliaknak csak orvosi rendelvényre. Javasolt fürdési idő 20 perc. Nincs úszósáv."
+        },
+        {
+          "id": "merulomedencek",
+          "name": "Gyógyvizes meleg és hideg merülőmedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "42 °C, illetve 20 °C; 1,05 m. Váltófürdőre alkalmas. Javasolt fürdési idő 5 perc. Nincs úszósáv."
+        },
+        {
+          "id": "babamedence",
+          "name": "Babamedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "32 °C, 0,3 m. Nincs úszósáv."
+        },
+        {
+          "id": "elmenymedence",
+          "name": "Élménymedence (beltéri)",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "36 °C, 0,9 m. Az élményelemek automata időzítés szerint működnek. Nincs úszósáv."
+        },
+        {
+          "id": "strandmedence",
+          "name": "Strandmedence (kültéri)",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "Egész évben üzemel. 32-36 °C, 1 m. FIGYELEM: a strandmedence kijelölt részén minden hétköznap 16:30-17:30 között úszásoktatás zajlik. Nincs számozott úszósáv."
+        },
+        {
+          "id": "relax-medence",
+          "name": "Relax medence (kültéri)",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "Egész évben üzemel. 34-36 °C, 1,1 m. Nincs úszósáv."
+        },
+        {
+          "id": "gyerekmedence-kulteri",
+          "name": "Kültéri gyerekmedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "CSAK SZEZONÁLISAN vehető igénybe. 32 °C, 0,3-0,6 m. Nincs úszósáv."
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "09:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása. ELLENTMONDÁS: az úszómedence sávtáblája már 06:00-07:00-s idősávval kezdődik, tehát az úszóknak valószínűleg korábbi (sportolói) bejutás is van - ezt a fürdő nyitvatartási oldala nem erősíti meg."
+        },
+        {
+          "weekday": 2,
+          "opens": "09:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása."
+        },
+        {
+          "weekday": 3,
+          "opens": "09:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása."
+        },
+        {
+          "weekday": 4,
+          "opens": "09:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása."
+        },
+        {
+          "weekday": 5,
+          "opens": "09:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása."
+        },
+        {
+          "weekday": 6,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "Szombaton egy órával korábban nyit."
+        },
+        {
+          "weekday": 7,
+          "opens": "08:00",
+          "closes": "22:00",
+          "seasonNote": "VASÁRNAP a leghosszabb: 08:00-22:00 ('Fürdőzés este 10 óráig' ajánlat)."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.paskalfurdo.hu/savhasznaltsag",
+        "format": "pdf",
+        "note": "FIGYELEM, a menüpont neve itt 'Sávhasználtság' (NEM 'Sávfoglaltság', mint a többi BGYH-fürdőnél) - a linkek keresésekor mindkét alakra kell keresni. Az oldal két PDF-re mutat (érvényesség 2026.09.07-től): úszómedence = https://budapestgyogyfurdoi.synergyfox.app/public/8/savtablak/paskal_uszomedence_0915.pdf , tanmedence = https://budapestgyogyfurdoi.synergyfox.app/public/8/savtablak/paskal_tanmedence_0907.pdf (a fájlnévben MMDD dátum van, de az úszómedence-fájl neve 0915, miközben az oldal 09.07-i érvényességet ír - a fájlnévre NEM szabad támaszkodni). FONTOS SZEMANTIKA: ez a táblázat AZT mutatja, hol van ÚSZÁSOKTATÁS ('az alábbi táblázatban szereplő időpontokban és sávokban úszásoktatás zajlik'), tehát a jelölt cellák a FOGLALT sávok. Rács: 7 nap, naponta 4 oszlop (4, 3, 2, 1) az úszómedencénél és 5 oszlop (5-1) a tanmedencénél; sorok = 1 órás idősávok 06:00-20:00. Mivel a 33 m-es medencének összesen 8 sávja van és csak 4 adható bérbe, a SZABAD SÁVOK SZÁMA = 8 - (a táblázatban foglaltként jelölt sávok száma) - vagyis sosem kevesebb 4-nél. A cellakitöltés itt is vektoros grafika, nem szöveg."
+      },
+      "sources": [
+        "https://www.paskalfurdo.hu/",
+        "https://www.paskalfurdo.hu/medencek",
+        "https://www.paskalfurdo.hu/savhasznaltsag",
+        "https://budapestgyogyfurdoi.synergyfox.app/public/8/savtablak/paskal_uszomedence_0915.pdf",
+        "https://budapestgyogyfurdoi.synergyfox.app/public/8/savtablak/paskal_tanmedence_0907.pdf",
+        "https://nominatim.openstreetmap.org/search?q=Pask%C3%A1l+strandf%C3%BCrd%C5%91+Budapest",
+        "https://hu.wikipedia.org/wiki/Pask%C3%A1l_Strandf%C3%BCrd%C5%91"
+      ],
+      "confidence": "high",
+      "note": "FELVÉVE a feltételes listáról: van kijelölt úszósáv (8 db a 33 m-es medencében) és nyilvános sávhasználtsági kimutatás. Üzemeltető: Budapest Gyógyfürdői és Hévizei Zrt. DOMAIN-VÁLTOZÁS: a feladatban/OSM-ben szereplő paskalstrand.hu ma 301-gyel a paskalfurdo.hu-ra irányít át, a hivatalos név is 'Paskál Gyógy- és Strandfürdő' (nem 'Paskál Gyógy- és Strandfürdő' helyett 'Strandfürdő'). CÍMELLENTMONDÁS: a fürdő saját oldala '1141 Budapest, Egressy út 178 f.'-et ír, az OSM viszont 1148-as irányítószámot - a hivatalos (1141) változatot vettem. KOORDINÁTA: OSM 47.52166/19.12698 és hu.wikipedia ('Paskál Strandfürdő') 47.52111/19.12750 kb. 73 m-re van egymástól - megerősítve, az OSM-változatot használtam. AKTUÁLIS VÁLTOZÁSOK: 2026. augusztus 17-től átalakítás (a geotermikus szauna helyén sóinhalatórium nyílik, a geotermikus szauna szolgáltatás megszűnik); a gyógyvizes ivókút nem üzemel."
+    },
+    {
+      "id": "pesterzsebeti-jodos-sos-furdo",
+      "name": "Pesterzsébeti Jódos-Sós Gyógy- és Strandfürdő",
+      "shortName": "Pesterzsébet",
+      "district": "XX.",
+      "address": "1203 Budapest, Vízisport u. 2.",
+      "lat": 47.43443,
+      "lon": 19.09037,
+      "website": "https://www.pesterzsebetifurdo.hu/",
+      "phone": "+36 1 250 0213",
+      "basins": [
+        {
+          "id": "uszomedence-25m",
+          "name": "25 m-es úszómedence",
+          "lengthM": 25,
+          "lanes": 6,
+          "indoor": false,
+          "seasonNote": "'Úszómedencénk fedetlen, mely télen nyáron üzemel' - azaz kültéri, de EGÉSZ ÉVES. 26-28 °C, vízmélység 210 cm ('Mélyvíz, csak úszóknak! Az úszómedence úszást segítő eszközökkel (úszógumi, karúszó stb.) nem használható.'). A 6 sáv a hivatalos sávkiosztási PDF rácsából igazolva (naponta 6, 5, 4, 3, 2, 1 oszlop, mind a 7 napra). 'Az úszómedencében időszakosan sportoktatások, edzések zajlanak.' KARBANTARTÁS: 2026. október 5-7. között az úszómedence nem üzemel."
+        },
+        {
+          "id": "elmenymedence",
+          "name": "Élménymedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "34-36 °C, 110-120 cm. Medencén belüli kiúszási lehetőség a strand területére. Csak szobatiszta gyermek használhatja. Nincs úszósáv."
+        },
+        {
+          "id": "gyerekmedence",
+          "name": "Beltéri gyerekmedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "30-32 °C, 20-50 cm. 2026. február 16-tól KIZÁRÓLAG hétvégén, ünnepnapokon, illetve június 1. - augusztus 31. között üzemel. Nincs úszósáv."
+        },
+        {
+          "id": "ulomedence",
+          "name": "Ülőmedence (kültéri, egész évben)",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": false,
+          "seasonNote": "35-37 °C, 110-120 cm. 'Brüggölő' medence a kiúszó és a napozóterasz között, fürdőzés közbeni sakkozási lehetőséggel. Nincs úszósáv."
+        },
+        {
+          "id": "jodos-sos-gyogymedence",
+          "name": "Jódos-sós gyógymedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "36-38 °C. AKTUÁLIS ÜZEMZAVAR: 'A medence jelenleg a jódos-sós kút elhúzódó műszaki hibája miatt Szent Erzsébet Gyógyvízzel van feltöltve' - tehát a fürdő névadó jódos-sós vize jelenleg NEM elérhető. 14 év alatt tilos, csak orvosi rendelvényre. Javasolt fürdési idő 10 perc. Nincs úszósáv."
+        },
+        {
+          "id": "termalmedence",
+          "name": "Termálmedence",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "38-40 °C, 100 cm. Nincs úszósáv."
+        },
+        {
+          "id": "sulyfurdo",
+          "name": "Súlyfürdő",
+          "lengthM": null,
+          "lanes": 0,
+          "indoor": true,
+          "seasonNote": "34-35 °C. Kizárólag orvosi rendelvényre használható. Nincs úszósáv."
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása; a sávkiosztás is 08:00-20:00-ig terjed, tehát a kettő itt egybevág."
+        },
+        {
+          "weekday": 2,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása."
+        },
+        {
+          "weekday": 3,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása."
+        },
+        {
+          "weekday": 4,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása."
+        },
+        {
+          "weekday": 5,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása."
+        },
+        {
+          "weekday": 6,
+          "opens": "08:00",
+          "closes": "22:00",
+          "seasonNote": "SZOMBATON hosszabbított 22:00-ig ('Fürdőzés este 10 óráig' ajánlat). A sávkiosztás viszont csak 20:00-ig ad ki sávokat - 20:00 után vélhetően minden sáv szabad."
+        },
+        {
+          "weekday": 7,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "A fürdő nyitvatartása."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.pesterzsebetifurdo.hu/savfoglaltsag",
+        "format": "pdf",
+        "note": "A /savfoglaltsag oldal EGY PDF-re mutat: https://budapestgyogyfurdoi.synergyfox.app/public/11/savfoglaltsag/savfoglaltsag_pesterzsebet_0921.pdf , a linkszöveg 'Sávfoglaltság (2026. szeptember 21-től)', a PDF fejléce pedig konkrét érvényességi INTERVALLUMOT ad: 'SÁVKIOSZTÁS: 2026.09.21-tól - 2026.12.19-ig'. Ez a lista legjobban definiált érvényességű forrása - egy teljes negyedévre szól, tehát ritkán kell újratölteni (de a fájlnévben lévő MMDD miatt a linket akkor is az oldalról kell kiolvasni). Rács: 7 nap (Hétfő-Vasárnap), naponta 6 oszlop FORDÍTOTT sorrendben (6, 5, 4, 3, 2, 1), sorok = 1 órás idősávok 08:00-09:00-tól 19:00-20:00-ig. KÉK cella = foglalt (úszásoktatás), üres/fehér = szabad. A foglaltság itt is csak vektoros kitöltésként létezik, szövegként nem. A foglaltság MINIMÁLIS: a teljes héten mindössze 4 cella foglalt (hétfő 18-19 / 2. sáv, szerda 18-19 / 2. és 3. sáv, szombat 09-10 / 2. sáv, vasárnap 09-10 / 2-3. sáv) - vagyis a 6 sávból gyakorlatilag mindig 5-6 szabad. Kiírt kikötés: 'A sávkiosztás változtatásának a jogát a fürdő fenntartja! Kérjük, hogy a táblázatban szereplő időpontokban ne zavarják az oktatók munkáját!'"
+      },
+      "sources": [
+        "https://www.pesterzsebetifurdo.hu/",
+        "https://www.pesterzsebetifurdo.hu/medencek",
+        "https://www.pesterzsebetifurdo.hu/savfoglaltsag",
+        "https://budapestgyogyfurdoi.synergyfox.app/public/11/savfoglaltsag/savfoglaltsag_pesterzsebet_0921.pdf",
+        "https://nominatim.openstreetmap.org/search?q=Pesterzs%C3%A9beti+J%C3%B3dos-s%C3%B3s+F%C3%BCrd%C5%91"
+      ],
+      "confidence": "high",
+      "note": "FELVÉVE a feltételes listáról: van 6 kijelölt úszósávja és negyedéves érvényességű, nyilvános sávkiosztása. Üzemeltető: Budapest Gyógyfürdői és Hévizei Zrt. A 25 m-es medence FEDETLEN, de egész évben üzemel - a Palatinus mellett ez a másik olyan budapesti fürdő, ahol télen is szabadtéren lehet sávban úszni. AKTUÁLIS ZÁRÁSOK (a főoldal hírsávjából, 2026-09-24): a fürdő 2026. szeptember 28-án karbantartás miatt zárva; 2026. szeptember 27-én a Gubacsi híd lezárása miatt onnan nem közelíthető meg; az úszómedence 2026. október 5-7. között nem üzemel. KOORDINÁTA: a hu.wikipedián nincs szócikk a fürdőről (a 900 m-es geosearch csak a szomszédos objektumokat adta, köztük a fürdőről elnevezett 'Sósfürdő megállóhely' HÉV-állomást 234 m-re, ami a helyet közvetve alátámasztja), ezért a második ellenőrzés a fürdő saját oldalán közölt cím (1203 Budapest, Vízisport u. 2.) egyezése az OSM-objektum címcímkéjével - cím-szintű, nem koordináta-szintű megerősítés."
+    }
+  ],
+  "researchNotes": "KÉSZ. 12 létesítmény, két üzemeltetőtől. KOORDINÁTÁK: minden pontot két független forrásból igyekeztem ellenőrizni (OpenStreetMap/Nominatim ÉS hu.wikipedia geokoordináta); ahol a két forrás 100 m-en belül volt, megerősítettnek vettem, és az OSM-objektum középpontját használtam (pontosabb épület-centroid). Két fürdőnél (Csillaghegyi, Pesterzsébeti) nincs Wikipédia-szócikk, ott a megerősítés csak cím-szintű (a fürdő saját oldalán közölt cím = az OSM címcímkéje) - ezt a rekordok note mezője és az unresolved lista is jelzi. Koordinátát sehol nem becsültem vagy interpoláltam. SÁVSZÁMOK: kizárólag akkor adtam meg számot, ha (a) hivatalos sávfoglaltsági rács oszlopaiból megszámolható, (b) a fürdő szövegesen kimondja, vagy (c) heti lakossági vízfelület-kimutatás tartalmazza. A medence szélességéből SOHA nem számoltam sávszámot; a szélesség/vízfelület csak már meglévő adat ellenőrzésére szolgált (pl. Csillaghegy 825 m2 / 25 m = 33 m szélesség, ami egybevág a közölt 12 sávval). Ahol nincs forrás, a mező null, és a tétel szerepel az unresolved listában. KÉT ÜZEMELTETŐ, KÉT VILÁG: (1) NSÜ / Nemzeti Sportügynökség (nsu.hu; a régi mnsk.hu innen 301-gyel átirányít): Komjádi, Hajós/Széchy, Dagály, Duna Aréna, Tüskecsarnok. HETENTE változó PDF/JPG dokumentumokat adnak ki a 'Heti lakossági szabad vízfelületek' gomb mögött; a fájlnév NEM kitalálható (puszta dátumtartomány), ezért a HTML-ben a GOMB SZÖVEGÉRE kell keresni, nem a fájlnévre - én is emiatt hittem először tévesen, hogy a Komjádi nem közöl semmit. Itt a sávkiosztás napon belül óránként változik, mert az élsport (válogatott- és egyesületi edzések) elsőbbséget élvez. (2) Budapest Gyógyfürdői és Hévizei Zrt. (budapestgyogyfurdoi.hu): Széchenyi, Gellért, Lukács, Palatinus, Csillaghegyi, Paskál, Pesterzsébeti, Római. Egységes sablonú honlapok, dokumentumaik a budapestgyogyfurdoi.synergyfox.app CDN-en; itt a sávkiosztás STATIKUS (hetekre-hónapokra szóló érvényességgel), és a jelölt cellák jellemzően az ÚSZÁSOKTATÁST jelölik, nem minden foglaltságot. Figyelem: a menüpont neve a Paskálnál 'Sávhasználtság', máshol 'Sávfoglaltság'. KÖZÖS PARSER-TANULSÁG A BGYH-PDF-EKNÉL: a foglaltságot mindegyik PDF-ben színes vektoros téglalapok jelölik, amelyek NEM szöveges elemek - a PyMuPDF get_text() csak a napneveket, sávszámokat és idősávokat adja vissza, a tényleges kitöltéshez page.get_drawings() vagy raszterizálás + pixelszín-mintavétel kell. A sávszám-fejlécek több helyen FORDÍTOTT sorrendűek (4-3-2-1, illetve 6-5-4-3-2-1). FORRÁSFORMÁTUMOK: html-table 1 (Tüskecsarnok), image/JPG-rács 1 (Dagály), pdf 6 (Komjádi, Hajós, Palatinus, Csillaghegyi, Paskál, Pesterzsébeti), none-found 4 (Duna Aréna, Széchenyi, Lukács, valamint a zárva tartó Gellért). KIZÁRVA: Római Strandfürdő - nincs igazolható kijelölt úszósávja, ráadásul idényjellegű és jelenleg zárva; a részletek és a már összegyűjtött adatai az unresolved listában. FIGYELMEZTETÉS AZ APP SZÁMÁRA: a Gellért 2025. október 1. óta ZÁRVA (várható nyitás 2028-ban), a rekordban a medencék a bezárás ELŐTTI állapotot írják le (hu.wikipedia alapján, hogy a build ne dobja el a rekordot), az openingHours tömb viszont szándékosan ÜRES marad, mert érvényes nyitvatartás nem létezik - ne jelenjen meg aktív uszodaként.",
+  "unresolved": [
+    "Császár-Komjádi FEDETT 50 m-es medence (50x21 m): sávszáma nem igazolható - a heti lakossági szabad vízfelületek PDF egyáltalán nem tartalmazza ezt a medencét (feltehetően teljes egészében egyesületi/válogatott használatban van). A nyitott 50 m (10 sáv) és a 25 m (6 sáv) viszont igazolt.",
+    "Császár-Komjádi tanmedencék (12,5x5,8 m fedett és 16x6 m sátras): sávszám nincs közölve, oktatási célúak.",
+    "Hajós Alfréd fedett 33 m-es medence: a teljes sávszám nem igazolható, csak annyi látszik a heti PDF-ből, hogy a lakosságnak egyszerre legfeljebb 7 pálya szabad - a medence összesen ennél több is lehet.",
+    "Duna Aréna: NINCS nyilvános heti sáv-/pályabeosztás semmilyen formában (az nsu.hu létesítményoldal csak árlistát és általános leírást közöl). A 2x10 sáv a hivatalos létesítményleírásból, nem foglaltsági kimutatásból származik - az app nem tudja megmondani, ténylegesen hány sáv szabad.",
+    "Duna Aréna tanmedence: méret és sávszám nincs közölve.",
+    "Duna Aréna címellentmondás: az nsu.hu oldal fejléce Népfürdő utca 28-30-at, a kapcsolat-blokk 36-ot ír. Az OSM a 36-ot támasztja alá, ezt használtam.",
+    "Tüskecsarnok tanmedence hossza (25 m) KÖVETKEZTETETT, nem közölt adat - a 4 sáv viszont a honlapról igazolt.",
+    "Tüskecsarnok telefonszáma: a honlap egyetlen aloldalán sem szerepel.",
+    "Széchenyi Gyógyfürdő úszómedence: sem a HOSSZ, sem a SÁVSZÁM nincs közölve sehol (csak 910 m2 vízfelszín, 26-28 C, 1,4-1,7 m, 182 fo befogadóképesség). Nem becsültem a területből.",
+    "Széchenyi Gyógyfürdő: nem találtam telefonszámot a letöltött oldalakon.",
+    "Szt. Lukács mindkét úszómedencéje (310 m2 és 368 m2): sem hossz, sem sávszám nincs közölve a fürdő egyetlen oldalán sem.",
+    "Szt. Lukács: a Medencék oldal (1,4-1,9 / 1-1,9 m) és a Medencék paraméterei táblázat (1,4-2,2 m) ellentmond egymásnak a vízmélységben.",
+    "Palatinus: a fürdő hivatalos nyitvatartása (09:00-19:00) és a sávfoglaltsági PDF idősávjai (06:00-20:00) ellentmondanak - feltehetően a PDF a nyári strandszezonra készült, amikor az úszómedence korábban nyit. Az app-nak a kettő metszetét érdemes venni.",
+    "Palatinus sávfoglaltsági PDF: 2026. június 22-i keltezésű és azóta nem frissült - statikus heti mintázat, NEM élő foglaltsági adat.",
+    "Csillaghegyi úszó- és tanmedence: sehol nincs leírva, hogy FEDETT-e vagy szabadtéri - az indoor mező mindkettőnél null. (A Sport zóna egész évben 6:00-tól üzemel, ami fedett kivitelre utal, de ezt forrás nem erősítette meg.)",
+    "Csillaghegyi tanmedence hossza nincs közölve (csak 120 m2 vízfelület, 90 cm mélység).",
+    "Csillaghegyi sávszámozás: a hivatalos '12 sávos' szöveg és a sávfoglaltsági PDF 13 oszlopa (A, B, 0-9, C) közti eltérés - a 'C / lépcsők közötti' oszlop feltehetően nem teljes értékű sáv, de ez nincs kimondva.",
+    "Paskál tanmedence hossza nincs közölve.",
+    "Paskál: a fürdő nyitvatartása hétköznap 09:00-tól, de az úszómedence sávtáblája 06:00-tól ad ki idősávokat - nem derült ki, van-e korai (sportolói) bejutás.",
+    "Paskál irányítószám-ellentmondás: a fürdő saját oldala 1141-et, az OSM 1148-at ír az Egressy út 178/f-hez. A hivatalos (1141) változatot vettem.",
+    "Csillaghegyi és Pesterzsébeti koordinátája CSAK OSM/Nominatim-ból származik: a hu.wikipedián egyik fürdőnek sincs szócikke (900 m-es geosearch sem talált), a második ellenőrzés csak cím-szintű (a fürdő saját oldalán közölt cím egyezik az OSM címcímkéjével).",
+    "RÓMAI STRANDFÜRDŐ: NEM KERÜLT BE a listába. Van 33,3 m-es, 'Úszómedence' nevű medencéje (24-26 °C, 1,45-2,05 m, 'fokozatosan mélyülő kiépítése révén kényelmesen használható sportolásra'), de SEMMILYEN forrás nem igazolja, hogy kijelölt úszósávjai lennének: a honlapján a 'sáv' szó egyszer sem fordul elő, és a testvérfürdőkkel ellentétben nincs sávfoglaltsági oldala. Ráadásul a strand jelenleg ZÁRVA (a főoldal állapotjelzője szerint; az OSM szerint idényjellegű: május 29. - augusztus 31.). Ha a megrendelő mégis kéri, a meglévő adatok: 1031 Budapest, Rozgonyi Piroska u. 2., +36 1 388 9740, OSM 47.5754205/19.0525494, https://www.romaistrand.hu/ .",
+    "Gellért fedett úszómedence HOSSZA nem igazolható: a közkeletű '33 méteres' adatra egyetlen elérhető forrásban sem találtam megerősítést (a fürdő saját medence-oldala a bezáráskor megszűnt, a Wayback Machine-ben nincs róla mentés, a hu.wikipedia szócikk pedig nem közöl méretet). lengthM: null.",
+    "Gellért fedett úszómedence SÁVSZÁMA nem igazolható, és valószínűleg nem is sávozott: a hu.wikipedia szerint 'Az úszómedencében körbe szokás úszni' - azaz körforgalom-szerű úszásrend, nem kijelölt sávok. lanes: null.",
+    "Gellért NYITVATARTÁS: nincs és nem is lehet érvényes adat, amíg a fürdő zárva van (várható nyitás 2028); az openingHours tömb szándékosan üres. A telefonszám sem érhető el a honlapon.",
+    "Gellért medenceadatai a bezárás ELŐTTI állapotot tükrözik és kizárólag hu.wikipedia-alapúak (a fürdő saját leírásai nem hozzáférhetők) - újranyitáskor mindent újra kell ellenőrizni."
+  ]
+}

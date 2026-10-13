@@ -1,0 +1,47 @@
+{
+  "id": "szeruskert-tanuszoda",
+  "name": "Szérűskert tanuszoda",
+  "shortName": "Szérűskert uszoda",
+  "district": "III.",
+  "address": "1033 Budapest, Szérűskert utca 40-44.",
+  "lat": 47.559348,
+  "lon": 19.0432306,
+  "website": null,
+  "phone": "+36 1 387 3141",
+  "basins": [
+    {
+      "id": "25m-uszomedence",
+      "name": "25 m-es úszómedence",
+      "lengthM": 25,
+      "lanes": null,
+      "indoor": true
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "07:30", "seasonNote": "Reggeli közönségúszás. Napközben iskolai úszásoktatás és úszóiskolák foglalják a medencét." },
+    { "weekday": 1, "opens": "19:00", "closes": "21:00", "seasonNote": "Esti közönségúszás." },
+    { "weekday": 2, "opens": "06:00", "closes": "07:30", "seasonNote": "Reggeli közönségúszás." },
+    { "weekday": 2, "opens": "19:00", "closes": "21:00", "seasonNote": "Esti közönségúszás." },
+    { "weekday": 3, "opens": "06:00", "closes": "07:30", "seasonNote": "Reggeli közönségúszás." },
+    { "weekday": 3, "opens": "19:00", "closes": "21:00", "seasonNote": "Esti közönségúszás." },
+    { "weekday": 4, "opens": "06:00", "closes": "07:30", "seasonNote": "Reggeli közönségúszás." },
+    { "weekday": 4, "opens": "19:00", "closes": "21:00", "seasonNote": "Esti közönségúszás." },
+    { "weekday": 5, "opens": "06:00", "closes": "07:30", "seasonNote": "Reggeli közönségúszás." },
+    { "weekday": 5, "opens": "19:00", "closes": "21:00", "seasonNote": "Esti közönségúszás." },
+    { "weekday": 6, "opens": "09:00", "closes": "17:00", "seasonNote": "Hétvégén és munkaszüneti napokon folyamatos közönségúszás." },
+    { "weekday": 7, "opens": "09:00", "closes": "17:00", "seasonNote": "Hétvégén és munkaszüneti napokon folyamatos közönségúszás." }
+  ],
+  "scheduleSource": {
+    "url": null,
+    "format": "none-found",
+    "note": "Nem találtam publikált sáv- vagy pályabeosztást. Konkrétan ellenőriztem: (1) https://kszki.obuda.hu/ és http://kszki.obuda.hu/ - az üzemeltető Óbudai Kulturális, Sport és Szabadidő Nonprofit Kft. domainje ebből a környezetből NEM oldódik fel DNS-ben (getent hosts kszki.obuda.hu -> nincs találat, curl HTTP 000), tehát nem tudtam megnézni; (2) https://obuda.hu/szeruskerti-uszoda/ - szintén nincs DNS-feloldás; (3) https://www.obuda.hu/?s=uszoda - HTTP 466 (blokkolt/WAF); (4) https://3.kerulet.ittlakunk.hu/holmi/sport-szabadido/szeruskert-tanuszoda - csak név, cím, nyitvatartás, sem táblázat, sem PDF, sem kép; (5) https://www.amobauszoiskola.hu/uszasoktatas-szeruskert-tanuszoda - csak az úszóiskola saját órarendje, csak nevet és címet ad ('Budapest, Szérűskert u. 40-42, 1033'); (6) https://fitadvisor.hu/p/szeruskerti-uszoda és https://www.furdes.hu/furdok/magyarorszag/szeruskerti-uszoda - a HTML-ből semmilyen medence-/sávadat nem nyerhető ki (valószínűleg JS-ből renderelnek). Az uszodának nincs saját honlapja. Az OSM contact:facebook szerint van egy Facebook-oldala (https://www.facebook.com/pages/Sz%C3%A9r%C5%B1skert-Uszoda/236565296402508), de ezt nem nyitottam meg és nem tudom, hogy él-e, ezért NEM adtam meg website-ként. Beosztásért az uszoda@kszki.obuda.hu címen vagy a +36 1 387 3141 számon kell érdeklődni."
+  },
+  "sources": [
+    "https://overpass-api.de/api/interpreter (OSM way 252847119: name='Szérűskert tanuszoda', addr:postcode=1033, addr:street=Szérűskert utca, addr:housenumber=40-44, length=25, swimming_lanes=4, phone=+36 1 387 3141, email=uszoda@kszki.obuda.hu, opening_hours='Mo-Fr 06:00-07:30,19:00-21:00; Sa-Su 09:00-17:00')",
+    "https://nominatim.openstreetmap.org/search?q=Sz%C3%A9r%C5%B1skert+utca+40%2C+Budapest",
+    "https://3.kerulet.ittlakunk.hu/holmi/sport-szabadido/szeruskert-tanuszoda",
+    "https://www.amobauszoiskola.hu/uszasoktatas-szeruskert-tanuszoda"
+  ],
+  "confidence": "medium",
+  "notes": "LÉTEZÉS: megerősítve, de csak közvetett forrásokból - az uszodának nincs saját honlapja, és az üzemeltető (KSZKI Óbuda) domainje ebből a környezetből nem érhető el, ezért NEM tudtam hivatalos oldalon ellenőrizni, hogy 2026 szeptemberében is nyitva van-e. Felújításról/bezárásról szóló hírt nem találtam. KOORDINÁTA: OSM way 252847119 (building=yes, leisure=sports_centre, sport=swimming, name='Szérűskert tanuszoda') poligonközéppontja 47.559348 / 19.0432306. Független kereszthivatkozás: a Nominatim a 'Szérűskert utca 40, Budapest' címre 47.5584376 / 19.0435280-at ad, 1033-as irányítószámmal, Kaszásdűlő, III. kerület - ez ~110 m-re van az épületközépponttól, mert a Nominatim a 40-es házszám utcai interpolált pontját adja vissza, míg az OSM way a 40-44. szám alatti épületet fedi le. A két forrás ugyanazt az utcát, házszámtartományt, irányítószámot és kerületet erősíti meg, ezért az épületközéppontot használtam. Az úszóiskola oldala 'Szérűskert u. 40-42'-t ír, az OSM és az ittlakunk '40-44'-et illetve '40'-et - a házszámtartomány forrásonként kicsit eltér, a sarokpont ugyanaz. SÁVSZÁM: NULL, mert ELLENTMONDÓ adatokat találtam és egyiket sem tudtam hivatalos forrásból igazolni. Az OSM way swimming_lanes=4 tag-et hordoz; ezzel szemben a webkereső összefoglalója a fitadvisor.hu-ra hivatkozva '25 méteres, hatpályás medencét' említ (6 sáv). Mivel a fitadvisor HTML-jéből semmilyen adatot nem tudtam kinyerni, a 6-os számot NEM tudtam saját szemmel megerősíteni, az OSM-tag pedig egyetlen, ellenőrizetlen forrás. Ezért lanes = null; a valós érték nagy valószínűséggel 4 vagy 6. MEDENCEHOSSZ: 25 m - ezt két forrás is állítja (OSM length=25 tag, illetve a fitadvisor-idézet '25 méteres'), ezért megtartottam. NYITVATARTÁS: az OSM opening_hours tag ('Mo-Fr 06:00-07:30,19:00-21:00; Sa-Su 09:00-17:00') és az ittlakunk.hu leírása egybehangzó, de az utóbbi forrás kora bizonytalan (egy idézett fórumbejegyzés 2016-os), ezért a nyitvatartás ELAVULT LEHET. FIGYELEM A FELDOLGOZÓNAK: hétköznapokra SZÁNDÉKOSAN KÉT bejegyzés jut naponta (reggeli és esti ablak), mert a medence napközben iskolai úszásoktatással van lefoglalva - ez nem duplikáció. Ez tanuszoda: a vízfelület nagy részét napközben iskolai oktatás és bérlő úszóiskolák (pl. Békalencse Úszóiskola) foglalják."
+}

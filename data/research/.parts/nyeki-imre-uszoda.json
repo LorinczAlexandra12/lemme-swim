@@ -1,0 +1,58 @@
+{
+  "id": "nyeki-imre-uszoda",
+  "name": "Nyéki Imre Uszoda",
+  "shortName": "Nyéki Imre Uszoda",
+  "district": "XI.",
+  "address": "1116 Budapest, Kondorosi út 14.",
+  "lat": 47.45028,
+  "lon": 19.03625,
+  "website": "https://sport.ujbuda.hu/letesitmenyek/nyekiimreuszoda",
+  "phone": "+36 70 903 7714",
+  "basins": [
+    {
+      "id": "nagymedence-bent",
+      "name": "Nagymedence (bent)",
+      "lengthM": null,
+      "lanes": null,
+      "indoor": true
+    },
+    {
+      "id": "tanmedence",
+      "name": "Tanmedence",
+      "lengthM": null,
+      "lanes": null,
+      "indoor": true
+    },
+    {
+      "id": "nagymedence-kint",
+      "name": "Nagymedence (kint)",
+      "lengthM": null,
+      "lanes": null,
+      "indoor": false
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "20:00", "seasonNote": "Pénztárzárás 45 perccel az uszoda zárása előtt" },
+    { "weekday": 2, "opens": "06:00", "closes": "19:00", "seasonNote": "Pénztárzárás 45 perccel az uszoda zárása előtt" },
+    { "weekday": 3, "opens": "06:00", "closes": "20:00", "seasonNote": "Pénztárzárás 45 perccel az uszoda zárása előtt" },
+    { "weekday": 4, "opens": "06:00", "closes": "19:00", "seasonNote": "Pénztárzárás 45 perccel az uszoda zárása előtt" },
+    { "weekday": 6, "opens": "06:00", "closes": "18:00", "seasonNote": "Pénztárzárás 45 perccel az uszoda zárása előtt" },
+    { "weekday": 7, "opens": "06:00", "closes": "18:00", "seasonNote": "Pénztárzárás 45 perccel az uszoda zárása előtt" }
+  ],
+  "scheduleSource": {
+    "url": "https://api.ujbuda.hu/webapi/v1.0/static-pages/156",
+    "format": "none-found",
+    "note": "IMPORTANT INFRASTRUCTURE FINDING even though the schedule itself is currently missing. sport.ujbuda.hu is a Vite/React SPA and serves NO server-rendered HTML (curl returns a 2 KB JS shell), so plain scraping of the public URL yields nothing. The real content is available as JSON from the Újbuda CMS API at https://api.ujbuda.hu/webapi/v1.0/static-pages/156 — but ONLY if you send the header 'Domain: sport.ujbuda.hu'; without it the API returns {\"error\":{\"code\":10002,\"message\":\"Invalid domain\"}}. The numeric id 156 comes from https://api.ujbuda.hu/webapi/v1.0/sitemap (same Domain header), where the node with slug 'nyekiimreuszoda' carries id 156 — resolve it there rather than hardcoding. The JSON's .content field is an HTML blob. It contains a real <table> for the vízigimnasztika timetable (columns: óra | Hétfő | Kedd | Szerda | Csütörtök | Péntek | Szombat | Vasárnap; rows 7.00-8.00, 9.00-10.00, 14.00-15.00, 19.00-20.00; cells marked 'x'). It also contains the lane-occupancy section headed 'A PÁLYAFOGLALTSÁGGAL kapcsolatos információk. A kékkel jelölt rubrikák jelzik medencéink foglalt sávjait.' with three labelled slots in this order: 'Tanmedence:', 'Nagymedence kint:', 'Nagymedence bent:'. AS OF 2026-09-24 THOSE THREE SLOTS ARE EMPTY — the markup after each label is only <br /> whitespace; the grids that normally sit there have been taken down. The three <img> tags still present in the blob are NOT schedules: e4a7b87f-....jpg was downloaded and visually checked and is a Star Sport Akadémia advertisement, e686f6ed-....jpg belongs to the 'Kistornaterem órarendje' gym section, and 68255200-....jpg could not be downloaded (repeated curl timeouts against api.ujbuda.hu file storage) so its content is unverified. Worth re-polling: when the operator re-uploads, blue-shaded cells = occupied lanes, and the section covers all three basins."
+  },
+  "sources": [
+    "https://api.ujbuda.hu/webapi/v1.0/sitemap",
+    "https://api.ujbuda.hu/webapi/v1.0/static-pages/156",
+    "https://api.ujbuda.hu/files/StaticImages/image/e4a7b87f-570a-4121-905f-9e44badd96ea.jpg",
+    "https://sport.ujbuda.hu/letesitmenyek/nyekiimreuszoda",
+    "https://sport.ujbuda.hu/assets/index-BCXu-6Vd.js",
+    "https://nominatim.openstreetmap.org/search?q=Ny%C3%A9ki+Imre+Uszoda+Budapest&format=json&limit=5",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "medium",
+  "notes": "COORDINATE VERIFIED: Nominatim and Overpass independently return a sports_centre named 'Nyéki Imre Uszoda' at 47.4503, 19.0363 tagged addr 1116 Kondorosi út 14, and the operator's own CMS content states 'Budapest - XI. kerület, Kondorosi út 14.' — match. (Two nearby OSM bus-stop nodes share the name; they were discarded.) BASIN NAMES are taken verbatim from the operator's own lane-occupancy section, which is the only official enumeration: Tanmedence, Nagymedence kint, Nagymedence bent. LANE COUNTS AND LENGTHS ARE NULL ON PURPOSE — no official source states either. Secondary/aggregator sources claim a 33 m indoor pool, an '8-sávos' tanmedence, and a 25 m outdoor summer pool plus a children's pancsoló and jakuzzi, but none of that is confirmed by the operator, so it is recorded here as hearsay only and NOT in the basins array. OPENING HOURS GAP: the official page lists Hétfő/szerda 06:00-20:00, Kedd/csütörtök 06:00-19:00, Szombat/vasárnap 06:00-18:00 and SILENTLY OMITS FRIDAY. One secondary source claims Friday closes at 18:00, but this is unconfirmed, so no weekday-5 entry is emitted. The site is a SZÉP-kártya acceptance point and sells a 2-hour 'úszójegy'."
+}

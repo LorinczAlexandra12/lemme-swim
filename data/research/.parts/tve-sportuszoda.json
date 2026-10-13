@@ -1,0 +1,41 @@
+{
+  "id": "tve-sportuszoda",
+  "name": "III. kerületi TVE sportuszoda",
+  "shortName": "TVE uszoda",
+  "district": "III.",
+  "address": "1037 Budapest, Kalap utca 1.",
+  "lat": 47.5503694,
+  "lon": 19.0362016,
+  "website": "https://tve1887.hu/uszoda/",
+  "phone": "+36 70 866 7810",
+  "basins": [
+    {
+      "id": "21x285-medence",
+      "name": "21 × 28,5 m-es ponyvatetős medence",
+      "lengthM": null,
+      "lanes": 8,
+      "indoor": true
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda nyitvatartás; a lakossági (közönség) sávok ettől szűkebbek, lásd a heti program PDF zöld celláit." },
+    { "weekday": 2, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda nyitvatartás; a lakossági sávok ettől szűkebbek." },
+    { "weekday": 3, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda nyitvatartás; a lakossági sávok ettől szűkebbek." },
+    { "weekday": 4, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda nyitvatartás; a lakossági sávok ettől szűkebbek." },
+    { "weekday": 5, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda nyitvatartás; a lakossági sávok ettől szűkebbek." },
+    { "weekday": 6, "opens": "08:00", "closes": "18:00", "seasonNote": "Július 1-től hétvégente 8:00-18:00 (a honlapon így szerepel)." },
+    { "weekday": 7, "opens": "08:00", "closes": "18:00", "seasonNote": "Július 1-től hétvégente 8:00-18:00 (a honlapon így szerepel)." }
+  ],
+  "scheduleSource": {
+    "url": "https://tve1887.hu/wp-content/uploads/2026/09/USZODA_HETI-PROGRAM-2026_09_23_mod.pdf",
+    "format": "pdf",
+    "note": "EGYSÁVOS FELBONTÁSÚ HETI RÁCS - a legjobb forrás a projektben. A PDF-et a https://tve1887.hu/uszoda/ oldal 'Heti program' gombja linkeli, hetente új fájl. URL-minta: https://tve1887.hu/wp-content/uploads/<ÉÉÉÉ>/<HH>/USZODA_HETI-PROGRAM-<ÉÉÉÉ>_<HH>_<NN>[_mod].pdf - a scraper NE hardcode-olja, hanem a /uszoda/ oldal HTML-jéből szedje ki az első 'USZODA_HETI-PROGRAM' mintára illeszkedő href-et. 1 oldal, A3 fekvő (841.92 x 1190.52 pt, de a tartalom a felső ~850 pt-on van). SZERKEZET: felül 'III. KERÜLETI TVE USZODA HETI PROGRAM <N>.hét' cím, alatta y~48-61 a JELÖLÉSEK legendsáv. A rács 7 napblokkból áll (hétfőtől vasárnapig), blokkonként 8 sor = 8 úszósáv. Bal oldali fejlécoszlopok balról jobbra: x~39 dátum függőlegesen forgatva ('2026.09.21'), x~59 napnév ('HÉTFŐ'), x~78 sávszám ('1.'-tól '8.'-ig). A napblokkok kb. 143 pt-onként ismétlődnek (első blokk sorai y~158,174,191,207,223,239,256,272; második blokk y~301-től). Minden napblokk fölött/alatt egy időfejléc-sor fut 6:00-tól 22:30-ig, 30 PERCES lépésekben, 34 oszlop; az időcímkék 90 fokkal elforgatott szövegek sötét palaszürke (0.267,0.329,0.416) háttéren. A CELLÁK KITÖLTŐSZÍNNEL KÓDOLJÁK A FOGLALTSÁGOT, a szöveg csak az összevont blokkok közepén jelenik meg (pl. 'Női Ob 1', 'LAKOSSÁG', 'Óbudai Egyetem', 'Fiú serdülő ifi'), ezért TEXT-EXTRAKCIÓ ÖNMAGÁBAN NEM ELÉG - page.get_drawings() kell. LEGENDA ÉS RGB-K (PyMuPDF 0-1 float fill): PIROS (1.0, 0.0, 0.0) = ZÁRVA; VILÁGOSKÉK (0.608, 0.761, 0.902) = TVE EDZÉS (FIGYELEM: a tényleges rácsban az edzéscellák ennél telítettebb kékek, (0.357, 0.608, 0.835) - a scraper mindkettőt kezelje TVE EDZÉS-ként, vagy toleranciával illesszen); SÁRGA (1.0, 1.0, 0.0) = MÉRKŐZÉS; BOROSTYÁN/NARANCS (1.0, 0.753, 0.0) = BÉRLŐK; VILÁGOSSZÜRKE (0.906, 0.902, 0.902) illetve a rácsban (0.851, 0.851, 0.851) = TÁMOGATÓK; ZÖLD (0.663, 0.816, 0.557) = LAKOSSÁG <- EZ A SZABAD/KÖZÖNSÉG SÁV, ezt kell szabadnak számolni. FIGYELMEZTETÉS: a legendában 7 színminta van, de csak 6 felirat - az x~292 pozíciójú SÖTÉTKÉK (0.0, 0.439, 0.753) mintának NINCS felirata a PDF-ben; a 2026.09.23-i kiadásban a rácsban nem fordult elő, de későbbi heteken megjelenhet, ilyenkor ismeretlen kategóriaként kezelendő (ne számoljuk szabadnak). Ellenőrzött példa (2026.09.21 hétfő): 1-8. sáv 6:00-7:30 zöld = LAKOSSÁG (kivéve 5-6. sáv szürke TÁMOGATÓK/'Óbudai Egyetem' és 7-8. sáv narancs BÉRLŐK/'Market','Biotech'), 8:00-8:30 piros ZÁRVA, 8:30-9:30 kék 'Női Ob 1', 10:00 piros, 10:30-14:00 zöld LAKOSSÁG, majd 15:00-tól délután végig kék edzések és 21:30-22:30 narancs 'Cégszolgálat'."
+  },
+  "sources": [
+    "https://tve1887.hu/uszoda/",
+    "https://tve1887.hu/wp-content/uploads/2026/09/USZODA_HETI-PROGRAM-2026_09_23_mod.pdf",
+    "https://overpass-api.de/api/interpreter (OSM way 614823063, name=TVE sportuszoda, addr:postcode=1037, addr:street=Kalap utca, addr:housenumber=1, operator=III. Kerületi TVE)"
+  ],
+  "confidence": "high",
+  "notes": "KOORDINÁTA: OSM way 614823063 (building=sports_centre, name='TVE sportuszoda', operator='III. Kerületi TVE') középpontja 47.5503694 / 19.0362016. Az OSM-ben rögzített cím (1037 Budapest, Kalap utca 1.) szó szerint egyezik a klub saját uszodaoldalán kiírt címmel ('1037 Budapest Kalap utca 1.'), tehát két független forrás erősíti meg. A bejárat a Hévízi út felől nyílik (a honlap szerint), ezért a recepció a poligon keleti oldalán lehet - a megadott koordináta az épület geometriai közepe. SÁVSZÁM: 8 sáv, NEM becslés - a heti program PDF minden napblokkjában a bal oldali oszlop ténylegesen 1.-től 8.-ig sorolja fel a sávokat, és a rács is 8 sornyi cellát tartalmaz. MEDENCE MÉRET: a honlap szövege szerint '21 x 28,5 méteres, 2,0 m mély medence... ponyvatetővel készült'. Nem írja le, melyik irányban futnak az úszósávok, ezért lengthM-et szándékosan null-ra hagytam (28,5 m lenne a valószínű sávhossz 8 x ~2,6 m szélességgel, de ezt EGYIK forrás sem mondja ki). A ponyvatető miatt 'indoor: true' (egész évben, időjárástól függetlenül használható - a honlap explicit állítása), de nem klasszikus fedett csarnok. NYITVATARTÁS: a H-P 6:00-22:00 / Szo-V 8:00-18:00 az USZODA nyitvatartása, NEM a közönségúszás ideje; a honlap kifejezetten figyelmeztet, hogy lakossági használat csak a heti program zöld sávjaiban lehetséges, és hogy 'az edzések és a mérkőzések megkezdése előtt és befejezése után a medence átállás alatt az uszoda zárva tart'. A lakossági idősáv hetente változhat. JEGYÁRAK (2026.09., tájékoztatásul): felnőtt 3.200 Ft, III. kerületi felnőtt 2.700 Ft, diák/nyugdíjas 2.500 Ft, kerületi diák/nyugdíjas 2.200 Ft."
+}

@@ -1,0 +1,52 @@
+{
+  "id": "ujlak-uszoda",
+  "name": "Újlak Uszoda és Strandfürdő",
+  "shortName": "Újlak Uszoda",
+  "district": "XVII.",
+  "address": "1173 Budapest, Uszoda utca 2.",
+  "lat": 47.47891,
+  "lon": 19.23477,
+  "website": "https://www.ujlakuszoda.hu/",
+  "phone": "+36 1 256 0362",
+  "basins": [
+    {
+      "id": "25m-medence",
+      "name": "25 m-es úszómedence",
+      "lengthM": 25,
+      "lanes": null,
+      "indoor": true
+    },
+    {
+      "id": "nyari-strand",
+      "name": "Szezonális strandmedence",
+      "lengthM": null,
+      "lanes": null,
+      "indoor": false
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "22:00", "seasonNote": "Pénztár zárás előtt 1 órával zár; nyári strand 09:00-20:00" },
+    { "weekday": 2, "opens": "06:00", "closes": "22:00", "seasonNote": "Nyári strand 09:00-20:00" },
+    { "weekday": 3, "opens": "06:00", "closes": "22:00", "seasonNote": "Nyári strand 09:00-20:00" },
+    { "weekday": 4, "opens": "06:00", "closes": "22:00", "seasonNote": "Nyári strand 16:00-20:00" },
+    { "weekday": 5, "opens": "06:00", "closes": "22:00", "seasonNote": "Nyári strand 09:00-20:00" },
+    { "weekday": 6, "opens": "07:00", "closes": "17:00", "seasonNote": "Ünnepnapokon 07:00-17:00; nyári strand 09:00-20:00" },
+    { "weekday": 7, "opens": "07:00", "closes": "19:00", "seasonNote": "Nyári strand 09:00-20:00" }
+  ],
+  "scheduleSource": {
+    "url": "https://www.ujlakuszoda.hu/",
+    "format": "none-found",
+    "note": "No lane/timeslot schedule is published anywhere on the site as of 2026-09-24. All pages were enumerated (/, /uszoda, /szolgaltatasok, /arlista, /hazirend, /kapcsolat, /hirek, /impresszum) — there is no 'sávbeosztás' or 'beosztás' page, and no PDF or image asset containing one. The site only alludes to lane allocation in marketing copy ('kiemelt figyelmet fordítunk az átlátható sávbeosztásra') and in the házirend, which covers lane-rental rules ('Úszás tanfolyamot kizárólag pályabérleti szerződéssel, sávbérleti díj megfizetése mellett lehet tartani', 'Sávonként és egyidejűleg legfeljebb 20 fő részére lehet csoportos foglalkozást tartani'). The árlista does price lane rental at 12 100 Ft / 60 min, confirming lanes are individually bookable — so an allocation exists internally but is not published."
+  },
+  "sources": [
+    "https://www.ujlakuszoda.hu/",
+    "https://www.ujlakuszoda.hu/uszoda",
+    "https://www.ujlakuszoda.hu/szolgaltatasok",
+    "https://www.ujlakuszoda.hu/arlista",
+    "https://www.ujlakuszoda.hu/hazirend",
+    "https://www.ujlakuszoda.hu/kapcsolat",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "medium",
+  "notes": "This is the Rákosmenti (XVII. kerület) district pool. Lane count left null on purpose: the site states the basin is 25 m long and 11 m wide with ~28 °C water, but never states a lane count. 11 m of width would conventionally imply 5 lanes, but that is an inference, not a source, so it is not recorded. Coordinate: OSM node at 1173 Uszoda utca 2 cross-checked against the address on the site's /kapcsolat page ('1173 Budapest, Uszoda utca 2.') — exact match. Note the OSM entry stores http://ujlakuszoda.hu/ while the site canonicalises to https://www.ujlakuszoda.hu/."
+}

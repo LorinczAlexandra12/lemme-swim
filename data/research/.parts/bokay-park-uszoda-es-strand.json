@@ -1,0 +1,57 @@
+{
+  "id": "bokay-park-uszoda-es-strand",
+  "name": "Park Uszoda és Strand (Bókay uszoda)",
+  "shortName": "Bókay / Park uszoda",
+  "district": "XVIII.",
+  "address": "1181 Budapest, Városház utca 40.",
+  "lat": 47.4369399,
+  "lon": 19.1764243,
+  "website": "https://www.varosgazda18.hu/park-uszoda-es-strand/",
+  "phone": "+36 30 595 9857",
+  "basins": [
+    {
+      "id": "25m-fedett-tanmedence",
+      "name": "Fedett tanmedence (25×16 m, 140 cm)",
+      "lengthM": 25,
+      "lanes": 4,
+      "indoor": true
+    },
+    {
+      "id": "25m-kulteri-medence",
+      "name": "Kültéri úszómedence (25×11 m, 140 cm)",
+      "lengthM": 25,
+      "lanes": null,
+      "indoor": false
+    },
+    {
+      "id": "pancsolo",
+      "name": "Pancsoló medence (átmérő 5 m, max. 50 cm)",
+      "lengthM": null,
+      "lanes": null,
+      "indoor": false
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "21:00", "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45" },
+    { "weekday": 2, "opens": "06:00", "closes": "21:00", "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45" },
+    { "weekday": 3, "opens": "06:00", "closes": "21:00", "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45" },
+    { "weekday": 4, "opens": "06:00", "closes": "21:00", "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45" },
+    { "weekday": 5, "opens": "06:00", "closes": "21:00", "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45" },
+    { "weekday": 6, "opens": "06:00", "closes": "19:00", "seasonNote": "Hétvégén és ünnepnapokon; pénztárzárás 18.00, medencetér elhagyása 18.45; 08.00-19.00 között legalább 1 úszósáv a lakosság számára" },
+    { "weekday": 7, "opens": "06:00", "closes": "19:00", "seasonNote": "Hétvégén és ünnepnapokon; pénztárzárás 18.00, medencetér elhagyása 18.45; 08.00-19.00 között legalább 1 úszósáv a lakosság számára" }
+  ],
+  "scheduleSource": {
+    "url": "https://www.varosgazda18.hu/wp-content/uploads/2026/09/2026-HL-PU-2026-SZEPTEMBER-21-27.pdf",
+    "format": "pdf",
+    "note": "HETENTE CSERÉLŐDŐ PDF, a /park-uszoda-es-strand/ oldalon 'Uszoda oktatás-sávbérlés' linkszöveggel. URL-minta: https://www.varosgazda18.hu/wp-content/uploads/<ÉÉÉÉ>/<HH>/<ÉÉÉÉ>-HL-PU-<ÉÉÉÉ>-<HÓNAP NAGYBETŰVEL>-<kezdőnap>-<zárónap>.pdf ; a 'PU' = Park Uszoda (a Kastélydombinál ugyanez 'KU'), 'HL' = heti lebontás. A scraper-nek a linket a HTML-oldalról kell kiszednie, az URL-t nem szabad kitalálni. A PDF 2 oldalas, A4 FEKVŐ (841.7 × 595.2 pt), és VALÓDI SZÖVEGRÉTEGE VAN (PyMuPDF page.get_text() kiolvassa) - nem szkennelt kép. 1. oldal fejléce 'délelőtt', 2. oldal 'délután'. Rácsszerkezet mindkét oldalon: egy nagy táblázat, OSZLOPOK = 15 PERCES idősávok - 1. oldal: 6:00, 6:15, ... 12:45 (28 oszlop); 2. oldal: 13:00, 13:15, ... 20:45 (32 oszlop). Az idősáv-fejléc a táblázat TETEJÉN ÉS ALJÁN is szerepel, valamint bal és jobb szélen egy-egy 'sáv' feliratú oszlop. SOROK: 7 napblokk egymás alatt (HÉTFŐ, KEDD, SZERDA, CSÜTÖRTÖK, PÉNTEK, SZOMBAT, VASÁRNAP), minden napblokk 4 sorból áll, a sorok bal szélén 1, 2, 3, 4 = A NÉGY ÚSZÓSÁV. A napnevet betűnként, függőlegesen tördelve tartalmazza a bal és jobb szélső cella (a get_text() így 'H\\nÉ\\nT\\nF\\nŐ' alakban adja vissza - ezt össze kell fűzni). A napblokk mellett a konkrét dátum is ott van külön cellában ('szeptember 21.', 'szeptember 22.', ...), és a fejlécben a hét sorszáma ('39. HÉT') és az intervallum ('2026. SZEPTEMBER 21 - 27.'). FOGLALTSÁG KÓDOLÁSA - FONTOS: a foglalt blokkok EGYSZERRE kapnak kitöltőszínt ÉS szöveget. A szöveg a foglaltság IDŐTARTAMA, pl. '8:00-8:45', '6:00-7:30', '10:00-14:00', néha bérlő névvel ('17:00-18:00 TEMPO'). A kitöltőszín a foglalás TÍPUSÁT kódolja: élénkzöld (RGB 0,1,0 - a page.get_drawings() 27 db ilyen fill-t ad az 1. oldalon), élénkpiros (1,0,0 - 6 db), halvány rózsaszín (0.961,0.890,0.937 - 3 db), világosszürke (0.950,0.951,0.950 - 1 db), halvány zöld (0.776,0.878,0.706 - a fejléc 'PARK USZODA' cimke), világospiros (1,0.357,0.357 - 1 db). A SZABAD sávok cellái FEHÉREK ÉS ÜRESEK. LEGENDA NINCS a lapon, tehát a színek jelentése (oktatás / sávbérlés / egyesület / zárva) nem dekódolható a dokumentumból - de erre nincs is szükség: az időtartam-szöveg + a színes téglalap bounding boxa elég a 'foglalt' állapot megállapításához. Gyakorlati parse-stratégia: page.get_drawings()-ból vedd a nem-fekete, nem-fehér fill-ű téglalapokat, a bal élük x-koordinátáját vetítsd rá az oszlop-fejléc idősávok x-pozícióira (page.get_text('words') adja a szavak bbox-át), a felső élük y-koordinátáját pedig a 7×4 = 28 sávsor y-sávjaira. A cellába írt '8:00-8:45' szöveg ellenőrzésként használható. A lap alján piros dőlt figyelmeztetés: 'Változtatás jogát fenntartjuk!', és egy generálási időbélyeg (pl. '2026.09.18 / 10:21')."
+  },
+  "sources": [
+    "https://www.varosgazda18.hu/",
+    "https://www.varosgazda18.hu/park-uszoda-es-strand/",
+    "https://www.varosgazda18.hu/wp-content/uploads/2026/09/2026-HL-PU-2026-SZEPTEMBER-21-27.pdf",
+    "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=3&countrycodes=hu&q=B%C3%B3kay%20uszoda%20V%C3%A1rosh%C3%A1z%20utca%2040%20Budapest",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "high",
+  "notes": "Koordináta: Nominatim a 'Bókay uszoda Városház utca 40 Budapest' keresésre a 'Bókay uszoda' objektumot adta 47.4369399 / 19.1764243 értékkel (display_name: 'Bókay uszoda, 40, Városház utca, Bókaytelep, XVIII. kerület, Budapest, 1181'). Független második forrás: Overpass API, OSM way id 251664006 (leisure=sports_centre, sport=swimming, addr:postcode=1181, addr:street=Városház utca, addr:housenumber=40, website=https://www.varosgazda18.hu/park-uszoda-es-strand/, phone=+36 1 290 6955) középpontja 47.4369584 / 19.17641 - a két érték kb. 2 m-en belül egyezik. Harmadik megerősítés: az üzemeltető Városgazda XVIII. Kerület Nonprofit Zrt. saját /park-uszoda-es-strand/ oldala '1181 Budapest, Városház utca 40.' címet ír. A közeli 'Bókay strandfürdő' OSM node (id 4274032949, 47.4366476 / 19.1766814) ugyanezt a címet és telefonszámot viseli - ugyanaz a létesítmény, a strand része. SÁVSZÁM: nem becslés, KÉT egymástól független megerősítés. (a) Az üzemeltetői oldal szó szerint: '25×16 méteres, 140 cm mély, 4 sávos fedett tanmedencéje'. (b) A hivatalos heti sávbérlés-PDF rácsában minden naphoz pontosan 4 sor tartozik, 1-2-3-4 számozással - ezt a PDF szövegrétegéből olvastam ki és a PDF 130 dpi-s renderelésén vizuálisan is ellenőriztem. A kültéri (25 x 11 m) medencéhez és a pancsolóhoz sehol nem láttam sávszámot, ezért ott null. TELEFON ELTÉRÉS: az üzemeltetői oldal '+36-30 595 9857'-et ad (ezt vettem fel), az OSM objektum viszont '+36 1 290 6955'-öt - utóbbi valószínűleg a régi vezetékes szám. A varosgazda18.hu oldal külön e-mail címet nem ír ki, csak a /elerhetoseg/ kapcsolatfelvételi űrlapra mutat. SZEZONALITÁS: az oldal szerint '2026. augusztus 31-től a Bókay Strand zárva tart' a következő szezonig, tehát a kültéri medence és a pancsoló jelenleg NEM üzemel; a fenti openingHours a fedett uszodára vonatkozik. Hétköznap és hétvégén is garantálnak 'legalább egy szabad sávot' a lakosságnak. TECHNIKAI MEGJEGYZÉS a kollégának: a www.varosgazda18.hu nginx-e 403-mal utasítja el a curl/script-szerű klienseket (User-Agent spoofing sem segített ebben a környezetben), a tartalmat csak böngésző-szerű fetcheren keresztül sikerült elérni. A scraper-nek ezzel számolnia kell."
+}

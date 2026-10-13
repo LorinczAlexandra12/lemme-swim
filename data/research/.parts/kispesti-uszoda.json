@@ -1,0 +1,51 @@
+{
+  "id": "kispesti-uszoda",
+  "name": "Kispesti Uszoda és Sportközpont",
+  "shortName": "Kispesti Uszoda",
+  "district": "XIX.",
+  "address": "1191 Budapest, Simonyi Zsigmond utca 31.",
+  "lat": 47.46001,
+  "lon": 19.15175,
+  "website": "https://kispestiuszoda.hu/",
+  "phone": "+36 1 280 6095",
+  "basins": [
+    {
+      "id": "33m-uszomedence",
+      "name": "33 m-es úszómedence",
+      "lengthM": 33,
+      "lanes": 6,
+      "indoor": true
+    },
+    {
+      "id": "tanmedence",
+      "name": "Tanmedence",
+      "lengthM": null,
+      "lanes": 6,
+      "indoor": true
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "21:00", "seasonNote": "Hétköznapi nyitvatartás" },
+    { "weekday": 2, "opens": "06:00", "closes": "21:00", "seasonNote": "Hétköznapi nyitvatartás" },
+    { "weekday": 3, "opens": "06:00", "closes": "21:00", "seasonNote": "Hétköznapi nyitvatartás" },
+    { "weekday": 4, "opens": "06:00", "closes": "21:00", "seasonNote": "Hétköznapi nyitvatartás" },
+    { "weekday": 5, "opens": "06:00", "closes": "21:00", "seasonNote": "Hétköznapi nyitvatartás" },
+    { "weekday": 6, "opens": "07:00", "closes": "19:00", "seasonNote": "Hétvégi nyitvatartás" },
+    { "weekday": 7, "opens": "07:00", "closes": "19:00", "seasonNote": "Hétvégi nyitvatartás" }
+  ],
+  "scheduleSource": {
+    "url": "https://kispestiuszoda.hu/pentek-ebihal/",
+    "format": "image",
+    "note": "BEST-IN-CLASS LANE DATA, but published as a PNG, not HTML. The page 'Sávbeosztás' (menu slug is misleadingly /pentek-ebihal/) embeds a fortnightly PNG whose URL follows a stable, predictable pattern: https://kispestiuszoda.hu/wp-content/uploads/YYYY/MM/Savbeosztas-WEB-YYYY.MM.DD-MM.DD.png (verified example: .../2026/09/Savbeosztas-WEB-2026.09.28-10.04.png, and the page also showed the prior 2026.09.21-09.27 sheet). A scraper should GET the page and regex the <img src> under the 'Sávbeosztás' heading rather than construct the URL. IMAGE STRUCTURE (it is a rendered Excel grid, so OCR/pixel-sampling is viable and the geometry is stable): two side-by-side week panels, each headed 'Érvényes: YYYY.MM.DD-MM.DD.'. Each panel has two stacked tables: upper = 'Medence 33 M', lower = 'Tanmedence'. Header rows: 'Nap / Day' (Hétfő/Monday .. Vasárnap/Sunday), 'Dátum / Date', then 'Sáv / Lane' with lane numbers 1-6 repeated per day = 42 columns. Row labels are hourly timeslots 06:00-07:00 through 20:00-21:00 (15 rows). Cell colour is the payload: GREEN = 'Lakosság számára elérhető' (available to the public), RED = 'Foglalt / Zárva' (reserved or closed). Footnote warns green lanes are shared public lanes, not exclusive, and can be crowded. This maps 1:1 onto the app's 'how many lanes are free in a timeslot' question: count green cells per (basin, day, hour)."
+  },
+  "sources": [
+    "https://kispestiuszoda.hu/",
+    "https://kispestiuszoda.hu/nyitva-tartas-4/",
+    "https://kispestiuszoda.hu/pentek-ebihal/",
+    "https://kispestiuszoda.hu/kapcsolat/",
+    "https://kispestiuszoda.hu/wp-content/uploads/2026/09/Savbeosztas-WEB-2026.09.28-10.04.png",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "high",
+  "notes": "Lane counts (6 per basin) read directly off the official sávbeosztás grid, which enumerates lanes 1-6 for both the 33 m pool and the tanmedence. Tanmedence length not stated on the site, left null. Outdoor summer basins exist (see /kulteri-medencek-nyitvatartas/) but are seasonal and not lane-marked, so omitted. Coordinate: OSM node/way at 1191 Simonyi Zsigmond utca 31 cross-checked against the address printed in the site footer and on /kapcsolat/ — exact match."
+}

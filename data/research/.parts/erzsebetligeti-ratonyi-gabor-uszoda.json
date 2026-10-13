@@ -1,0 +1,56 @@
+{
+  "id": "erzsebetligeti-ratonyi-gabor-uszoda",
+  "name": "Erzsébetligeti Rátonyi Gábor Uszoda",
+  "shortName": "Erzsébetligeti Uszoda",
+  "district": "XVI.",
+  "address": "1165 Budapest, Újszász utca 106-108.",
+  "lat": 47.50811,
+  "lon": 19.20630,
+  "website": "https://www.uszodak16.hu/erzsebetligeti-uszoda/",
+  "phone": "+36 20 288 8450",
+  "basins": [
+    {
+      "id": "25m-uszomedence",
+      "name": "25 m-es úszómedence",
+      "lengthM": 25,
+      "lanes": 6,
+      "indoor": true
+    },
+    {
+      "id": "tanmedence",
+      "name": "13,5 m-es tanmedence",
+      "lengthM": 13.5,
+      "lanes": null,
+      "indoor": true
+    },
+    {
+      "id": "pezsgofurdo",
+      "name": "Pezsgőfürdő",
+      "lengthM": null,
+      "lanes": null,
+      "indoor": true
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30" },
+    { "weekday": 2, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30" },
+    { "weekday": 3, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30" },
+    { "weekday": 4, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30" },
+    { "weekday": 5, "opens": "06:00", "closes": "22:00", "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30" },
+    { "weekday": 6, "opens": "08:00", "closes": "20:00", "seasonNote": "Hétvége és ünnepnap; a medencék és szaunák 08:00-19:30" },
+    { "weekday": 7, "opens": "08:00", "closes": "20:00", "seasonNote": "Hétvége és ünnepnap; a medencék és szaunák 08:00-19:30" }
+  ],
+  "scheduleSource": {
+    "url": "https://www.uszodak16.hu/erzsebetligeti-uszoda/?content=dct&did=36",
+    "format": "html-table",
+    "note": "*** THE SINGLE BEST SOURCE FOUND IN THIS WHOLE RESEARCH BATCH — it publishes the app's exact target quantity as a plain integer in server-rendered HTML. *** Page title 'Szabad pályák a közönségnek', reachable from the left nav of the pool homepage (the href is the relative form '?content=dct&did=36#ct'; did=36 is the stable document id). No JS, no login, ~6 KB of HTML, parses with any HTML table reader. THERE ARE SIX <table> ELEMENTS ON THE PAGE — indexes 0-3 are layout/search/event-calendar/footer chrome and MUST be skipped. Select by caption text, not by index, in case the layout shifts.\n\nTABLE index 4 — the main pool. Caption cell: 'Szabad pályák a közönség részére / A változtatás jogát fenntartjuk!' and a second header cell 'Közönség részére szabad sávok száma az úszómedencében'. Header row: blank corner cell, then the seven Hungarian weekday abbreviations in ISO order: H | K | Sz | Cs | P | Szo | V. 34 <tr> total = 1 caption row + 1 header row + 32 DATA ROWS. Row labels are consecutive HALF-HOUR slots formatted with spaces around the dash, '6:00 - 6:30' through '21:00 - 21:30' (note: single-digit hours are NOT zero-padded, and the separator is ':' here unlike other pools' '.'). EACH CELL IS ALREADY THE INTEGER COUNT OF LANES FREE TO THE PUBLIC — observed values range 2..6 — or the literal 'X' meaning the pool is closed in that slot on that day. So free-lane lookup is a direct cell read; no colour sampling, no arithmetic. Example verified rows: Friday 16:00-17:30 = 2 free lanes (the week's worst); Saturday/Sunday 6:00-8:00 and 19:30-21:30 = 'X' (closed), consistent with the 08:00-20:00 weekend opening hours.\n\nTABLE index 5 — the learner pool. Header cell 'Tanmedence használható a közönség számára (i-igen)', same H|K|Sz|Cs|P|Szo|V columns and the same 32 half-hour rows. Cells are 'i' (= igen, available to the public) or EMPTY (not available). This is a boolean availability flag, NOT a lane count — do not coerce it to a number.\n\nBoth tables carry the operator's disclaimer 'A változtatás jogát fenntartjuk!', so treat as a nominal weekly pattern rather than a live feed. The same CMS pattern (?content=dct&did=NN) very likely exposes an equivalent page for the sister pool Szentmihályi Konrád Ferenc Uszoda on the same domain — worth probing."
+  },
+  "sources": [
+    "https://www.uszodak16.hu/",
+    "https://www.uszodak16.hu/erzsebetligeti-uszoda/",
+    "https://www.uszodak16.hu/erzsebetligeti-uszoda/?content=dct&did=36",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "high",
+  "notes": "LANE COUNT 6 IS DOUBLY VERIFIED: the homepage spec line reads '25 m-es úszómedence, feszített víztükör 4 oldalról, 6 sávos, 1,95 m mély, hőmérséklet: 27 C°', and independently the free-lane table's maximum cell value is exactly 6. Tanmedence: '13,5 m-es tanmedence, 0,83 m mély, hőmérséklet: 32 C°' — no lane count published (it is a learner pool and the schedule treats it as a single yes/no unit), so lanes is null. The operator notes the tanmedence is individually usable only at weekends from 11:15 because of group lessons. Pezsgőfürdő holds max 6 people at ~34 °C. Other facilities (not basins): 2 Finnish saunas, infra sauna, plunge pool, salt room, 2 solariums. Opened 2008-01-25; renamed Erzsébetligeti Rátonyi Gábor Uszoda on 2019-04-30. Operated by Kertvárosi Sportlétesítményeket Üzemeltető Kft., which also runs the Szentmihályi Konrád Ferenc Uszoda (1162 Segesvár utca 16) and the Erzsébetligeti Strand. COORDINATE VERIFIED: Overpass returns 47.50811, 19.20630 tagged addr 1165 Újszász utca 106-108, matching the address block in the site footer ('1165 Budapest, Újszász utca 106-108.') — exact match. Outdoor strand closed for the 2026 season on 2026-08-31."
+}

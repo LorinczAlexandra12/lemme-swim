@@ -1,0 +1,74 @@
+{
+  "_comment": "Melyik uszodánál van TÉNYLEGES sávbeosztásunk a data/blocks.json-ban, és milyen friss. A scripts/build-dataset.ts ezt ráírja a kutatásból jövő alapértelmezett 'none' forrásra. Ami itt nem szerepel, az 'none' marad, és a felület 'Nincs sávadat'-ot ír - ez a helyes viselkedés, nem hiba. Minden 'curated' bejegyzéshez KELL lastVerified dátum.",
+  "sources": {
+    "dagaly-furdo-es-uszoda": {
+      "type": "curated",
+      "lastVerified": "2026-09-24",
+      "url": "https://nsu.hu/letesitmeny/dagaly-gyogyfurdo-strandfurdo-es-uszoda-nemzeti-uszo-es-vizilabda-olimpiai-kozpont/",
+      "format": "image",
+      "note": "A heti pályabeosztás JPG rácsról kézzel átvezetve. Az uszoda hetente cseréli a képet, ezért a sávadat a hét végén elavul - ilyenkor a felület 'Régi adat'-ra vált."
+    },
+    "kispesti-uszoda": {
+      "type": "curated",
+      "lastVerified": "2026-09-24",
+      "url": "https://kispestiuszoda.hu/pentek-ebihal/",
+      "format": "image",
+      "note": "A kéthetente frissülő 'Sávbeosztás' PNG rácsról kézzel átvezetve. A zöld cella nyilvános sávot jelent, de az uszoda jelzi, hogy ezek osztott sávok, nem kizárólagos használatúak."
+    },
+    "bvsc-laky-karoly-sportuszoda": {
+      "type": "scraper",
+      "adapter": "bvsc-facilitypilot",
+      "url": "https://letesitmeny.bvsc.hu/naptar/beagyazas/1/gLvN8QUGY0KL143SXiqxkNCFpJTGxrlHtRpvnqlhansUnfec?nezet=week&objektum=2&felosztas=hosszanti",
+      "format": "html-table",
+      "lastScrapedAt": "2026-09-24T20:49:38.068Z",
+      "note": "A kutatás a bvsc.hu 'Uszoda medence beosztás' oldalát üresnek találta, ezért ott 'none-found' szerepel — ez az ATTÓL KÜLÖNBÖZŐ FacilityPilot-naptár, ami valódi, sávonkénti beosztást ad. A versenymedence 8 sávja innen igazolt: a naptár fejlécében 'th.lane-head' cellák '1-es sáv' … '8-es sáv' címmel. Figyelem: az uszoda házirendje szerint az 50 m-es medence hétköznap korlátozottan áll a közönség rendelkezésére — a naptár a sávfoglalásokat mutatja, a közönségsávra vonatkozó külön korlátozást nem."
+    },
+    "csepeli-strandfurdo": {
+      "type": "scraper",
+      "adapter": "csepel-palyabeosztas",
+      "url": "https://www.csepelistrandfurdo.hu/palyabeosztas/",
+      "lastScrapedAt": "2026-09-24T20:49:38.068Z"
+    },
+    "tuskecsarnok-sportuszoda": {
+      "type": "scraper",
+      "adapter": "tuskecsarnok-szabad-vizfelulet",
+      "url": "https://tuskecsarnok.hu/sportuszoda/",
+      "lastScrapedAt": "2026-09-24T20:49:38.068Z",
+      "note": "ISMERT HIÁNY — a legoptimistább forrásunk. Az oldal nem teljes heti beosztást közöl, hanem csak egyes NAPOKRA szóló, konkrét korlátozásokat ('nincs szabad sáv', 'csak 3 sáv lakossági'). Amelyik napra vagy idősávra nem közöl semmit, ott nincs adatunk, a motor viszont az összes sávot szabadnak jelenti. Példa: 2026-09-24-re csak a versenymedence 11:00–13:00 szerepel, így 06:00–11:00 és 13:00–16:00 között mind a 10 sáv szabadnak látszik — ez nem igazolt, csak az adat hiánya. Kitalált blokk nélkül ezt nem lehet javítani; a valódi megoldás egy teljes beosztást közlő forrás."
+    },
+    "ujhegyi-uszoda": {
+      "type": "scraper",
+      "url": "https://www.kobanyasport.hu/letesitmenyek.htm",
+      "format": "pdf",
+      "note": "MŰKÖDIK. Korábban 'fetch failed'-del elszállt, és ezt tévesen a kobanyasport.hu elérhetetlenségének tulajdonítottuk — valójában a fejlesztői környezetben CSAK proxyn át van kijárat, a Node beépített `fetch`-e viszont a `curl`-lel ellentétben nem veszi figyelembe a `http_proxy`/`https_proxy` változókat. A `src/lib/scrapers/http.ts` proxy-támogatása óta az adapter lefut. A forrás a létesítmény-oldalról linkelt, dátumbélyeges PDF (pl. aktualis_palyabeosztas_20260831.pdf); a fájlnevet SOSEM drótozzuk be, mert új beosztásnál változik.",
+      "adapter": "ujhegyi-palyabeosztas-pdf",
+      "lastScrapedAt": "2026-09-24T20:49:38.068Z"
+    },
+    "tve-sportuszoda": {
+      "type": "scraper",
+      "adapter": "tve-heti-program",
+      "url": "https://tve1887.hu/uszoda/",
+      "lastScrapedAt": "2026-09-24T20:49:38.068Z"
+    },
+    "erzsebetligeti-ratonyi-gabor-uszoda": {
+      "type": "scraper",
+      "adapter": "uszodak16-erzsebetligeti",
+      "url": "https://www.uszodak16.hu/erzsebetligeti-uszoda/",
+      "lastScrapedAt": "2026-09-24T20:49:38.068Z"
+    },
+    "szentmihalyi-konrad-ferenc-uszoda": {
+      "type": "scraper",
+      "adapter": "uszodak16-szentmihalyi",
+      "url": "https://www.uszodak16.hu/szentmihalyi-uszoda/",
+      "lastScrapedAt": "2026-09-24T20:49:38.068Z"
+    },
+    "pesterzsebeti-uszoda": {
+      "type": "scraper",
+      "adapter": "pesterzsebeti-savbeosztas",
+      "format": "html-table",
+      "note": "Csak a /melyvizes-medence/ aloldalt dolgozzuk fel (10 pálya). A forrás /tanmedence/ oldalát szándékosan nem töltjük le: a tanmedencék mindenhonnan kimaradnak. A több pályára szóló foglalás `colspan`-nal összevont cella: pályánként ki KELL bontani, különben 3 lefoglalt pályából 1 lenne. Vasárnapra nincs táblázat, ezért arra szándékosan nincs blokk.",
+      "url": "https://www.pesterzsebetiuszoda.hu/savbeosztas/",
+      "lastScrapedAt": "2026-09-24T20:49:38.068Z"
+    }
+  }
+}

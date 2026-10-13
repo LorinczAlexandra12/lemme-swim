@@ -1,0 +1,48 @@
+{
+  "id": "gazdagreti-tanuszoda",
+  "name": "Gazdagréti Tanuszoda",
+  "shortName": "Gazdagréti Tanuszoda",
+  "district": "XI.",
+  "address": "1112 Budapest, Gazdagréti út 12.",
+  "lat": 47.46810,
+  "lon": 18.99735,
+  "website": "https://nsu.hu/letesitmeny/gazdagreti-tanuszoda/",
+  "phone": "+36 1 471 4158",
+  "basins": [
+    {
+      "id": "25m-uszomedence",
+      "name": "25 m-es hatpályás úszómedence",
+      "lengthM": 25,
+      "lanes": 6,
+      "indoor": true
+    },
+    {
+      "id": "tanmedence",
+      "name": "Tanmedence",
+      "lengthM": 10,
+      "lanes": null,
+      "indoor": true
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "20:00", "seasonNote": "Lakossági sávok CSAK 06:00-08:00 és 16:00-20:00; 08:00-16:00 között kötelező iskolai/óvodai úszásoktatás. Medencetér elhagyása záróra előtt 30 perccel" },
+    { "weekday": 2, "opens": "06:00", "closes": "20:00", "seasonNote": "Lakossági sávok CSAK 06:00-08:00 és 16:00-20:00; 08:00-16:00 iskolai úszásoktatás" },
+    { "weekday": 3, "opens": "06:00", "closes": "20:00", "seasonNote": "Lakossági sávok CSAK 06:00-08:00 és 16:00-20:00; 08:00-16:00 iskolai úszásoktatás" },
+    { "weekday": 4, "opens": "06:00", "closes": "20:00", "seasonNote": "Lakossági sávok CSAK 06:00-08:00 és 16:00-20:00; 08:00-16:00 iskolai úszásoktatás" },
+    { "weekday": 5, "opens": "06:00", "closes": "20:00", "seasonNote": "Lakossági sávok CSAK 06:00-08:00 és 16:00-20:00; 08:00-16:00 iskolai úszásoktatás" },
+    { "weekday": 6, "opens": "08:00", "closes": "18:00", "seasonNote": "Lakosság és szerződéses bérlők" },
+    { "weekday": 7, "opens": "08:00", "closes": "18:00", "seasonNote": "Lakosság és szerződéses bérlők" }
+  ],
+  "scheduleSource": {
+    "url": "https://www.facebook.com/gazdagrettanuszoda/",
+    "format": "facebook-only",
+    "note": "The operator states this explicitly on the official NSÜ facility page: 'a jelzett nyitvatartástól eltérő – a szabad kapacitás függvényében a lakosság részére rendelkezésre álló vízfelület – időpontok tájékoztatója a Tanuszoda Facebook-oldalán olvasható.' In other words the authoritative free-water-surface information is posted ONLY to Facebook, as ad-hoc posts, not as a structured recurring table. There is no sávbeosztás page, PDF or image on nsu.hu. A second, related site exists at https://gazdagretiuszas.hu/orarend/ ('Órarend') but it was fetched and contains NO HTML <table> elements — and it belongs to a private swim school operating in the pool, so even if populated it would cover only that school's own courses, not overall lane availability. The NSÜ page also notes visitors should consult the occupancy board at the ticket desk ('a jegypénztárnál elhelyezett foglaltsági tájékoztató szerint látogatható'), i.e. the real-time truth is on-site only."
+  },
+  "sources": [
+    "https://nsu.hu/letesitmeny/gazdagreti-tanuszoda/",
+    "https://gazdagretiuszas.hu/orarend/",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "high",
+  "notes": "LANE COUNT 6 IS VERIFIED from the operator's own text: 'egy 25*15 méteres, hatpályás úszómedence (1.90 m mély)' — 'hatpályás' = six-lane. Second basin: 'egy 10*6 méteres tanmedence (0.80 m mély)'; no lane count is given for it, so lanes is null (a 10 x 6 m learner pool is not normally lane-marked). Water temperatures: main pool min 25 °C, tanmedence min 30 °C. Built under the Nemzeti Köznevelési Infrastruktúra Fejlesztési Program in Makovecz style and opened 2021-06-21; operated by the Nemzeti Sportügynökség (NSÜ). CAUTION FOR THE APP: this venue is a teaching pool first — on weekdays 08:00-16:00 the entire facility is given over to compulsory school and kindergarten swimming lessons, so public lane availability is effectively zero in that window even though the building is open. COORDINATE VERIFIED: Overpass returns 47.46810, 18.99735 tagged addr 1112 Gazdagréti út 12, matching the operator's stated 'Helyszín: 1112 Budapest XI, Gazdagréti út 12., 1783/7. hrsz.' Note an earlier URL guess (nsu.hu/letesitmeny/gazdagreti_tanuszoda, underscore form, taken from an OSM website tag) 404s; the correct slug is hyphenated with a trailing slash."
+}

@@ -1,0 +1,57 @@
+{
+  "id": "bvsc-laky-karoly-sportuszoda",
+  "name": "BVSC-Zugló Laky Károly Sportuszoda",
+  "shortName": "BVSC Szőnyi úti Uszoda",
+  "district": "XIV.",
+  "address": "1142 Budapest, Szőnyi út 2.",
+  "lat": 47.52253,
+  "lon": 19.09196,
+  "website": "https://bvsc.hu/szolgaltatasaink/uszoda",
+  "phone": "+36 30 528 0768",
+  "basins": [
+    {
+      "id": "50m-versenymedence",
+      "name": "50 m-es versenymedence",
+      "lengthM": 50,
+      "lanes": null,
+      "indoor": true
+    },
+    {
+      "id": "tanmedence",
+      "name": "Tanmedence",
+      "lengthM": null,
+      "lanes": null,
+      "indoor": true
+    },
+    {
+      "id": "kulteri-strandmedence",
+      "name": "Kültéri strandmedence",
+      "lengthM": null,
+      "lanes": null,
+      "indoor": false
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "21:00", "seasonNote": "Hétköznap; pénztár 06:00-20:15; medencéket zárás előtt 20 perccel el kell hagyni" },
+    { "weekday": 2, "opens": "06:00", "closes": "21:00", "seasonNote": "Hétköznap; pénztár 06:00-20:15" },
+    { "weekday": 3, "opens": "06:00", "closes": "21:00", "seasonNote": "Hétköznap; pénztár 06:00-20:15" },
+    { "weekday": 4, "opens": "06:00", "closes": "21:00", "seasonNote": "Hétköznap; pénztár 06:00-20:15" },
+    { "weekday": 5, "opens": "06:00", "closes": "21:00", "seasonNote": "Hétköznap; pénztár 06:00-20:15" },
+    { "weekday": 6, "opens": "06:00", "closes": "19:30", "seasonNote": "Hétvége/ünnepnap; pénztár 06:00-18:45" },
+    { "weekday": 7, "opens": "06:00", "closes": "19:30", "seasonNote": "Hétvége/ünnepnap; pénztár 06:00-18:45" }
+  ],
+  "scheduleSource": {
+    "url": "https://bvsc.hu/szolgaltatasaink/uszoda/uszoda-medence-beosztas",
+    "format": "none-found",
+    "note": "A page titled 'Uszoda medence beosztás' EXISTS at this URL and is linked from the uszoda menu, but as of 2026-09-24 it publishes NO schedule content — the fetched HTML contains only site chrome plus an events calendar widget; the only <table> elements on the page are the month calendar. The one image linked from the uszoda section (/images/szolgaltatasaink/uszoda/uszoda-palyarendszabalyok.jpg) was downloaded and visually inspected: it is the trilingual spectator ground-rules poster (Pályarendszabályok), NOT a lane allocation. The házirend states the basin allocation is communicated only on monitors in the lobby ('a medencék beosztásáról a vendégek az előcsarnokban elhelyezett monitorokról tájékozódhatnak'), so there is nothing scrapeable. Worth re-checking periodically in case the page is populated."
+  },
+  "sources": [
+    "https://bvsc.hu/szolgaltatasaink/uszoda",
+    "https://bvsc.hu/szolgaltatasaink/uszoda/uszoda-medence-beosztas",
+    "https://bvsc.hu/szolgaltatasaink/uszoda/uszoda-hazirendje",
+    "https://bvsc.hu/images/szolgaltatasaink/uszoda/uszoda-palyarendszabalyok.jpg",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "medium",
+  "notes": "Lane counts deliberately null — no source published a lane count for any basin and the beosztás page is empty. Házirend confirms three indoor basins plus an outdoor one, that all basins except the tanmedence are deep water (>1.35 m), and critically for this app: 'Az oktatási és tanmedencéink hétköznapokon a közönség részére zárva tartanak' (teaching/learner basins are CLOSED to the public on weekdays; available Sat-Sun 06:00-19:00 in summer), and 'Az 50 méteres versenymedence, valamint a tanmedencék csak hétvégeken, korlátozva állnak a vendégek rendelkezésére'. Outdoor strand closed for the season on 2026-09-21 per site notice. Coordinate: OSM way tagged 'Laky Károly Sportuszoda (BVSC-Zugló)' with addr 1142 Szőnyi út 2, cross-checked against the address in the bvsc.hu site header and házirend text — exact match."
+}

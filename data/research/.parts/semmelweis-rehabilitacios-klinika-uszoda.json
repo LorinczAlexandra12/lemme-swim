@@ -1,0 +1,41 @@
+{
+  "id": "semmelweis-rehabilitacios-klinika-uszoda",
+  "name": "Semmelweis Egyetem Rehabilitációs Klinika uszodája",
+  "shortName": "Semmelweis Rehab uszoda",
+  "district": "XII.",
+  "address": "1121 Budapest, Szanatórium utca 19.",
+  "lat": 47.523536,
+  "lon": 18.9313423,
+  "website": "https://semmelweis.hu/rehabilitaciosklinika/szolgaltatasok/uszoda/",
+  "phone": "+36 1 391 1900",
+  "basins": [
+    {
+      "id": "uszomedence",
+      "name": "Úszómedence (Főépület, E szárny, földszint)",
+      "lengthM": null,
+      "lanes": null,
+      "indoor": true
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "08:00", "seasonNote": "Reggeli úszás. 8-9 óra között beteg terapeutával úszása (nem nyilvános). Utána úszóiskolák bérelt idősávjai." },
+    { "weekday": 2, "opens": "06:00", "closes": "08:00", "seasonNote": "Reggeli úszás." },
+    { "weekday": 3, "opens": "06:00", "closes": "08:00", "seasonNote": "Reggeli úszás." },
+    { "weekday": 4, "opens": "06:00", "closes": "08:00", "seasonNote": "Reggeli úszás." },
+    { "weekday": 5, "opens": "06:00", "closes": "08:00", "seasonNote": "Reggeli úszás." }
+  ],
+  "scheduleSource": {
+    "url": null,
+    "format": "none-found",
+    "note": "Nincs publikált sáv- vagy pályabeosztás. Amit ténylegesen megnyitottam: (1) https://semmelweis.hu/rehabilitaciosklinika/szolgaltatasok/uszoda/ - ez a hivatalos uszodaoldal, prózában közli a nyitvatartást és a térítési díjakat, van rajta egy 'Galéria - 4 kép' blokk és egy 'Uszoda házirendje' link, de SEMMILYEN táblázat, PDF vagy beosztáskép nincs rajta; (2) https://semmelweis.hu/rehabilitaciosklinika/elerhetoseg/ - csak cím és telefonszám. Az úszófelület bérlése egyedi megállapodás alapján, Jakab Tamásnál (1. emelet, 106-os szoba, jakab.tamas@semmelweis.hu) történik, tehát a sávkiosztás nem publikus adat."
+  },
+  "sources": [
+    "https://semmelweis.hu/rehabilitaciosklinika/szolgaltatasok/uszoda/",
+    "https://semmelweis.hu/rehabilitaciosklinika/elerhetoseg/",
+    "https://semmelweis.hu/net/",
+    "https://nominatim.openstreetmap.org/search?q=Szanat%C3%B3rium+utca+19%2C+Budapest",
+    "https://overpass-api.de/api/interpreter (OSM relation 7463390, node 5024510486)"
+  ],
+  "confidence": "medium",
+  "notes": "FIGYELEM - A KIINDULÓ FELTEVÉS HIBÁS VOLT: a feladat 'Semmelweis Egyetem uszoda (Nagyvárad tér, VIII./IX.)'-ként adta meg, de a NAGYVÁRAD TÉREN NINCS SEMMELWEIS-USZODA. A Nagyvárad téri Elméleti Tömb (1089 Budapest, Nagyvárad tér 4.) oktatási-kutatási toronyépület, a semmelweis.hu/net/ oldal semmilyen medencét nem említ. A Semmelweis Egyetem EGYETLEN olyan medencéje, amelyhez nyilvános jegyár tartozik, a Rehabilitációs Klinikán van, a XII. kerületben - ezt rögzítettem. (Aki a Nagyvárad tér közelében keres 8 sávos egyetemi uszodát, az valószínűleg a Nemzeti Közszolgálati Egyetem Ludovika-kampuszának uszodájára gondol az Üllői úton - az NEM Semmelweis-létesítmény, és nem tartozott a feladatomhoz.) KOORDINÁTA: a klinika saját elérhetőségi oldalán kiírt cím szó szerint '1121 Budapest, Szanatórium utca 19.', telefon +36 1 391 1900. Ehhez két független geokódolás: (a) Nominatim 'Szanatórium utca 19, Budapest' -> 47.5235417 / 18.9311495, display_name 'Országos Orvosi Rehabilitációs Intézet, 19, Szanatórium utca, Budakeszierdő, XII. kerület, Budapest'; (b) Overpass/OSM relation 7463390 (building=hospital, addr:street=Szanatórium utca, addr:housenumber=19, name='Országos Orvosi Rehabilitációs Intézet') középpontja 47.523536 / 18.9313423. A két pont ~14 m-re van egymástól; az OSM relation középpontját használtam. A Klinika az 1975 óta működő OORI jogutódja, ezért szerepel OORI néven a térképeken. Az uszoda az oldal szerint a 'Főépület, E szárny, földszint' szinten van, tehát a bejárat a kórházkomplexum főépületénél keresendő - a koordináta az épületkomplexum középpontja, nem az uszoda bejárata. SÁVSZÁM ÉS MEDENCEHOSSZ: NULL - egyik megnyitott oldal sem közöl medenceparamétert; sem sávszámot, sem hosszt, sem mélységet nem láttam sehol leírva. NYITVATARTÁS - ELLENTMONDÁS A FORRÁSON BELÜL: ugyanaz a hivatalos oldal fent azt írja, hogy 'Szombaton: 08:00-16:00', lent viszont azt, hogy 'Hétvégén az uszoda zárva tart'. Ezért szombatot NEM vettem fel; feltételezésem szerint a szombati 8-16 az úszóiskolák bérelt idősávja, nem lakossági nyitvatartás, de ezt nem tudtam igazolni. HOZZÁFÉRHETŐSÉG: ez NEM klasszikus közuszoda - 'A Klinikánk főépületében található úszómedence elsősorban betegeink részére fenntartott, azonban úszóiskolák számára is tudunk úszófelületet biztosítani.' Ugyanakkor van nyilvános árlista külsősöknek is (2025. március 1-től, áfával: Semmelweis-dolgozó és családtag 600 Ft/alkalom, 4.500 Ft/10 alkalom, 12.000 Ft/30 alkalom; MÁS VENDÉGEK 2.500 Ft/alkalom, 20.000 Ft/10 alkalom, 55.000 Ft/30 alkalom), tehát külsős is válthat jegyet. Mérlegelendő, hogy egy 'legközelebbi uszoda' alkalmazásba egyáltalán bekerüljön-e, mert a napi nyilvános ablak mindössze 2 óra (hétköznap 6-8), és a helyszín a Budakeszi-erdőnél, tömegközlekedéssel a 22/22A/222 busszal érhető el. A behajtás a klinika területére 1000 Ft/nap."
+}

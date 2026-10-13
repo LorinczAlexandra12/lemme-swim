@@ -1,0 +1,1731 @@
+{
+  "pools": [
+    {
+      "id": "csillaghegyi-arpad-forrasfurdo",
+      "name": "Csillaghegyi Árpád Forrásfürdő és Székely Éva Uszoda",
+      "shortName": "Csillaghegyi fürdő",
+      "district": "III.",
+      "address": "1038 Budapest, Pusztakúti út 2-6.",
+      "lat": 47.5845514,
+      "lon": 19.0409268,
+      "website": "https://www.csillaghegyifurdo.hu/",
+      "phone": "+36 1 242 0754",
+      "basins": [
+        {
+          "id": "25m-uszomedence",
+          "name": "Úszómedence (25 × 33 méter)",
+          "lengthM": 25,
+          "lanes": 13,
+          "indoor": true
+        },
+        {
+          "id": "tanmedence",
+          "name": "Tanmedence (12 méter)",
+          "lengthM": 12,
+          "lanes": 4,
+          "indoor": true
+        },
+        {
+          "id": "kulteri-uszomedence-33m",
+          "name": "Kültéri úszómedence (33 méter)",
+          "lengthM": 33,
+          "lanes": null,
+          "indoor": false
+        },
+        {
+          "id": "kulteri-strandmedence-55m",
+          "name": "Kültéri strandmedence (55 méter)",
+          "lengthM": 55,
+          "lanes": null,
+          "indoor": false
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Sport zóna, 2026. szeptember 14-től érvényes rend. Wellness/Szaunavilág csak 10:00-tól."
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Sport zóna, 2026. szeptember 14-től."
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Sport zóna, szerdánként hosszított nyitvatartás 22:00-ig."
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Sport zóna, 2026. szeptember 14-től."
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Sport zóna, 2026. szeptember 14-től."
+        },
+        {
+          "weekday": 6,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Sport zóna. A sávtábla hétvégén csak 7:00-tól sorolja a sávokat."
+        },
+        {
+          "weekday": 7,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Sport zóna. A sávtábla hétvégén csak 7:00-tól sorolja a sávokat."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.csillaghegyifurdo.hu/savfoglaltsag",
+        "format": "pdf",
+        "note": "A /savfoglaltsag HTML-oldalon nincs táblázat, csak KÉT PDF-LINK, amit a scrapernek onnan kell kiszednie (a fájlnév dátumbélyeges, hetente/idényenként cserélődik). 2026-09-24-én érvényes linkek: (1) 25 méteres úszómedence -> https://budapestgyogyfurdoi.synergyfox.app/public/10/savtablak/uszomedence_260914_tol_mod2.pdf ; (2) Tanmedence -> https://budapestgyogyfurdoi.synergyfox.app/public/10/savtablak/tanmedence_260914_tol_mod.pdf . Minta: .../public/10/savtablak/<medence>_<ÉÉHHNN>_tol[_mod|_mod2].pdf . FIGYELEM: a www.csillaghegyifurdo.hu lassú, a curl gyakran 40-60 s-nál timeoutol, érdemes --max-time 100 és újrapróbálkozás. --- ÚSZÓMEDENCE PDF SZERKEZETE (1 oldal, A4 álló, 595.2 x 841.8 pt): hét napblokk, elrendezés 3+3+1 (felső sor: Hétfő | Kedd | Szerda, alsó sor: Csütörtök | Péntek | Szombat, majd a Szombat alatt Vasárnap). Minden napblokk OSZLOPAI = úszósávok, balról jobbra: 'A', 'B' (e kettő fölött 90 fokkal forgatva a 'lépcsők közötti' felirat), majd a SZÁMOZOTT sávok '0','1','2','3','4','5','6','7','8','9', végül 'C'. ÖSSZESEN 13 EGYFORMA SZÉLESSÉGŰ OSZLOP (a Hétfő blokkban a fejléc-betűk x-középpontjai: A=85.8, B=97.4, 0=109.8, 1=121.8, 2=133.3, 3=144.8, 4=156.3, 5=167.8, 6=179.4, 7=190.9, 8=202.4, 9=213.9, C=224.8 -> egyenletes ~11.5 pt osztás, tehát A/B/C ugyanolyan széles sáv, mint a számozottak). SOROK = ÓRASÁVOK, hétköznap '6-7'-től '19-20'-ig (szerdán plusz egy '20-22' sor), hétvégén '7-8'-tól '19-20'-ig; a sorfeliratok a blokk bal ÉS jobb szélén is szerepelnek. A FOGLALTSÁG KIZÁRÓLAG CELLA-KITÖLTŐSZÍN, nulla szöveggel a cellákban -> page.get_drawings() kötelező. RGB-k (PyMuPDF 0-1 float fill): FEKETE (0.0, 0.0, 0.0) = 'Foglalt sávok'; HALVÁNY CIÁN (0.659, 0.941, 0.98) = 'Szabad sávok'; TELÍTETT CIÁN (0.224, 0.867, 0.953) = 'Legnagyobb terhelésű időszak' (ez IS szabad/közönség, csak zsúfolt - NE számoljuk foglaltnak); FEHÉR (1.0, 1.0, 1.0) = az 'AQUA-MAZE*' kiemelt dobozok; LILA (0.439, 0.188, 0.627) = csak a magyarázó nyilak. A jelmagyarázat az oldal alján y~783-nál van ('Jelmagyarázat: Foglalt sávok / Szabad sávok / Legnagyobb terhelésű időszak'). SZŰRÉS: a fekete fill-ek száma 984, ami jóval több a fekete celláknál, mert a betűk és a vékony keretek is fekete fill-ek -> a scraper CSAK a kb. 11.5 pt széles x 22.5 pt magas, a rácsra illeszkedő téglalapokat vegye figyelembe. --- TANMEDENCE PDF SZERKEZETE (1 oldal, nagy méret: 1749.88 x 2476.59 pt): ugyanaz a logika, de NAPONKÉNT CSAK 4 SÁV, és a sávok JOBBRÓL BALRA vannak számozva ('4','3','2','1' sorrendben növekvő x mentén). Napfejlécek rövidítve: 'Hé','Ke','Sze','Csü','Pé','Szo' (+ Vasárnap). Sorok szintén órasávok '6-7'-től. Színkulcs azonos: fekete = foglalt, halvány cián (0.659, 0.941, 0.98) = szabad. Az 'Aqua-' feliratú fehér dobozok az Aquafitness/Aquamaze órákat jelölik (aquamaze.hu/idopontfoglalas előzetes regisztráció)."
+      },
+      "sources": [
+        "https://www.csillaghegyifurdo.hu/",
+        "https://www.csillaghegyifurdo.hu/nyitvatartas",
+        "https://www.csillaghegyifurdo.hu/osszes-medence-parametere",
+        "https://www.csillaghegyifurdo.hu/savfoglaltsag",
+        "https://budapestgyogyfurdoi.synergyfox.app/public/10/savtablak/uszomedence_260914_tol_mod2.pdf",
+        "https://budapestgyogyfurdoi.synergyfox.app/public/10/savtablak/tanmedence_260914_tol_mod.pdf",
+        "https://nominatim.openstreetmap.org/search?q=Pusztak%C3%BAti+%C3%BAt+2%2C+Budapest",
+        "https://overpass-api.de/api/interpreter (OSM way 965214078 + node 3465235517)"
+      ],
+      "confidence": "high",
+      "notes": "KOORDINÁTA: Nominatim a 'Pusztakúti út 2, Budapest' lekérdezésre pontosan a névvel egyező objektumot adta vissza: 47.5845514 / 19.0409268, display_name = 'Csillaghegyi Árpád Forrásfürdő és Székely Éva Uszoda, 2-6, Pusztakúti út, Csillaghegy, III. kerület, Budapest, 1038'. Ezt megerősíti az Overpass-ból lekért OSM way 965214078 (amenity=public_bath, name = ugyanez a hivatalos név, addr:postcode=1038, addr:street=Pusztakúti út, addr:housenumber=2-6) középpontja: 47.5845379 / 19.0409268 - 2 m eltérés. A fürdő SAJÁT honlapjának fejlécében és láblécében kiírt cím ('1038 Budapest, Pusztakúti út 2-6.') karakterre egyezik. Az OSM-ben van egy külön node (3465235517) is 47.5859151 / 19.0421026 'Csillaghegyi strandfürdő és uszoda' néven, ami ~180 m-rel északkeletebbre esik és a strandterületet/bejáratot jelöli; NEM ezt használtam, mert a way a tényleges fürdőépület. SÁVSZÁM - NEM BECSLÉS: a 25 m-es úszómedence 13 sávját a hivatalos sávfoglaltsági PDF fejléce tételesen felsorolja (A, B, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, C), és a fejlécbetűk x-koordinátái egyenletes ~11.5 pt osztást mutatnak, tehát mind a 13 azonos szélességű sáv. Ez keresztbe stimmel a hivatalos medenceparaméterrel is: a medence 25 x 33 m (825 nm), 33 m / 13 sáv = 2,54 m/sáv, ami szabványos sávszélesség. A tanmedence 4 sávját ugyanígy a tanmedence-PDF fejléce sorolja fel (4, 3, 2, 1), és 120 nm / 12 m hossz = 10 m szélesség, 10 m / 4 = 2,5 m/sáv - szintén konzisztens. MEDENCEHOSSZ: a /savfoglaltsag oldal szövege explicit '25 méteres úszómedence'-ként hivatkozik rá, a paramétertábla pedig 'Úszómedence (25x33 méter)'-ként, tehát 25 m a sávhossz és 33 m a szélesség. BELTÉR/KÜLTÉR: a hivatalos paramétertábla a kültéri medencéket kifejezetten 'Kültéri' előtaggal jelöli (Kültéri strandmedence 55 m, Kültéri gyermekmedence, Kültéri úszómedence 33 m), a 25 m-es úszómedence és a tanmedence előtag nélkül szerepel és a 'Sport zóna' egész évben 6:00-tól üzemel, ezért ezeket fedettnek vettem. A kültéri 33 m-es úszómedence és az 55 m-es strandmedence sávszámát EGYIK forrás sem adja meg (a sávfoglaltsági PDF-ek csak a fedett 25 m-es medencére és a tanmedencére vonatkoznak), ezért ezeknél lanes = null. NYITVATARTÁS: a /nyitvatartas oldal 'Nyitvatartás szeptember 14-től' HTML-táblázatából, a 'Sport zóna' sorából vettem (a Wellness 10:00-tól, a Gyermekvilág hétköznap zárva). A fürdő fenntartja a sávkiosztás változtatásának jogát. Üzemeltető: Budapest Gyógyfürdői és Hévizei Zrt."
+    },
+    {
+      "id": "szeruskert-tanuszoda",
+      "name": "Szérűskert tanuszoda",
+      "shortName": "Szérűskert uszoda",
+      "district": "III.",
+      "address": "1033 Budapest, Szérűskert utca 40-44.",
+      "lat": 47.559348,
+      "lon": 19.0432306,
+      "website": null,
+      "phone": "+36 1 387 3141",
+      "basins": [
+        {
+          "id": "25m-uszomedence",
+          "name": "25 m-es úszómedence",
+          "lengthM": 25,
+          "lanes": null,
+          "indoor": true
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "07:30",
+          "seasonNote": "Reggeli közönségúszás. Napközben iskolai úszásoktatás és úszóiskolák foglalják a medencét."
+        },
+        {
+          "weekday": 1,
+          "opens": "19:00",
+          "closes": "21:00",
+          "seasonNote": "Esti közönségúszás."
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "07:30",
+          "seasonNote": "Reggeli közönségúszás."
+        },
+        {
+          "weekday": 2,
+          "opens": "19:00",
+          "closes": "21:00",
+          "seasonNote": "Esti közönségúszás."
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "07:30",
+          "seasonNote": "Reggeli közönségúszás."
+        },
+        {
+          "weekday": 3,
+          "opens": "19:00",
+          "closes": "21:00",
+          "seasonNote": "Esti közönségúszás."
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "07:30",
+          "seasonNote": "Reggeli közönségúszás."
+        },
+        {
+          "weekday": 4,
+          "opens": "19:00",
+          "closes": "21:00",
+          "seasonNote": "Esti közönségúszás."
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "07:30",
+          "seasonNote": "Reggeli közönségúszás."
+        },
+        {
+          "weekday": 5,
+          "opens": "19:00",
+          "closes": "21:00",
+          "seasonNote": "Esti közönségúszás."
+        },
+        {
+          "weekday": 6,
+          "opens": "09:00",
+          "closes": "17:00",
+          "seasonNote": "Hétvégén és munkaszüneti napokon folyamatos közönségúszás."
+        },
+        {
+          "weekday": 7,
+          "opens": "09:00",
+          "closes": "17:00",
+          "seasonNote": "Hétvégén és munkaszüneti napokon folyamatos közönségúszás."
+        }
+      ],
+      "scheduleSource": {
+        "url": null,
+        "format": "none-found",
+        "note": "Nem találtam publikált sáv- vagy pályabeosztást. Konkrétan ellenőriztem: (1) https://kszki.obuda.hu/ és http://kszki.obuda.hu/ - az üzemeltető Óbudai Kulturális, Sport és Szabadidő Nonprofit Kft. domainje ebből a környezetből NEM oldódik fel DNS-ben (getent hosts kszki.obuda.hu -> nincs találat, curl HTTP 000), tehát nem tudtam megnézni; (2) https://obuda.hu/szeruskerti-uszoda/ - szintén nincs DNS-feloldás; (3) https://www.obuda.hu/?s=uszoda - HTTP 466 (blokkolt/WAF); (4) https://3.kerulet.ittlakunk.hu/holmi/sport-szabadido/szeruskert-tanuszoda - csak név, cím, nyitvatartás, sem táblázat, sem PDF, sem kép; (5) https://www.amobauszoiskola.hu/uszasoktatas-szeruskert-tanuszoda - csak az úszóiskola saját órarendje, csak nevet és címet ad ('Budapest, Szérűskert u. 40-42, 1033'); (6) https://fitadvisor.hu/p/szeruskerti-uszoda és https://www.furdes.hu/furdok/magyarorszag/szeruskerti-uszoda - a HTML-ből semmilyen medence-/sávadat nem nyerhető ki (valószínűleg JS-ből renderelnek). Az uszodának nincs saját honlapja. Az OSM contact:facebook szerint van egy Facebook-oldala (https://www.facebook.com/pages/Sz%C3%A9r%C5%B1skert-Uszoda/236565296402508), de ezt nem nyitottam meg és nem tudom, hogy él-e, ezért NEM adtam meg website-ként. Beosztásért az uszoda@kszki.obuda.hu címen vagy a +36 1 387 3141 számon kell érdeklődni."
+      },
+      "sources": [
+        "https://overpass-api.de/api/interpreter (OSM way 252847119: name='Szérűskert tanuszoda', addr:postcode=1033, addr:street=Szérűskert utca, addr:housenumber=40-44, length=25, swimming_lanes=4, phone=+36 1 387 3141, email=uszoda@kszki.obuda.hu, opening_hours='Mo-Fr 06:00-07:30,19:00-21:00; Sa-Su 09:00-17:00')",
+        "https://nominatim.openstreetmap.org/search?q=Sz%C3%A9r%C5%B1skert+utca+40%2C+Budapest",
+        "https://3.kerulet.ittlakunk.hu/holmi/sport-szabadido/szeruskert-tanuszoda",
+        "https://www.amobauszoiskola.hu/uszasoktatas-szeruskert-tanuszoda"
+      ],
+      "confidence": "medium",
+      "notes": "LÉTEZÉS: megerősítve, de csak közvetett forrásokból - az uszodának nincs saját honlapja, és az üzemeltető (KSZKI Óbuda) domainje ebből a környezetből nem érhető el, ezért NEM tudtam hivatalos oldalon ellenőrizni, hogy 2026 szeptemberében is nyitva van-e. Felújításról/bezárásról szóló hírt nem találtam. KOORDINÁTA: OSM way 252847119 (building=yes, leisure=sports_centre, sport=swimming, name='Szérűskert tanuszoda') poligonközéppontja 47.559348 / 19.0432306. Független kereszthivatkozás: a Nominatim a 'Szérűskert utca 40, Budapest' címre 47.5584376 / 19.0435280-at ad, 1033-as irányítószámmal, Kaszásdűlő, III. kerület - ez ~110 m-re van az épületközépponttól, mert a Nominatim a 40-es házszám utcai interpolált pontját adja vissza, míg az OSM way a 40-44. szám alatti épületet fedi le. A két forrás ugyanazt az utcát, házszámtartományt, irányítószámot és kerületet erősíti meg, ezért az épületközéppontot használtam. Az úszóiskola oldala 'Szérűskert u. 40-42'-t ír, az OSM és az ittlakunk '40-44'-et illetve '40'-et - a házszámtartomány forrásonként kicsit eltér, a sarokpont ugyanaz. SÁVSZÁM: NULL, mert ELLENTMONDÓ adatokat találtam és egyiket sem tudtam hivatalos forrásból igazolni. Az OSM way swimming_lanes=4 tag-et hordoz; ezzel szemben a webkereső összefoglalója a fitadvisor.hu-ra hivatkozva '25 méteres, hatpályás medencét' említ (6 sáv). Mivel a fitadvisor HTML-jéből semmilyen adatot nem tudtam kinyerni, a 6-os számot NEM tudtam saját szemmel megerősíteni, az OSM-tag pedig egyetlen, ellenőrizetlen forrás. Ezért lanes = null; a valós érték nagy valószínűséggel 4 vagy 6. MEDENCEHOSSZ: 25 m - ezt két forrás is állítja (OSM length=25 tag, illetve a fitadvisor-idézet '25 méteres'), ezért megtartottam. NYITVATARTÁS: az OSM opening_hours tag ('Mo-Fr 06:00-07:30,19:00-21:00; Sa-Su 09:00-17:00') és az ittlakunk.hu leírása egybehangzó, de az utóbbi forrás kora bizonytalan (egy idézett fórumbejegyzés 2016-os), ezért a nyitvatartás ELAVULT LEHET. FIGYELEM A FELDOLGOZÓNAK: hétköznapokra SZÁNDÉKOSAN KÉT bejegyzés jut naponta (reggeli és esti ablak), mert a medence napközben iskolai úszásoktatással van lefoglalva - ez nem duplikáció. Ez tanuszoda: a vízfelület nagy részét napközben iskolai oktatás és bérlő úszóiskolák (pl. Békalencse Úszóiskola) foglalják."
+    },
+    {
+      "id": "tve-sportuszoda",
+      "name": "III. kerületi TVE sportuszoda",
+      "shortName": "TVE uszoda",
+      "district": "III.",
+      "address": "1037 Budapest, Kalap utca 1.",
+      "lat": 47.5503694,
+      "lon": 19.0362016,
+      "website": "https://tve1887.hu/uszoda/",
+      "phone": "+36 70 866 7810",
+      "basins": [
+        {
+          "id": "21x285-medence",
+          "name": "21 × 28,5 m-es ponyvatetős medence",
+          "lengthM": null,
+          "lanes": 8,
+          "indoor": true
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda nyitvatartás; a lakossági (közönség) sávok ettől szűkebbek, lásd a heti program PDF zöld celláit."
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda nyitvatartás; a lakossági sávok ettől szűkebbek."
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda nyitvatartás; a lakossági sávok ettől szűkebbek."
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda nyitvatartás; a lakossági sávok ettől szűkebbek."
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda nyitvatartás; a lakossági sávok ettől szűkebbek."
+        },
+        {
+          "weekday": 6,
+          "opens": "08:00",
+          "closes": "18:00",
+          "seasonNote": "Július 1-től hétvégente 8:00-18:00 (a honlapon így szerepel)."
+        },
+        {
+          "weekday": 7,
+          "opens": "08:00",
+          "closes": "18:00",
+          "seasonNote": "Július 1-től hétvégente 8:00-18:00 (a honlapon így szerepel)."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://tve1887.hu/wp-content/uploads/2026/09/USZODA_HETI-PROGRAM-2026_09_23_mod.pdf",
+        "format": "pdf",
+        "note": "EGYSÁVOS FELBONTÁSÚ HETI RÁCS - a legjobb forrás a projektben. A PDF-et a https://tve1887.hu/uszoda/ oldal 'Heti program' gombja linkeli, hetente új fájl. URL-minta: https://tve1887.hu/wp-content/uploads/<ÉÉÉÉ>/<HH>/USZODA_HETI-PROGRAM-<ÉÉÉÉ>_<HH>_<NN>[_mod].pdf - a scraper NE hardcode-olja, hanem a /uszoda/ oldal HTML-jéből szedje ki az első 'USZODA_HETI-PROGRAM' mintára illeszkedő href-et. 1 oldal, A3 fekvő (841.92 x 1190.52 pt, de a tartalom a felső ~850 pt-on van). SZERKEZET: felül 'III. KERÜLETI TVE USZODA HETI PROGRAM <N>.hét' cím, alatta y~48-61 a JELÖLÉSEK legendsáv. A rács 7 napblokkból áll (hétfőtől vasárnapig), blokkonként 8 sor = 8 úszósáv. Bal oldali fejlécoszlopok balról jobbra: x~39 dátum függőlegesen forgatva ('2026.09.21'), x~59 napnév ('HÉTFŐ'), x~78 sávszám ('1.'-tól '8.'-ig). A napblokkok kb. 143 pt-onként ismétlődnek (első blokk sorai y~158,174,191,207,223,239,256,272; második blokk y~301-től). Minden napblokk fölött/alatt egy időfejléc-sor fut 6:00-tól 22:30-ig, 30 PERCES lépésekben, 34 oszlop; az időcímkék 90 fokkal elforgatott szövegek sötét palaszürke (0.267,0.329,0.416) háttéren. A CELLÁK KITÖLTŐSZÍNNEL KÓDOLJÁK A FOGLALTSÁGOT, a szöveg csak az összevont blokkok közepén jelenik meg (pl. 'Női Ob 1', 'LAKOSSÁG', 'Óbudai Egyetem', 'Fiú serdülő ifi'), ezért TEXT-EXTRAKCIÓ ÖNMAGÁBAN NEM ELÉG - page.get_drawings() kell. LEGENDA ÉS RGB-K (PyMuPDF 0-1 float fill): PIROS (1.0, 0.0, 0.0) = ZÁRVA; VILÁGOSKÉK (0.608, 0.761, 0.902) = TVE EDZÉS (FIGYELEM: a tényleges rácsban az edzéscellák ennél telítettebb kékek, (0.357, 0.608, 0.835) - a scraper mindkettőt kezelje TVE EDZÉS-ként, vagy toleranciával illesszen); SÁRGA (1.0, 1.0, 0.0) = MÉRKŐZÉS; BOROSTYÁN/NARANCS (1.0, 0.753, 0.0) = BÉRLŐK; VILÁGOSSZÜRKE (0.906, 0.902, 0.902) illetve a rácsban (0.851, 0.851, 0.851) = TÁMOGATÓK; ZÖLD (0.663, 0.816, 0.557) = LAKOSSÁG <- EZ A SZABAD/KÖZÖNSÉG SÁV, ezt kell szabadnak számolni. FIGYELMEZTETÉS: a legendában 7 színminta van, de csak 6 felirat - az x~292 pozíciójú SÖTÉTKÉK (0.0, 0.439, 0.753) mintának NINCS felirata a PDF-ben; a 2026.09.23-i kiadásban a rácsban nem fordult elő, de későbbi heteken megjelenhet, ilyenkor ismeretlen kategóriaként kezelendő (ne számoljuk szabadnak). Ellenőrzött példa (2026.09.21 hétfő): 1-8. sáv 6:00-7:30 zöld = LAKOSSÁG (kivéve 5-6. sáv szürke TÁMOGATÓK/'Óbudai Egyetem' és 7-8. sáv narancs BÉRLŐK/'Market','Biotech'), 8:00-8:30 piros ZÁRVA, 8:30-9:30 kék 'Női Ob 1', 10:00 piros, 10:30-14:00 zöld LAKOSSÁG, majd 15:00-tól délután végig kék edzések és 21:30-22:30 narancs 'Cégszolgálat'."
+      },
+      "sources": [
+        "https://tve1887.hu/uszoda/",
+        "https://tve1887.hu/wp-content/uploads/2026/09/USZODA_HETI-PROGRAM-2026_09_23_mod.pdf",
+        "https://overpass-api.de/api/interpreter (OSM way 614823063, name=TVE sportuszoda, addr:postcode=1037, addr:street=Kalap utca, addr:housenumber=1, operator=III. Kerületi TVE)"
+      ],
+      "confidence": "high",
+      "notes": "KOORDINÁTA: OSM way 614823063 (building=sports_centre, name='TVE sportuszoda', operator='III. Kerületi TVE') középpontja 47.5503694 / 19.0362016. Az OSM-ben rögzített cím (1037 Budapest, Kalap utca 1.) szó szerint egyezik a klub saját uszodaoldalán kiírt címmel ('1037 Budapest Kalap utca 1.'), tehát két független forrás erősíti meg. A bejárat a Hévízi út felől nyílik (a honlap szerint), ezért a recepció a poligon keleti oldalán lehet - a megadott koordináta az épület geometriai közepe. SÁVSZÁM: 8 sáv, NEM becslés - a heti program PDF minden napblokkjában a bal oldali oszlop ténylegesen 1.-től 8.-ig sorolja fel a sávokat, és a rács is 8 sornyi cellát tartalmaz. MEDENCE MÉRET: a honlap szövege szerint '21 x 28,5 méteres, 2,0 m mély medence... ponyvatetővel készült'. Nem írja le, melyik irányban futnak az úszósávok, ezért lengthM-et szándékosan null-ra hagytam (28,5 m lenne a valószínű sávhossz 8 x ~2,6 m szélességgel, de ezt EGYIK forrás sem mondja ki). A ponyvatető miatt 'indoor: true' (egész évben, időjárástól függetlenül használható - a honlap explicit állítása), de nem klasszikus fedett csarnok. NYITVATARTÁS: a H-P 6:00-22:00 / Szo-V 8:00-18:00 az USZODA nyitvatartása, NEM a közönségúszás ideje; a honlap kifejezetten figyelmeztet, hogy lakossági használat csak a heti program zöld sávjaiban lehetséges, és hogy 'az edzések és a mérkőzések megkezdése előtt és befejezése után a medence átállás alatt az uszoda zárva tart'. A lakossági idősáv hetente változhat. JEGYÁRAK (2026.09., tájékoztatásul): felnőtt 3.200 Ft, III. kerületi felnőtt 2.700 Ft, diák/nyugdíjas 2.500 Ft, kerületi diák/nyugdíjas 2.200 Ft."
+    },
+    {
+      "id": "halassy-oliver-varosi-uszoda",
+      "name": "Halassy Olivér Városi Uszoda",
+      "shortName": "Halassy Olivér Uszoda",
+      "district": "IV.",
+      "address": "1048 Budapest, Tóth Aladár utca 16-18.",
+      "lat": 47.58271,
+      "lon": 19.10726,
+      "website": "https://haloujpest.hu/",
+      "phone": "+36 1 696 1641",
+      "basins": [
+        {
+          "id": "uszomedence",
+          "name": "Úszómedence (FINA, 275 m² vízfelület)",
+          "lengthM": 25,
+          "lanes": null,
+          "indoor": true
+        },
+        {
+          "id": "tanmedence",
+          "name": "Tanmedence",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": true
+        },
+        {
+          "id": "pezsgofurdo",
+          "name": "Pezsgőfürdő",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": true
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "UNCONFIRMED — from the OSM opening_hours tag 'Mo-Fr 06:00-20:00, Sa-Su 08:00-20:00'; the operator's own site could not be fetched (bot wall) and secondary sources disagree about the weekend. Verify before use."
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "UNCONFIRMED — see weekday 1 note"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "UNCONFIRMED — see weekday 1 note"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "UNCONFIRMED — see weekday 1 note"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "UNCONFIRMED — see weekday 1 note"
+        },
+        {
+          "weekday": 6,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "UNCONFIRMED — OSM says 08:00-20:00, one secondary source says 06:00-20:00. Conflict unresolved."
+        },
+        {
+          "weekday": 7,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "UNCONFIRMED — OSM says 08:00-20:00, two secondary sources say 08:00-17:00. Conflict unresolved."
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://haloujpest.hu/",
+        "format": "none-found",
+        "note": "BLOCKED, NOT ABSENT — the distinction matters for whoever writes the scraper. haloujpest.hu sits behind a JavaScript anti-bot interstitial: every plain HTTP request returns HTTP 403 with a ~9.7 KB 'Hitelesítés / Verification' challenge page instead of content. Reproduced against https://haloujpest.hu/, https://www.haloujpest.hu/ and https://haloujpest.hu/uszoda/, with a full desktop-Chrome and a Safari User-Agent plus Accept-Language: hu-HU and the Sec-Fetch-* navigation headers — all 403. Plain http:// (port 80) does not answer at all (connection failure). The managed WebFetch tool separately declined the host ('Unable to verify if domain haloujpest.hu is safe to fetch'), so there is currently NO route to this site from this environment. A scraper running from a normal residential/browser context, or a headless browser that executes the challenge JS, will very likely get through — this pool should be RE-ATTEMPTED with Playwright/Puppeteer rather than written off. Until then no schedule page, PDF or image could be located or ruled out, hence format 'none-found' with low confidence. The pool's Facebook page is the other likely publication channel."
+      },
+      "sources": [
+        "https://haloujpest.hu/",
+        "https://haloujpest.hu/uszoda/",
+        "https://www.furdoszovetseg.hu/furdok/halassy-oliver-varosi-uszoda/",
+        "https://www.furdoszovetseg.hu/en/furdok/halassy-oliver-varosi-uszoda/",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "low",
+      "notes": "LANE COUNT DELIBERATELY NULL. Secondary sources (a lifestyle article and a district news piece) claim '25 méteres medence 6 sávból áll', i.e. six lanes, but the operator's own site is unreachable (see scheduleSource note) so this could not be confirmed against a primary source and is recorded here as hearsay only. What IS confirmed by the Magyar Fürdőszövetség entry: the main pool is FINA-compliant with a 275 m² water surface, reaching 1.8 m depth; total facility 2139 m²; 'Az úszómedencében a víz 27, a tanmedencében 32, míg a pezsgőfürdőben 34 °C-os'. A 275 m² FINA pool is 25 x 11 m, which would conventionally be laid out as 5 or 6 lanes — again an inference, not recorded. Secondary sources also mention a simultaneous capacity of 108 people, a wellness unit of one sauna plus the whirlpool, and Újpest Kártya discounts. Facility manager: Mogyorósi Ferenc. Four-star Fürdőszövetség rating. COORDINATE VERIFIED: Overpass way 302647667 'Halassy Olivér Uszoda' at 47.58271, 19.10726 carries addr 1048 Tóth Aladár utca 16-18, and the Magyar Fürdőszövetség (an independent national trade body, fetched directly) prints the identical address '1048 Budapest, Tóth Aladár utca 16-18' together with the same contact e-mail info@haloujpest.hu — two independent agreeing sources, so the coordinate is accepted even though the operator's own page is unreachable. THIS IS THE ONE POOL IN THE SET WHERE THE BLOCKER IS PURELY TECHNICAL AND EASILY FIXED — worth a second pass from a different network or with a headless browser."
+    },
+    {
+      "id": "ujhegyi-uszoda",
+      "name": "Újhegyi Uszoda és Strandfürdő",
+      "shortName": "Újhegyi Uszoda",
+      "district": "X.",
+      "address": "1108 Budapest, Újhegyi út 13.",
+      "lat": 47.46685,
+      "lon": 19.16705,
+      "website": "https://www.kobanyasport.hu/letesitmenyek.htm",
+      "phone": "+36 1 262 4359",
+      "basins": [
+        {
+          "id": "belso-uszomedence",
+          "name": "Belső úszómedence (25 m-es)",
+          "lengthM": 25,
+          "lanes": 6,
+          "indoor": true
+        },
+        {
+          "id": "belso-tanmedence",
+          "name": "Belső tanmedence",
+          "lengthM": 4.5,
+          "lanes": null,
+          "indoor": true
+        },
+        {
+          "id": "kulso-strandmedence",
+          "name": "Külső strandmedence",
+          "lengthM": 25,
+          "lanes": null,
+          "indoor": false
+        },
+        {
+          "id": "kulso-babausztato",
+          "name": "Külső babaúsztató",
+          "lengthM": 5,
+          "lanes": null,
+          "indoor": false
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Egész évben; szabadtéri medence nyáron külön 09:00-19:00"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Egész évben"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Egész évben"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Egész évben"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Egész évben"
+        },
+        {
+          "weekday": 6,
+          "opens": "08:00",
+          "closes": "19:00",
+          "seasonNote": "Hétvége és ünnepnap"
+        },
+        {
+          "weekday": 7,
+          "opens": "08:00",
+          "closes": "19:00",
+          "seasonNote": "Hétvége és ünnepnap"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.kobanyasport.hu/index_htm_files/aktualis_palyabeosztas_20260831.pdf",
+        "format": "pdf",
+        "note": "HIGHEST-VALUE MACHINE-READABLE SOURCE FOUND. Linked from https://www.kobanyasport.hu/letesitmenyek.htm as 'Aktuális pályabeosztás (A változás jogát fenntartjuk!!!)'. The filename carries a date stamp (aktualis_palyabeosztas_YYYYMMDD.pdf), so a scraper MUST regex the href off letesitmenyek.htm each run, not hardcode it. STRUCTURE: 7 pages, exactly one per weekday, page 0 = Hétfő ... page 6 = Vasárnap; each page's text layer starts with the effective date ('2026. augusztus 31.') then the weekday name. Column headers: the 25 m indoor pool is split 'Bal oldal' / 'Jobb oldal' over six lanes labelled with Roman numerals I. II. III. IV. V. VI., followed by two further columns both labelled '1/2 tanm.' (the learner pool split into two halves rather than lanes). Row headers are hourly slots '6. - 7 .' through '21. - 22 ' (labels are typographically inconsistent — e.g. '7. - 830', '17. - 18.30', '20. - 21.00' — so parse leniently). CRITICAL: the free/occupied state is NOT in the text layer; it is encoded purely as cell FILL COLOUR, verified via PyMuPDF page.get_drawings(). Legend swatches confirmed by position against their labels: RGB (1.0, 0.75, 0.0) amber = FOGLALT (occupied), RGB (0.0, 0.69, 0.31) green = SZABAD (free). A scraper should extract filled rects, drop the two legend swatches (x0≈16, x1≈97, y≈398-453 on each page), then map each remaining rect's centre to a (lane column, hour row) cell and read its colour. Page 6 (Vasárnap) omits the 'Bal oldal'/'Jobb oldal' grouping header but keeps the same I.-VI. + 2×'1/2 tanm.' columns."
+      },
+      "sources": [
+        "https://www.kobanyasport.hu/",
+        "https://www.kobanyasport.hu/letesitmenyek.htm",
+        "https://www.kobanyasport.hu/index_htm_files/aktualis_palyabeosztas_20260831.pdf",
+        "https://www.kobanyasport.hu/index_htm_files/uszoda.pdf",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "high",
+      "notes": "Operated by the Kocsis Sándor Sportközpont (X. kerület önkormányzat). Lane count 6 is VERIFIED: the official pályabeosztás PDF enumerates lanes I.-VI. for the indoor pool. Basin dimensions taken verbatim from the operator's own 'Medencék adatai' table on letesitmenyek.htm (szélesség/hosszúság/mélység/hőfok): belső úszómedence 16 m wide x 25 m long x 2 m deep, 26-28 °C; belső tanmedence 16 m wide x 4,5 m long x 80 cm, 30-32 °C; külső strandmedence 8,5 m x 25 m x 1,35 m; külső babaúsztató 5 x 5 m. Note the operator lists width BEFORE length, so lengthM here is the longer 'hosszúság' value (4.5 for the tanmedence is genuinely its length per that table). Opening hours from the operator's own uszoda.pdf. WARNING: aggregator site strand.hu lists the postcode as 1196 — that is WRONG (1196 is Kispest); OSM and the operator both give 1108. Coordinate cross-checked: OSM way at 1108 Újhegyi út 13 vs. operator address — exact match."
+    },
+    {
+      "id": "gazdagreti-tanuszoda",
+      "name": "Gazdagréti Tanuszoda",
+      "shortName": "Gazdagréti Tanuszoda",
+      "district": "XI.",
+      "address": "1112 Budapest, Gazdagréti út 12.",
+      "lat": 47.4681,
+      "lon": 18.99735,
+      "website": "https://nsu.hu/letesitmeny/gazdagreti-tanuszoda/",
+      "phone": "+36 1 471 4158",
+      "basins": [
+        {
+          "id": "25m-uszomedence",
+          "name": "25 m-es hatpályás úszómedence",
+          "lengthM": 25,
+          "lanes": 6,
+          "indoor": true
+        },
+        {
+          "id": "tanmedence",
+          "name": "Tanmedence",
+          "lengthM": 10,
+          "lanes": null,
+          "indoor": true
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Lakossági sávok CSAK 06:00-08:00 és 16:00-20:00; 08:00-16:00 között kötelező iskolai/óvodai úszásoktatás. Medencetér elhagyása záróra előtt 30 perccel"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Lakossági sávok CSAK 06:00-08:00 és 16:00-20:00; 08:00-16:00 iskolai úszásoktatás"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Lakossági sávok CSAK 06:00-08:00 és 16:00-20:00; 08:00-16:00 iskolai úszásoktatás"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Lakossági sávok CSAK 06:00-08:00 és 16:00-20:00; 08:00-16:00 iskolai úszásoktatás"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Lakossági sávok CSAK 06:00-08:00 és 16:00-20:00; 08:00-16:00 iskolai úszásoktatás"
+        },
+        {
+          "weekday": 6,
+          "opens": "08:00",
+          "closes": "18:00",
+          "seasonNote": "Lakosság és szerződéses bérlők"
+        },
+        {
+          "weekday": 7,
+          "opens": "08:00",
+          "closes": "18:00",
+          "seasonNote": "Lakosság és szerződéses bérlők"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.facebook.com/gazdagrettanuszoda/",
+        "format": "facebook-only",
+        "note": "The operator states this explicitly on the official NSÜ facility page: 'a jelzett nyitvatartástól eltérő – a szabad kapacitás függvényében a lakosság részére rendelkezésre álló vízfelület – időpontok tájékoztatója a Tanuszoda Facebook-oldalán olvasható.' In other words the authoritative free-water-surface information is posted ONLY to Facebook, as ad-hoc posts, not as a structured recurring table. There is no sávbeosztás page, PDF or image on nsu.hu. A second, related site exists at https://gazdagretiuszas.hu/orarend/ ('Órarend') but it was fetched and contains NO HTML <table> elements — and it belongs to a private swim school operating in the pool, so even if populated it would cover only that school's own courses, not overall lane availability. The NSÜ page also notes visitors should consult the occupancy board at the ticket desk ('a jegypénztárnál elhelyezett foglaltsági tájékoztató szerint látogatható'), i.e. the real-time truth is on-site only."
+      },
+      "sources": [
+        "https://nsu.hu/letesitmeny/gazdagreti-tanuszoda/",
+        "https://gazdagretiuszas.hu/orarend/",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "high",
+      "notes": "LANE COUNT 6 IS VERIFIED from the operator's own text: 'egy 25*15 méteres, hatpályás úszómedence (1.90 m mély)' — 'hatpályás' = six-lane. Second basin: 'egy 10*6 méteres tanmedence (0.80 m mély)'; no lane count is given for it, so lanes is null (a 10 x 6 m learner pool is not normally lane-marked). Water temperatures: main pool min 25 °C, tanmedence min 30 °C. Built under the Nemzeti Köznevelési Infrastruktúra Fejlesztési Program in Makovecz style and opened 2021-06-21; operated by the Nemzeti Sportügynökség (NSÜ). CAUTION FOR THE APP: this venue is a teaching pool first — on weekdays 08:00-16:00 the entire facility is given over to compulsory school and kindergarten swimming lessons, so public lane availability is effectively zero in that window even though the building is open. COORDINATE VERIFIED: Overpass returns 47.46810, 18.99735 tagged addr 1112 Gazdagréti út 12, matching the operator's stated 'Helyszín: 1112 Budapest XI, Gazdagréti út 12., 1783/7. hrsz.' Note an earlier URL guess (nsu.hu/letesitmeny/gazdagreti_tanuszoda, underscore form, taken from an OSM website tag) 404s; the correct slug is hyphenated with a trailing slash."
+    },
+    {
+      "id": "nyeki-imre-uszoda",
+      "name": "Nyéki Imre Uszoda",
+      "shortName": "Nyéki Imre Uszoda",
+      "district": "XI.",
+      "address": "1116 Budapest, Kondorosi út 14.",
+      "lat": 47.45028,
+      "lon": 19.03625,
+      "website": "https://sport.ujbuda.hu/letesitmenyek/nyekiimreuszoda",
+      "phone": "+36 70 903 7714",
+      "basins": [
+        {
+          "id": "nagymedence-bent",
+          "name": "Nagymedence (bent)",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": true
+        },
+        {
+          "id": "tanmedence",
+          "name": "Tanmedence",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": true
+        },
+        {
+          "id": "nagymedence-kint",
+          "name": "Nagymedence (kint)",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": false
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Pénztárzárás 45 perccel az uszoda zárása előtt"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "19:00",
+          "seasonNote": "Pénztárzárás 45 perccel az uszoda zárása előtt"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Pénztárzárás 45 perccel az uszoda zárása előtt"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "19:00",
+          "seasonNote": "Pénztárzárás 45 perccel az uszoda zárása előtt"
+        },
+        {
+          "weekday": 6,
+          "opens": "06:00",
+          "closes": "18:00",
+          "seasonNote": "Pénztárzárás 45 perccel az uszoda zárása előtt"
+        },
+        {
+          "weekday": 7,
+          "opens": "06:00",
+          "closes": "18:00",
+          "seasonNote": "Pénztárzárás 45 perccel az uszoda zárása előtt"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://api.ujbuda.hu/webapi/v1.0/static-pages/156",
+        "format": "none-found",
+        "note": "IMPORTANT INFRASTRUCTURE FINDING even though the schedule itself is currently missing. sport.ujbuda.hu is a Vite/React SPA and serves NO server-rendered HTML (curl returns a 2 KB JS shell), so plain scraping of the public URL yields nothing. The real content is available as JSON from the Újbuda CMS API at https://api.ujbuda.hu/webapi/v1.0/static-pages/156 — but ONLY if you send the header 'Domain: sport.ujbuda.hu'; without it the API returns {\"error\":{\"code\":10002,\"message\":\"Invalid domain\"}}. The numeric id 156 comes from https://api.ujbuda.hu/webapi/v1.0/sitemap (same Domain header), where the node with slug 'nyekiimreuszoda' carries id 156 — resolve it there rather than hardcoding. The JSON's .content field is an HTML blob. It contains a real <table> for the vízigimnasztika timetable (columns: óra | Hétfő | Kedd | Szerda | Csütörtök | Péntek | Szombat | Vasárnap; rows 7.00-8.00, 9.00-10.00, 14.00-15.00, 19.00-20.00; cells marked 'x'). It also contains the lane-occupancy section headed 'A PÁLYAFOGLALTSÁGGAL kapcsolatos információk. A kékkel jelölt rubrikák jelzik medencéink foglalt sávjait.' with three labelled slots in this order: 'Tanmedence:', 'Nagymedence kint:', 'Nagymedence bent:'. AS OF 2026-09-24 THOSE THREE SLOTS ARE EMPTY — the markup after each label is only <br /> whitespace; the grids that normally sit there have been taken down. The three <img> tags still present in the blob are NOT schedules: e4a7b87f-....jpg was downloaded and visually checked and is a Star Sport Akadémia advertisement, e686f6ed-....jpg belongs to the 'Kistornaterem órarendje' gym section, and 68255200-....jpg could not be downloaded (repeated curl timeouts against api.ujbuda.hu file storage) so its content is unverified. Worth re-polling: when the operator re-uploads, blue-shaded cells = occupied lanes, and the section covers all three basins."
+      },
+      "sources": [
+        "https://api.ujbuda.hu/webapi/v1.0/sitemap",
+        "https://api.ujbuda.hu/webapi/v1.0/static-pages/156",
+        "https://api.ujbuda.hu/files/StaticImages/image/e4a7b87f-570a-4121-905f-9e44badd96ea.jpg",
+        "https://sport.ujbuda.hu/letesitmenyek/nyekiimreuszoda",
+        "https://sport.ujbuda.hu/assets/index-BCXu-6Vd.js",
+        "https://nominatim.openstreetmap.org/search?q=Ny%C3%A9ki+Imre+Uszoda+Budapest&format=json&limit=5",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "medium",
+      "notes": "COORDINATE VERIFIED: Nominatim and Overpass independently return a sports_centre named 'Nyéki Imre Uszoda' at 47.4503, 19.0363 tagged addr 1116 Kondorosi út 14, and the operator's own CMS content states 'Budapest - XI. kerület, Kondorosi út 14.' — match. (Two nearby OSM bus-stop nodes share the name; they were discarded.) BASIN NAMES are taken verbatim from the operator's own lane-occupancy section, which is the only official enumeration: Tanmedence, Nagymedence kint, Nagymedence bent. LANE COUNTS AND LENGTHS ARE NULL ON PURPOSE — no official source states either. Secondary/aggregator sources claim a 33 m indoor pool, an '8-sávos' tanmedence, and a 25 m outdoor summer pool plus a children's pancsoló and jakuzzi, but none of that is confirmed by the operator, so it is recorded here as hearsay only and NOT in the basins array. OPENING HOURS GAP: the official page lists Hétfő/szerda 06:00-20:00, Kedd/csütörtök 06:00-19:00, Szombat/vasárnap 06:00-18:00 and SILENTLY OMITS FRIDAY. One secondary source claims Friday closes at 18:00, but this is unconfirmed, so no weekday-5 entry is emitted. The site is a SZÉP-kártya acceptance point and sells a 2-hour 'úszójegy'."
+    },
+    {
+      "id": "semmelweis-rehabilitacios-klinika-uszoda",
+      "name": "Semmelweis Egyetem Rehabilitációs Klinika uszodája",
+      "shortName": "Semmelweis Rehab uszoda",
+      "district": "XII.",
+      "address": "1121 Budapest, Szanatórium utca 19.",
+      "lat": 47.523536,
+      "lon": 18.9313423,
+      "website": "https://semmelweis.hu/rehabilitaciosklinika/szolgaltatasok/uszoda/",
+      "phone": "+36 1 391 1900",
+      "basins": [
+        {
+          "id": "uszomedence",
+          "name": "Úszómedence (Főépület, E szárny, földszint)",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": true
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "08:00",
+          "seasonNote": "Reggeli úszás. 8-9 óra között beteg terapeutával úszása (nem nyilvános). Utána úszóiskolák bérelt idősávjai."
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "08:00",
+          "seasonNote": "Reggeli úszás."
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "08:00",
+          "seasonNote": "Reggeli úszás."
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "08:00",
+          "seasonNote": "Reggeli úszás."
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "08:00",
+          "seasonNote": "Reggeli úszás."
+        }
+      ],
+      "scheduleSource": {
+        "url": null,
+        "format": "none-found",
+        "note": "Nincs publikált sáv- vagy pályabeosztás. Amit ténylegesen megnyitottam: (1) https://semmelweis.hu/rehabilitaciosklinika/szolgaltatasok/uszoda/ - ez a hivatalos uszodaoldal, prózában közli a nyitvatartást és a térítési díjakat, van rajta egy 'Galéria - 4 kép' blokk és egy 'Uszoda házirendje' link, de SEMMILYEN táblázat, PDF vagy beosztáskép nincs rajta; (2) https://semmelweis.hu/rehabilitaciosklinika/elerhetoseg/ - csak cím és telefonszám. Az úszófelület bérlése egyedi megállapodás alapján, Jakab Tamásnál (1. emelet, 106-os szoba, jakab.tamas@semmelweis.hu) történik, tehát a sávkiosztás nem publikus adat."
+      },
+      "sources": [
+        "https://semmelweis.hu/rehabilitaciosklinika/szolgaltatasok/uszoda/",
+        "https://semmelweis.hu/rehabilitaciosklinika/elerhetoseg/",
+        "https://semmelweis.hu/net/",
+        "https://nominatim.openstreetmap.org/search?q=Szanat%C3%B3rium+utca+19%2C+Budapest",
+        "https://overpass-api.de/api/interpreter (OSM relation 7463390, node 5024510486)"
+      ],
+      "confidence": "medium",
+      "notes": "FIGYELEM - A KIINDULÓ FELTEVÉS HIBÁS VOLT: a feladat 'Semmelweis Egyetem uszoda (Nagyvárad tér, VIII./IX.)'-ként adta meg, de a NAGYVÁRAD TÉREN NINCS SEMMELWEIS-USZODA. A Nagyvárad téri Elméleti Tömb (1089 Budapest, Nagyvárad tér 4.) oktatási-kutatási toronyépület, a semmelweis.hu/net/ oldal semmilyen medencét nem említ. A Semmelweis Egyetem EGYETLEN olyan medencéje, amelyhez nyilvános jegyár tartozik, a Rehabilitációs Klinikán van, a XII. kerületben - ezt rögzítettem. (Aki a Nagyvárad tér közelében keres 8 sávos egyetemi uszodát, az valószínűleg a Nemzeti Közszolgálati Egyetem Ludovika-kampuszának uszodájára gondol az Üllői úton - az NEM Semmelweis-létesítmény, és nem tartozott a feladatomhoz.) KOORDINÁTA: a klinika saját elérhetőségi oldalán kiírt cím szó szerint '1121 Budapest, Szanatórium utca 19.', telefon +36 1 391 1900. Ehhez két független geokódolás: (a) Nominatim 'Szanatórium utca 19, Budapest' -> 47.5235417 / 18.9311495, display_name 'Országos Orvosi Rehabilitációs Intézet, 19, Szanatórium utca, Budakeszierdő, XII. kerület, Budapest'; (b) Overpass/OSM relation 7463390 (building=hospital, addr:street=Szanatórium utca, addr:housenumber=19, name='Országos Orvosi Rehabilitációs Intézet') középpontja 47.523536 / 18.9313423. A két pont ~14 m-re van egymástól; az OSM relation középpontját használtam. A Klinika az 1975 óta működő OORI jogutódja, ezért szerepel OORI néven a térképeken. Az uszoda az oldal szerint a 'Főépület, E szárny, földszint' szinten van, tehát a bejárat a kórházkomplexum főépületénél keresendő - a koordináta az épületkomplexum középpontja, nem az uszoda bejárata. SÁVSZÁM ÉS MEDENCEHOSSZ: NULL - egyik megnyitott oldal sem közöl medenceparamétert; sem sávszámot, sem hosszt, sem mélységet nem láttam sehol leírva. NYITVATARTÁS - ELLENTMONDÁS A FORRÁSON BELÜL: ugyanaz a hivatalos oldal fent azt írja, hogy 'Szombaton: 08:00-16:00', lent viszont azt, hogy 'Hétvégén az uszoda zárva tart'. Ezért szombatot NEM vettem fel; feltételezésem szerint a szombati 8-16 az úszóiskolák bérelt idősávja, nem lakossági nyitvatartás, de ezt nem tudtam igazolni. HOZZÁFÉRHETŐSÉG: ez NEM klasszikus közuszoda - 'A Klinikánk főépületében található úszómedence elsősorban betegeink részére fenntartott, azonban úszóiskolák számára is tudunk úszófelületet biztosítani.' Ugyanakkor van nyilvános árlista külsősöknek is (2025. március 1-től, áfával: Semmelweis-dolgozó és családtag 600 Ft/alkalom, 4.500 Ft/10 alkalom, 12.000 Ft/30 alkalom; MÁS VENDÉGEK 2.500 Ft/alkalom, 20.000 Ft/10 alkalom, 55.000 Ft/30 alkalom), tehát külsős is válthat jegyet. Mérlegelendő, hogy egy 'legközelebbi uszoda' alkalmazásba egyáltalán bekerüljön-e, mert a napi nyilvános ablak mindössze 2 óra (hétköznap 6-8), és a helyszín a Budakeszi-erdőnél, tömegközlekedéssel a 22/22A/222 busszal érhető el. A behajtás a klinika területére 1000 Ft/nap."
+    },
+    {
+      "id": "bvsc-laky-karoly-sportuszoda",
+      "name": "BVSC-Zugló Laky Károly Sportuszoda",
+      "shortName": "BVSC Szőnyi úti Uszoda",
+      "district": "XIV.",
+      "address": "1142 Budapest, Szőnyi út 2.",
+      "lat": 47.52253,
+      "lon": 19.09196,
+      "website": "https://bvsc.hu/szolgaltatasaink/uszoda",
+      "phone": "+36 30 528 0768",
+      "basins": [
+        {
+          "id": "50m-versenymedence",
+          "name": "50 m-es versenymedence",
+          "lengthM": 50,
+          "lanes": 8,
+          "indoor": true
+        },
+        {
+          "id": "tanmedence",
+          "name": "Tanmedence",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": true
+        },
+        {
+          "id": "kulteri-strandmedence",
+          "name": "Kültéri strandmedence",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": false
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Hétköznap; pénztár 06:00-20:15; medencéket zárás előtt 20 perccel el kell hagyni"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Hétköznap; pénztár 06:00-20:15"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Hétköznap; pénztár 06:00-20:15"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Hétköznap; pénztár 06:00-20:15"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Hétköznap; pénztár 06:00-20:15"
+        },
+        {
+          "weekday": 6,
+          "opens": "06:00",
+          "closes": "19:30",
+          "seasonNote": "Hétvége/ünnepnap; pénztár 06:00-18:45"
+        },
+        {
+          "weekday": 7,
+          "opens": "06:00",
+          "closes": "19:30",
+          "seasonNote": "Hétvége/ünnepnap; pénztár 06:00-18:45"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://bvsc.hu/szolgaltatasaink/uszoda/uszoda-medence-beosztas",
+        "format": "none-found",
+        "note": "A page titled 'Uszoda medence beosztás' EXISTS at this URL and is linked from the uszoda menu, but as of 2026-09-24 it publishes NO schedule content — the fetched HTML contains only site chrome plus an events calendar widget; the only <table> elements on the page are the month calendar. The one image linked from the uszoda section (/images/szolgaltatasaink/uszoda/uszoda-palyarendszabalyok.jpg) was downloaded and visually inspected: it is the trilingual spectator ground-rules poster (Pályarendszabályok), NOT a lane allocation. The házirend states the basin allocation is communicated only on monitors in the lobby ('a medencék beosztásáról a vendégek az előcsarnokban elhelyezett monitorokról tájékozódhatnak'), so there is nothing scrapeable. Worth re-checking periodically in case the page is populated."
+      },
+      "sources": [
+        "https://bvsc.hu/szolgaltatasaink/uszoda",
+        "https://bvsc.hu/szolgaltatasaink/uszoda/uszoda-medence-beosztas",
+        "https://bvsc.hu/szolgaltatasaink/uszoda/uszoda-hazirendje",
+        "https://bvsc.hu/images/szolgaltatasaink/uszoda/uszoda-palyarendszabalyok.jpg",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "medium",
+      "notes": "Lane counts deliberately null — no source published a lane count for any basin and the beosztás page is empty. Házirend confirms three indoor basins plus an outdoor one, that all basins except the tanmedence are deep water (>1.35 m), and critically for this app: 'Az oktatási és tanmedencéink hétköznapokon a közönség részére zárva tartanak' (teaching/learner basins are CLOSED to the public on weekdays; available Sat-Sun 06:00-19:00 in summer), and 'Az 50 méteres versenymedence, valamint a tanmedencék csak hétvégeken, korlátozva állnak a vendégek rendelkezésére'. Outdoor strand closed for the season on 2026-09-21 per site notice. Coordinate: OSM way tagged 'Laky Károly Sportuszoda (BVSC-Zugló)' with addr 1142 Szőnyi út 2, cross-checked against the address in the bvsc.hu site header and házirend text — exact match."
+    },
+    {
+      "id": "kispesti-uszoda",
+      "name": "Kispesti Uszoda és Sportközpont",
+      "shortName": "Kispesti Uszoda",
+      "district": "XIX.",
+      "address": "1191 Budapest, Simonyi Zsigmond utca 31.",
+      "lat": 47.46001,
+      "lon": 19.15175,
+      "website": "https://kispestiuszoda.hu/",
+      "phone": "+36 1 280 6095",
+      "basins": [
+        {
+          "id": "33m-uszomedence",
+          "name": "33 m-es úszómedence",
+          "lengthM": 33,
+          "lanes": 6,
+          "indoor": true
+        },
+        {
+          "id": "tanmedence",
+          "name": "Tanmedence",
+          "lengthM": null,
+          "lanes": 6,
+          "indoor": true
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Hétköznapi nyitvatartás"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Hétköznapi nyitvatartás"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Hétköznapi nyitvatartás"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Hétköznapi nyitvatartás"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Hétköznapi nyitvatartás"
+        },
+        {
+          "weekday": 6,
+          "opens": "07:00",
+          "closes": "19:00",
+          "seasonNote": "Hétvégi nyitvatartás"
+        },
+        {
+          "weekday": 7,
+          "opens": "07:00",
+          "closes": "19:00",
+          "seasonNote": "Hétvégi nyitvatartás"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://kispestiuszoda.hu/pentek-ebihal/",
+        "format": "image",
+        "note": "BEST-IN-CLASS LANE DATA, but published as a PNG, not HTML. The page 'Sávbeosztás' (menu slug is misleadingly /pentek-ebihal/) embeds a fortnightly PNG whose URL follows a stable, predictable pattern: https://kispestiuszoda.hu/wp-content/uploads/YYYY/MM/Savbeosztas-WEB-YYYY.MM.DD-MM.DD.png (verified example: .../2026/09/Savbeosztas-WEB-2026.09.28-10.04.png, and the page also showed the prior 2026.09.21-09.27 sheet). A scraper should GET the page and regex the <img src> under the 'Sávbeosztás' heading rather than construct the URL. IMAGE STRUCTURE (it is a rendered Excel grid, so OCR/pixel-sampling is viable and the geometry is stable): two side-by-side week panels, each headed 'Érvényes: YYYY.MM.DD-MM.DD.'. Each panel has two stacked tables: upper = 'Medence 33 M', lower = 'Tanmedence'. Header rows: 'Nap / Day' (Hétfő/Monday .. Vasárnap/Sunday), 'Dátum / Date', then 'Sáv / Lane' with lane numbers 1-6 repeated per day = 42 columns. Row labels are hourly timeslots 06:00-07:00 through 20:00-21:00 (15 rows). Cell colour is the payload: GREEN = 'Lakosság számára elérhető' (available to the public), RED = 'Foglalt / Zárva' (reserved or closed). Footnote warns green lanes are shared public lanes, not exclusive, and can be crowded. This maps 1:1 onto the app's 'how many lanes are free in a timeslot' question: count green cells per (basin, day, hour)."
+      },
+      "sources": [
+        "https://kispestiuszoda.hu/",
+        "https://kispestiuszoda.hu/nyitva-tartas-4/",
+        "https://kispestiuszoda.hu/pentek-ebihal/",
+        "https://kispestiuszoda.hu/kapcsolat/",
+        "https://kispestiuszoda.hu/wp-content/uploads/2026/09/Savbeosztas-WEB-2026.09.28-10.04.png",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "high",
+      "notes": "Lane counts (6 per basin) read directly off the official sávbeosztás grid, which enumerates lanes 1-6 for both the 33 m pool and the tanmedence. Tanmedence length not stated on the site, left null. Outdoor summer basins exist (see /kulteri-medencek-nyitvatartas/) but are seasonal and not lane-marked, so omitted. Coordinate: OSM node/way at 1191 Simonyi Zsigmond utca 31 cross-checked against the address printed in the site footer and on /kapcsolat/ — exact match."
+    },
+    {
+      "id": "erzsebetligeti-ratonyi-gabor-uszoda",
+      "name": "Erzsébetligeti Rátonyi Gábor Uszoda",
+      "shortName": "Erzsébetligeti Uszoda",
+      "district": "XVI.",
+      "address": "1165 Budapest, Újszász utca 106-108.",
+      "lat": 47.50811,
+      "lon": 19.2063,
+      "website": "https://www.uszodak16.hu/erzsebetligeti-uszoda/",
+      "phone": "+36 20 288 8450",
+      "basins": [
+        {
+          "id": "25m-uszomedence",
+          "name": "25 m-es úszómedence",
+          "lengthM": 25,
+          "lanes": 6,
+          "indoor": true
+        },
+        {
+          "id": "tanmedence",
+          "name": "13,5 m-es tanmedence",
+          "lengthM": 13.5,
+          "lanes": null,
+          "indoor": true
+        },
+        {
+          "id": "pezsgofurdo",
+          "name": "Pezsgőfürdő",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": true
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30"
+        },
+        {
+          "weekday": 6,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "Hétvége és ünnepnap; a medencék és szaunák 08:00-19:30"
+        },
+        {
+          "weekday": 7,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "Hétvége és ünnepnap; a medencék és szaunák 08:00-19:30"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.uszodak16.hu/erzsebetligeti-uszoda/?content=dct&did=36",
+        "format": "html-table",
+        "note": "*** THE SINGLE BEST SOURCE FOUND IN THIS WHOLE RESEARCH BATCH — it publishes the app's exact target quantity as a plain integer in server-rendered HTML. *** Page title 'Szabad pályák a közönségnek', reachable from the left nav of the pool homepage (the href is the relative form '?content=dct&did=36#ct'; did=36 is the stable document id). No JS, no login, ~6 KB of HTML, parses with any HTML table reader. THERE ARE SIX <table> ELEMENTS ON THE PAGE — indexes 0-3 are layout/search/event-calendar/footer chrome and MUST be skipped. Select by caption text, not by index, in case the layout shifts.\n\nTABLE index 4 — the main pool. Caption cell: 'Szabad pályák a közönség részére / A változtatás jogát fenntartjuk!' and a second header cell 'Közönség részére szabad sávok száma az úszómedencében'. Header row: blank corner cell, then the seven Hungarian weekday abbreviations in ISO order: H | K | Sz | Cs | P | Szo | V. 34 <tr> total = 1 caption row + 1 header row + 32 DATA ROWS. Row labels are consecutive HALF-HOUR slots formatted with spaces around the dash, '6:00 - 6:30' through '21:00 - 21:30' (note: single-digit hours are NOT zero-padded, and the separator is ':' here unlike other pools' '.'). EACH CELL IS ALREADY THE INTEGER COUNT OF LANES FREE TO THE PUBLIC — observed values range 2..6 — or the literal 'X' meaning the pool is closed in that slot on that day. So free-lane lookup is a direct cell read; no colour sampling, no arithmetic. Example verified rows: Friday 16:00-17:30 = 2 free lanes (the week's worst); Saturday/Sunday 6:00-8:00 and 19:30-21:30 = 'X' (closed), consistent with the 08:00-20:00 weekend opening hours.\n\nTABLE index 5 — the learner pool. Header cell 'Tanmedence használható a közönség számára (i-igen)', same H|K|Sz|Cs|P|Szo|V columns and the same 32 half-hour rows. Cells are 'i' (= igen, available to the public) or EMPTY (not available). This is a boolean availability flag, NOT a lane count — do not coerce it to a number.\n\nBoth tables carry the operator's disclaimer 'A változtatás jogát fenntartjuk!', so treat as a nominal weekly pattern rather than a live feed. The same CMS pattern (?content=dct&did=NN) very likely exposes an equivalent page for the sister pool Szentmihályi Konrád Ferenc Uszoda on the same domain — worth probing."
+      },
+      "sources": [
+        "https://www.uszodak16.hu/",
+        "https://www.uszodak16.hu/erzsebetligeti-uszoda/",
+        "https://www.uszodak16.hu/erzsebetligeti-uszoda/?content=dct&did=36",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "high",
+      "notes": "LANE COUNT 6 IS DOUBLY VERIFIED: the homepage spec line reads '25 m-es úszómedence, feszített víztükör 4 oldalról, 6 sávos, 1,95 m mély, hőmérséklet: 27 C°', and independently the free-lane table's maximum cell value is exactly 6. Tanmedence: '13,5 m-es tanmedence, 0,83 m mély, hőmérséklet: 32 C°' — no lane count published (it is a learner pool and the schedule treats it as a single yes/no unit), so lanes is null. The operator notes the tanmedence is individually usable only at weekends from 11:15 because of group lessons. Pezsgőfürdő holds max 6 people at ~34 °C. Other facilities (not basins): 2 Finnish saunas, infra sauna, plunge pool, salt room, 2 solariums. Opened 2008-01-25; renamed Erzsébetligeti Rátonyi Gábor Uszoda on 2019-04-30. Operated by Kertvárosi Sportlétesítményeket Üzemeltető Kft., which also runs the Szentmihályi Konrád Ferenc Uszoda (1162 Segesvár utca 16) and the Erzsébetligeti Strand. COORDINATE VERIFIED: Overpass returns 47.50811, 19.20630 tagged addr 1165 Újszász utca 106-108, matching the address block in the site footer ('1165 Budapest, Újszász utca 106-108.') — exact match. Outdoor strand closed for the 2026 season on 2026-08-31."
+    },
+    {
+      "id": "szentmihalyi-konrad-ferenc-uszoda",
+      "name": "Szentmihályi Konrád Ferenc Uszoda",
+      "shortName": "Szentmihályi Uszoda",
+      "district": "XVI.",
+      "address": "1162 Budapest, Segesvár utca 16.",
+      "lat": 47.53144,
+      "lon": 19.16663,
+      "website": "https://www.uszodak16.hu/szentmihalyi-uszoda/",
+      "phone": "+36 20 416 9396",
+      "basins": [
+        {
+          "id": "25m-uszomedence",
+          "name": "25 m-es úszómedence",
+          "lengthM": 25,
+          "lanes": 6,
+          "indoor": true
+        },
+        {
+          "id": "tanmedence",
+          "name": "12,5 m-es tanmedence",
+          "lengthM": 12.5,
+          "lanes": null,
+          "indoor": true
+        },
+        {
+          "id": "pezsgofurdo",
+          "name": "Pezsgőfürdő",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": true
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Uszoda 06:00-22:00; a medencék és szaunák 06:00-21:30"
+        },
+        {
+          "weekday": 6,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "Hétvége és ünnepnap; a medencék és szaunák 08:00-19:30"
+        },
+        {
+          "weekday": 7,
+          "opens": "08:00",
+          "closes": "20:00",
+          "seasonNote": "Hétvége és ünnepnap; a medencék és szaunák 08:00-19:30"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.uszodak16.hu/szentmihalyi-uszoda/?content=dct&did=34",
+        "format": "html-table",
+        "note": "SECOND HTML-TABLE SOURCE, IDENTICAL CMS AND SCHEMA TO THE ERZSÉBETLIGETI POOL (same operator, same Flashcom CMS) — free public lanes published as a plain integer in server-rendered HTML. Nav label 'Szabad pályák a közönségnek'; note the document id here is did=34, NOT 36 as at Erzsébetliget, so resolve the id by scraping the nav for that anchor text rather than hardcoding. No JS, no login.\n\nTHERE ARE FIVE <table> ELEMENTS ON THE PAGE; indexes 0-3 are chrome (layout, search box, 'Eseménynaptár' month calendar, footer nav). THE SCHEDULE IS INDEX 4 — but select by caption text, not index. Caption row has two cells: 'Szabad pályák a közönség részére / A változtatás jogát fenntartjuk!' and 'Közönség részére szabad sávok száma az úszómedencében'. Header row: empty corner cell then H | K | Sz | Cs | P | Szo | V (Monday-first ISO order). 34 <tr> = caption + header + 32 DATA ROWS of half-hour slots labelled '6:00 - 6:30' through '21:00 - 21:30' (spaces around the dash; single-digit hours NOT zero-padded).\n\nCELL VALUE = THE NUMBER OF LANES FREE TO THE PUBLIC, an integer 2..6, or the literal 'X' when the pool is closed in that slot. Direct read, no colour decoding and no arithmetic needed. Verified samples: Mon-Fri 06:00-08:00 all 6 free while Sat/Sun show 'X' (matches the 08:00 weekend opening); Thursday 11:30-12:30 drops to 2 (the week's minimum); Sat/Sun are 6 all day except 08:00-12:00 which is 4.\n\nUNLIKE ERZSÉBETLIGET THERE IS NO SECOND TABLE for the tanmedence here — a scraper written for both pools must tolerate its absence. Carries the operator's 'A változtatás jogát fenntartjuk!' disclaimer, so this is the nominal weekly pattern, not a live feed."
+      },
+      "sources": [
+        "https://www.uszodak16.hu/",
+        "https://www.uszodak16.hu/szentmihalyi-uszoda/",
+        "https://www.uszodak16.hu/szentmihalyi-uszoda/?content=dct&did=34",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "high",
+      "notes": "LANE COUNT 6 IS DOUBLY VERIFIED: the homepage 'Kínálatunk' spec reads '25 m-es úszómedence, feszített víztükör 4 oldalról, 6 sávos, 1,90 m mély, hőmérséklet: 26 C°', and independently the maximum cell value in the free-lane table is exactly 6. Tanmedence: '12,5 m-es tanmedence, 0,70 m mély, hőmérséklet: 32 C°', usable individually only at weekends from 12:00 because of group lessons; no lane count published, so lanes is null. Pezsgőfürdő max 8 people at 34 °C. Non-basin facilities: finn szauna, infra szauna, 1 stand-up solarium, grass sunbathing area and terrace. Opened 2008-07-10. Operated by Kertvárosi Sportlétesítményeket Üzemeltető Kft. (same operator as the Erzsébetligeti Rátonyi Gábor Uszoda and the Erzsébetligeti Strand); shared e-mail titkarsag@uszodak16.hu. SEASONAL: as of 2026-09-24 the site banner states 'A kültéri medencéink bezártak!' — the outdoor basins are shut for the season, so only the indoor 25 m pool and tanmedence are in play. COORDINATE VERIFIED: Overpass way 219296047 'Szentmihályi Konrád Ferenc Uszoda' at 47.53144, 19.16663 carries addr 1162 Segesvár utca 16, exactly matching the address block in the site footer; OSM's opening_hours tag 'Mo-Fr 06:00-22:00; Sa,Su,PH 08:00-20:00' also matches the operator's published hours independently."
+    },
+    {
+      "id": "ujlak-uszoda",
+      "name": "Újlak Uszoda és Strandfürdő",
+      "shortName": "Újlak Uszoda",
+      "district": "XVII.",
+      "address": "1173 Budapest, Uszoda utca 2.",
+      "lat": 47.47891,
+      "lon": 19.23477,
+      "website": "https://www.ujlakuszoda.hu/",
+      "phone": "+36 1 256 0362",
+      "basins": [
+        {
+          "id": "25m-medence",
+          "name": "25 m-es úszómedence",
+          "lengthM": 25,
+          "lanes": null,
+          "indoor": true
+        },
+        {
+          "id": "nyari-strand",
+          "name": "Szezonális strandmedence",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": false
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Pénztár zárás előtt 1 órával zár; nyári strand 09:00-20:00"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Nyári strand 09:00-20:00"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Nyári strand 09:00-20:00"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Nyári strand 16:00-20:00"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "22:00",
+          "seasonNote": "Nyári strand 09:00-20:00"
+        },
+        {
+          "weekday": 6,
+          "opens": "07:00",
+          "closes": "17:00",
+          "seasonNote": "Ünnepnapokon 07:00-17:00; nyári strand 09:00-20:00"
+        },
+        {
+          "weekday": 7,
+          "opens": "07:00",
+          "closes": "19:00",
+          "seasonNote": "Nyári strand 09:00-20:00"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.ujlakuszoda.hu/",
+        "format": "none-found",
+        "note": "No lane/timeslot schedule is published anywhere on the site as of 2026-09-24. All pages were enumerated (/, /uszoda, /szolgaltatasok, /arlista, /hazirend, /kapcsolat, /hirek, /impresszum) — there is no 'sávbeosztás' or 'beosztás' page, and no PDF or image asset containing one. The site only alludes to lane allocation in marketing copy ('kiemelt figyelmet fordítunk az átlátható sávbeosztásra') and in the házirend, which covers lane-rental rules ('Úszás tanfolyamot kizárólag pályabérleti szerződéssel, sávbérleti díj megfizetése mellett lehet tartani', 'Sávonként és egyidejűleg legfeljebb 20 fő részére lehet csoportos foglalkozást tartani'). The árlista does price lane rental at 12 100 Ft / 60 min, confirming lanes are individually bookable — so an allocation exists internally but is not published."
+      },
+      "sources": [
+        "https://www.ujlakuszoda.hu/",
+        "https://www.ujlakuszoda.hu/uszoda",
+        "https://www.ujlakuszoda.hu/szolgaltatasok",
+        "https://www.ujlakuszoda.hu/arlista",
+        "https://www.ujlakuszoda.hu/hazirend",
+        "https://www.ujlakuszoda.hu/kapcsolat",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "medium",
+      "notes": "This is the Rákosmenti (XVII. kerület) district pool. Lane count left null on purpose: the site states the basin is 25 m long and 11 m wide with ~28 °C water, but never states a lane count. 11 m of width would conventionally imply 5 lanes, but that is an inference, not a source, so it is not recorded. Coordinate: OSM node at 1173 Uszoda utca 2 cross-checked against the address on the site's /kapcsolat page ('1173 Budapest, Uszoda utca 2.') — exact match. Note the OSM entry stores http://ujlakuszoda.hu/ while the site canonicalises to https://www.ujlakuszoda.hu/."
+    },
+    {
+      "id": "bokay-park-uszoda-es-strand",
+      "name": "Park Uszoda és Strand (Bókay uszoda)",
+      "shortName": "Bókay / Park uszoda",
+      "district": "XVIII.",
+      "address": "1181 Budapest, Városház utca 40.",
+      "lat": 47.4369399,
+      "lon": 19.1764243,
+      "website": "https://www.varosgazda18.hu/park-uszoda-es-strand/",
+      "phone": "+36 30 595 9857",
+      "basins": [
+        {
+          "id": "25m-fedett-tanmedence",
+          "name": "Fedett tanmedence (25×16 m, 140 cm)",
+          "lengthM": 25,
+          "lanes": 4,
+          "indoor": true
+        },
+        {
+          "id": "25m-kulteri-medence",
+          "name": "Kültéri úszómedence (25×11 m, 140 cm)",
+          "lengthM": 25,
+          "lanes": null,
+          "indoor": false
+        },
+        {
+          "id": "pancsolo",
+          "name": "Pancsoló medence (átmérő 5 m, max. 50 cm)",
+          "lengthM": null,
+          "lanes": null,
+          "indoor": false
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45"
+        },
+        {
+          "weekday": 6,
+          "opens": "06:00",
+          "closes": "19:00",
+          "seasonNote": "Hétvégén és ünnepnapokon; pénztárzárás 18.00, medencetér elhagyása 18.45; 08.00-19.00 között legalább 1 úszósáv a lakosság számára"
+        },
+        {
+          "weekday": 7,
+          "opens": "06:00",
+          "closes": "19:00",
+          "seasonNote": "Hétvégén és ünnepnapokon; pénztárzárás 18.00, medencetér elhagyása 18.45; 08.00-19.00 között legalább 1 úszósáv a lakosság számára"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.varosgazda18.hu/wp-content/uploads/2026/09/2026-HL-PU-2026-SZEPTEMBER-21-27.pdf",
+        "format": "pdf",
+        "note": "HETENTE CSERÉLŐDŐ PDF, a /park-uszoda-es-strand/ oldalon 'Uszoda oktatás-sávbérlés' linkszöveggel. URL-minta: https://www.varosgazda18.hu/wp-content/uploads/<ÉÉÉÉ>/<HH>/<ÉÉÉÉ>-HL-PU-<ÉÉÉÉ>-<HÓNAP NAGYBETŰVEL>-<kezdőnap>-<zárónap>.pdf ; a 'PU' = Park Uszoda (a Kastélydombinál ugyanez 'KU'), 'HL' = heti lebontás. A scraper-nek a linket a HTML-oldalról kell kiszednie, az URL-t nem szabad kitalálni. A PDF 2 oldalas, A4 FEKVŐ (841.7 × 595.2 pt), és VALÓDI SZÖVEGRÉTEGE VAN (PyMuPDF page.get_text() kiolvassa) - nem szkennelt kép. 1. oldal fejléce 'délelőtt', 2. oldal 'délután'. Rácsszerkezet mindkét oldalon: egy nagy táblázat, OSZLOPOK = 15 PERCES idősávok - 1. oldal: 6:00, 6:15, ... 12:45 (28 oszlop); 2. oldal: 13:00, 13:15, ... 20:45 (32 oszlop). Az idősáv-fejléc a táblázat TETEJÉN ÉS ALJÁN is szerepel, valamint bal és jobb szélen egy-egy 'sáv' feliratú oszlop. SOROK: 7 napblokk egymás alatt (HÉTFŐ, KEDD, SZERDA, CSÜTÖRTÖK, PÉNTEK, SZOMBAT, VASÁRNAP), minden napblokk 4 sorból áll, a sorok bal szélén 1, 2, 3, 4 = A NÉGY ÚSZÓSÁV. A napnevet betűnként, függőlegesen tördelve tartalmazza a bal és jobb szélső cella (a get_text() így 'H\\nÉ\\nT\\nF\\nŐ' alakban adja vissza - ezt össze kell fűzni). A napblokk mellett a konkrét dátum is ott van külön cellában ('szeptember 21.', 'szeptember 22.', ...), és a fejlécben a hét sorszáma ('39. HÉT') és az intervallum ('2026. SZEPTEMBER 21 - 27.'). FOGLALTSÁG KÓDOLÁSA - FONTOS: a foglalt blokkok EGYSZERRE kapnak kitöltőszínt ÉS szöveget. A szöveg a foglaltság IDŐTARTAMA, pl. '8:00-8:45', '6:00-7:30', '10:00-14:00', néha bérlő névvel ('17:00-18:00 TEMPO'). A kitöltőszín a foglalás TÍPUSÁT kódolja: élénkzöld (RGB 0,1,0 - a page.get_drawings() 27 db ilyen fill-t ad az 1. oldalon), élénkpiros (1,0,0 - 6 db), halvány rózsaszín (0.961,0.890,0.937 - 3 db), világosszürke (0.950,0.951,0.950 - 1 db), halvány zöld (0.776,0.878,0.706 - a fejléc 'PARK USZODA' cimke), világospiros (1,0.357,0.357 - 1 db). A SZABAD sávok cellái FEHÉREK ÉS ÜRESEK. LEGENDA NINCS a lapon, tehát a színek jelentése (oktatás / sávbérlés / egyesület / zárva) nem dekódolható a dokumentumból - de erre nincs is szükség: az időtartam-szöveg + a színes téglalap bounding boxa elég a 'foglalt' állapot megállapításához. Gyakorlati parse-stratégia: page.get_drawings()-ból vedd a nem-fekete, nem-fehér fill-ű téglalapokat, a bal élük x-koordinátáját vetítsd rá az oszlop-fejléc idősávok x-pozícióira (page.get_text('words') adja a szavak bbox-át), a felső élük y-koordinátáját pedig a 7×4 = 28 sávsor y-sávjaira. A cellába írt '8:00-8:45' szöveg ellenőrzésként használható. A lap alján piros dőlt figyelmeztetés: 'Változtatás jogát fenntartjuk!', és egy generálási időbélyeg (pl. '2026.09.18 / 10:21')."
+      },
+      "sources": [
+        "https://www.varosgazda18.hu/",
+        "https://www.varosgazda18.hu/park-uszoda-es-strand/",
+        "https://www.varosgazda18.hu/wp-content/uploads/2026/09/2026-HL-PU-2026-SZEPTEMBER-21-27.pdf",
+        "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=3&countrycodes=hu&q=B%C3%B3kay%20uszoda%20V%C3%A1rosh%C3%A1z%20utca%2040%20Budapest",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "high",
+      "notes": "Koordináta: Nominatim a 'Bókay uszoda Városház utca 40 Budapest' keresésre a 'Bókay uszoda' objektumot adta 47.4369399 / 19.1764243 értékkel (display_name: 'Bókay uszoda, 40, Városház utca, Bókaytelep, XVIII. kerület, Budapest, 1181'). Független második forrás: Overpass API, OSM way id 251664006 (leisure=sports_centre, sport=swimming, addr:postcode=1181, addr:street=Városház utca, addr:housenumber=40, website=https://www.varosgazda18.hu/park-uszoda-es-strand/, phone=+36 1 290 6955) középpontja 47.4369584 / 19.17641 - a két érték kb. 2 m-en belül egyezik. Harmadik megerősítés: az üzemeltető Városgazda XVIII. Kerület Nonprofit Zrt. saját /park-uszoda-es-strand/ oldala '1181 Budapest, Városház utca 40.' címet ír. A közeli 'Bókay strandfürdő' OSM node (id 4274032949, 47.4366476 / 19.1766814) ugyanezt a címet és telefonszámot viseli - ugyanaz a létesítmény, a strand része. SÁVSZÁM: nem becslés, KÉT egymástól független megerősítés. (a) Az üzemeltetői oldal szó szerint: '25×16 méteres, 140 cm mély, 4 sávos fedett tanmedencéje'. (b) A hivatalos heti sávbérlés-PDF rácsában minden naphoz pontosan 4 sor tartozik, 1-2-3-4 számozással - ezt a PDF szövegrétegéből olvastam ki és a PDF 130 dpi-s renderelésén vizuálisan is ellenőriztem. A kültéri (25 x 11 m) medencéhez és a pancsolóhoz sehol nem láttam sávszámot, ezért ott null. TELEFON ELTÉRÉS: az üzemeltetői oldal '+36-30 595 9857'-et ad (ezt vettem fel), az OSM objektum viszont '+36 1 290 6955'-öt - utóbbi valószínűleg a régi vezetékes szám. A varosgazda18.hu oldal külön e-mail címet nem ír ki, csak a /elerhetoseg/ kapcsolatfelvételi űrlapra mutat. SZEZONALITÁS: az oldal szerint '2026. augusztus 31-től a Bókay Strand zárva tart' a következő szezonig, tehát a kültéri medence és a pancsoló jelenleg NEM üzemel; a fenti openingHours a fedett uszodára vonatkozik. Hétköznap és hétvégén is garantálnak 'legalább egy szabad sávot' a lakosságnak. TECHNIKAI MEGJEGYZÉS a kollégának: a www.varosgazda18.hu nginx-e 403-mal utasítja el a curl/script-szerű klienseket (User-Agent spoofing sem segített ebben a környezetben), a tartalmat csak böngésző-szerű fetcheren keresztül sikerült elérni. A scraper-nek ezzel számolnia kell."
+    },
+    {
+      "id": "kastelydombi-uszoda",
+      "name": "Kastélydombi Uszoda",
+      "shortName": "Kastélydombi uszoda",
+      "district": "XVIII.",
+      "address": "1188 Budapest, Nemes utca 56.",
+      "lat": 47.4095455,
+      "lon": 19.193631,
+      "website": "https://www.varosgazda18.hu/kastelydombi-uszoda/",
+      "phone": "+36 30 559 6724",
+      "basins": [
+        {
+          "id": "20m-tanmedence",
+          "name": "Tanmedence (20×9 m, 140 cm)",
+          "lengthM": 20,
+          "lanes": 4,
+          "indoor": true
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45; 14.00-19.00 között NINCS szabad sáv a lakosságnak"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45; 14.00-19.00 között NINCS szabad sáv a lakosságnak"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45; 14.00-19.00 között NINCS szabad sáv a lakosságnak"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45; 14.00-19.00 között NINCS szabad sáv a lakosságnak"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "21:00",
+          "seasonNote": "Pénztárzárás 20.00, medencetér elhagyása 20.45; 14.00-19.00 között NINCS szabad sáv a lakosságnak"
+        },
+        {
+          "weekday": 6,
+          "opens": "08:00",
+          "closes": "15:00",
+          "seasonNote": "Hétvégén és ünnepnapokon; pénztárzárás 14.00, medencetér elhagyása 14.45"
+        },
+        {
+          "weekday": 7,
+          "opens": "08:00",
+          "closes": "15:00",
+          "seasonNote": "Hétvégén és ünnepnapokon; pénztárzárás 14.00, medencetér elhagyása 14.45; vasárnap 09.00-10.00 ingyenes felnőtt úszásoktatás kerületi lakosoknak"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.varosgazda18.hu/wp-content/uploads/2026/09/2026-HL-KU-2026-SZEPTEMBER-21-27.pdf",
+        "format": "pdf",
+        "note": "HETENTE CSERÉLŐDŐ PDF, a /kastelydombi-uszoda/ oldalon sávbérlés linkként. URL-minta: https://www.varosgazda18.hu/wp-content/uploads/<ÉÉÉÉ>/<HH>/<ÉÉÉÉ>-HL-KU-<ÉÉÉÉ>-<HÓNAP NAGYBETŰVEL>-<kezdőnap>-<zárónap>.pdf ; 'KU' = Kastélydombi Uszoda, 'HL' = heti lebontás. A linket a HTML-oldalról kell kinyerni, nem szabad kitalálni. FORMÁTUM: ugyanaz a Városgazda-sablon, mint a Park Uszodánál és a Vilmos Endrénél - 2 oldalas, A4 FEKVŐ (841.7 × 595.2 pt), VALÓDI SZÖVEGRÉTEGGEL (PyMuPDF page.get_text() olvassa). 1. oldal fejléce 'délelőtt', 2. oldal 'délután'. OSZLOPOK = 15 perces idősávok: 1. oldal 6:00 ... 12:45 (28 oszlop), 2. oldal 13:00 ... 20:45 (32 oszlop); az idősáv-fejléc a táblázat tetején és alján is szerepel, a bal és jobb szélén pedig egy-egy 'sáv' feliratú oszlop. SOROK: 7 napblokk egymás alatt (HÉTFŐ..VASÁRNAP), napblokkonként 4 sor, a sorok bal és jobb szélén 1,2,3,4 = A NÉGY ÚSZÓSÁV. A napnevek betűnként, függőlegesen tördelve vannak a szélső cellákban (get_text() 'H\\nÉ\\nT\\nF\\nŐ' alakban adja - össze kell fűzni). A napblokk mellett a konkrét dátum külön cellában ('szeptember 21.' ...), a fejlécben a hét sorszáma ('39. HÉT') és az intervallum ('2026. SZEPTEMBER 21 - 27.'). FOGLALTSÁG: a foglalt blokkok kitöltőszínt ÉS szöveget is kapnak; a szöveg maga az időtartam ('8:45-9:30', '10:00-11:00' stb.). A SZABAD cellák fehérek és üresek. A színek a foglalás típusát kódolják - ebben a lapban élénkzöld, halványkék, sárga, szürke és halvány narancs kitöltést láttam; LEGENDA NINCS a lapon, így a színek jelentése nem dekódolható, de a foglalt/szabad megkülönböztetéshez elég a színes téglalap + időtartam-szöveg. FONTOS BUKTATÓ: egy színes blokk TÖBB SÁVSORT IS ÁTFOGHAT függőlegesen (pl. szept. 21. hétfő 8:45-9:30 blokkja az 1. ÉS 2. sávra terjed ki egyetlen téglalapként), ezért a téglalap magasságát is fel kell osztani a sávsorokra, nem elég a felső él. Parse-stratégia: page.get_drawings() nem-fekete/nem-fehér fill-ű téglalapjai -> bal/jobb él x -> oszlop-idősávok (page.get_text('words') bbox-ai alapján), felső/alsó él y -> a 7×4=28 sávsor y-sávjai. A lap alján piros dőlt 'Változtatás jogát fenntartjuk!' és generálási időbélyeg ('2026.09.18 10:22')."
+      },
+      "sources": [
+        "https://www.varosgazda18.hu/",
+        "https://www.varosgazda18.hu/kastelydombi-uszoda/",
+        "https://www.varosgazda18.hu/wp-content/uploads/2026/09/2026-HL-KU-2026-SZEPTEMBER-21-27.pdf",
+        "https://18.kerulet.ittlakunk.hu/holmi/sport-szabadido/kastelydombi-uszoda",
+        "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=3&countrycodes=hu&q=Kast%C3%A9lydombi%20uszoda%20Budapest",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "high",
+      "notes": "Koordináta: Nominatim a 'Kastélydombi uszoda Budapest' keresésre 47.4095455 / 19.1936310-et adott, display_name 'Kastélydombi uszoda, 56, Nemes utca, Újpéteritelep, XVIII. kerület, Budapest, 1188'. Az Overpass ugyanezt az OSM way-t (id 428278054, leisure=sports_centre, sport=swimming, addr:postcode=1188, addr:street=Nemes utca, addr:housenumber=56, website=https://www.varosgazda18.hu/kastelydombi-uszoda/, phone=+36 1 290 6965) adta vissza azonos középponttal - mivel ez ugyanaz az OSM objektum, a valódi második, FÜGGETLEN megerősítés az üzemeltető saját /kastelydombi-uszoda/ oldala, amely '1188 Budapest, Nemes u. 56.' címet ír, és a 18.kerulet.ittlakunk.hu adatlap, amely szintén 'Nemes u. 56.'-ot ad. FIGYELEM: ugyanezen a telken/címen van a Kastélydombi Általános Iskola (OSM way 548689243, 'Nemes utca 56-60', 47.4102382 / 19.193641) - az iskola koordinátája kb. 75 m-rel ÉSZAKABBRA van, azt nem szabad az uszodára használni; az uszoda külön OSM objektum. SÁVSZÁM: nem becslés - a hivatalos heti sávbérlés-PDF rácsában minden naphoz pontosan 4 sor tartozik 1,2,3,4 számozással; ezt a PDF szövegrétegéből olvastam ki ÉS a PDF 130 dpi-s renderelésén vizuálisan is ellenőriztem (a sávszámok a táblázat bal és jobb szélén is ki vannak írva). MEDENCEMÉRET: az üzemeltetői oldal csak a vízmélységet írja (2006-ban 1,40 m-re növelték); a 20×9 m-es méret a 18.kerulet.ittlakunk.hu adatlapjáról származik, szó szerint: 'alacsony vízmélységgel, kisméretű (20×9 m) medencével került kialakításra' - ez másodlagos forrás, ezért a hosszt 20 m-nek vettem, de ezt csak egy forrás erősíti meg. Az uszoda medencéjében dobogórendszer van, amellyel 90 cm-es vízmélység állítható be az oktatáshoz. TELEFON ELTÉRÉS: az üzemeltetői oldal '+36-30 559 6724'-et ad (ezt vettem fel), az OSM objektum '+36 1 290 6965'-öt (valószínűleg régi vezetékes). NYITVATARTÁS: két forrás egyezik - a varosgazda18.hu szerint hétköznap 06.00-21.00, hétvégén és ünnepnapokon 08.00-15.00, a medencetér elhagyása hétköznap 20.45, hétvégén 14.45; az ittlakunk adatlap szó szerint ugyanezt a medencetér-elhagyási időt írja. KRITIKUS A SÁVFOGLALTSÁGHOZ: az uszoda TANUSZODAKÉNT üzemel, a nap nagy részében iskolai/tanfolyami oktatás folyik; a hivatalos szöveg szerint hétköznap 06.00-19.00 között 'lehetőség szerint 1 sáv' jut a lakosságnak, KIVÉVE 14.00-19.00 között, amikor NEM áll rendelkezésre szabad sáv a lakosság számára. TECHNIKAI: a www.varosgazda18.hu nginx-e 403-mal utasítja el a curl/script-klienseket, csak böngésző-szerű fetcheren át érhető el."
+    },
+    {
+      "id": "vilmos-endre-uszoda",
+      "name": "Vilmos Endre Sportcentrum – Vilmos Endre Uszoda",
+      "shortName": "Vilmos Endre uszoda",
+      "district": "XVIII.",
+      "address": "1185 Budapest, Nagyszalonta utca 25.",
+      "lat": 47.4388882,
+      "lon": 19.2194507,
+      "website": "https://www.varosgazda18.hu/vilmos-endre-sportcentrum/",
+      "phone": "+36 30 547 6476",
+      "basins": [
+        {
+          "id": "25m-uszomedence",
+          "name": "Úszómedence (25×16 m, feszített víztükrű)",
+          "lengthM": 25,
+          "lanes": 6,
+          "indoor": true
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "2026.09.26-i újranyitás utáni nyitvatartás; pénztárzárás 19.00, medencetér elhagyása 19.45"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Pénztárzárás 19.00, medencetér elhagyása 19.45"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Pénztárzárás 19.00, medencetér elhagyása 19.45"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Pénztárzárás 19.00, medencetér elhagyása 19.45"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "20:00",
+          "seasonNote": "Pénztárzárás 19.00, medencetér elhagyása 19.45"
+        },
+        {
+          "weekday": 6,
+          "opens": "06:00",
+          "closes": "19:00",
+          "seasonNote": "Hétvégén és ünnepnapokon; pénztárzárás 18.00, medencetér elhagyása 18.45"
+        },
+        {
+          "weekday": 7,
+          "opens": "06:00",
+          "closes": "19:00",
+          "seasonNote": "Hétvégén és ünnepnapokon; pénztárzárás 18.00, medencetér elhagyása 18.45"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.varosgazda18.hu/wp-content/uploads/2026/04/2026-HL-VE-2026-APRILIS-27-MAJUS-3.pdf",
+        "format": "pdf",
+        "note": "FIGYELEM: EZ AZ URL ELAVULT. A /vilmos-endre-sportcentrum/ oldalon a 'sávbérlés' link 2026.09.24-én még mindig a 2026. ÁPRILIS 27 - MÁJUS 3. közötti (18.) hetet mutatja, mert az uszoda 2026. május 1. óta felújítás miatt zárva volt. Az újranyitás (2026.09.26.) után a Városgazda várhatóan friss, heti PDF-et tesz ki - a scraper MINDIG a HTML-oldalról olvassa ki az aktuális href-et, soha ne találja ki az URL-t. URL-minta: https://www.varosgazda18.hu/wp-content/uploads/<ÉÉÉÉ>/<HH>/<ÉÉÉÉ>-HL-VE-<ÉÉÉÉ>-<HÓNAP NAGYBETŰVEL>-<kezdőnap>-<zárónap>.pdf ; 'VE' = Vilmos Endre, 'HL' = heti lebontás. FORMÁTUM: azonos Városgazda-sablon, mint a Park Uszoda (PU) és a Kastélydombi (KU) esetében - 2 oldalas, A4 FEKVŐ (841.7 × 595.2 pt), VALÓDI SZÖVEGRÉTEGGEL (PyMuPDF page.get_text() kiolvassa, nem szkennelt kép). 1. oldal fejléce 'délelőtt', 2. oldal 'délután'. OSZLOPOK = 15 perces idősávok: 1. oldal 6:00 ... 12:45 (28 oszlop), 2. oldal 13:00 ... 20:45 (32 oszlop); az idősáv-fejléc a táblázat tetején és alján is megismétlődik, bal és jobb szélen egy-egy 'sáv' feliratú oszlop. SOROK: 7 napblokk egymás alatt (HÉTFŐ, KEDD, SZERDA, CSÜTÖRTÖK, PÉNTEK, SZOMBAT, VASÁRNAP), és ITT napblokkonként 6 SOR van (a PU/KU-nál csak 4), a sorok bal és jobb szélén 1,2,3,4,5,6 = A HAT ÚSZÓSÁV. A napnevek betűnként, függőlegesen tördelve vannak a szélső cellákban (get_text() 'H\\nÉ\\nT\\nF\\nŐ' alakban adja - össze kell fűzni). Napblokkonként a konkrét dátum külön cellában ('április 27.' ...), a fejlécben a hét sorszáma ('18. HÉT'), az intervallum ('2026. ÁPRILIS 27 - MÁJUS 03') és az uszoda neve ('Vilmos Endre Uszoda'). FOGLALTSÁG: a foglalt blokkok kitöltőszínt ÉS szöveget kapnak, a szöveg az időtartam ('6:00-7:30', '9:00-10:00', '11:00-15:00'); a SZABAD cellák fehérek és üresek. A színek a foglalás típusát kódolják (ebben a lapban piros, halvány narancs, zöld, kék, magenta, világospiros fordul elő), LEGENDA NINCS, de a foglalt/szabad döntéshez elég a színes téglalap + időtartam-szöveg. BUKTATÓ: egy színes blokk több sávsort is átfoghat függőlegesen (pl. a 6:00-7:30 piros blokk az 1-4. sávot fogja át egyben), ezért a téglalap magasságát is fel kell osztani a sávsorokra. Teljes napos zárást egy lila, a teljes napblokkot (mind a 6 sávot) átfogó téglalap jelez a szöveggel 'KARBANTARTÁS, FELÚJÍTÁS 2026 MÁJUS 1 -' - ezt a scraper 'egész nap zárva'-ként kell kezelje. A lap alján piros dőlt 'Változtatás jogát fenntartjuk!' és generálási időbélyeg ('2026.04.24 9:40')."
+      },
+      "sources": [
+        "https://www.varosgazda18.hu/",
+        "https://www.varosgazda18.hu/vilmos-endre-sportcentrum/",
+        "https://www.varosgazda18.hu/wp-content/uploads/2026/04/2026-HL-VE-2026-APRILIS-27-MAJUS-3.pdf",
+        "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=4&countrycodes=hu&q=Vilmos%20Endre%20uszoda%20Budapest",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "medium",
+      "notes": "LEGFONTOSABB: AZ USZODA 2026. MÁJUS 1. ÓTA FELÚJÍTÁS MIATT ZÁRVA VOLT, és az üzemeltetői oldal szó szerinti közleménye szerint 'a Vilmos Endre Uszoda 2026. szeptember 26-án, szombaton reggel 6:00 órakor újra megnyitja kapuit.' A kutatás napján (2026.09.24.) tehát MÉG ZÁRVA VAN, két nappal az újranyitás előtt. Az élő appban ezt a nyitási dátumot kötelező figyelembe venni, különben zárt uszodához küldi a felhasználókat. A zárást két forrás erősíti: (a) a fenti újranyitási közlemény, (b) a még mindig kint lévő április végi sávbérlés-PDF, amelynek péntek-szombat-vasárnap napblokkjait teljes szélességben lefedi egy lila 'KARBANTARTÁS, FELÚJÍTÁS 2026 MÁJUS 1 -' sáv (nyitott végű dátum). Koordináta: Nominatim a 'Vilmos Endre uszoda Budapest' keresésre 47.4388882 / 19.2194507-et adott (display_name: 'Vilmos Endre uszoda, Nagybecskerek utca, Szemeretelep, XVIII. kerület, Budapest, 1185'); független második forrásként az Overpass API az OSM way 200827294-et ('Vilmos Endre uszoda', leisure=sports_centre, sport=swimming) adta 47.4388565 / 19.2194494 középponttal - a kettő néhány méteren belül egyezik. HARMADIK forrás: az üzemeltető saját /vilmos-endre-sportcentrum/ oldala '1185 Budapest, Nagyszalonta utca 25.' címet ír, és az OSM-ben a befoglaló sportkomplexum (way 551220509, 'Vilmos Endre Sportcentrum', sport=soccer;swimming;athletics;...) pontosan ezt az addr:street=Nagyszalonta utca / addr:housenumber=25 / addr:postcode=1185 címet viseli. MAGYARÁZAT A KOORDINÁTÁHOZ: szándékosan az USZODA ÉPÜLETÉNEK pontját vettem fel (47.43889 / 19.21945), nem a teljes sportkomplexum centroidját (47.4388247 / 19.2185741) - a kettő kb. 65 m-re van egymástól. A Nominatim az uszodánál 'Nagybecskerek utca'-t ír, mert az épület ehhez az utcához van közelebb a komplexumon belül, de a létesítmény postai/bejárati címe a Nagyszalonta utca 25. SÁVSZÁM: nem becslés - a hivatalos sávbérlés-PDF rácsában minden naphoz pontosan 6 sor tartozik 1..6 számozással; ezt a PDF szövegrétegéből olvastam ki ÉS a 130 dpi-s renderelésén vizuálisan is ellenőriztem. MEDENCEMÉRET: az üzemeltetői oldal szó szerint '25 x 16 méteres, feszített víztükrű', vízhőmérséklet kb. 24 °C; a belépőjegy tartalmazza a szaunát. Sávbérlés műugró és vízilabda csapatoknak is elérhető. TELEFON: a létesítmény száma +36-30-547-6476; létesítménybérléshez hétköznap 9:00-15:00 között +36-30-935-7014 / +36-70-657-8935, e-mail Karvasz.Karoly@varosgazda18.hu és papp.zsuzsanna@varosgazda18.hu. Az OSM objektumon nincs telefonszám. A confidence azért csak 'medium', mert az uszoda épp most nyit újra, a kint lévő sávbeosztás elavult, és az újranyitás utáni tényleges nyitvatartás/sávrend még nem volt ellenőrizhető. A közismert régi neve 'Malév uszoda'. TECHNIKAI: a www.varosgazda18.hu nginx-e 403-mal utasítja el a curl/script-klienseket, csak böngésző-szerű fetcheren át érhető el."
+    },
+    {
+      "id": "pesterzsebeti-uszoda",
+      "name": "Pesterzsébeti Uszoda",
+      "shortName": "Pesterzsébeti Uszoda",
+      "district": "XX.",
+      "address": "1203 Budapest, Zodony utca 1.",
+      "lat": 47.4324069,
+      "lon": 19.0962869,
+      "website": "https://www.pesterzsebetiuszoda.hu/",
+      "phone": "+36 1 920 0155",
+      "basins": [
+        {
+          "id": "melyvizes-medence",
+          "name": "Mélyvizes medence",
+          "lengthM": 33.3,
+          "lanes": 10,
+          "indoor": true
+        },
+        {
+          "id": "tanmedence",
+          "name": "Tanmedence",
+          "lengthM": 20,
+          "lanes": 5,
+          "indoor": true
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "19:00",
+          "seasonNote": "Pénztár 6.00-18.30"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "18:00",
+          "seasonNote": "Pénztár 6.00-17.30"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "19:00",
+          "seasonNote": "Pénztár 6.00-18.30"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "18:00",
+          "seasonNote": "Pénztár 6.00-17.30"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "19:00",
+          "seasonNote": "Pénztár 6.00-18.30"
+        },
+        {
+          "weekday": 6,
+          "opens": "06:00",
+          "closes": "18:00",
+          "seasonNote": "Pénztárzárás 17.30; ünnepnapokon külön kiírás szerint"
+        },
+        {
+          "weekday": 7,
+          "opens": "08:00",
+          "closes": "18:00",
+          "seasonNote": "Pénztár 8.00-17.30; a sávbeosztásban vasárnapra nincs tábla"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.pesterzsebetiuszoda.hu/savbeosztas/",
+        "format": "html-table",
+        "note": "A /savbeosztas/ oldal csak egy választó: két medencénként külön aloldalra mutat - https://www.pesterzsebetiuszoda.hu/melyvizes-medence/ és https://www.pesterzsebetiuszoda.hu/tanmedence/ . EZEK a scraper valódi célpontjai, és VALÓDI HTML <table> elemek (nem kép, nem PDF), szerver-oldalon renderelve, JS nélkül is megvannak a nyers HTML-ben. Szerkezet mindkét aloldalon azonos: Elementor tab-widget 6 füllel - a fülek <div class=\"elementor-tab-title ...\" data-tab=\"1..6\"> elemek, szövegük Hétfő, Kedd, Szerda, Csütörtök, Péntek, Szombat (VASÁRNAP NINCS). Minden fül tartalma egy-egy <table>, tehát az oldalon pontosan 6 <table> van, sorrendjük = hétfő..szombat (a data-tab / aria-controls attribútum köti össze a fület a tartalommal: aria-controls=\"elementor-tab-content-<id>\"). FIGYELEM: a fülcímkék KÉTSZER szerepelnek a HTML-ben (elementor-tab-desktop-title és elementor-tab-mobile-title), de a <table>-ök csak egyszer. Egy táblázat felépítése: az ELSŐ <tr> a fejléc (csupa <td>, nem <th>): az első cella ÜRES, utána a sávok nevei. Mélyvizes medence: '0.pálya', '1. pálya' (FIGYELEM: szóköz a pont után csak ennél az egynél!), '2.pálya', '3.pálya', '4.pálya', '5.pálya', '6.pálya', '7.pálya', '8.pálya', '9.pálya' - azaz 10 sáv, 0-tól indexelve. Tanmedence: '5.pálya', '4.pálya', '3.pálya', '2.pálya', '1. pálya' - azaz 5 sáv, és a sorrend FORDÍTOTT (5-től 1-ig). A további <tr>-ek idősorok: az első cella az idősáv szövege pont-elválasztóval, nem kettősponttal (mélyvizes: '6.00-7.00','7.00-8.00',...,'18.00-19.00' óránként; tanmedence: '6.00-7.00','7.00-8.00','8.15-9.15','9.15-10.15','10.15-11.15','11.15-12.15','12.15-13.15','13.15-14.15','14.00-15.00','15.00-16.00','16.00-17.00','17.00-18.00','18.00-19.00' - vagyis a tanmedencénél NEM egyenletes és átfedő időpontok vannak, pl. 13.15-14.15 után 14.00-15.00). A cellák szövege jelzi a foglaltságot: üres cella (csak &nbsp;) = SZABAD sáv; 'foglalt' = lefoglalt; 'iskola' / 'iskolai oktatás' / 'iskolai-óvodai oktatás' = oktatás miatt foglalt. NINCS cellaszín-kódolás, minden információ szövegben van. KRITIKUS SCRAPER-BUKTATÓ: a foglalt blokkok COLSPAN-t használnak, ezért egy <tr>-ben kevesebb <td> lehet, mint ahány sáv van. Pl. mélyvizes hétfő: <tr><td>8.00-9.00</td><td colspan=\"3\" rowspan=\"1\">iskola</td><td> </td><td> </td><td> </td><td> </td><td colspan=\"3\" rowspan=\"1\"> </td></tr> - naiv td-számlálás elcsúsztatja a sáv-hozzárendelést, a colspan/rowspan attribútumokat KÖTELEZŐ kibontani. A táblázatok felett szabadszöveg adja az érvényességet és a medenceméretet, pl. mélyvizes: 'Méret: 21 m széles – 33,3 m hosszú – 2 m mély / Hőfok: 26 – 28 fok' és '2026.09.01-től érvényes. Az iskolai és óvodai oktatás 09.14-től kezdődik, addig a sávokat lehet használni.'; tanmedence: 'Méret: 20 m hosszú – 10 m széles 90 cm mély / Hőfok: 30 – 32 fok'. Mindkét oldalon: 'Az uszoda a pályabeosztás változtatásának jogát fenntartja.' A beosztás heti ismétlődő (nem dátumozott hét), szezononként cserélik. Eseti zárásokat a nyitólap 'Friss Hírek' blokkja közli (pl. vízilabda bajnoki forduló miatti korábbi zárás) - ezt külön érdemes figyelni."
+      },
+      "sources": [
+        "https://www.pesterzsebetiuszoda.hu/",
+        "https://www.pesterzsebetiuszoda.hu/savbeosztas/",
+        "https://www.pesterzsebetiuszoda.hu/melyvizes-medence/",
+        "https://www.pesterzsebetiuszoda.hu/tanmedence/",
+        "https://www.pesterzsebetiuszoda.hu/kapcsolat/",
+        "https://www.pesterzsebetiuszoda.hu/arlista/",
+        "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=3&countrycodes=hu&q=Zodony%20utca%201%2C%201203%20Budapest",
+        "https://overpass-api.de/api/interpreter",
+        "https://esmtkuszoda-pesterzsebet.hu/"
+      ],
+      "confidence": "high",
+      "notes": "Koordináta: Nominatim a 'Zodony utca 1, 1203 Budapest' keresésre külön objektumként adta vissza a 'Pesterzsébeti Uszoda'-t 47.4324069 / 19.0962869 értékkel; független második forrásként az Overpass API ugyanazt az OSM way-t (id 328804606, leisure=sports_centre, sport=swimming, addr:postcode=1203, addr:street=Zodony utca, addr:housenumber=1) adta 47.4323661 / 19.0963251 középponttal - néhány méteren belül egyeznek. Harmadik megerősítés: az uszoda saját https://www.pesterzsebetiuszoda.hu/kapcsolat/ oldala szó szerint 'Cím: 1203 Budapest, Zodony utca 1.'-t ír. FIGYELEM: ugyanezen a címen (Zodony utca 1) van az ESMTK Pesterzsébet Jégcsarnok is, amit a Nominatim 47.4323634 / 19.0973125-re tesz - ez kb. 70 m-rel KELETEBBRE van, tehát a jégcsarnok koordinátáját nem szabad az uszodára használni. SÁVSZÁM: nem becslés - a hivatalos sávbeosztás HTML-táblázatok fejlécsorában a sávok EGYENKÉNT fel vannak sorolva. Mélyvizes medence: '0.pálya' ... '9.pálya' = 10 sáv. Tanmedence: '5.pálya' ... '1. pálya' = 5 sáv. MEDENCEMÉRET szó szerint a saját oldalakról: mélyvizes '21 m széles – 33,3 m hosszú – 2 m mély' (33,3 m = rövid pályás versenymedencének szokatlan méret, de így van kiírva), tanmedence '20 m hosszú – 10 m széles 90 cm mély'. A lengthM mezőbe a hosszúságot tettem (33.3 ill. 20). ÜZEMELTETŐI WEBOLDAL: a feladatban megadott esmtkuszoda-pesterzsebet.hu NEM működik - a DNS egy megosztott tárhelyre mutat, amelynek tanúsítványa teljesen más domainekre szól (termalfurdo.net, huawei.hu stb.), tehát elhagyott/parkolt domain; NEM vettem fel website-ként. A ténylegesen élő, az uszoda által üzemeltetett oldal a https://www.pesterzsebetiuszoda.hu/ (e-mail: esmtk.uszoda@gmail.com, tehát az ESMTK üzemelteti). BIZONYTALANSÁG a hétvégi nyitvatartásban: a /kapcsolat/, /savbeosztas/ és /tanmedence/ oldalak fejléce szombatra 6:00-18:00, vasárnapra 8:00-18:00-t ír, DE a /melyvizes-medence/ oldal ugyanabban a fejléc-widgetben szombat 6:00-14:00, vasárnap 8:00-14:00-t ír. A többségi (és a /kapcsolat/ oldal részletes szövegével, pénztárzárási időkkel megerősített) 18:00-át vettem fel. További bizonytalanság: a sávbeosztás táblázatok csak hétfőtől SZOMBATIG vannak, vasárnapra nincs közzétett sávbeosztás, bár az uszoda vasárnap nyitva van. Telefon: a saját oldal '06-1-920-01-55' központi és '06-20-352-76-55' mobil számot ad; a phone mezőbe a központit tettem nemzetközi formában. Az OSM objektumon nincs telefonszám."
+    },
+    {
+      "id": "csepeli-strandfurdo",
+      "name": "Csepeli Strandfürdő",
+      "shortName": "Csepeli Strand",
+      "district": "XXI.",
+      "address": "1213 Budapest, Hollandi út 14.",
+      "lat": 47.4064,
+      "lon": 19.10143,
+      "website": "https://www.csepelistrandfurdo.hu/",
+      "phone": "+36 1 277 6576",
+      "basins": [
+        {
+          "id": "50m-uszomedence",
+          "name": "50 m-es úszómedence",
+          "lengthM": 50,
+          "lanes": 7,
+          "indoor": false
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "17:00",
+          "seasonNote": "Téli nyitvatartás; nyáron minden nap 09:00-19:00. Medencezárás 30 perccel zárás előtt; pénztár 06:00-16:00"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "17:00",
+          "seasonNote": "Téli nyitvatartás; nyáron minden nap 09:00-19:00"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "17:00",
+          "seasonNote": "Téli nyitvatartás; nyáron minden nap 09:00-19:00"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "17:00",
+          "seasonNote": "Téli nyitvatartás; nyáron minden nap 09:00-19:00"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "17:00",
+          "seasonNote": "Téli nyitvatartás; nyáron minden nap 09:00-19:00"
+        },
+        {
+          "weekday": 6,
+          "opens": "07:00",
+          "closes": "16:00",
+          "seasonNote": "Téli hétvégi nyitvatartás; nyáron 09:00-19:00; pénztár 07:00-15:00"
+        },
+        {
+          "weekday": 7,
+          "opens": "07:00",
+          "closes": "16:00",
+          "seasonNote": "Téli hétvégi nyitvatartás; nyáron 09:00-19:00; pénztár 07:00-15:00"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://www.csepelistrandfurdo.hu/wp-content/uploads/2025/11/Palyabeosztas-2025-26-osz-tel-.pdf",
+        "format": "pdf",
+        "note": "STRONG MACHINE-READABLE SOURCE. Linked as the sole PDF from the 'Pályabeosztás' menu page https://www.csepelistrandfurdo.hu/palyabeosztas/ — scrape that page for href$='.pdf' rather than hardcoding, because the filename encodes the season ('Palyabeosztas-2025-26-osz-tel-.pdf') and will change at the season turn. STRUCTURE: a single landscape page holding SEVEN day blocks side by side, each headed with the weekday name (Hétfő, Kedd, Szerda, Csütörtök, Péntek, Szombat, Vasárnap) followed by a 'Sáv' header row enumerating lanes 1 2 3 4 5 6 7. Row labels are hourly slots in the form '06.00-07.00' running to '19.00-20.00' (note the DOT separator, not a colon). The text layer is unordered — PyMuPDF get_text() returns the strings but not the grid — so use page.get_text('words') and bucket by x/y coordinates to rebuild cells. OCCUPANCY IS ENCODED AS CELL FILL COLOUR keyed to a legend of club names printed at the top: Fradi, Öttusa úszás, Csepel Vízilabda, AquaLife Aqua fitness, Barrakuda Búvár SE, Csepel Kajak-kenu. Distinct non-black fills observed via page.get_drawings(): (1.0, 0.0, 0.0) red x25, (0.0, 0.44, 0.75) blue x21, (1.0, 0.2, 0.8) magenta x4, (0.93, 0.49, 0.19) orange x4, (0.27, 0.45, 0.77) steel blue x3, (1.0, 1.0, 0.0) yellow x1, (0.96, 0.69, 0.52) tan x1. A cell with NO club fill is public swimming, so free lanes per timeslot = 7 minus the number of filled cells in that (day, hour) row. Match each fill colour to its legend swatch by x/y position to name the occupying club."
+      },
+      "sources": [
+        "https://www.csepelistrandfurdo.hu/nyitva-tartas/",
+        "https://www.csepelistrandfurdo.hu/palyabeosztas/",
+        "https://www.csepelistrandfurdo.hu/wp-content/uploads/2025/11/Palyabeosztas-2025-26-osz-tel-.pdf",
+        "https://www.csepelistrandfurdo.hu/szolgaltatasok/uszas/",
+        "https://nominatim.openstreetmap.org/search?format=jsonv2&q=Csepeli+Strandf%C3%BCrd%C5%91+Hollandi+%C3%BAt+14+Budapest",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "high",
+      "notes": "SCOPE CORRECTION — READ THIS: the brief asked for the 'Csepeli Sport- és Szabadidőközpont uszoda'. That facility (Hollandi út 8-10, rebuilt and reopened 2023-07-01 as the Kolonics György Szabadidőközpont, operated by Csepeli Ingatlanhasznosítási Nonprofit Kft.) HAS NO SWIMMING POOL — its facilities are 2 clay and 3 hard tennis courts, 2 padel courts, a small artificial-turf football pitch, and changing rooms. The actual Csepel public pool is the Csepeli Strandfürdő two doors down at Hollandi út 14, which is what is recorded here. A separate small 'Csepeli Tanuszoda' also exists at 1211 Tanműhely köz 2 (operator varosgazda.eu) and is NOT covered by this record. LANE COUNT 7 IS VERIFIED — the official pályabeosztás PDF enumerates 'Sáv 1 2 3 4 5 6 7' for every one of the seven day blocks. BASIN DIMENSIONS are from the operator's own spec table on the /szolgaltatasok/uszas/ page: medence méret ~20 x 50 m, vízmélység ~1.60-1.90 m, vízfelület 970 m2, víztérfogat 1552 m3, egyidejű befogadóképesség 194 fő, vízhőmérséklet 26-27 °C, forgatott üzemeltetés. indoor is set FALSE because this is a strandfürdő (open-air bath); the pool is heated and operates through the winter season, but I could not find an explicit statement that it is covered, so treat the indoor flag as the one soft field in this record. COORDINATE VERIFIED: Nominatim returns a water_park 'Csepeli strandfürdő' at Hollandi út 14 (47.4064, 19.1014) and a separate Overpass sweep found four individual basin nodes (Úszómedence, Élménymedence, Termálmedence, Gyerekmedence) clustered at 47.406x, 19.101x — both agree with the address printed in the site header, '1213 Budapest, Hollandi út 14.'"
+    },
+    {
+      "id": "hajos-alfred-tanuszoda-budafok",
+      "name": "Hajós Alfréd Tanuszoda (Budafok)",
+      "shortName": "Budafoki Tanuszoda",
+      "district": "XXII.",
+      "address": "1222 Budapest, Nagytétényi út 31-33.",
+      "lat": 47.4084186,
+      "lon": 19.0215936,
+      "website": "https://hofeherfoka.hu/",
+      "phone": "+36 1 424 5307",
+      "basins": [
+        {
+          "id": "25m-uszomedence",
+          "name": "Úszómedence",
+          "lengthM": 25,
+          "lanes": 6,
+          "indoor": true
+        },
+        {
+          "id": "tanmedence",
+          "name": "Tanmedence",
+          "lengthM": 16,
+          "lanes": null,
+          "indoor": true
+        }
+      ],
+      "openingHours": [
+        {
+          "weekday": 1,
+          "opens": "06:00",
+          "closes": "14:00",
+          "seasonNote": "Hétköznap délelőtti blokk (Nyitvatartás oldal)"
+        },
+        {
+          "weekday": 1,
+          "opens": "18:15",
+          "closes": "20:30",
+          "seasonNote": "Hétköznap esti blokk; 13:30/14:00-18:15 között zárva"
+        },
+        {
+          "weekday": 2,
+          "opens": "06:00",
+          "closes": "14:00",
+          "seasonNote": "Hétköznap délelőtti blokk"
+        },
+        {
+          "weekday": 2,
+          "opens": "18:15",
+          "closes": "20:30",
+          "seasonNote": "Hétköznap esti blokk"
+        },
+        {
+          "weekday": 3,
+          "opens": "06:00",
+          "closes": "14:00",
+          "seasonNote": "Hétköznap délelőtti blokk"
+        },
+        {
+          "weekday": 3,
+          "opens": "18:15",
+          "closes": "20:30",
+          "seasonNote": "Hétköznap esti blokk"
+        },
+        {
+          "weekday": 4,
+          "opens": "06:00",
+          "closes": "14:00",
+          "seasonNote": "Hétköznap délelőtti blokk"
+        },
+        {
+          "weekday": 4,
+          "opens": "18:15",
+          "closes": "20:30",
+          "seasonNote": "Hétköznap esti blokk"
+        },
+        {
+          "weekday": 5,
+          "opens": "06:00",
+          "closes": "14:00",
+          "seasonNote": "Hétköznap délelőtti blokk"
+        },
+        {
+          "weekday": 5,
+          "opens": "18:15",
+          "closes": "20:30",
+          "seasonNote": "Hétköznap esti blokk"
+        },
+        {
+          "weekday": 6,
+          "opens": "08:00",
+          "closes": "18:30",
+          "seasonNote": "Szombat; a 2026.09.01-i pályabeosztás 8:00-18:00-t ír"
+        },
+        {
+          "weekday": 7,
+          "opens": "08:00",
+          "closes": "18:30",
+          "seasonNote": "Vasárnap; a 2026.09.01-i pályabeosztás 8:00-18:00-t ír"
+        }
+      ],
+      "scheduleSource": {
+        "url": "https://hofeherfoka.hu/palyabeosztas/",
+        "format": "image",
+        "note": "A /palyabeosztas/ oldalon nincs HTML szöveg, az egész beosztás EGYETLEN JPG kép: https://hofeherfoka.hu/wp-content/uploads/2026/09/2026.09-tol.jpg (WordPress srcset változatok: -212x300, -768x1086, -724x1024, -1086x1536; a teljes méret 1240 px széles - a teljes méretű URL időnként timeoutol, a -1086x1536 változat megbízhatóan letölthető). A kép címe: 'PÁLYABEOSZTÁS 2026.09.01-től'. Szerkezete: HÁROM külön rácstáblázat az ÚSZÓMEDENCÉRE, plusz egy kis negyedik táblázat a TANMEDENCÉRE. (1) 'HÉTFŐ-PÉNTEK' táblázat, fejléc 'Nyitvatartás hétköznap 6:00-13:30 és 18:15-20:00'. Első oszlop = 'Időpont', utána 6 oszlop 1..6 számozva = a 6 úszósáv. Sorok (16 db): 06:00, 07:00, 07:30, 08:00, 08:30, 09:00, 09:30, 10:00, 11:00, 12:00, 12:30, 13:00, 13:30-18:15, 18:15, 19:00-20:00 - vagyis a sorok NEM egyenletes időrácsok, némelyik pontszerű időpont, némelyik intervallum. (2) 'SZOMBAT' táblázat ugyanezzel a 6 sávoszloppal, 2 sor: 8:00-12:00 és 16:30-18:00 ('ÚSZÓMEDENCE HÉTVÉGI NYITVATARTÁS: 8:00-18:00'). (3) 'VASÁRNAP' táblázat 6 sávoszloppal, 3 sor: 8:00-9:00, 9:00-10:00, 10:00-18:00. Minden cella TEXTET tartalmaz (nem csak színt): 'SZABAD' (zöld betű), 'FOGLALT' (fekete betű, szürke cellaháttér), vagy 'Szabad/ Foglalt' (vegyes/bizonytalan, fekete betű). A szürke háttér a FOGLALT-hoz redundáns, a szöveg önmagában elég - OCR-rel kiolvasható, nincs szükség cellaszín-dekódolásra. Piros figyelmeztetés a táblák alatt: 'MEDENCETÉR ELHAGYÁSA ÉS ZÁRÁSA 18:00'. (4) TANMEDENCE tábla 2 oszloppal: nap | közönség által használható idősáv - HÉTKÖZNAP 6:00-7:30 és 19:00-20:00 (két cella), SZOMBAT 15:00-18:00, VASÁRNAP 8:00-18:00; felette: 'A TANMEDENCE ELSŐDLEGESEN OKTATÁSI CÉLOKAT SZOLGÁL'. A scraper-nek: a kép URL-je dátumozott (2026/09/2026.09-tol.jpg), tehát szezononként változik - a /palyabeosztas/ HTML-ből kell kinyerni az aktuális <img src>-t."
+      },
+      "sources": [
+        "https://hofeherfoka.hu/",
+        "https://hofeherfoka.hu/kapcsolat/",
+        "https://hofeherfoka.hu/medenceink-es-szaunank/",
+        "https://hofeherfoka.hu/nyitvatartas-2/",
+        "https://hofeherfoka.hu/palyabeosztas/",
+        "https://hofeherfoka.hu/wp-content/uploads/2026/09/2026.09-tol-1086x1536.jpg",
+        "https://hofeherfoka.hu/wp-content/uploads/2025/04/Nyitvatartas-1086x1536.jpg",
+        "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=2&countrycodes=hu&q=Nagyt%C3%A9t%C3%A9nyi%20%C3%BAt%2031-33%2C%201222%20Budapest",
+        "https://overpass-api.de/api/interpreter"
+      ],
+      "confidence": "high",
+      "notes": "Koordináta: Nominatim a 'Nagytétényi út 31-33, 1222 Budapest' keresésre a 'Hajós Alfréd Tanuszoda' objektumot adta vissza 47.4084186 / 19.0215936 értékkel; független második forrásként az Overpass API ugyanezt az OSM way-t (id 671139096, addr:postcode=1222, addr:street=Nagytétényi út, addr:housenumber=31-33, leisure=sports_centre, sport=swimming) adta 47.4085015 / 19.0216747 középponttal - a két érték ~10 m-en belül egyezik. Ezt egyeztettem az uszoda saját https://hofeherfoka.hu/kapcsolat/ oldalával, amely szó szerint '1222 Budapest, Nagytétényi út 31-33.' címet ír (üzemeltető: HÓFEHÉR FÓKA Bt.). A Nominatim listán a szomszédos Klauzál Gábor Művelődési Központ is ugyanezen a házszámon van, de a tanuszoda külön OSM objektum. SÁVSZÁM: az úszómedence 6 sávja a hivatalos pályabeosztás képről van leolvasva, ahol a táblázat oszlopai explicit 1,2,3,4,5,6 számozásúak - nem becslés. A tanmedencéhez sehol nem láttam sávszámot, ezért null. MEDENCEMÉRET: a /medenceink-es-szaunank/ oldal szó szerint: 'Úszómedence: 25 × 16 méteres, 180 cm mély' és 'Tanmedence: 16 × 10 méteres, 90 cm mély'. BIZONYTALANSÁG: a nyitvatartás két hivatalos forrása eltér. A /nyitvatartas-2/ oldal képe (2025/04-es feltöltés) HÉTFŐ-PÉNTEK 06:00-14:00 és 18:15-20:30, SZOMBAT-VASÁRNAP 08:00-18:30. Az újabb, 2026.09.01-től érvényes pályabeosztás kép fejléce viszont hétköznap 6:00-13:30 és 18:15-20:00, hétvégén 8:00-18:00 (medencetér zárása 18:00). A fenti openingHours a /nyitvatartas-2/ oldal (a dedikált nyitvatartás-oldal) értékeit követi; élesben érdemes a szűkebb, pályabeosztás szerinti időket használni. Ez NEM a margitszigeti Hajós Alfréd Nemzeti Sportuszoda, hanem a budatétényi kis tanuszoda - a /kapcsolat/ oldal címe és az OSM objektum is a XXII. kerületet erősíti meg. A /nyitvatartas-2/ és /palyabeosztas/ oldalak HTML-je gyakorlatilag üres, minden információ képben van."
+    }
+  ],
+  "researchNotes": "SCOPE: district-run, club and university pools in Budapest, deliberately EXCLUDING the colleague's set (Komjádi, Hajós Alfréd Margitsziget, Gellért, Széchenyi, Lukács, Palatinus, Dagály, Duna Aréna, Tüskecsarnok). Research performed 2026-09-24.\n\nMETHOD. Coordinates were obtained from a single bulk OpenStreetMap Overpass query over the Budapest admin area (126 candidate features: name, lat/lon, addr:* tags, website, phone, opening_hours) and then cross-checked, one pool at a time, against the street address printed on the operator's own contact page. A coordinate was accepted ONLY when the two agreed; otherwise it would have been set null. In practice every pool retained in the set passed this check, so there are no null coordinates. Nominatim was used as a spot-check where Overpass was ambiguous (e.g. Nyéki Imre, where two nearby bus-stop nodes share the pool's name and had to be discarded).\n\nLANE COUNTS follow the same rule and DO have nulls. A lane count was recorded only when an operator (or the operator's own schedule grid) states it in words or enumerates the lanes — 'hatpályás', '6 sávos', or a 'Sáv 1..7' header row. Where only a basin width was published, lanes were left null even when the conventional layout is obvious: an 11 m wide pool is normally 5 lanes, but that is inference, not a source. Learner pools (tanmedence) almost never have a published lane count and are mostly null by nature. The one place a secondary source asserts a lane count that could not be confirmed (Halassy Olivér, '6 sávos') it is recorded as hearsay in `notes` and the field is null.\n\nTHREE SCHEDULE ENCODINGS EXIST IN THE WILD, in descending order of usefulness to the app:\n\n(1) HTML TABLE WITH AN INTEGER FREE-LANE COUNT — the jackpot, because the cell value IS the quantity the app needs. Three pools: Erzsébetligeti Rátonyi Gábor Uszoda (XVI), Szentmihályi Konrád Ferenc Uszoda (XVI) and Pesterzsébeti Uszoda (XX). The two XVI. kerület pools share an operator (Kertvárosi Sportlétesítményeket Üzemeltető Kft.) and a CMS, so ONE PARSER HANDLES BOTH: fetch '?content=dct&did=NN' where NN is found by scraping the nav for the anchor text 'Szabad pályák a közönségnek' (did=36 at Erzsébetliget, did=34 at Szentmihály — do not hardcode), skip the 4 chrome tables, select the table whose caption contains 'Közönség részére szabad sávok száma az úszómedencében', read columns H|K|Sz|Cs|P|Szo|V and 32 half-hour rows '6:00 - 6:30'..'21:00 - 21:30', and each cell is an integer count of free public lanes or 'X' for closed. Erzsébetliget additionally has a second table for the tanmedence whose cells are 'i'/blank (boolean, NOT a count); Szentmihály has no such table, so the parser must tolerate its absence.\n\nPesterzsébet (XX) is a DIFFERENT html-table shape and needs its own parser: server-rendered <table>s live at /melyvizes-medence/ and /tanmedence/ (the /savbeosztas/ page is only a chooser), six tables per page = Monday..Saturday with NO SUNDAY table even though the pool opens on Sundays, the header row enumerates '0.pálya'..'9.pálya' for the 10-lane deep pool and '5.pálya'..'1. pálya' (REVERSED) for the 5-lane tanmedence, an empty cell means free, and the words 'foglalt' / 'iskola' / 'iskolai-óvodai oktatás' mean occupied. CRITICAL GOTCHA: the cells use colspan, so naive <td> counting mis-aligns lanes.\n\n(2) PDF GRID — seven pools, but in TWO FLAVOURS that must not be confused. The easier flavour is the Városgazda XVIII. Nonprofit Zrt. family (Bókay-park, Kastélydombi, Vilmos Endre), which shares ONE template across all three pools: URL pattern .../wp-content/uploads/<YYYY>/<MM>/<YYYY>-HL-{PU|KU|VE}-<YYYY>-<MONTH>-<start>-<end>.pdf, 2 pages (délelőtt / délután), A4 landscape, and a REAL TEXT LAYER that PyMuPDF reads directly — occupied cells carry both a fill colour AND the time-range text, free cells are white and empty, so colour decoding is optional here. Columns are 15-minute slots 6:00-12:45 and 13:00-20:45; rows are 7 day blocks x N lane rows (4 at Bókay and Kastélydomb, 6 at Vilmos Endre). Two gotchas: a coloured rectangle can span several lane rows vertically, and day names are stored letter-per-line and must be rejoined. Full-day closures appear as a purple band across all lanes.\n\nThe harder flavour is the rest (Újhegyi X, Csepeli Strandfürdő XXI, TVE Sportuszoda III, Csillaghegyi Árpád Forrásfürdő III), WHERE OCCUPANCY IS ENCODED PURELY AS CELL FILL COLOUR. These have NO usable text layer for the occupancy state: page.get_text() returns the day names, lane numbers and hour labels but the free/occupied state lives only in the rectangle fills. The working recipe is PyMuPDF — page.get_text('words') plus x/y bucketing to rebuild the grid, then page.get_drawings() to read each cell's fill RGB, then match those RGBs to the legend swatches printed on the page (and DROP the legend swatches themselves, which otherwise pollute the grid — at Újhegyi they sit at x0~16, x1~97, y~398-453). Exact observed RGB triples are recorded per pool in each scheduleSource.note so a scraper does not have to rediscover them. Two different semantics are in use: Újhegyi paints state directly (amber 1.0,0.75,0.0 = FOGLALT, green 0.0,0.69,0.31 = SZABAD), whereas Csepel paints the OCCUPYING CLUB's colour and leaves public slots unfilled, so free lanes = total lanes minus filled cells. Filenames encode the season and WILL change at the season turn — always scrape the parent 'Pályabeosztás' page for href$='.pdf' rather than hardcoding a URL.\n\n(3) IMAGE (PNG/JPG) — two pools (Kispesti XIX, Hajós Alfréd Tanuszoda Budafok XXII). Kispest is the better of the two: a stable upload-path pattern .../wp-content/uploads/YYYY/MM/Savbeosztas-WEB-YYYY.MM.DD-MM.DD.png, two week panels, 'Medence 33 M' over 'Tanmedence', Sáv/Lane 1-6 per day (42 columns), hourly rows 06:00-21:00, GREEN = 'Lakosság számára elérhető', RED = 'Foglalt / Zárva'. These need OCR or manual transcription; treat as a weekly manual-refresh source.\n\nAND THE REST PUBLISH NOTHING. Six pools are 'none-found' or 'facebook-only'. This is not always laziness on the operator's part — several genuinely allocate lanes only on a whiteboard at the ticket desk (Gazdagréti explicitly tells visitors to consult 'a jegypénztárnál elhelyezett foglaltsági tájékoztató').\n\nTRAPS WORTH KNOWING. (a) Aggregator sites are wrong often enough to be dangerous: strand.hu gives Újhegyi's postcode as 1196, which is Kispest; the correct code is 1108. Always prefer OSM addr:* plus the operator's own contact page. (b) sport.ujbuda.hu (Nyéki Imre) is a Vite/React SPA serving a 2 KB JS shell — curl gets nothing. The content is reachable as JSON from https://api.ujbuda.hu/webapi/v1.0/static-pages/156 BUT ONLY with the header 'Domain: sport.ujbuda.hu'; without it the API answers {\"error\":{\"code\":10002,\"message\":\"Invalid domain\"}}. Resolve the numeric id from /webapi/v1.0/sitemap rather than hardcoding. (c) haloujpest.hu (Újpest) returns HTTP 403 with a JS 'Hitelesítés' anti-bot interstitial to every request regardless of headers — that pool is blocked, not schedule-less, and deserves a retry with a headless browser. www.varosgazda18.hu (the three XVIII. kerület pools) likewise returns 403 to curl and other scripted clients no matter what User-Agent is sent; its PDFs were only obtainable through a browser-like fetcher, so plan for a headless browser there too. (c2) esmtkuszoda-pesterzsebet.hu, the Pesterzsébet domain named in the brief, is DEAD — it now resolves to shared hosting whose TLS certificate covers unrelated domains; the live operator site is https://www.pesterzsebetiuszoda.hu/. (d) Several sites (uszodak16.hu, hegyvideksport.hu, sport13.hu, api.ujbuda.hu) intermittently return HTTP 000 / empty bodies; a 4x retry loop with a 3 s backoff fixed it. (e) A JPG named 'uszoda-palyarendszabalyok.jpg' on the BVSC site looks exactly like a lane schedule from its filename but is a trilingual spectator ground-rules poster — it was downloaded and viewed before being used, which is the only way to be sure. (f) Hungarian-language queries ('sávbeosztás', 'pályabeosztás', 'szabad pályák', 'vízfelület beosztás') find these pages; English ones do not.\n\nSEASONAL CONTEXT AS OF 2026-09-24: the outdoor season has just ended. Szentmihály banners 'A kültéri medencéink bezártak!', the Erzsébetligeti strand closed 2026-08-31, and Csepel has switched to its winter timetable. Any summer/outdoor basin in this file should be treated as currently closed, and the 'strand' opening hours in openingHours are the summer figures recorded for completeness.",
+  "unresolved": [
+    "Halassy Olivér Városi Uszoda (IV) — INCLUDED but with confidence 'low'. haloujpest.hu answers every request with HTTP 403 and a JS 'Hitelesítés / Verification' interstitial; reproduced with desktop-Chrome and Safari user agents, hu-HU Accept-Language and Sec-Fetch-* headers, over https and www; plain http does not answer at all. WebFetch separately refused the host. Lane count therefore null (secondary sources claim 6) and opening hours are taken from the OSM opening_hours tag and disagree with two secondary sources about the weekend. HIGHEST-VALUE RETRY TARGET: a headless browser that executes the challenge JS will almost certainly get in.",
+    "Nyéki Imre Uszoda (XI) — basin lengths and lane counts all null; the operator publishes only the three basin NAMES (Tanmedence, Nagymedence kint, Nagymedence bent). The PÁLYAFOGLALTSÁG section of the CMS payload, which normally carries the lane grids (blue cells = occupied), is EMPTY as of 2026-09-24 — the markup after each of the three labels is bare <br/>. Re-poll api.ujbuda.hu/webapi/v1.0/static-pages/156 (with the Domain header) periodically; this pool could jump straight to a usable source when the operator re-uploads. Also: the official opening-hours block SILENTLY OMITS FRIDAY, so no weekday-5 entry was emitted.",
+    "BVSC-Zugló Laky Károly Sportuszoda (XIV) — lane counts null for all three basins and format 'none-found'. The site has a page literally called 'uszoda-medence-beosztas' but it publishes no grid; the only linked image is the spectator ground-rules poster. The házirend does state that the teaching basins are closed to the public on weekdays, which is useful negative information. A major club pool with a real internal allocation that simply is not published.",
+    "Újlak Uszoda és Strandfürdő (XVII) — lane count null. All eight site pages were enumerated; there is no sávbeosztás page, PDF or image. The árlista prices lane rental at 12 100 Ft/60 min and the házirend regulates per-lane group sizes, so an allocation demonstrably exists internally. Basin is 25 x 11 m (5 lanes would be the conventional layout, NOT recorded as it is inference).",
+    "Szérűskert Tanuszoda (III) — lane count null, nothing published. Note for the schema consumer: this is the one pool with TWO openingHours entries for the same weekday (a morning and an afternoon block with a midday closure); any consumer that assumes one row per weekday will mis-handle it.",
+    "Semmelweis Egyetem rehabilitációs klinika uszoda (XII, not VIII/IX as the brief's university hint suggested) — lane count null, no public schedule. This is a clinical/rehabilitation pool rather than a general-access public pool; include in the app only with a clear access caveat.",
+    "Gazdagréti Tanuszoda (XI) — lane count IS verified (6, 'hatpályás') but the free-water information is published ONLY as ad-hoc Facebook posts, by the operator's own explicit statement on nsu.hu. There is no structured recurring table anywhere. Additionally, weekdays 08:00-16:00 are given over entirely to compulsory school and kindergarten lessons, so public availability is effectively zero in that window even though the building is open — the app should special-case this.",
+    "Nővér utcai Tanuszoda (XIII) — DELIBERATELY EXCLUDED from pools[]. The operator states twice on its own page: 'Az uszoda nem nyilvános fürdő, csak gyermek úszóoktatási tevékenységre alkalmas.' It is a 12,5 x 6 m Stilianos-branded learner pool for children's lessons with no public lane swimming at all, so it has no free-lane concept. (Address discrepancy noted for anyone who revisits it: the operator prints 1138 Nővér utca 15 while OSM tags 1131.)",
+    "Molnár Ferenc uszoda (IX) — investigated and NOT given a record. It is the school pool of the Molnár Ferenc Magyar-Angol Két Tanítási Nyelvű Általános Iskola, renovated by the Belső-Pesti Tankerületi Központ. No operator site publishes opening hours, prices or a lane schedule; the school's own domain redirects. Would need a phone call.",
+    "FTC / Fradi Népligeti uszoda (IX) — investigated and NOT given a record. fradi.hu treats the Népligeti Sportközpont as a club training facility and refers all facility questions to the üzemeltetési igazgatóság; the swimming-section page covers paid courses only. No public lane schedule exists online, and the site has been under redevelopment. (Also note it is usually indexed under X. kerület, Vajda Péter utca, not IX.)",
+    "LoBoGó Tanuszoda (1098 Lobogó utca 1, IX) — identified via OSM (operator uszasoktatas.com) but NOT given a record: it presents as a private swim-school teaching pool and no public közönségúszás lane schedule was found. Worth a second look if IX. kerület coverage matters, since it is the only real pool candidate found in that district.",
+    "Kelenvölgyi uszoda (XI) — the brief listed 'Gazdagréti és Kelenvölgyi' as a pair, but no Kelenvölgy swimming pool could be found in OSM, on nsu.hu or anywhere else. Most likely it does not exist (Kelenvölgy has a sports ground, not a pool).",
+    "Csepeli Sport- és Szabadidőközpont (XXI) — PREMISE ERROR IN THE BRIEF. The facility at Hollandi út 8-10, reopened 2023-07-01 as the Kolonics György Szabadidőközpont, HAS NO POOL: it is tennis courts, padel courts and a small artificial-turf pitch. The actual Csepel public pool is the Csepeli Strandfürdő two doors down at Hollandi út 14, which is what was recorded. A separate small Csepeli Tanuszoda also exists at 1211 Tanműhely köz 2 (operator varosgazda.eu) and was NOT researched.",
+    "Marczibányi téri uszoda and Pasaréti uszoda (II) — searched for and not found as public swimming pools; the II. kerület candidates in the brief appear not to exist in that form. No II. kerület pool is represented in this file.",
+    "BME sportuszoda and ELTE uszoda — do not exist as separate public pools. Both universities use Tüskecsarnok, which is explicitly out of scope (colleague's set). The only university pool found was the Semmelweis clinical pool above.",
+    "Soroksár (XXIII) — CONFIRMED NO POOL. The district's own sports concept lists an uszoda as one of the two basic facilities MISSING from its infrastructure; residents swim in neighbouring districts (Kastélydombi, Kispest, Pesterzsébet). Nothing to record.",
+    "Zugló (XIV) — the only real pool is BVSC's Laky Károly Sportuszoda, already recorded. No separate district-council-run Zugló pool was found.",
+    "Hegyvidéki Sport Uszoda (XII) — NOT RESEARCHED. hegyvideksport.hu returned intermittent empty responses and time ran out before it could be covered. This is the clearest remaining coverage gap and should be the first target of any follow-up pass.",
+    "Vilmos Endre Uszoda (XVIII) — IS CLOSED AS THIS FILE IS WRITTEN. Shut since 2026-05-01 for renovation; the operator states it reopens 2026-09-26 at 06:00, two days after this research. Its published lane PDF is still the April edition and shows an open-ended purple 'KARBANTARTÁS, FELÚJÍTÁS 2026 MÁJUS 1 –' band across every lane, so the schedule data is stale by construction. Confidence medium. THE APP MUST NOT ROUTE USERS THERE BEFORE 2026-09-26, and the PDF should be re-fetched after that date.",
+    "Gloriett Sportuszoda (XVIII) — DOES NOT EXIST. Confirmed four independent ways: the Városgazda XVIII. Nonprofit Zrt. facility list, the 18.kerulet.ittlakunk.hu 'uszoda, fürdő' category, akademia18.hu/uszasoktatas (which lists only Bókay and Kastélydomb as venues), and an Overpass sweep of the south-east Budapest bbox. The XVIII. kerület has exactly three pools, all recorded here. 'Gloriett' in that district is a housing estate, a sports primary school and a sports club — none has a pool.",
+    "Pestszentimrei Sportkastély (1188 Kisfaludy u. 33/c, XVIII) — EXISTS BUT HAS NO POOL. The operator page lists handball, multi-sport, table tennis and artificial turf; OSM tags it sport=volleyball;basketball;handball;team_handball;table_tennis. Not a swimming venue, so no record was written. The brief's 'Pestszentimrei' candidate is best served by the Vilmos Endre Uszoda, which IS in Pestszentimre and is recorded.",
+    "Kastélydombi Uszoda (XVIII) — lane count (4) is solid, taken from the official PDF, but the basin size 20x9 m rests on a single secondary source (18.kerulet.ittlakunk.hu); the operator page gives only the 1.40 m depth. Also a policy note the app should honour: NO FREE PUBLIC LANE weekdays 14:00-19:00 by design.",
+    "Hajós Alfréd Tanuszoda, Budatétény (XXII) — OPENING HOURS CONFLICT, unresolved. The /nyitvatartas-2/ image (dated April 2025) gives weekday 06:00-14:00 and 18:15-20:30, weekend 08:00-18:30, while the newer 2026-09-01 lane sheet gives 06:00-13:30 and 18:15-20:00, weekend 08:00-18:00. The dedicated hours page was recorded and the conflict flagged. No lane count is published for its tanmedence (null). NOTE: this is NOT the Margitsziget Hajós Alfréd (which is the colleague's scope) — it is a small Budatétény teaching pool run by HÓFEHÉR FÓKA Bt., confirmed via its own contact page and a distinct OSM object.",
+    "Pesterzsébeti Uszoda (XX) — two gaps in an otherwise excellent source. (1) Weekend closing time conflicts: /melyvizes-medence/ says Sat/Sun close at 14:00 while /kapcsolat/, /savbeosztas/ and /tanmedence/ say 18:00; 18:00 was used (majority, and backed by the detailed cashier-closing text) and flagged. (2) NO SUNDAY LANE TABLE is published at all even though the pool opens on Sundays, so Sunday free-lane data simply does not exist upstream.",
+    "Bókay-park (XVIII) — no lane count published for the outdoor 25x11 m pool or the pancsoló, so both are null; only the indoor pool's 4 lanes are verified. The outdoor pool and pancsoló have been closed for the season since 2026-08-31. Phone numbers differ between OSM (stale landlines) and the operator page for both Bókay and Kastélydomb; the operator-page numbers were used and both are documented in the records.",
+    "Kőbányai Sportközpont beyond Újhegyi (X) — partially covered; any pool in that district not present in pools[] was not reached.",
+    "BUILD-SAFETY CHECK (for the build script that drops pools with no basins): NO POOL IN THIS FILE HAS AN EMPTY basins ARRAY — all 19 have at least one basin object, so none will silently vanish. 42 basin objects in total. However SIX POOLS HAVE NO VERIFIED LANE COUNT ON ANY BASIN (every lanes field is null): szeruskert-tanuszoda, halassy-oliver-varosi-uszoda, nyeki-imre-uszoda, semmelweis-rehabilitacios-klinika-uszoda, bvsc-laky-karoly-sportuszoda, ujlak-uszoda. These are real, correctly-located pools that belong in the app, but the free-lane feature cannot compute a denominator for them — the UI should show them as 'lane count unknown' rather than treating null as zero. Each one's individual reason is listed separately above.",
+    "GENERAL: 'indoor' is the softest field in this dataset. For strand-type venues that operate year-round with heated water (notably Csepeli Strandfürdő) no explicit statement of whether the basin is covered in winter could be found, so indoor was set false on the strandfürdő designation alone. Verify before relying on it."
+  ]
+}

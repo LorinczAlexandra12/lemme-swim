@@ -1,0 +1,44 @@
+{
+  "id": "csepeli-strandfurdo",
+  "name": "Csepeli Strandfürdő",
+  "shortName": "Csepeli Strand",
+  "district": "XXI.",
+  "address": "1213 Budapest, Hollandi út 14.",
+  "lat": 47.40640,
+  "lon": 19.10143,
+  "website": "https://www.csepelistrandfurdo.hu/",
+  "phone": "+36 1 277 6576",
+  "basins": [
+    {
+      "id": "50m-uszomedence",
+      "name": "50 m-es úszómedence",
+      "lengthM": 50,
+      "lanes": 7,
+      "indoor": false
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "17:00", "seasonNote": "Téli nyitvatartás; nyáron minden nap 09:00-19:00. Medencezárás 30 perccel zárás előtt; pénztár 06:00-16:00" },
+    { "weekday": 2, "opens": "06:00", "closes": "17:00", "seasonNote": "Téli nyitvatartás; nyáron minden nap 09:00-19:00" },
+    { "weekday": 3, "opens": "06:00", "closes": "17:00", "seasonNote": "Téli nyitvatartás; nyáron minden nap 09:00-19:00" },
+    { "weekday": 4, "opens": "06:00", "closes": "17:00", "seasonNote": "Téli nyitvatartás; nyáron minden nap 09:00-19:00" },
+    { "weekday": 5, "opens": "06:00", "closes": "17:00", "seasonNote": "Téli nyitvatartás; nyáron minden nap 09:00-19:00" },
+    { "weekday": 6, "opens": "07:00", "closes": "16:00", "seasonNote": "Téli hétvégi nyitvatartás; nyáron 09:00-19:00; pénztár 07:00-15:00" },
+    { "weekday": 7, "opens": "07:00", "closes": "16:00", "seasonNote": "Téli hétvégi nyitvatartás; nyáron 09:00-19:00; pénztár 07:00-15:00" }
+  ],
+  "scheduleSource": {
+    "url": "https://www.csepelistrandfurdo.hu/wp-content/uploads/2025/11/Palyabeosztas-2025-26-osz-tel-.pdf",
+    "format": "pdf",
+    "note": "STRONG MACHINE-READABLE SOURCE. Linked as the sole PDF from the 'Pályabeosztás' menu page https://www.csepelistrandfurdo.hu/palyabeosztas/ — scrape that page for href$='.pdf' rather than hardcoding, because the filename encodes the season ('Palyabeosztas-2025-26-osz-tel-.pdf') and will change at the season turn. STRUCTURE: a single landscape page holding SEVEN day blocks side by side, each headed with the weekday name (Hétfő, Kedd, Szerda, Csütörtök, Péntek, Szombat, Vasárnap) followed by a 'Sáv' header row enumerating lanes 1 2 3 4 5 6 7. Row labels are hourly slots in the form '06.00-07.00' running to '19.00-20.00' (note the DOT separator, not a colon). The text layer is unordered — PyMuPDF get_text() returns the strings but not the grid — so use page.get_text('words') and bucket by x/y coordinates to rebuild cells. OCCUPANCY IS ENCODED AS CELL FILL COLOUR keyed to a legend of club names printed at the top: Fradi, Öttusa úszás, Csepel Vízilabda, AquaLife Aqua fitness, Barrakuda Búvár SE, Csepel Kajak-kenu. Distinct non-black fills observed via page.get_drawings(): (1.0, 0.0, 0.0) red x25, (0.0, 0.44, 0.75) blue x21, (1.0, 0.2, 0.8) magenta x4, (0.93, 0.49, 0.19) orange x4, (0.27, 0.45, 0.77) steel blue x3, (1.0, 1.0, 0.0) yellow x1, (0.96, 0.69, 0.52) tan x1. A cell with NO club fill is public swimming, so free lanes per timeslot = 7 minus the number of filled cells in that (day, hour) row. Match each fill colour to its legend swatch by x/y position to name the occupying club."
+  },
+  "sources": [
+    "https://www.csepelistrandfurdo.hu/nyitva-tartas/",
+    "https://www.csepelistrandfurdo.hu/palyabeosztas/",
+    "https://www.csepelistrandfurdo.hu/wp-content/uploads/2025/11/Palyabeosztas-2025-26-osz-tel-.pdf",
+    "https://www.csepelistrandfurdo.hu/szolgaltatasok/uszas/",
+    "https://nominatim.openstreetmap.org/search?format=jsonv2&q=Csepeli+Strandf%C3%BCrd%C5%91+Hollandi+%C3%BAt+14+Budapest",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "high",
+  "notes": "SCOPE CORRECTION — READ THIS: the brief asked for the 'Csepeli Sport- és Szabadidőközpont uszoda'. That facility (Hollandi út 8-10, rebuilt and reopened 2023-07-01 as the Kolonics György Szabadidőközpont, operated by Csepeli Ingatlanhasznosítási Nonprofit Kft.) HAS NO SWIMMING POOL — its facilities are 2 clay and 3 hard tennis courts, 2 padel courts, a small artificial-turf football pitch, and changing rooms. The actual Csepel public pool is the Csepeli Strandfürdő two doors down at Hollandi út 14, which is what is recorded here. A separate small 'Csepeli Tanuszoda' also exists at 1211 Tanműhely köz 2 (operator varosgazda.eu) and is NOT covered by this record. LANE COUNT 7 IS VERIFIED — the official pályabeosztás PDF enumerates 'Sáv 1 2 3 4 5 6 7' for every one of the seven day blocks. BASIN DIMENSIONS are from the operator's own spec table on the /szolgaltatasok/uszas/ page: medence méret ~20 x 50 m, vízmélység ~1.60-1.90 m, vízfelület 970 m2, víztérfogat 1552 m3, egyidejű befogadóképesség 194 fő, vízhőmérséklet 26-27 °C, forgatott üzemeltetés. indoor is set FALSE because this is a strandfürdő (open-air bath); the pool is heated and operates through the winter season, but I could not find an explicit statement that it is covered, so treat the indoor flag as the one soft field in this record. COORDINATE VERIFIED: Nominatim returns a water_park 'Csepeli strandfürdő' at Hollandi út 14 (47.4064, 19.1014) and a separate Overpass sweep found four individual basin nodes (Úszómedence, Élménymedence, Termálmedence, Gyerekmedence) clustered at 47.406x, 19.101x — both agree with the address printed in the site header, '1213 Budapest, Hollandi út 14.'"
+}

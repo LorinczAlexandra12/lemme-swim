@@ -1,0 +1,59 @@
+{
+  "id": "hajos-alfred-tanuszoda-budafok",
+  "name": "Hajós Alfréd Tanuszoda (Budafok)",
+  "shortName": "Budafoki Tanuszoda",
+  "district": "XXII.",
+  "address": "1222 Budapest, Nagytétényi út 31-33.",
+  "lat": 47.4084186,
+  "lon": 19.0215936,
+  "website": "https://hofeherfoka.hu/",
+  "phone": "+36 1 424 5307",
+  "basins": [
+    {
+      "id": "25m-uszomedence",
+      "name": "Úszómedence",
+      "lengthM": 25,
+      "lanes": 6,
+      "indoor": true
+    },
+    {
+      "id": "tanmedence",
+      "name": "Tanmedence",
+      "lengthM": 16,
+      "lanes": null,
+      "indoor": true
+    }
+  ],
+  "openingHours": [
+    { "weekday": 1, "opens": "06:00", "closes": "14:00", "seasonNote": "Hétköznap délelőtti blokk (Nyitvatartás oldal)" },
+    { "weekday": 1, "opens": "18:15", "closes": "20:30", "seasonNote": "Hétköznap esti blokk; 13:30/14:00-18:15 között zárva" },
+    { "weekday": 2, "opens": "06:00", "closes": "14:00", "seasonNote": "Hétköznap délelőtti blokk" },
+    { "weekday": 2, "opens": "18:15", "closes": "20:30", "seasonNote": "Hétköznap esti blokk" },
+    { "weekday": 3, "opens": "06:00", "closes": "14:00", "seasonNote": "Hétköznap délelőtti blokk" },
+    { "weekday": 3, "opens": "18:15", "closes": "20:30", "seasonNote": "Hétköznap esti blokk" },
+    { "weekday": 4, "opens": "06:00", "closes": "14:00", "seasonNote": "Hétköznap délelőtti blokk" },
+    { "weekday": 4, "opens": "18:15", "closes": "20:30", "seasonNote": "Hétköznap esti blokk" },
+    { "weekday": 5, "opens": "06:00", "closes": "14:00", "seasonNote": "Hétköznap délelőtti blokk" },
+    { "weekday": 5, "opens": "18:15", "closes": "20:30", "seasonNote": "Hétköznap esti blokk" },
+    { "weekday": 6, "opens": "08:00", "closes": "18:30", "seasonNote": "Szombat; a 2026.09.01-i pályabeosztás 8:00-18:00-t ír" },
+    { "weekday": 7, "opens": "08:00", "closes": "18:30", "seasonNote": "Vasárnap; a 2026.09.01-i pályabeosztás 8:00-18:00-t ír" }
+  ],
+  "scheduleSource": {
+    "url": "https://hofeherfoka.hu/palyabeosztas/",
+    "format": "image",
+    "note": "A /palyabeosztas/ oldalon nincs HTML szöveg, az egész beosztás EGYETLEN JPG kép: https://hofeherfoka.hu/wp-content/uploads/2026/09/2026.09-tol.jpg (WordPress srcset változatok: -212x300, -768x1086, -724x1024, -1086x1536; a teljes méret 1240 px széles - a teljes méretű URL időnként timeoutol, a -1086x1536 változat megbízhatóan letölthető). A kép címe: 'PÁLYABEOSZTÁS 2026.09.01-től'. Szerkezete: HÁROM külön rácstáblázat az ÚSZÓMEDENCÉRE, plusz egy kis negyedik táblázat a TANMEDENCÉRE. (1) 'HÉTFŐ-PÉNTEK' táblázat, fejléc 'Nyitvatartás hétköznap 6:00-13:30 és 18:15-20:00'. Első oszlop = 'Időpont', utána 6 oszlop 1..6 számozva = a 6 úszósáv. Sorok (16 db): 06:00, 07:00, 07:30, 08:00, 08:30, 09:00, 09:30, 10:00, 11:00, 12:00, 12:30, 13:00, 13:30-18:15, 18:15, 19:00-20:00 - vagyis a sorok NEM egyenletes időrácsok, némelyik pontszerű időpont, némelyik intervallum. (2) 'SZOMBAT' táblázat ugyanezzel a 6 sávoszloppal, 2 sor: 8:00-12:00 és 16:30-18:00 ('ÚSZÓMEDENCE HÉTVÉGI NYITVATARTÁS: 8:00-18:00'). (3) 'VASÁRNAP' táblázat 6 sávoszloppal, 3 sor: 8:00-9:00, 9:00-10:00, 10:00-18:00. Minden cella TEXTET tartalmaz (nem csak színt): 'SZABAD' (zöld betű), 'FOGLALT' (fekete betű, szürke cellaháttér), vagy 'Szabad/ Foglalt' (vegyes/bizonytalan, fekete betű). A szürke háttér a FOGLALT-hoz redundáns, a szöveg önmagában elég - OCR-rel kiolvasható, nincs szükség cellaszín-dekódolásra. Piros figyelmeztetés a táblák alatt: 'MEDENCETÉR ELHAGYÁSA ÉS ZÁRÁSA 18:00'. (4) TANMEDENCE tábla 2 oszloppal: nap | közönség által használható idősáv - HÉTKÖZNAP 6:00-7:30 és 19:00-20:00 (két cella), SZOMBAT 15:00-18:00, VASÁRNAP 8:00-18:00; felette: 'A TANMEDENCE ELSŐDLEGESEN OKTATÁSI CÉLOKAT SZOLGÁL'. A scraper-nek: a kép URL-je dátumozott (2026/09/2026.09-tol.jpg), tehát szezononként változik - a /palyabeosztas/ HTML-ből kell kinyerni az aktuális <img src>-t."
+  },
+  "sources": [
+    "https://hofeherfoka.hu/",
+    "https://hofeherfoka.hu/kapcsolat/",
+    "https://hofeherfoka.hu/medenceink-es-szaunank/",
+    "https://hofeherfoka.hu/nyitvatartas-2/",
+    "https://hofeherfoka.hu/palyabeosztas/",
+    "https://hofeherfoka.hu/wp-content/uploads/2026/09/2026.09-tol-1086x1536.jpg",
+    "https://hofeherfoka.hu/wp-content/uploads/2025/04/Nyitvatartas-1086x1536.jpg",
+    "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=2&countrycodes=hu&q=Nagyt%C3%A9t%C3%A9nyi%20%C3%BAt%2031-33%2C%201222%20Budapest",
+    "https://overpass-api.de/api/interpreter"
+  ],
+  "confidence": "high",
+  "notes": "Koordináta: Nominatim a 'Nagytétényi út 31-33, 1222 Budapest' keresésre a 'Hajós Alfréd Tanuszoda' objektumot adta vissza 47.4084186 / 19.0215936 értékkel; független második forrásként az Overpass API ugyanezt az OSM way-t (id 671139096, addr:postcode=1222, addr:street=Nagytétényi út, addr:housenumber=31-33, leisure=sports_centre, sport=swimming) adta 47.4085015 / 19.0216747 középponttal - a két érték ~10 m-en belül egyezik. Ezt egyeztettem az uszoda saját https://hofeherfoka.hu/kapcsolat/ oldalával, amely szó szerint '1222 Budapest, Nagytétényi út 31-33.' címet ír (üzemeltető: HÓFEHÉR FÓKA Bt.). A Nominatim listán a szomszédos Klauzál Gábor Művelődési Központ is ugyanezen a házszámon van, de a tanuszoda külön OSM objektum. SÁVSZÁM: az úszómedence 6 sávja a hivatalos pályabeosztás képről van leolvasva, ahol a táblázat oszlopai explicit 1,2,3,4,5,6 számozásúak - nem becslés. A tanmedencéhez sehol nem láttam sávszámot, ezért null. MEDENCEMÉRET: a /medenceink-es-szaunank/ oldal szó szerint: 'Úszómedence: 25 × 16 méteres, 180 cm mély' és 'Tanmedence: 16 × 10 méteres, 90 cm mély'. BIZONYTALANSÁG: a nyitvatartás két hivatalos forrása eltér. A /nyitvatartas-2/ oldal képe (2025/04-es feltöltés) HÉTFŐ-PÉNTEK 06:00-14:00 és 18:15-20:30, SZOMBAT-VASÁRNAP 08:00-18:30. Az újabb, 2026.09.01-től érvényes pályabeosztás kép fejléce viszont hétköznap 6:00-13:30 és 18:15-20:00, hétvégén 8:00-18:00 (medencetér zárása 18:00). A fenti openingHours a /nyitvatartas-2/ oldal (a dedikált nyitvatartás-oldal) értékeit követi; élesben érdemes a szűkebb, pályabeosztás szerinti időket használni. Ez NEM a margitszigeti Hajós Alfréd Nemzeti Sportuszoda, hanem a budatétényi kis tanuszoda - a /kapcsolat/ oldal címe és az OSM objektum is a XXII. kerületet erősíti meg. A /nyitvatartas-2/ és /palyabeosztas/ oldalak HTML-je gyakorlatilag üres, minden információ képben van."
+}
