@@ -1,12 +1,14 @@
 'use client';
 
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { ArrowRight, MapPin, Search, SlidersHorizontal, Waves, X } from 'lucide-react';
+import Link from 'next/link';
 import type { PoolAvailability, SearchQuery } from '@/lib/types';
 import { LocationPicker, type Origin } from './LocationPicker';
 import { TimeslotPicker, defaultTimeslot, type Timeslot } from './TimeslotPicker';
 import { DEFAULT_FILTERS, FilterPanel, type Filters } from './FilterPanel';
 import { ResultsList, type ResultsState } from './ResultsList';
-import { Waterline } from './Waterline';
+import { ThemeToggle } from './ThemeControls';
 import { formatRange, formatWeekdayName, minutesOfDay } from '@/lib/ui/format';
 
 function validateSlot(slot: Timeslot): string | null {
@@ -124,7 +126,7 @@ export function SearchExperience() {
     void runSearch({ ...submitted, filters: relaxed });
   }
 
-  const blocked = !origin ? 'Előbb add meg, honnan indulsz.' : slotError;
+  const blocked = !origin ? 'Előbb válassz kerületet.' : slotError;
   const hasSearched = submitted !== null;
 
   const shown = submitted?.filters ?? filters;
@@ -137,9 +139,13 @@ export function SearchExperience() {
         type="submit"
         disabled={Boolean(blocked)}
         aria-describedby={blocked ? blockedId : undefined}
-        className="w-full rounded-xl bg-pool px-5 py-4 text-base font-bold text-pool-ink transition-colors hover:bg-pool-hover disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex min-h-14 w-full items-center justify-between gap-3 rounded-sm bg-pool px-5 py-4 text-sm font-bold text-pool-ink transition-colors hover:bg-pool-hover disabled:cursor-not-allowed disabled:opacity-40"
       >
-        {state === 'loading' ? 'Keresés…' : 'Szabad sávok keresése'}
+        <span className="flex items-center gap-2.5">
+          <Search size={18} aria-hidden="true" />
+          {state === 'loading' ? 'Keresés…' : 'Szabad sávok keresése'}
+        </span>
+        <ArrowRight size={18} aria-hidden="true" />
       </button>
       {blocked && (
         <p id={blockedId} className="text-center text-sm text-ink-3">
@@ -151,53 +157,66 @@ export function SearchExperience() {
 
   return (
     <>
-      <header
-        className={[
-          'bg-header text-header-ink transition-[padding]',
-          hasSearched ? 'pt-6' : 'pt-12 sm:pt-20',
-        ].join(' ')}
-      >
-        <div className="mx-auto w-full max-w-2xl px-4 sm:px-6">
+      <header className="industrial-header border-b border-line bg-header text-header-ink">
+        <div className="relative mx-auto w-full max-w-5xl px-5 sm:px-8">
+          <div className="flex min-h-16 items-center justify-between gap-4 border-b border-line">
+            <Link href="/" aria-label="Lemme swim kezdőlap" className="inline-flex items-center gap-2.5 text-sm font-bold">
+              <Waves size={22} className="text-pool" aria-hidden="true" />
+              <span className="wordmark text-base">Lemme swim</span>
+            </Link>
+            <div className="flex shrink-0 items-center gap-4">
+              <span className="hidden items-center gap-1.5 font-mono text-[11px] text-ink-2 sm:flex">
+                <MapPin size={13} aria-hidden="true" />
+                BUDAPEST, HU
+              </span>
+              <ThemeToggle />
+            </div>
+          </div>
+          <div className={hasSearched ? 'py-6' : 'py-8 sm:py-10'}>
+            <p className="mb-3 flex items-center gap-2 font-mono text-[11px] uppercase text-ink-2">
+              <span className="h-1.5 w-1.5 bg-pool" aria-hidden="true" />
+              Úszás / Sávbeosztások
+            </p>
           <h1
             className={[
-              'wordmark font-bold leading-[0.95]',
-              hasSearched ? 'text-2xl' : 'text-[2.75rem] sm:text-6xl',
+              'wordmark font-semibold leading-tight',
+              hasSearched ? 'text-2xl' : 'text-3xl sm:text-5xl',
             ].join(' ')}
           >
-            Uszoda Tracker
+            Lemme swim
           </h1>
           {!hasSearched && (
-            <p className="mt-4 max-w-[38ch] text-base leading-relaxed text-header-ink/85 sm:text-lg">
-              Megmutatjuk, hány úszósáv marad szabadon a közeli budapesti uszodákban abban az
-              időpontban, amikor úszni indulnál.
+            <p className="mt-3 text-sm text-ink-2 sm:text-base">
+              Szabad úszósávok Budapesten.
             </p>
           )}
-        </div>
-        <div className={hasSearched ? 'mt-5' : 'mt-10 sm:mt-14'}>
-          <Waterline />
+          </div>
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-2xl flex-1 px-4 pb-16 sm:px-6">
+      <main className="mx-auto w-full max-w-5xl flex-1 px-5 pb-12 sm:px-8">
         <form
           onSubmit={onSubmit}
           aria-label="Keresési feltételek"
-          className="-mt-2 rounded-2xl bg-surface p-4 shadow-[0_1px_2px_rgba(6,38,48,0.06),0_12px_32px_-20px_rgba(6,38,48,0.45)] ring-1 ring-line sm:p-5"
+          className="border-b border-line bg-bg/95 py-6 sm:py-8"
         >
           {!hasSearched ? (
-            <div className="space-y-4">
-              <div>
-                <h2 className="text-base font-bold text-ink">Honnan indulsz?</h2>
-                <p className="mt-1 text-sm leading-snug text-ink-2">
-                  A helyzeted csak a távolság kiszámításához kell, és nem hagyja el a
-                  böngésződet, amíg nem keresel.
-                </p>
+            <div>
+              <div className="grid gap-7 md:grid-cols-2 md:gap-8">
+                <div className="min-w-0 space-y-4 md:border-r md:border-line md:pr-8">
+                  <h2 className="flex items-center gap-3 text-sm font-semibold text-ink">
+                    <span className="font-mono text-xs text-ink-3">01 /</span>
+                    Melyik kerületből indulsz?
+                  </h2>
+                  <LocationPicker origin={origin} onOriginChange={setOrigin} />
+                </div>
+                <div className="min-w-0 border-t border-line pt-6 md:border-0 md:pt-0">
+                  <TimeslotPicker value={slot} onChange={setSlot} error={slotError} />
+                </div>
               </div>
-              <LocationPicker origin={origin} onOriginChange={setOrigin} />
-              <div className="border-t border-line pt-4">
-                <TimeslotPicker value={slot} onChange={setSlot} error={slotError} />
+              <div className="mt-6 grid gap-4 border-t border-line pt-5 md:grid-cols-2 md:gap-8">
+                <div className="md:col-start-2">{searchButton}</div>
               </div>
-              <div className="border-t border-line pt-4">{searchButton}</div>
             </div>
           ) : (
             <div className="space-y-4">
@@ -227,8 +246,9 @@ export function SearchExperience() {
                   aria-expanded={panelOpen}
                   aria-controls="kereses-vezerlok"
                   onClick={() => setPanelOpen((v) => !v)}
-                  className="shrink-0 rounded-xl bg-surface-2 px-3.5 py-2.5 text-sm font-semibold text-pool ring-1 ring-inset ring-line hover:bg-pool-soft"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-sm bg-surface-2 px-3.5 py-2.5 text-sm font-semibold text-ink ring-1 ring-inset ring-line hover:bg-pool-soft"
                 >
+                  {panelOpen ? <X size={15} aria-hidden="true" /> : <SlidersHorizontal size={15} aria-hidden="true" />}
                   {panelOpen ? 'Bezárás' : 'Módosítás'}
                 </button>
               </div>
@@ -249,7 +269,14 @@ export function SearchExperience() {
           )}
         </form>
 
-        <section id="talalatok" aria-label="Találatok" className="mt-6">
+        <section id="talalatok" aria-label="Találatok" className="mt-7">
+          <div className="mb-5 flex items-center justify-between gap-4">
+            <h2 className="flex items-center gap-3 text-sm font-semibold">
+              <span className="font-mono text-xs text-ink-3">03 /</span>
+              Találatok
+            </h2>
+            <span className="font-mono text-[10px] uppercase text-ink-3">Távolság szerint</span>
+          </div>
           <ResultsList
             state={state}
             results={results}
@@ -265,9 +292,12 @@ export function SearchExperience() {
         </section>
       </main>
 
-      <footer className="border-t border-line px-4 py-6 text-center text-xs text-ink-3 sm:px-6">
-        Uszoda Tracker — nyilvános uszodabeosztásokból dolgozunk, és megmondjuk, ha egy adat
-        régi vagy hiányzik.
+      <footer className="border-t border-line bg-bg-deep px-5 py-5 text-xs text-ink-3 sm:px-8">
+        <div className="mx-auto flex max-w-[960px] flex-wrap items-center justify-between gap-x-8 gap-y-3">
+          <span className="flex items-center gap-2 font-semibold text-ink-2"><Waves size={16} aria-hidden="true" /> Lemme swim</span>
+          <span>Nyilvános beosztások. Egyértelmű adatforrások.</span>
+          <span className="font-mono text-[10px]">BUDAPEST / HU</span>
+        </div>
       </footer>
     </>
   );

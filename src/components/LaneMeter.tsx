@@ -24,7 +24,7 @@ export function LaneMeter({ totalLanes, freeLanes, animate = false }: LaneMeterP
     <div
       role="img"
       aria-label={formatLaneCount(free, totalLanes)}
-      className="flex flex-col gap-[3px] rounded-md bg-water-well p-[5px] ring-1 ring-inset ring-black/5 dark:ring-white/5"
+      className="flex flex-col gap-[3px] rounded-sm bg-water-well p-[5px] ring-1 ring-inset ring-line"
     >
       {lanes.map((isFree, i) => (
         <span

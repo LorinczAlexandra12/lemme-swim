@@ -20,10 +20,10 @@ export function PoolCard({ result, date, animate }: PoolCardProps) {
     basins.length > 0 && basins.every((b) => b.openingHoursKnown && !b.openThroughout);
 
   return (
-    <li className="overflow-hidden rounded-2xl bg-surface shadow-[0_1px_2px_rgba(6,38,48,0.06),0_8px_24px_-16px_rgba(6,38,48,0.35)] ring-1 ring-line">
+    <li className="overflow-hidden rounded-sm border border-line bg-surface transition-colors hover:border-line-strong">
       <header className="flex items-start justify-between gap-4 px-4 pt-4 sm:px-5 sm:pt-5">
         <div className="min-w-0">
-          <h3 className="text-lg font-bold leading-tight tracking-[-0.015em] text-ink">
+          <h3 className="text-lg font-semibold leading-tight text-ink">
             {pool.name}
           </h3>
           <p className="mt-1 text-sm leading-snug text-ink-2">
@@ -31,8 +31,8 @@ export function PoolCard({ result, date, animate }: PoolCardProps) {
             {pool.address}
           </p>
         </div>
-        <p className="shrink-0 text-right">
-          <span className="block text-base font-bold text-ink tnum">
+        <p className="max-w-[38%] shrink-0 text-right">
+          <span className="block font-mono text-base font-bold text-pool tnum">
             {formatDistance(distanceKm)}
           </span>
           {totalFreeLanes !== null && !allClosed && (

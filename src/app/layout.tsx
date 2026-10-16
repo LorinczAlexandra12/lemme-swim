@@ -1,23 +1,23 @@
 import type { Metadata, Viewport } from 'next';
-import { Archivo } from 'next/font/google';
+import { Nunito } from 'next/font/google';
+import { ThemeProvider } from '@/components/ThemeControls';
 import './globals.css';
 
 // latin-ext a magyar ő és ű miatt — enélkül a böngésző más fontból pótolná őket.
-const archivo = Archivo({
-  variable: '--font-archivo',
+const nunito = Nunito({
+  variable: '--font-nunito',
   subsets: ['latin', 'latin-ext'],
-  axes: ['wdth'],
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Uszoda Tracker — szabad úszósávok Budapesten',
+  title: 'Lemme swim — szabad úszósávok Budapesten',
   description:
     'Nézd meg, melyik budapesti uszodában hány úszósáv szabad abban az időpontban, amikor úszni indulnál.',
-  applicationName: 'Uszoda Tracker',
+  applicationName: 'Lemme swim',
   keywords: ['uszoda', 'úszósáv', 'Budapest', 'úszás', 'medence', 'nyitvatartás'],
   openGraph: {
-    title: 'Uszoda Tracker',
+    title: 'Lemme swim',
     description: 'Szabad úszósávok a közeli budapesti uszodákban.',
     locale: 'hu_HU',
     type: 'website',
@@ -25,17 +25,15 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#eef3f3' },
-    { media: '(prefers-color-scheme: dark)', color: '#041a22' },
-  ],
+  themeColor: '#216ad8',
+  colorScheme: 'light dark',
 };
 
 // Nem a Next által generált `LayoutProps<'/'>` típust használjuk: az csak az
 // első `next build` után áll elő, így a friss klón `tsc --noEmit`-je elhasalna rajta.
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="hu" className={`${archivo.variable} h-full antialiased`}>
+    <html lang="hu" className={`${nunito.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col bg-bg text-ink">
         <a
           href="#talalatok"
@@ -43,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Ugrás a találatokhoz
         </a>
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

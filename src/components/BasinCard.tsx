@@ -104,7 +104,7 @@ export function BasinCard({
           )}
         </div>
       ) : noLaneData ? (
-        <div className="mt-3 rounded-lg bg-surface-2 px-3 py-2.5 ring-1 ring-inset ring-line">
+        <div className="mt-3 border-l-2 border-line-strong py-1 pl-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="text-sm font-semibold text-ink-2">Nincs sávadat</p>
             <ConfidenceBadge confidence="unknown" />

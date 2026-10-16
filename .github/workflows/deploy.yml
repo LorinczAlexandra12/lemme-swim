@@ -1,0 +1,113 @@
+name: Refresh Data and Deploy
+
+on:
+  push:
+    branches: ['**']
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
+      timezone: Europe/Budapest
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deployment
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  deploy:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment:
+      name: production
+      url: ${{ vars.PRODUCTION_URL || steps.stage.outputs.url }}
+    env:
+      TZ: Europe/Budapest
+      NEXT_TELEMETRY_DISABLED: '1'
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Check deployment configuration
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          test -n "$VERCEL_TOKEN" || { echo '::error::Missing VERCEL_TOKEN'; exit 1; }
+          test -n "$VERCEL_ORG_ID" || { echo '::error::Missing VERCEL_ORG_ID'; exit 1; }
+          test -n "$VERCEL_PROJECT_ID" || { echo '::error::Missing VERCEL_PROJECT_ID'; exit 1; }
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build pool dataset
+        run: npm exec -- tsx scripts/build-dataset.ts
+
+      - name: Refresh all registered lane sources
+        timeout-minutes: 20
+        run: npm run scrape -- --no-cache
+
+      - name: Apply refreshed source metadata
+        run: npm exec -- tsx scripts/build-dataset.ts
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@64.3.1
+
+      - name: Pull production settings
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build production release
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --prod --token="$VERCEL_TOKEN"
+
+      - name: Stage release without changing production domains
+        id: stage
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          deployment_url=$(vercel deploy --prebuilt --prod --skip-domain --yes --token="$VERCEL_TOKEN")
+          echo "url=$deployment_url" >> "$GITHUB_OUTPUT"
+
+      - name: Smoke test staged homepage and search API
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          DEPLOYMENT_URL: ${{ steps.stage.outputs.url }}
+        run: |
+          vercel curl / --deployment "$DEPLOYMENT_URL" --token="$VERCEL_TOKEN" -- --fail --silent --show-error --max-time 60 --output /tmp/homepage.html
+          test -s /tmp/homepage.html
+          search_date=$(date +%F)
+          vercel curl "/api/search?lat=47.4979&lon=19.0402&date=$search_date&start=06:00&end=07:00" --deployment "$DEPLOYMENT_URL" --token="$VERCEL_TOKEN" -- --fail --silent --show-error --max-time 60 --output /tmp/search.json
+          node -e "const results = require('/tmp/search.json'); if (!Array.isArray(results) || results.length === 0) throw new Error('Search returned no pools');"
+
+      - name: Promote verified release to production domains
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          DEPLOYMENT_URL: ${{ steps.stage.outputs.url }}
+        run: vercel promote "$DEPLOYMENT_URL" --yes --token="$VERCEL_TOKEN"
+
+      - name: Report failure
+        if: failure()
+        run: |
+          echo '::error::Release failed. Production promotion requires successful scraping, building, and smoke tests. Review the failed step before retrying.'
+          echo 'Release failed. No promotion is attempted unless every earlier check passes. If the promotion step itself failed or timed out, check its status in Vercel before retrying.' >> "$GITHUB_STEP_SUMMARY"

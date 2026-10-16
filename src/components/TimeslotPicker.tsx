@@ -50,10 +50,13 @@ export function TimeslotPicker({ value, onChange, error }: TimeslotPickerProps) 
   }
 
   return (
-    <fieldset className="space-y-3">
-      <legend className="text-sm font-semibold text-ink">Mikor úsznál?</legend>
+    <fieldset className="min-w-0 space-y-4">
+      <legend className="flex items-center gap-3 text-sm font-semibold text-ink">
+        <span className="font-mono text-xs text-ink-3">02 /</span>
+        Mikor úsznál?
+      </legend>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="grid grid-cols-3 border border-line bg-surface">
         {QUICK_SLOTS.map((q) => {
           const slot = q.build();
           const active = isActive(slot);
@@ -64,10 +67,10 @@ export function TimeslotPicker({ value, onChange, error }: TimeslotPickerProps) 
               aria-pressed={active}
               onClick={() => onChange(q.build())}
               className={[
-                'rounded-full px-3.5 py-2 text-sm font-semibold transition-colors',
+                'min-h-11 px-2 py-2 text-xs font-semibold transition-colors sm:text-sm',
                 active
                   ? 'bg-pool text-pool-ink'
-                  : 'bg-surface-2 text-ink-2 ring-1 ring-inset ring-line hover:text-pool',
+                  : 'text-ink-2 hover:bg-surface-2 hover:text-pool',
               ].join(' ')}
             >
               {q.label}

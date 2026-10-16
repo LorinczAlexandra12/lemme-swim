@@ -1,5 +1,6 @@
 'use client';
 
+import { Waves } from 'lucide-react';
 import type { IsoDate, PoolAvailability } from '@/lib/types';
 import { PoolCard } from './PoolCard';
 import { formatRange, formatWeekdayName } from '@/lib/ui/format';
@@ -57,9 +58,13 @@ export function ResultsList({
 }: ResultsListProps) {
   if (state === 'idle') {
     return (
-      <p className="rounded-2xl bg-surface px-5 py-8 text-center text-sm text-ink-2 ring-1 ring-line">
-        Add meg, honnan indulsz és mikor úsznál, majd nyomd meg a keresést.
-      </p>
+      <div className="flex min-h-28 items-center gap-4 border-y border-dashed border-line py-6 text-ink-3">
+        <Waves size={30} strokeWidth={1} aria-hidden="true" />
+        <div>
+          <p className="text-sm font-medium text-ink-2">Nincs aktív keresés</p>
+          <p className="mt-1 font-mono text-[11px]">Budapest / Uszodák és szabad sávok</p>
+        </div>
+      </div>
     );
   }
 

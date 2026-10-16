@@ -1,8 +1,8 @@
-# Uszoda Tracker
+# Lemme swim
 
 Webalkalmazás, amely megmutatja, hogy a **hozzád legközelebbi budapesti uszodákban hány úszósáv szabad** abban az időpontban, amikor úszni indulnál.
 
-A felület teljes egészében magyar. A távolságot mindig a böngésző helymeghatározásából számoljuk (légvonalban), de az alkalmazás helymegosztás nélkül is használható: kerület vagy cím megadásával.
+A felület teljes egészében magyar. Kiindulási pontként Budapest 23 kerülete közül lehet választani; a légvonalbeli távolságot a kerület középpontjától számoljuk. Nincs címbevitel vagy böngészős helymeghatározás. A fejlécben váltható világos és sötét megjelenés, a választást a böngésző megjegyzi.
 
 ---
 
@@ -49,6 +49,88 @@ npm test             # a keresőmotor tesztjei (vitest)
 npm run build        # éles build
 npm run scrape       # a scraperek futtatása, az adatfájlok frissítése
 ```
+
+---
+
+## Production Deployment
+
+[The deployment workflow](.github/workflows/deploy.yml) hosts the full Next.js app
+on Vercel, including the search and geocoding API routes. GitHub Pages is not
+suitable because these routes need a server runtime.
+
+### One-Time Setup
+
+1. Create a Vercel project for this repository with the **Next.js** framework
+	 preset, repository root directory, Node.js **24.x**, build command
+	 `npm run build`, and install command `npm ci`.
+2. Disconnect the project's Git integration in Vercel after creating it, or
+	 otherwise disable its automatic Git deployments. GitHub Actions must be the
+	 only production publisher, so another deployment cannot bypass the checks.
+3. In GitHub, create an environment named `production`. Add these environment
+	 secrets under **Settings > Environments > production**:
+
+	 | Secret | Value |
+	 | --- | --- |
+	 | `VERCEL_TOKEN` | A Vercel access token allowed to deploy and promote this project |
+	 | `VERCEL_ORG_ID` | The Vercel team/account ID (`orgId` when linking with the CLI) |
+	 | `VERCEL_PROJECT_ID` | The Vercel project ID (`projectId` when linking with the CLI) |
+
+	 Project IDs are available in Vercel settings or the local `.vercel/project.json`
+	 created by `npx vercel@64.3.1 link`. Never commit the token. Configure any app
+	 environment variables in Vercel's **Production** environment. The CLI smoke
+	 checks automatically handle Vercel deployment protection; the token must also
+	 have permission to obtain an automation bypass token for the project.
+4. Merge the workflow and lockfile into the repository's default branch. Run
+	 **Actions > Refresh Data and Deploy > Run workflow** on that branch for the
+	 first release. Use Vercel's assigned `*.vercel.app` URL until buying a domain.
+	 Production environment approval rules, if enabled, must be approved on each
+	 run; leave required reviewers disabled for unattended daily releases.
+5. Enable GitHub Actions failure notifications for this repository. A failed
+	 refresh is intentionally a failed workflow, not a silently successful run.
+
+### Daily Refresh and Failure Handling
+
+- The workflow starts at **06:00 Europe/Budapest** every day, automatically
+	following daylight saving time. It also runs on default-branch pushes and can
+	be started manually. Other branches cannot deploy to production.
+- Every registered scraper runs with its HTTP cache disabled. Pool data is
+	normalized before scraping and rebuilt afterward so fresh source timestamps
+	reach the website. Manually curated schedules still require manual updates;
+	pools without a registered scraper cannot be refreshed automatically.
+- Tests must pass, **every scraper must succeed**, and the production build must
+	succeed. Any failure or scrape timeout stops the release; partially refreshed
+	files are discarded with the runner, and the existing site and data stay live.
+- A successful build is uploaded with `--skip-domain`. The workflow checks the
+	staged homepage and search API before promoting that exact deployment to the
+	production domains. A failed staging or smoke check leaves production alone.
+- Releases are serialized and active releases are not canceled by later runs.
+	Data is bundled into each immutable deployment, not modified on the live site.
+	There are no daily commits or runtime scrape requests from visitors.
+- If the promotion command itself times out, Vercel may still finish promotion;
+	check its dashboard before retrying. For a runtime issue that escaped the
+	checks, use Vercel's **Instant Rollback** to restore a known working deployment.
+	Smoke tests reduce risk but cannot guarantee that every feature works.
+
+06:00 is the scheduled start, not a guarantee that new data is live at that
+instant: scraping, tests, and building take time, and GitHub can delay scheduled
+runs. The workflow must remain on the default branch. GitHub can disable
+schedules in public repositories after 60 days without repository activity;
+monitor Actions and re-enable them when necessary. GitHub Actions and Vercel
+usage are subject to their plans and limits.
+
+### Custom Domain Later
+
+After purchasing `lemme-swim.com`, open **Vercel > Project > Settings > Domains**
+and add `www.lemme-swim.com` and, optionally, the apex `lemme-swim.com`. Enter the
+DNS records Vercel provides at your registrar, wait for verification and HTTPS,
+and redirect the apex to `www` if that is the preferred address. Keep the domain
+assigned to this project's **Production** environment.
+
+Optionally set the GitHub `production` environment variable `PRODUCTION_URL` to
+`https://www.lemme-swim.com` (or the current Vercel URL). This changes the link
+shown in GitHub's deployment environment; it does **not** configure DNS or buy
+the domain. Future successful releases automatically use all production domains
+assigned in Vercel, so no workflow edit is needed when the domain changes.
 
 ---
 
