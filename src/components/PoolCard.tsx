@@ -1,4 +1,4 @@
-import type { IsoDate, PoolAvailability, Weekday } from '@/lib/types';
+import type { IsoDate, PoolAvailability, TimeOfDay, Weekday } from '@/lib/types';
 import { BasinCard } from './BasinCard';
 import { formatDistance, weekdayOf } from '@/lib/ui/format';
 
@@ -6,18 +6,20 @@ interface PoolCardProps {
   result: PoolAvailability;
   /** A keresett nap — ebből választjuk ki a nyitvatartási sort. */
   date: IsoDate;
+  start: TimeOfDay;
+  end: TimeOfDay;
   /** Az első néhány kártya sávjai animálva telnek be. */
   animate?: boolean;
 }
 
-export function PoolCard({ result, date, animate }: PoolCardProps) {
+export function PoolCard({ result, date, start, end, animate }: PoolCardProps) {
   const { pool, distanceKm, basins, totalFreeLanes } = result;
   const weekday = weekdayOf(date) as Weekday;
   const dayHours = pool.openingHours.filter((h) => h.weekday === weekday);
   // Csak akkor „zárva", ha van rá nyitvatartási adatunk. Hiányzó nyitvatartás
   // nem bizonyíték a zárva tartásra — lásd `openingHoursKnown`.
   const allClosed =
-    basins.length > 0 && basins.every((b) => b.openingHoursKnown && !b.openThroughout);
+    basins.length > 0 && basins.every((b) => b.openingHoursKnown && b.openIntervals.length === 0);
 
   return (
     <li className="overflow-hidden rounded-sm border border-line bg-surface transition-colors hover:border-line-strong">
@@ -53,6 +55,8 @@ export function PoolCard({ result, date, animate }: PoolCardProps) {
             <BasinCard
               key={b.basin.id}
               availability={b}
+              start={start}
+              end={end}
               dayHours={dayHours}
               sourceUrl={pool.scheduleSource.url}
               lastVerified={pool.scheduleSource.lastVerified}

@@ -118,7 +118,7 @@ describe('searchPools — minimális szabad sáv', () => {
     expect(results.map((r) => r.pool.id)).toEqual(['tavoli']);
   });
 
-  it('az ismeretlen sávadatú uszodát NEM ejti ki, csak hátrébb sorolja', () => {
+  it('az ismeretlen sávadatú uszodát megtartja, és távolság szerint rendezi', () => {
     const unknownLanes = pool({
       id: 'sav-ismeretlen',
       name: 'Sávadat nélküli uszoda',
@@ -133,9 +133,9 @@ describe('searchPools — minimális szabad sáv', () => {
       now: NOW,
     });
 
-    expect(results.map((r) => r.pool.id)).toEqual(['kozeli', 'tavoli', 'sav-ismeretlen']);
-    expect(results[2].totalFreeLanes).toBeNull();
-    expect(results[2].confidence).toBe('unknown');
+    expect(results.map((r) => r.pool.id)).toEqual(['sav-ismeretlen', 'kozeli', 'tavoli']);
+    expect(results[0].totalFreeLanes).toBeNull();
+    expect(results[0].confidence).toBe('unknown');
   });
 
   it('szűrő nélkül a legközelebbi nyer akkor is, ha ismeretlen a sávadata', () => {
@@ -212,6 +212,35 @@ describe('searchPools — fedett medence szűrő', () => {
 });
 
 describe('searchPools — peremesetek', () => {
+  it('keeps a late-opening pool when lanes are available during the open portion', () => {
+    const late = pool({
+      id: 'late-opening',
+      openingHours: [{ weekday: THURSDAY, opens: '07:00', closes: '22:00' }],
+    });
+    const blocks: LaneBlock[] = [{
+      poolId: late.id,
+      basinId: '50m-fedett',
+      weekday: THURSDAY,
+      start: '06:00',
+      end: '07:00',
+      lanesOccupied: 8,
+      kind: 'closed',
+      reason: 'Closed before opening',
+    }];
+    const results = searchPools([late], blocks, query({ start: '06:00', end: '08:00', minFreeLanes: 1 }), { now: NOW });
+    expect(results).toHaveLength(1);
+    expect(results[0].totalFreeLanes).toBe(8);
+    expect(results[0].basins[0].openIntervals).toEqual([{ start: '07:00', end: '08:00' }]);
+  });
+
+  it('does not offer a fully closed pool when free lanes are required', () => {
+    const late = pool({ openingHours: [{ weekday: THURSDAY, opens: '08:00', closes: '22:00' }] });
+    expect(searchPools([late], [], query({ start: '06:00', end: '08:00', minFreeLanes: 1 }), { now: NOW })).toHaveLength(0);
+    const unfiltered = searchPools([late], [], query({ start: '06:00', end: '08:00' }), { now: NOW });
+    expect(unfiltered).toHaveLength(1);
+    expect(unfiltered[0].totalFreeLanes).toBe(0);
+  });
+
   it('üres uszodalistára üres eredmény', () => {
     expect(searchPools([], [], query(), { now: NOW })).toEqual([]);
   });

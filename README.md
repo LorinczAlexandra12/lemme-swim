@@ -30,6 +30,8 @@ A budapesti uszodák a sávbeosztásukat (*sávrend*, *vízfelület-beosztás*) 
 **1. A szabad sávok száma a legrosszabb esetet mutatja, nem az átlagot.**
 Ha egy sáv a kért idősáv közepén elfogy, azt a sávot nem ígérjük oda. A kért ablakot a foglalások határai mentén részintervallumokra bontjuk, és a legkevesebb szabad sávot adó rész számít. Ha 18:00–19:00-ra keresel, és 18:30-tól edzés kezdődik, azt látod, ami 18:30 után marad.
 
+Ha az uszoda csak a kért idősáv egy részében van nyitva, a találat megmarad: figyelmeztetés jelzi a nyitást, zárást vagy szünetet és a ténylegesen elérhető időszakokat. A sávszámot kizárólag ezekre a nyitvatartási részekre számoljuk. Például 06:00–08:00 keresésnél egy 07:00-kor nyitó uszodánál a 07:00–08:00 közötti sávokat mutatjuk. A találatok mindig távolság szerint követik egymást; az ismeretlen távolságúak kerülnek a lista végére.
+
 **2. A „nem tudjuk” nem ugyanaz, mint a „nulla”.**
 Ha egy medence sávszáma ismeretlen, `null`-t tárolunk, és a felület nem mutat számot. Sosem tippelünk sávszámot vagy koordinátát: a hiteles forrásból nem igazolt érték `null` marad.
 

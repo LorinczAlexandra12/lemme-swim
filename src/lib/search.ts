@@ -2,8 +2,8 @@
  * Keresés: uszodák szűrése és sorrendbe rakása a felhasználó kérése alapján.
  *
  * Vezérelv: a „nem tudjuk” nem ugyanaz, mint a „nincs szabad sáv”. Ahol
- * hiányzik az adat, ott nem ejtjük ki csendben a találatot — hátrébb soroljuk,
- * és a UI jelzi, hogy bizonytalan.
+ * hiányzik az adat, ott nem ejtjük ki csendben a találatot,
+ * és a UI jelzi, hogy bizonytalan. A sorrendet a távolság határozza meg.
  */
 
 import type { LaneBlock, Pool, PoolAvailability, SearchQuery } from './types';
@@ -28,14 +28,11 @@ function distanceKey(distanceKm: number | null): number {
 /**
  * Megfelel-e a találat a minimális szabad sáv szűrőnek.
  *
- * - `0`: ismert adat, és teljesíti a feltételt → elöl
- * - `1`: ismeretlen sávadat → megtartjuk, de hátrébb soroljuk
- * - `null`: ismert adat, de kevesebb a szabad sáv a kértnél → kiesik
+ * Ismeretlen sávadatnál megtartjuk a találatot, mert nem bizonyított,
+ * hogy nincs elég szabad sáv.
  */
-function laneRank(result: PoolAvailability, minFreeLanes: number | undefined): number | null {
-  if (minFreeLanes === undefined) return 0;
-  if (result.totalFreeLanes === null) return 1;
-  return result.totalFreeLanes >= minFreeLanes ? 0 : null;
+function matchesLaneFilter(result: PoolAvailability, minFreeLanes: number | undefined): boolean {
+  return minFreeLanes === undefined || result.totalFreeLanes === null || result.totalFreeLanes >= minFreeLanes;
 }
 
 /**
@@ -51,7 +48,7 @@ export function searchPools(
   query: SearchQuery,
   options: SearchOptions = {},
 ): PoolAvailability[] {
-  const results: Array<{ result: PoolAvailability; rank: number }> = [];
+  const results: PoolAvailability[] = [];
 
   for (const pool of pools ?? []) {
     const result = poolAvailability(pool, blocks ?? [], query, { now: options.now });
@@ -70,26 +67,22 @@ export function searchPools(
       continue;
     }
 
-    const rank = laneRank(result, query.minFreeLanes);
-    if (rank === null) continue;
+    if (!matchesLaneFilter(result, query.minFreeLanes)) continue;
 
-    results.push({ result, rank });
+    results.push(result);
   }
 
   results.sort((a, b) => {
-    // Először a biztos találatok, utánuk az ismeretlen sávadatúak.
-    if (a.rank !== b.rank) return a.rank - b.rank;
-
     // Kivonás helyett összehasonlítás: az ismeretlen távolság Infinity, és
     // az Infinity - 5 nem véges, ami elrontaná a sorrendet.
-    const aKey = distanceKey(a.result.distanceKm);
-    const bKey = distanceKey(b.result.distanceKm);
+    const aKey = distanceKey(a.distanceKm);
+    const bKey = distanceKey(b.distanceKm);
     if (aKey !== bKey) return aKey < bKey ? -1 : 1;
 
     // Azonos (vagy mindkettőnél ismeretlen) távolság: magyar ábécé szerint,
     // hogy a sorrend futásról futásra stabil legyen.
-    return a.result.pool.name.localeCompare(b.result.pool.name, 'hu');
+    return a.pool.name.localeCompare(b.pool.name, 'hu');
   });
 
-  return results.map((entry) => entry.result);
+  return results;
 }

@@ -199,6 +199,15 @@ function worstCaseFreeLanes(
 // Nyitvatartás
 // ---------------------------------------------------------------------------
 
+function openingIntervals(openingHours: OpeningHours[], weekday: Weekday | null): MinuteInterval[] {
+  if (weekday === null) return [];
+  return (openingHours ?? [])
+    .filter((entry) => entry.weekday === weekday)
+    .map((entry) => toMinuteRange({ start: entry.opens, end: entry.closes }))
+    .filter((span): span is MinuteInterval => span !== null)
+    .sort((first, second) => first.start - second.start);
+}
+
 /**
  * Igaz, ha a nyitvatartás a kért ablak EGÉSZÉT lefedi az adott napon.
  *
@@ -213,11 +222,7 @@ export function isOpenThroughout(
 ): boolean {
   if (weekday === null) return false;
 
-  const spans = (openingHours ?? [])
-    .filter((entry) => entry.weekday === weekday)
-    .map((entry) => toMinuteRange({ start: entry.opens, end: entry.closes }))
-    .filter((span): span is MinuteInterval => span !== null)
-    .sort((a, b) => a.start - b.start);
+  const spans = openingIntervals(openingHours, weekday);
 
   if (spans.length === 0) return false;
   if (window.end <= window.start) {
@@ -328,6 +333,24 @@ export function basinAvailability(
   // a valóságnál, mert a legrosszabb esetet nézzük.
   const window: MinuteInterval = requested ?? { start: 0, end: MINUTES_PER_DAY };
 
+  const openingHoursKnown =
+    weekday !== null && (openingHours ?? []).some((entry) => entry.weekday === weekday);
+  const openWindows: MinuteInterval[] = [];
+  for (const interval of openingIntervals(openingHours, weekday)) {
+    const overlap = {
+      start: Math.max(window.start, interval.start),
+      end: Math.min(window.end, interval.end),
+    };
+    if (overlap.end <= overlap.start) continue;
+    const previous = openWindows.at(-1);
+    if (previous && overlap.start <= previous.end) {
+      previous.end = Math.max(previous.end, overlap.end);
+    } else {
+      openWindows.push(overlap);
+    }
+  }
+  const availabilityWindows = openingHoursKnown ? openWindows : [window];
+
   const applicable = resolveBlocksForDate(basin, blocks, query.date, options.poolId);
 
   // Csak a kért ablakot ténylegesen érintő foglalások érdekelnek.
@@ -336,7 +359,7 @@ export function basinAvailability(
   for (const block of applicable) {
     const interval = blockInterval(block);
     if (!interval) continue;
-    if (interval.end <= window.start || interval.start >= window.end) continue;
+    if (!availabilityWindows.some((span) => interval.start < span.end && interval.end > span.start)) continue;
     spans.push({ ...interval, lanesOccupied: block.lanesOccupied });
     touching.push(block);
   }
@@ -348,7 +371,14 @@ export function basinAvailability(
     : null;
 
   const lanesKnown = totalLanes !== null;
-  const freeLanes = lanesKnown ? worstCaseFreeLanes(totalLanes, spans, window) : null;
+  const freeLanes = lanesKnown
+    ? availabilityWindows.length === 0
+      ? 0
+      : availabilityWindows.reduce(
+          (worst, span) => Math.min(worst, worstCaseFreeLanes(totalLanes, spans, span)),
+          totalLanes,
+        )
+    : null;
 
   return {
     basin,
@@ -356,8 +386,8 @@ export function basinAvailability(
     freeLanes,
     blocks: touching,
     openThroughout: isOpenThroughout(openingHours, weekday, window),
-    openingHoursKnown:
-      weekday !== null && (openingHours ?? []).some((entry) => entry.weekday === weekday),
+    openingHoursKnown,
+    openIntervals: openWindows.map((span) => ({ start: fromMinutes(span.start), end: fromMinutes(span.end) })),
     confidence: computeConfidence(options.source, lanesKnown, options.now),
   };
 }

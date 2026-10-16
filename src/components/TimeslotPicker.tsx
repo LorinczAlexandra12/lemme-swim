@@ -31,7 +31,7 @@ const QUICK_SLOTS: { label: string; build: () => Timeslot }[] = [
   { label: 'Ma este', build: () => ({ date: todayIso(), start: '18:00', end: '20:00' }) },
   {
     label: 'Holnap reggel',
-    build: () => ({ date: tomorrowIso(), start: '06:30', end: '08:00' }),
+    build: () => ({ date: tomorrowIso(), start: '06:00', end: '08:00' }),
   },
 ];
 

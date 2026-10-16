@@ -133,7 +133,7 @@ export function ResultsList({
       </p>
       <ul className="space-y-4">
         {results.map((r, i) => (
-          <PoolCard key={r.pool.id} result={r} date={date} animate={i < 4} />
+          <PoolCard key={r.pool.id} result={r} date={date} start={start} end={end} animate={i < 4} />
         ))}
       </ul>
       <p className="mt-6 text-xs leading-relaxed text-ink-3">

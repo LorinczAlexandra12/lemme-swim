@@ -1,4 +1,6 @@
-import type { BasinAvailability, OpeningHours } from '@/lib/types';
+import { TriangleAlert } from 'lucide-react';
+import type { BasinAvailability, OpeningHours, TimeOfDay } from '@/lib/types';
+import { toMinutes } from '@/lib/time';
 import { LaneMeter } from './LaneMeter';
 import { ConfidenceBadge } from './ConfidenceBadge';
 import { BLOCK_KIND_LABEL } from '@/lib/ui/labels';
@@ -6,6 +8,8 @@ import { formatLaneCount, formatRange } from '@/lib/ui/format';
 
 interface BasinCardProps {
   availability: BasinAvailability;
+  start: TimeOfDay;
+  end: TimeOfDay;
   /** A kért napra érvényes nyitvatartás — akkor kell, ha nincs sávadatunk. */
   dayHours: OpeningHours[];
   /** Az uszoda saját beosztásának URL-je, ha van. */
@@ -56,21 +60,32 @@ function SourceLink({ url }: { url?: string }) {
  *  3. van sávadatunk — sávmérő, pontos szám és frissességi címke.
  *
  * „Zárva" csak akkor jelenik meg, ha VAN nyitvatartási adatunk az adott napra,
- * és az nem fedi a kért idősávot. Ha az uszoda egyszerűen nem publikálta az
+ * és az egyáltalán nem fedi a kért idősávot. Ha az uszoda egyszerűen nem publikálta az
  * adott napot, azt külön sávban bevalljuk — a magabiztosan téves „Zárva"
  * elküldené a felhasználót egy nyitva lévő uszoda elől.
  */
 export function BasinCard({
   availability,
+  start,
+  end,
   dayHours,
   sourceUrl,
   lastVerified,
   animate,
 }: BasinCardProps) {
-  const { basin, totalLanes, freeLanes, blocks, openThroughout, openingHoursKnown, confidence } =
+  const { basin, totalLanes, freeLanes, blocks, openThroughout, openingHoursKnown, openIntervals, confidence } =
     availability;
   const hours = openingText(dayHours);
-  const closed = openingHoursKnown && !openThroughout;
+  const closed = openingHoursKnown && openIntervals.length === 0;
+  const partial = openingHoursKnown && !openThroughout && !closed;
+  const availableHours = openIntervals.map((interval) => formatRange(interval.start, interval.end)).join(' és ');
+  const firstOpen = openIntervals[0];
+  const lastOpen = openIntervals.at(-1);
+  const timingWarnings = [
+    firstOpen && toMinutes(firstOpen.start) > toMinutes(start) ? `Nyitás: ${firstOpen.start}.` : null,
+    lastOpen && toMinutes(lastOpen.end) < toMinutes(end) ? `Zárás: ${lastOpen.end}.` : null,
+    openIntervals.length > 1 ? 'Szünet a nyitvatartásban.' : null,
+  ].filter(Boolean).join(' ');
   const noLaneData = confidence === 'unknown' || freeLanes === null || totalLanes === null;
 
   return (
@@ -89,6 +104,16 @@ export function BasinCard({
           Erre a napra nincs nyitvatartási adatunk, ezért azt sem tudjuk, hogy nyitva van-e.
           Indulás előtt ellenőrizd az uszodánál.
         </p>
+      )}
+
+      {partial && (
+        <div role="note" aria-label="Részleges nyitvatartás" className="mt-3 flex items-start gap-2 rounded-lg bg-amber-bg px-3 py-2.5 text-amber ring-1 ring-inset ring-amber-line">
+          <TriangleAlert size={18} className="mt-0.5 shrink-0" aria-hidden="true" />
+          <div className="min-w-0">
+            <p className="text-sm font-semibold">{timingWarnings || 'Részleges nyitvatartás'}</p>
+            <p className="mt-0.5 text-xs">A kért idősávban ekkor van nyitva: {availableHours}.</p>
+          </div>
+        </div>
       )}
 
       {closed ? (
@@ -132,8 +157,8 @@ export function BasinCard({
               <span className="text-ink-3"> / {totalLanes}</span>
               <span className="block text-xs font-medium text-ink-2">
                 {freeLanes === 0
-                  ? 'sáv szabad — a teljes idősáv foglalt'
-                  : 'sáv szabad a teljes idősávban'}
+                  ? partial ? 'sáv szabad — a nyitvatartási rész foglalt' : 'sáv szabad — a teljes idősáv foglalt'
+                  : partial ? 'sáv szabad a fenti nyitvatartás alatt' : 'sáv szabad a teljes idősávban'}
               </span>
             </p>
             <div className="flex flex-wrap items-center gap-2">
@@ -173,7 +198,9 @@ export function BasinCard({
           ? 'zárva a kért időpontban'
           : !openingHoursKnown
             ? 'erre a napra nincs nyitvatartási adatunk'
-            : formatLaneCount(freeLanes, totalLanes)}
+            : partial
+              ? `részleges nyitvatartás: ${availableHours}, ${formatLaneCount(freeLanes, totalLanes)}`
+              : formatLaneCount(freeLanes, totalLanes)}
         .
       </p>
     </li>

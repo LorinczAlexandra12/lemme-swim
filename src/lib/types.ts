@@ -168,7 +168,7 @@ export interface BasinAvailability {
   /** Összes felfestett sáv. `null`, ha ismeretlen. */
   totalLanes: number | null;
   /**
-   * A kért idősáv EGÉSZE alatt szabadon maradó sávok száma.
+  * A kért idősáv nyitvatartásra eső részein szabadon maradó sávok száma.
    * A legrosszabb (legkevesebb szabad sávot adó) részintervallum értéke,
    * hogy ne ígérjünk olyan sávot, ami a közepén elfogy. `null`, ha ismeretlen.
    */
@@ -186,6 +186,7 @@ export interface BasinAvailability {
    * a felület inkább bevallja, hogy nem tudjuk.
    */
   openingHoursKnown: boolean;
+  openIntervals: { start: TimeOfDay; end: TimeOfDay }[];
   confidence: Confidence;
 }
 

@@ -326,15 +326,85 @@ describe('isOpenThroughout — osztott nyitvatartás', () => {
 
   it('megkülönbözteti a "zárva"-t a "nincs nyitvatartási adat"-tól', () => {
     // Van adatunk a napra, de a kért ablak kívül esik: ez bizonyítottan zárva.
-    const closed = basinAvailability(BASIN, [], split, query({ start: '07:00', end: '17:00' }));
+    const closed = basinAvailability(BASIN, [], split, query({ start: '09:00', end: '10:00' }));
     expect(closed.openThroughout).toBe(false);
     expect(closed.openingHoursKnown).toBe(true);
+    expect(closed.openIntervals).toEqual([]);
 
     // A kért napról egyáltalán nincs bejegyzésünk (pl. a Nyéki Imre kihagyja a
     // péntekjét). Ilyenkor a "zárva" magabiztosan téves állítás lenne.
     const unknown = basinAvailability(BASIN, [], split, query({ date: '2026-09-25' }));
     expect(unknown.openThroughout).toBe(false);
     expect(unknown.openingHoursKnown).toBe(false);
+  });
+});
+
+describe('basinAvailability — partial opening hours', () => {
+  const lateOpening: OpeningHours[] = [{ weekday: THURSDAY, opens: '07:00', closes: '22:00' }];
+
+  it('keeps the open portion and ignores bookings before opening', () => {
+    const blocks = [
+      block({ weekday: THURSDAY, start: '06:00', end: '07:00', lanesOccupied: 8, kind: 'closed' }),
+      block({ weekday: THURSDAY, start: '07:00', end: '07:30', lanesOccupied: 3 }),
+    ];
+    const result = basinAvailability(BASIN, blocks, lateOpening, query({ start: '06:00', end: '08:00' }));
+    expect(result.openThroughout).toBe(false);
+    expect(result.openingHoursKnown).toBe(true);
+    expect(result.openIntervals).toEqual([{ start: '07:00', end: '08:00' }]);
+    expect(result.freeLanes).toBe(5);
+    expect(result.blocks).toHaveLength(1);
+  });
+
+  it('ignores bookings after an early closing', () => {
+    const blocks = [block({ weekday: THURSDAY, start: '19:00', end: '20:00', lanesOccupied: 8 })];
+    const result = basinAvailability(BASIN, blocks, [{ weekday: THURSDAY, opens: '06:00', closes: '19:00' }], query());
+    expect(result.openIntervals).toEqual([{ start: '18:00', end: '19:00' }]);
+    expect(result.freeLanes).toBe(8);
+    expect(result.blocks).toHaveLength(0);
+  });
+
+  it('uses the worst availability across split opening periods, excluding the closed gap', () => {
+    const hours: OpeningHours[] = [
+      { weekday: THURSDAY, opens: '16:00', closes: '20:00' },
+      { weekday: THURSDAY, opens: '06:00', closes: '08:00' },
+    ];
+    const blocks = [
+      block({ weekday: THURSDAY, start: '08:00', end: '16:00', lanesOccupied: 8 }),
+      block({ weekday: THURSDAY, start: '16:00', end: '17:00', lanesOccupied: 5 }),
+    ];
+    const result = basinAvailability(BASIN, blocks, hours, query({ start: '07:00', end: '17:00' }));
+    expect(result.openIntervals).toEqual([{ start: '07:00', end: '08:00' }, { start: '16:00', end: '17:00' }]);
+    expect(result.freeLanes).toBe(3);
+    expect(result.blocks).toHaveLength(1);
+  });
+
+  it('merges overlapping and contiguous opening periods', () => {
+    const hours: OpeningHours[] = [
+      { weekday: THURSDAY, opens: '06:00', closes: '08:00' },
+      { weekday: THURSDAY, opens: '07:00', closes: '09:00' },
+      { weekday: THURSDAY, opens: '09:00', closes: '10:00' },
+    ];
+    const result = basinAvailability(BASIN, [], hours, query({ start: '06:00', end: '10:00' }));
+    expect(result.openThroughout).toBe(true);
+    expect(result.openIntervals).toEqual([{ start: '06:00', end: '10:00' }]);
+  });
+
+  it('does not treat opening exactly at the requested end as an overlap', () => {
+    const result = basinAvailability(BASIN, [], lateOpening, query({ start: '06:00', end: '07:00' }));
+    expect(result.openIntervals).toEqual([]);
+    expect(result.freeLanes).toBe(0);
+  });
+
+  it('keeps missing opening hours distinct from confirmed closure', () => {
+    const result = basinAvailability(BASIN, [], [], query());
+    expect(result.openingHoursKnown).toBe(false);
+    expect(result.openIntervals).toEqual([]);
+    expect(result.freeLanes).toBe(8);
+  });
+
+  it('preserves midnight closing times', () => {
+    const result = basinAvailability(BASIN, [], [{ weekday: THURSDAY, opens: '07:00', closes: '00:00' }], query({ start: '06:00', end: '00:00' }));
+    expect(result.openIntervals).toEqual([{ start: '07:00', end: '24:00' }]);
   });
 });
 

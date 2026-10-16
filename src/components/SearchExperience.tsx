@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
-import { ArrowRight, MapPin, Search, SlidersHorizontal, Waves, X } from 'lucide-react';
+import { ArrowRight, ExternalLink, MapPin, Search, SlidersHorizontal, Waves, X } from 'lucide-react';
 import Link from 'next/link';
 import type { PoolAvailability, SearchQuery } from '@/lib/types';
 import { LocationPicker, type Origin } from './LocationPicker';
@@ -296,6 +296,16 @@ export function SearchExperience() {
         <div className="mx-auto flex max-w-[960px] flex-wrap items-center justify-between gap-x-8 gap-y-3">
           <span className="flex items-center gap-2 font-semibold text-ink-2"><Waves size={16} aria-hidden="true" /> Lemme swim</span>
           <span>Nyilvános beosztások. Egyértelmű adatforrások.</span>
+          <a
+            href="https://github.com/LorinczAlexandra12/lemme-swim"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Lemme swim GitHub-repozitórium"
+            className="inline-flex items-center gap-2 font-semibold text-pool underline decoration-pool/35 underline-offset-4 hover:decoration-pool"
+          >
+            <ExternalLink size={16} aria-hidden="true" />
+            GitHub
+          </a>
           <span className="font-mono text-[10px]">BUDAPEST / HU</span>
         </div>
       </footer>
