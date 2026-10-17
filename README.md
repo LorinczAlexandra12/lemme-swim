@@ -1,55 +1,53 @@
 # Lemme swim
 
-Webalkalmazás, amely megmutatja, hogy a **hozzád legközelebbi budapesti uszodákban hány úszósáv szabad** abban az időpontban, amikor úszni indulnál.
+Lemme swim shows **how many swimming lanes are available at nearby pools in Budapest** for the time you want to swim.
 
-A felület teljes egészében magyar. Kiindulási pontként Budapest 23 kerülete közül lehet választani; a légvonalbeli távolságot a kerület középpontjától számoljuk. Nincs címbevitel vagy böngészős helymeghatározás. A fejlécben váltható világos és sötét megjelenés, a választást a böngésző megjegyzi.
+The application UI is in Hungarian. Choose one of Budapest's 23 districts as your starting point; distances are measured in a straight line from the district center. There is no address entry or browser geolocation. The header lets you switch between light and dark themes, and your choice is saved in the browser.
 
 ---
 
-## Miért nem triviális ez
+## Why This Is Challenging
 
-A budapesti uszodák a sávbeosztásukat (*sávrend*, *vízfelület-beosztás*) nagyon különböző módon teszik közzé: van, aki HTML-táblázatban, van, aki PDF-ben, van, aki beszkennelt képen, és van, aki csak Facebookon. Ezért **hibrid** megoldást használunk:
+Budapest's pools publish lane schedules (*sávrend* or *vízfelület-beosztás*) in many different formats: HTML tables, PDFs, scanned images, or sometimes only on Facebook. The project therefore uses a **hybrid** approach:
 
-| Forrás | Mit jelent |
+| Source | Meaning |
 |---|---|
-| `scraper` | Gépi olvasású forrásból automatikusan lekért adat |
-| `curated` | Kézzel rögzített, dátummal ellenőrzött adat |
-| `none` | Nincs sávbeosztásunk — csak nyitvatartást mutatunk |
+| `scraper` | Data fetched automatically from a machine-readable source |
+| `curated` | Data entered manually and verified on a specific date |
+| `none` | No lane schedule is available; only opening hours are shown |
 
-**Az alkalmazás sosem tesz úgy, mintha biztosabbat tudna, mint amennyit valóban tud.** Minden medencénél megjelenik, honnan származik az adat és mikor ellenőriztük utoljára:
+**The app never claims more certainty than the data supports.** Each pool shows where its data came from and when it was last checked:
 
-- **Friss adat** — 48 óránál frissebb scraper-futás
-- **Ellenőrzött · dátum** — 60 napnál frissebb kézi ellenőrzés
-- **Régi adat** — van adatunk, de elavulhatott
-- **Nincs sávadat** — ilyenkor **egyáltalán nem írunk ki szabad sávszámot**, csak a nyitvatartást és az uszoda saját beosztására mutató linket
-
----
-
-## Két tervezési döntés, amit érdemes tudni
-
-**1. A szabad sávok száma a legrosszabb esetet mutatja, nem az átlagot.**
-Ha egy sáv a kért idősáv közepén elfogy, azt a sávot nem ígérjük oda. A kért ablakot a foglalások határai mentén részintervallumokra bontjuk, és a legkevesebb szabad sávot adó rész számít. Ha 18:00–19:00-ra keresel, és 18:30-tól edzés kezdődik, azt látod, ami 18:30 után marad.
-
-Ha az uszoda csak a kért idősáv egy részében van nyitva, a találat megmarad: figyelmeztetés jelzi a nyitást, zárást vagy szünetet és a ténylegesen elérhető időszakokat. A sávszámot kizárólag ezekre a nyitvatartási részekre számoljuk. Például 06:00–08:00 keresésnél egy 07:00-kor nyitó uszodánál a 07:00–08:00 közötti sávokat mutatjuk. A találatok mindig távolság szerint követik egymást; az ismeretlen távolságúak kerülnek a lista végére.
-
-**2. A „nem tudjuk” nem ugyanaz, mint a „nulla”.**
-Ha egy medence sávszáma ismeretlen, `null`-t tárolunk, és a felület nem mutat számot. Sosem tippelünk sávszámot vagy koordinátát: a hiteles forrásból nem igazolt érték `null` marad.
+- **Fresh data** — scraped within the last 48 hours
+- **Verified · date** — manually checked within the last 60 days
+- **Stale data** — data is available, but may be out of date
+- **No lane data** — **we never display an availability count**; we show only opening hours and a link to the pool's own schedule
 
 ---
 
-## Indítás
+## Two Important Design Decisions
+
+**1. Available lanes show the worst case, not the average.**
+If a lane becomes occupied partway through the requested time, we do not promise it for the whole session. We split the requested window at booking boundaries and show the fewest lanes available in any interval. For example, if you search for 18:00–19:00 and a class starts at 18:30, the result reflects availability after 18:30.
+
+If a pool is open for only part of the requested window, it remains in the results. A warning shows when it opens, closes, or has a break, along with the intervals when it is actually open. Lane availability is calculated only during those open intervals. For example, a 06:00–08:00 search for a pool that opens at 07:00 shows availability from 07:00–08:00. Results are always ordered by distance, with pools of unknown distance at the end.
+
+**2. “Unknown” is not the same as zero.**
+If a pool's lane count is unknown, we store `null` and do not display a number. We never guess lane counts or coordinates; values that cannot be verified from a reliable source remain `null`.
+
+## Getting Started
 
 ```bash
 npm install
-npm run dev          # fejlesztői szerver: http://localhost:3000
+npm run dev          # development server: http://localhost:3000
 ```
 
-További parancsok:
+Other commands:
 
 ```bash
-npm test             # a keresőmotor tesztjei (vitest)
-npm run build        # éles build
-npm run scrape       # a scraperek futtatása, az adatfájlok frissítése
+npm test             # run the test suite (Vitest)
+npm run build        # create a production build
+npm run scrape       # run scrapers and update the data files
 ```
 
 ---
@@ -120,44 +118,42 @@ schedules in public repositories after 60 days without repository activity;
 monitor Actions and re-enable them when necessary. GitHub Actions and Vercel
 usage are subject to their plans and limits.
 
-### Custom Domain Later
+### Custom Domain
 
-After purchasing `lemme-swim.com`, open **Vercel > Project > Settings > Domains**
-and add `www.lemme-swim.com` and, optionally, the apex `lemme-swim.com`. Enter the
-DNS records Vercel provides at your registrar, wait for verification and HTTPS,
-and redirect the apex to `www` if that is the preferred address. Keep the domain
-assigned to this project's **Production** environment.
+For `lemme-swim.hu`, open **Vercel > Project > Settings > Domains** and add
+`www.lemme-swim.hu`. Add `lemme-swim.hu` too if you want the bare domain to
+redirect to `www`. Copy the DNS records shown by Vercel into the domain's DNS
+settings at your registrar. Wait for Vercel to verify the records and provision
+HTTPS, and keep the domains assigned to this project's **Production** environment.
 
 Optionally set the GitHub `production` environment variable `PRODUCTION_URL` to
-`https://www.lemme-swim.com` (or the current Vercel URL). This changes the link
-shown in GitHub's deployment environment; it does **not** configure DNS or buy
-the domain. Future successful releases automatically use all production domains
-assigned in Vercel, so no workflow edit is needed when the domain changes.
+`https://www.lemme-swim.hu`. This only sets the URL shown for the GitHub
+deployment; it does **not** configure DNS or attach the domain to Vercel. The
+workflow already promotes successful releases to every domain assigned to the
+Vercel production project, so no workflow edit is needed.
 
 ---
 
-## Felépítés
+## Project Structure
 
 ```
-src/lib/types.ts        A projekt adatszerződése — minden más ehhez igazodik
-src/lib/geo.ts          Légvonalbeli távolság, magyar távolságformázás
-src/lib/time.ts         Időkezelés, ISO hétköznap, magyar dátumnevek
-src/lib/availability.ts Az elérhetőség-motor: hány sáv marad ténylegesen szabadon
-src/lib/search.ts       Szűrés és távolság szerinti rendezés
-src/lib/data.ts         Az adatfájlok betöltése és validálása
-src/lib/scrapers/       Scraper-keretrendszer és uszodánkénti adapterek
-src/app/api/search/     Kereső API-végpont
-src/components/         A magyar felület komponensei
-data/                   Az uszoda- és sávfoglalás-adatok (lásd data/README.md)
-scripts/scrape.ts       A scraperek futtatója
+src/lib/types.ts        Shared data contracts used throughout the project
+src/lib/geo.ts          Straight-line distance and localized distance formatting
+src/lib/time.ts         Time handling, ISO weekdays, and localized date names
+src/lib/availability.ts Availability engine: calculates how many lanes are free
+src/lib/search.ts       Filters pools and sorts results by distance
+src/lib/data.ts         Loads and validates the data files
+src/lib/scrapers/       Scraper framework and pool-specific adapters
+src/app/api/search/     Search API endpoint
+src/components/         Hungarian-language UI components
+data/                   Pool and lane-booking data (see data/README.md)
+scripts/scrape.ts       Scraper runner
 ```
 
-A `src/lib/types.ts` a közös szerződés: a scraperek ilyen alakú adatot állítanak elő, a motor ilyet fogyaszt, a felület ilyet jelenít meg.
+`src/lib/types.ts` defines the shared contract: scrapers produce this data shape, the availability engine consumes it, and the UI displays it.
 
----
+## Updating the Data
 
-## Adatok javítása, bővítése
+Pool data lives in `data/` and is intentionally editable by hand. For instructions on adding pools, correcting lane schedules, and setting verification dates, see **[`data/README.md`](data/README.md)**.
 
-Az uszodaadatok a `data/` könyvtárban vannak, és szándékosan emberi kézzel is szerkeszthetők. Új uszoda felvételéhez, sávbeosztás javításához és az ellenőrzési dátum szabályaihoz lásd: **[`data/README.md`](data/README.md)**.
-
-Egy szabály mindenekelőtt: **ha egy értéket nem tudsz hiteles forrásból igazolni, hagyd `null`-on.** A rossz koordináta rosszabb a hiányzónál — oda küldi a felhasználót, ahol nincs uszoda.
+One rule above all: **if a value cannot be verified from a reliable source, leave it as `null`.** Incorrect coordinates are worse than missing ones; they can send someone to a place with no pool.
